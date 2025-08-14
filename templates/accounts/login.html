@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="sign-up-section section">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-lg-6 sign-in">
+        <div class="content">
+            <h2>Connexion</h2>
+            <form method="post" class="form-style-2" novalidate>
+                {% csrf_token %}
+                {% for field in form %}
+                  <div class="form-group required mb-3">
+                    {{ field.label_tag }}
+                    {{ field }}
+                    {% for error in field.errors %}<div class="text-danger small">{{ error }}</div>{% endfor %}
+                  </div>
+                {% endfor %}
+                {% if form.non_field_errors %}
+                  <div class="text-danger mb-3">{% for error in form.non_field_errors %}{{ error }}<br>{% endfor %}</div>
+                {% endif %}
+                <button type="submit" class="small-btn btn-block btn btn-primary">Se connecter</button>
+            </form>
+            <div class="login-link text-center mt-4">
+                <a href="/app/account/register/">Créer un compte</a> | <a href="/app/account/password-reset/">Mot de passe oublié ?</a>
+            </div>
+        </div>
+      </div>
+      <div class="col-12 col-lg-6 sign-up">
+        <div class="content text-center">
+            <h2>Bienvenue !</h2>
+            <p>Rejoignez la communauté en créant votre compte.</p>
+            <a href="/app/account/register/" class="main-btn">Créer un compte</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+  .sign-up-section .sign-in, .sign-up-section .sign-up {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 500px;
+  }
+  .sign-up-section .content {
+    background: #fff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 450px;
+  }
+  .main-btn {
+    background: #007bff;
+    color: #fff;
+    padding: 12px 30px;
+    border-radius: 5px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 20px;
+  }
+  .main-btn:hover {
+    background: #0056b3;
+    color: #fff;
+  }
+  .form-style-2 .form-group label {
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+  .form-style-2 .form-control {
+    border-radius: 6px;
+    border: 1px solid #e0e0e0;
+    padding: 10px 12px;
+    font-size: 16px;
+  }
+  .btn-block {
+    width: 100%;
+    padding: 15px;
+    font-size: 16px;
+    margin-top: 20px;
+  }
+  @media (max-width: 991px) {
+    .sign-up-section .sign-in, .sign-up-section .sign-up {
+      min-height: 350px;
+    }
+    .sign-up-section .content {
+      padding: 20px;
+      max-width: 100%;
+    }
+  }
+</style>
+{% endblock %}

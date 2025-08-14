@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+  <h4>Votre adresse e-mail est confirmée.<br>Bienvenue, {{ user.username }} !</h4>
+  <a href="/app/account/login/" class="btn btn-success">Se connecter</a>
+</div>
+{% endblock %}
