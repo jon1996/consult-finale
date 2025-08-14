@@ -80,9 +80,10 @@ from .models import User
 from django.core.mail import send_mail
 from django.conf import settings
 from django.utils.crypto import get_random_string
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes, force_str
+from django.contrib.auth.tokens import default_token_generator
 
-# Simple token storage (à remplacer par un modèle ou cache en prod)
-EMAIL_TOKENS = {}
 
 def register(request):
 	error_message = None
@@ -95,11 +96,11 @@ def register(request):
 			user.company = form.cleaned_data.get("company", "")
 			user.sector = form.cleaned_data.get("sector", "")
 			user.save()
-			# Générer un token de confirmation
-			token = get_random_string(32)
-			EMAIL_TOKENS[user.email] = token
+			# Générer un token de confirmation basé sur uid + token de Django
+			uid = urlsafe_base64_encode(force_bytes(user.pk))
+			token = default_token_generator.make_token(user)
 			# Envoyer email de confirmation
-			confirm_url = request.build_absolute_uri(reverse("accounts:email_verify", args=[token]))
+			confirm_url = request.build_absolute_uri(reverse("accounts:email_verify", args=[uid, token]))
 			send_mail(
 				_("Confirmez votre adresse e-mail"),
 				_(f"Bonjour {user.username},\nCliquez sur ce lien pour confirmer votre adresse e-mail : {confirm_url}"),
@@ -114,18 +115,16 @@ def register(request):
 		form = RegisterForm()
 	return render(request, "accounts/register.html", {"form": form, "error_message": error_message})
 
-def email_verify(request, token):
-	# Recherche du token
-	for email, t in EMAIL_TOKENS.items():
-		if t == token:
-			try:
-				user = User.objects.get(email=email)
-				user.is_active = True
-				user.email_verified = True
-				user.save()
-				login(request, user)
-				del EMAIL_TOKENS[email]
-				return render(request, "accounts/email_confirmed.html", {"user": user})
-			except User.DoesNotExist:
-				pass
+def email_verify(request, uidb64, token):
+	try:
+		uid = force_str(urlsafe_base64_decode(uidb64))
+		user = get_user_model().objects.get(pk=uid)
+	except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+		user = None
+	if user and default_token_generator.check_token(user, token):
+		user.is_active = True
+		user.email_verified = True
+		user.save()
+		login(request, user)
+		return render(request, "accounts/email_confirmed.html", {"user": user})
 	return render(request, "accounts/email_invalid.html")

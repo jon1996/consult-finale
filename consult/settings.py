@@ -142,11 +142,13 @@ LANGUAGES = [
 LOCALE_PATHS = [os.path.join(BASE_DIR, 'locale')]
 
 # Email configuration
-# In development, print emails to the console; in production, use SMTP via environment variables.
-if DEBUG:
-    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-else:
-    EMAIL_BACKEND = os.environ.get('DJANGO_EMAIL_BACKEND', 'django.core.mail.backends.smtp.EmailBackend')
+# Default: console in DEBUG; SMTP in production. Can be overridden via EMAIL_BACKEND env var.
+EMAIL_BACKEND = os.environ.get('EMAIL_BACKEND')
+if not EMAIL_BACKEND:
+    if DEBUG:
+        EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    else:
+        EMAIL_BACKEND = os.environ.get('DJANGO_EMAIL_BACKEND', 'django.core.mail.backends.smtp.EmailBackend')
 
 EMAIL_HOST = os.environ.get('EMAIL_HOST', 'smtp.example.com')
 EMAIL_PORT = int(os.environ.get('EMAIL_PORT', 587))
@@ -154,13 +156,14 @@ EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', 'user@example.com')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', 'password')
 EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS', 'True').lower() in ['1', 'true', 'yes']
 EMAIL_USE_SSL = os.environ.get('EMAIL_USE_SSL', 'False').lower() in ['1', 'true', 'yes']
+EMAIL_TIMEOUT = int(os.environ.get('EMAIL_TIMEOUT', 10))
 DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', 'Consult <noreply@example.com>')
 SERVER_EMAIL = os.environ.get('SERVER_EMAIL', DEFAULT_FROM_EMAIL)
 
 # Static & Media
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.environ.get('DJANGO_STATIC_ROOT', os.path.join(BASE_DIR, 'staticfiles'))
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Security
