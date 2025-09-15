@@ -1,0 +1,47 @@
+.range-slider-con {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 500px;
+
+  .start, .end {
+    height: 25px;
+    width: 20px;
+    font-size: 13px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--icon-color);
+    color: var(--white);
+  }
+  
+
+  .noUi-connect {
+    background-color: var(--active-icon-color);
+  }
+  .pmd-range-slider {
+    width: 400px;
+    margin: 0;
+
+    .noUi-handle {
+      &:before {
+        background: var(--white);
+        border: 1px solid var(--active-icon-color);
+      }
+    }
+
+    .noUi-active {
+      background: var(--active-icon-color);
+    }
+    .noUi-tooltip {
+      background: var(--active-icon-color) !important;
+      &::before {
+        background: var(--active-icon-color) !important;
+      }
+    }
+
+    .noUi-background {
+      background: var(--icon-color);
+    }
+  }
+}

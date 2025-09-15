@@ -1,0 +1,106 @@
+// Toggle Switch
+.toggle-switch {
+  display: inline-block;
+  width: 80px;
+  height: 25px;
+  margin: 0 2rem;
+  position: relative;
+  border-radius: 40px;
+  background-color: rgba(158, 182, 188, 0.4);
+
+  &::after {
+    content: "" !important;
+  }
+
+  input {
+    display: none;
+  }
+  .option-slider {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: 30px;
+    cursor: pointer;
+    overflow: hidden;
+
+    &::before {
+      position: absolute;
+      content: "";
+      width: 100%;
+      height: 100%;
+      background: var(--active-icon-color);
+      border-radius: 30px;
+      transform: translateX(-30px);
+      transition: 0.3s;
+    }
+  }
+
+  input:disabled + .option-slider {
+    cursor: not-allowed;
+  }
+  input:checked + .option-slider:before {
+    transform: translateX(30px);
+    background: var(--active-icon-color);
+  }
+
+  input:disabled + .option-slider::before {
+    background: #e5e5e5;
+  }
+
+  input:disabled + .option-slider {
+    background: rgba(#dbdbdb, 0.5);
+  }
+}
+
+// Hamburger Menu
+// Hamburger Menu
+.hamburger-menu {
+  position: relative;
+
+  a {
+    width: 25px;
+    height: 15px;
+    display: block;
+    position: relative;
+
+    span {
+      height: 1px;
+      position: absolute;
+      background: var(--white);
+      text-indent: -999em;
+      width: 100%;
+      top: 6px;
+      transition: all 0.5s cubic-bezier(0, 0.275, 0.125, 1);
+
+      &:before,
+      &:after {
+        content: "";
+        height: 1px;
+        background: var(--white);
+        width: 100%;
+        position: absolute;
+        top: -6px;
+        left: 0;
+        transition: all 0.5s cubic-bezier(0, 0.275, 0.125, 1);
+      }
+
+      &:after {
+        top: 6px;
+      }
+    }
+
+    &.active span {
+      background: transparent;
+
+      &:before {
+        transform: translateY(6px) translateX(1px) rotate(45deg);
+      }
+
+      &:after {
+        transform: translateY(-6px) translateX(1px) rotate(-45deg);
+      }
+    }
+  }
+}

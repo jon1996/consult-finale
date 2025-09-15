@@ -1,0 +1,116 @@
+<link rel="stylesheet" href="./forms.css">
+<script src="./forms.js" defer></script>
+
+<form id="tdg-form" class="tdg-form-component" novalidate>
+  <fieldset>
+    <legend>Traduction Officielle – Assistance Administrative – Guide Local</legend>
+    <div class="form-group">
+      <label>Choisissez le ou les services dont vous avez besoin <span class="req" aria-hidden="true">*</span></label>
+      <div class="checkbox-group">
+        <label><input type="checkbox" name="services[]" value="traduction" id="service-traduction"> Traduction officielle de documents</label>
+        <label><input type="checkbox" name="services[]" value="assistance" id="service-assistance"> Assistance administrative</label>
+        <label><input type="checkbox" name="services[]" value="guide" id="service-guide"> Guide local professionnel</label>
+      </div>
+    </div>
+    <div class="service-section" id="section-traduction" style="display:none;">
+      <h4>1. Traduction officielle de documents</h4>
+      <div class="form-group">
+        <label>Documents à traduire :</label>
+        <div class="checkbox-group">
+          <label><input type="checkbox" name="traduction_docs[]" value="contrat"> Contrat / Accord</label>
+          <label><input type="checkbox" name="traduction_docs[]" value="piece_identite"> Pièce d’identité</label>
+          <label><input type="checkbox" name="traduction_docs[]" value="juridique"> Documents juridiques / notariés</label>
+          <label><input type="checkbox" name="traduction_docs[]" value="fiscal"> Documents fiscaux / administratifs</label>
+          <label><input type="checkbox" name="traduction_docs[]" value="correspondance"> Correspondance professionnelle</label>
+          <label><input type="checkbox" name="traduction_docs[]" value="autre"> Autre</label>
+        </div>
+        <input type="text" name="traduction_docs_autre" placeholder="Précisez (facultatif)" />
+      </div>
+      <div class="form-group">
+        <label>Langue source :</label>
+        <select name="langue_source">
+          <option value="">-- Sélectionnez --</option>
+          <option value="fr">Français</option>
+          <option value="en">Anglais</option>
+          <option value="sw">Swahili</option>
+          <option value="autre">Autre</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Langue cible :</label>
+        <select name="langue_cible">
+          <option value="">-- Sélectionnez --</option>
+          <option value="fr">Français</option>
+          <option value="en">Anglais</option>
+          <option value="sw">Swahili</option>
+          <option value="autre">Autre</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Besoin de légalisation / certification officielle ?</label>
+        <div class="choice-group">
+          <label><input type="radio" name="legalisation" value="oui"> Oui</label>
+          <label><input type="radio" name="legalisation" value="non"> Non</label>
+        </div>
+      </div>
+    </div>
+    <div class="service-section" id="section-assistance" style="display:none;">
+      <h4>2. Assistance administrative</h4>
+      <div class="form-group">
+        <label>Nous vous accompagnons dans toutes vos démarches :</label>
+        <div class="checkbox-group">
+          <label><input type="checkbox" name="assistance_options[]" value="rdv"> Prise de rendez-vous avec l’administration</label><br>
+          <label><input type="checkbox" name="assistance_options[]" value="dossier"> Constitution de dossier juridique</label><br>
+          <label><input type="checkbox" name="assistance_options[]" value="guichet"> Accompagnement aux guichets</label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Précisez votre demande :</label>
+        <textarea name="assistance_details" rows="2" placeholder="Votre demande..."></textarea>
+      </div>
+    </div>
+    <div class="service-section" id="section-guide" style="display:none;">
+      <h4>3. Guide local professionnel</h4>
+      <div class="form-group">
+        <label>Accompagnement :</label>
+        <div class="choice-group">
+          <label><input type="radio" name="guide_accompagnement" value="journee"> Journée</label>
+          <label><input type="radio" name="guide_accompagnement" value="demi_journee"> Demi-journée</label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Langue souhaitée :</label>
+        <select name="guide_langue">
+          <option value="">-- Sélectionnez --</option>
+          <option value="fr">Français</option>
+          <option value="en">Anglais</option>
+          <option value="sw">Swahili</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Lieux à visiter ou à couvrir :</label>
+        <textarea name="guide_lieux" rows="2" placeholder="Ex: Centre-ville, institutions, etc."></textarea>
+      </div>
+      <div class="form-group">
+        <div class="checkbox-group">
+          <label><input type="checkbox" name="guide_options[]" value="culturelle"> Assistance culturelle / protocolaire</label><br>
+          <label><input type="checkbox" name="guide_options[]" value="contacts"> Présentation aux contacts locaux / partenaires</label><br>
+          <label><input type="checkbox" name="guide_options[]" value="terrain"> Accompagnement lors de missions de terrain</label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="tdg-nom">Nom complet <span class="req" aria-hidden="true">*</span></label>
+      <input type="text" id="tdg-nom" name="nom" required autocomplete="name" />
+    </div>
+    <div class="form-group">
+      <label for="tdg-email">Email <span class="req" aria-hidden="true">*</span></label>
+      <input type="email" id="tdg-email" name="email" required autocomplete="email" />
+    </div>
+    <div class="form-group">
+      <label for="tdg-phone">Téléphone <span class="req" aria-hidden="true">*</span></label>
+      <input type="tel" id="tdg-phone" name="phone" required autocomplete="tel" pattern="[0-9+ ]{7,}" />
+    </div>
+    <button type="submit">Réserver un accompagnement</button>
+  </fieldset>
+</form>

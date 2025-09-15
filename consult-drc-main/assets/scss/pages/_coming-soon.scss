@@ -1,0 +1,72 @@
+body {
+  position: relative;
+}
+
+.coming-soon {
+  overflow-x: hidden;
+  min-height: 100vh;
+  background-color: var(--dark-grey-4);
+  .media {
+    background: url("../img/University/Coming_soon/ambar-simpang.png") no-repeat
+      center center / cover;
+    height: 100vh;
+  }
+  .content {
+    background-color: var(--dark-grey-4);
+    padding: 0 4rem;
+    height: 100vh;
+    * {
+      color: var(--white);
+    }
+
+    .title {
+      font-size: 5.5rem;
+      width: 600px;
+      letter-spacing: 1px;
+      position: relative;
+      left: -257px;
+      margin: 20vh 0 10vh 0;
+      font-family: var(--heading-font);
+
+      * {
+        font-family: var(--heading-font);
+      }
+    }
+
+    .left {
+      color: var(--dark-grey-4);
+    }
+
+    form {
+      width: 70%;
+      max-width: 480px;
+      margin-bottom: 2rem;
+      * {
+        height: 35px;
+        margin: 0;
+        border: 0;
+      }
+
+      input {
+        background-color: var(--light-blue-2);
+        padding: 0.25rem 1.5rem;
+        width: 75%;
+        color: var(--dark-grey-4);
+
+        &::placeholder {
+          color: var(--icon-color);
+          font-size: 12px;
+        }
+
+        &:focus {
+          outline: 1px solid var(--dark-blue-1);
+        }
+      }
+
+      .small-btn {
+        width: 20%;
+        margin: 0;
+      }
+    }
+  }
+}

@@ -1,0 +1,152 @@
+// ============================ Blog summary style 1 ==============================
+.blog-sum-item-style-1 {
+  display: flex;
+  align-items: center;
+
+  .content {
+    p, h6 {
+      color: var(--dark-grey-3);
+    }
+
+    p {
+      margin: 1.5rem 0;
+    }
+
+    .date {
+      color: var(--dark-grey-4);
+      margin: 1rem 0;
+      letter-spacing: 1px;
+    }
+
+    .react {
+      display: flex;
+      align-items: center;
+      margin: .25rem 0;
+
+      p, i {
+        color: var(--dark-grey-4);
+        font-size: 11px;
+      }
+      i {
+        margin: 0 .5rem 0 0;
+      }
+      p {
+        margin: 0;
+      }
+    }
+
+    .small-btn {
+      margin: 3rem 0 0 0;
+    }
+
+  }
+}
+
+// =========================== Blog summary style 2 ===============================
+.blog-sum-item-style-2 {
+  display: flex;
+  align-items: center;
+
+  .content {
+    p, h6 {
+      color: var(--dark-grey-3);
+    }
+
+    p {
+      margin: 1.5rem 0;
+    }
+
+    .date {
+      color: var(--dark-grey-4);
+      margin: 1rem 0;
+      letter-spacing: 1px;
+    }
+
+    .react {
+      display: flex;
+      align-items: center;
+      margin: .25rem 0;
+
+      p, i {
+        color: var(--dark-grey-4);
+        font-size: 11px;
+      }
+      i {
+        margin: 0 .5rem 0 0;
+      }
+      p {
+        margin: 0;
+      }
+    }
+
+    .small-btn {
+      margin: 3rem 0 0 0;
+    }
+
+  }
+
+  .inner-content {
+    position: relative;
+    left: 12%;
+    top: -8vh;
+    z-index: 10; 
+  }
+}
+
+// =========================== Tweet Summary item ================================
+.tweet-sum-item {
+  display: flex;
+  margin-bottom: 2rem;
+  cursor: pointer;
+  i {
+    font-size: 20px;
+    margin: 0;
+  }
+
+  .post-detail {
+    margin-left: 1rem;
+    p {
+      margin-bottom: .25rem;
+      color: var(--dark-grey-4);
+    }
+
+    .time {
+      font-size: 9px;
+    }
+  }
+  &:hover {
+    i {
+      color: var(--active-icon-color);
+    }
+  }
+}
+
+// =========================== Blog Area ================================
+.blogs-area-section {
+  .container-fluid {
+    padding-right: 0;
+  }
+
+  .img-fluid {
+    width: 100%;
+  }
+
+  .side-section {
+    .side-media {
+      background: url("../img/University/Blog/architecture-balcony.png") no-repeat  center center / cover;
+      height: 110vh;
+      min-height: 900px;
+      margin-top: 15vh;
+    }
+
+    .social-feed {
+      h4 {
+        margin: 3rem 0;
+      }
+    }
+  }
+  .blog {
+    margin-bottom: 4rem;
+    margin-right: 1rem;
+  }
+}

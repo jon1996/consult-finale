@@ -1,0 +1,129 @@
+
+
+.page-nav-section {
+  padding: 1rem 0 0 0;
+}
+
+.events-section-style-2 {
+  .container {
+      .event {
+          margin: 5rem 0;
+  
+          .date, .img {
+              padding: 0;
+          }
+
+          h1,
+          h5 {
+              font-family: var(--main-font);
+              font-weight: 700;
+              letter-spacing: 2px;
+              padding: .75rem 0;
+              color: var(--heading-color);
+          }
+  
+          h1 {
+              font-size: 4.7rem;
+              padding: 0px;
+              border-bottom: 1px solid var(--icon-color);
+          }
+          
+          h4 {
+            font-weight: 700;
+          }
+
+          h5 {
+              font-size: 1rem;
+          }
+          .date {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+          }
+          
+          .details {
+              p {
+                  margin: 1rem 0 .5rem 0;
+              }
+  
+              .main-btn {
+                  margin: 1rem 0;
+              }
+  
+              .event-infos {
+                  .info {
+                      height: 2rem;
+                      display: flex;
+                      align-items: center;
+                      margin-right: 2.5rem;
+  
+                      span {
+                          font-size: 11px;
+                          margin: 0;
+                          color: var(--dark-grey-3);
+                      }
+  
+                      i {
+                          color: var(--heading-color);
+                          margin: 0 .5rem 0 0;
+                          font-size: 14px;
+                      }
+                  }
+              }
+          }
+      }
+  
+      .odd-event {
+          .details {
+              padding-left: 2rem;
+          }
+      }
+  
+      .even-event {
+          .details {
+              padding-right: 2rem;
+              order: 1;
+          }
+
+          .img {
+              order: 2;
+          }
+  
+          .date {
+              text-align: right;
+              order: 3;
+          }
+      }
+
+      .more {
+          a {
+              font-size: 18px;
+              padding: .25rem;
+              color: var(--dark-blue-2);
+              text-align: center;
+              border-bottom: 1px solid var(--dark-blue-2);
+              font-weight: 400;
+              display: inline-block;
+              position: relative;
+              transition: 0.3s;
+          }
+
+          a:after {
+              content: '⭢';
+              position: absolute;
+              opacity: 0;  
+              right: 5px;
+              transition: 0.3s;
+          }
+          a:hover{
+          padding-right: 28px;
+          padding-left:8px;
+          }
+          
+          a:hover:after {
+          opacity: 1;
+          right: 5px;
+          }
+      }
+  }
+}

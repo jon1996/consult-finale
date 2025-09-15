@@ -7,16 +7,51 @@ from django.contrib.auth.forms import PasswordResetForm, SetPasswordForm
 
 class CustomPasswordResetForm(PasswordResetForm):
     email = forms.EmailField(label="Adresse email", max_length=254, widget=forms.EmailInput(attrs={"class": "form-control", "placeholder": "Votre email"}))
+
+
+class CustomSetPasswordForm(SetPasswordForm):
+    """Subclass SetPasswordForm to add form-control classes and placeholders to widgets
+
+    This ensures templates that render {{ field }} get Bootstrap styling without
+    using method calls in templates.
+    """
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if 'new_password1' in self.fields:
+            self.fields['new_password1'].widget.attrs.update({
+                'class': 'form-control',
+                'placeholder': 'Nouveau mot de passe'
+            })
+        if 'new_password2' in self.fields:
+            self.fields['new_password2'].widget.attrs.update({
+                'class': 'form-control',
+                'placeholder': 'Confirmer le mot de passe'
+            })
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from .models import User
+import re
 
 class RegisterForm(UserCreationForm):
     username = forms.CharField(label="Nom d'utilisateur", max_length=150, required=True, widget=forms.TextInput(attrs={"class": "form-control", "placeholder": "Nom d'utilisateur"}))
     first_name = forms.CharField(label="Prénom", max_length=30, required=True, widget=forms.TextInput(attrs={"class": "form-control", "placeholder": "Votre prénom"}))
     last_name = forms.CharField(label="Nom", max_length=30, required=True, widget=forms.TextInput(attrs={"class": "form-control", "placeholder": "Votre nom"}))
     email = forms.EmailField(required=True, widget=forms.EmailInput(attrs={"class": "form-control", "placeholder": "votre.email@exemple.com"}))
-    phone = forms.CharField(label="Numéro de téléphone", max_length=20, required=True, widget=forms.TextInput(attrs={"class": "form-control", "placeholder": "+243 xxx xxx xxx"}))
+    phone = forms.CharField(
+        label="Numéro de téléphone",
+        max_length=20,
+        required=True,
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control",
+                "placeholder": "+243 970 000 000",
+                # Client-side constraint: E.164-like (+ and 8-15 digits total)
+                "pattern": r"^\+[1-9][0-9]{7,14}$",
+                "inputmode": "tel",
+                "title": "Format international requis: +[indicatif][numéro], ex: +243970000000",
+            }
+        ),
+    )
     company = forms.CharField(label="Entreprise/Organisation", max_length=100, required=False, widget=forms.TextInput(attrs={"class": "form-control", "placeholder": "Nom de votre entreprise (optionnel)"}))
     sector = forms.ChoiceField(label="Secteur d'activité", choices=[
         ("", "Sélectionnez votre secteur"),
@@ -57,6 +92,18 @@ class RegisterForm(UserCreationForm):
         if not any(c.isdigit() for c in password):
             raise forms.ValidationError("Le mot de passe doit contenir un chiffre.")
         return password
+
+    def clean_phone(self):
+        raw = (self.cleaned_data.get("phone") or "").strip()
+        # Normalize: remove spaces, dashes, parentheses; convert leading 00->+
+        normalized = re.sub(r"[\s\-()]", "", raw)
+        if normalized.startswith("00"):
+            normalized = "+" + normalized[2:]
+        if not normalized.startswith("+"):
+            raise forms.ValidationError("Format invalide. Utilisez le format international, ex: +243970000000")
+        if not re.fullmatch(r"\+[1-9][0-9]{7,14}", normalized):
+            raise forms.ValidationError("Numéro invalide. Saisissez 8 à 15 chiffres après l’indicatif (ex: +243970000000).")
+        return normalized
 
     def clean(self):
         cleaned_data = super().clean()

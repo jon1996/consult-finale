@@ -1,0 +1,78 @@
+<!-- Shared assets for standalone preview; harmless if already included on a parent page -->
+<link rel="stylesheet" href="./forms.css">
+<script src="./forms.js" defer></script>
+
+<form id="aeroport-form" class="aeroport-form-component" novalidate>
+  <fieldset>
+    <legend>Accompagnement aéroport</legend>
+    <p class="muted">Un accueil VIP dès votre arrivée, un départ sans stress.</p>
+    <p class="muted">Que vous arriviez pour un séjour professionnel ou repartiez après une mission réussie, nous vous offrons un accompagnement complet pour tous vos déplacements à l’aéroport.</p>
+
+    <div class="form-group">
+      <label>Type de service souhaité <span class="req">*</span></label>
+      <div class="choice-group">
+        <label><input type="radio" name="service" value="arrivee" required> Accueil à l’arrivée</label>
+        <label><input type="radio" name="service" value="depart"> Assistance au départ</label>
+        <label><input type="radio" name="service" value="transit"> Transit ou correspondance</label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="aeroport">Aéroport concerné <span class="req">*</span></label>
+      <select id="aeroport" name="aeroport" required>
+        <option value="">-- Choisir l’aéroport --</option>
+        <option>Kinshasa – N’djili</option>
+        <option>Lubumbashi – Luano</option>
+        <option>Kolwezi</option>
+        <option>Goma</option>
+        <option>Autres</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Date et heure du vol <span class="req">*</span></label>
+      <div class="grid grid-2">
+        <div>
+          <input type="date" name="date_vol" required />
+        </div>
+        <div>
+          <input type="time" name="heure_vol" required />
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="num_vol">Numéro du vol (si disponible)</label>
+      <input type="text" id="num_vol" name="num_vol" placeholder="Numéro du vol" />
+    </div>
+    <div class="form-group">
+      <label>Langue préférée du personnel d’accueil <span class="req">*</span></label>
+      <div class="choice-group">
+        <label><input type="radio" name="langue" value="fr" required> Français</label>
+        <label><input type="radio" name="langue" value="en"> Anglais</label>
+        <label><input type="radio" name="langue" value="sw"> Swahili</label>
+        <label>
+          <input type="radio" name="langue" value="autre"> Autre
+        </label>
+      </div>
+      <div class="grid" style="margin-top:.6em;">
+        <input type="text" name="langue_autre" placeholder="Précisez (facultatif)" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Services souhaités</label>
+      <div class="checkbox-group">
+        <label><input type="checkbox" name="services[]" value="pancarte"> Accueil avec pancarte personnalisée</label>
+        <label><input type="checkbox" name="services[]" value="formalites"> Accélération des formalités (visa, immigration, douanes)</label>
+        <label><input type="checkbox" name="services[]" value="bagages"> Port des bagages</label>
+        <label><input type="checkbox" name="services[]" value="transfert"> Transfert aéroport–hôtel ou domicile</label>
+        <label><input type="checkbox" name="services[]" value="coordination"> Coordination avec votre chauffeur ou hôtel</label>
+        <label><input type="checkbox" name="services[]" value="visa"> Assistance pour visa à l’arrivée (le cas échéant)</label>
+        <label><input type="checkbox" name="services[]" value="lounge"> Lounge VIP (optionnel selon l’aéroport)</label>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Informations complémentaires ou instructions spéciales</label>
+      <textarea name="infos" rows="3" placeholder="Détails ou instructions..."></textarea>
+    </div>
+    <button type="submit">Réserver mon accompagnement</button>
+  </fieldset>
+</form>

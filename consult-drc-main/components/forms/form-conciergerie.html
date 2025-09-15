@@ -1,0 +1,54 @@
+<link rel="stylesheet" href="./forms.css">
+<script src="./forms.js" defer></script>
+
+<form id="conciergerie-form" class="conciergerie-form-component" novalidate>
+  <fieldset>
+    <legend>Conciergerie 24h/24</legend>
+    <p>Une assistance personnalisée, disponible à tout moment, pour tous vos besoins en RDC.</p>
+    <p>Parce qu’un séjour réussi dépend aussi de la réactivité et du confort, notre service de conciergerie accessible 24h/24 et 7j/7 prend en charge tous les détails logistiques, pratiques ou d’urgence pendant votre séjour.</p>
+    <p><strong>Faites-nous part de vos besoins :</strong></p>
+    <div class="form-group">
+  <label for="concierge-nature">Nature de la demande <span class="req">*</span></label>
+      <select id="concierge-nature" name="nature" required>
+        <option value="">-- Choisir une option --</option>
+        <option>Réservation de restaurant / salle de réunion</option>
+        <option>Organisation d’un rendez-vous professionnel</option>
+        <option>Achat de billet (avion, Bus, événement)</option>
+        <option>Livraison à domicile ou bureau</option>
+        <option>Recommandation médicale / urgence santé</option>
+        <option>Assistance administrative</option>
+        <option>Recherche de prestataire (notaire, avocat, traducteur, etc.)</option>
+        <option>Services personnels (pressing, coiffure, bien-être…)</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Degré d’urgence <span class="req">*</span></label>
+      <div class="choice-group">
+        <label><input type="radio" name="urgence" value="immediat" required> Immédiat (dans l’heure)</label>
+        <label><input type="radio" name="urgence" value="aujourdhui"> Aujourd’hui</label>
+        <label><input type="radio" name="urgence" value="semaine"> Cette semaine</label>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Moyen de communication préféré <span class="req">*</span></label>
+      <div class="choice-group">
+        <label><input type="radio" name="contact" value="whatsapp" required> WhatsApp</label>
+        <label><input type="radio" name="contact" value="telephone"> Téléphone</label>
+        <label><input type="radio" name="contact" value="email"> Email</label>
+        <label><input type="radio" name="contact" value="physique"> Rencontre physique</label>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Souhaitez-vous un agent dédié pendant tout votre séjour ? <span class="req">*</span></label>
+      <div class="choice-group">
+        <label><input type="radio" name="agent" value="oui" required> Oui</label>
+        <label><input type="radio" name="agent" value="non"> Non</label>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Détail de votre demande ou consigne particulière</label>
+      <textarea name="details" rows="3" placeholder="Votre demande ou consigne..."></textarea>
+    </div>
+    <button type="submit">Soumettre ma demande</button>
+  </fieldset>
+</form>

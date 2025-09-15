@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Demo Formulaires HTML (Modern)</title>
+  <link rel="stylesheet" href="/components/forms/forms.css" />
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif; background: #f8fafc; margin: 0; }
+    .shell { max-width: 980px; margin: 0 auto; padding: 24px 16px 64px; }
+    .topbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 16px; }
+    .brand { font-weight: 700; color: #0d6efd; }
+    .picker { display: flex; flex-wrap: wrap; gap: 8px; }
+    .picker button { background: #fff; border: 1px solid #e5e7eb; border-radius: 999px; padding: 8px 12px; cursor: pointer; }
+    .picker button.active { background: #0d6efd; color: #fff; border-color: #0d6efd; }
+    .card { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <div class="topbar">
+      <div class="brand">Consult DRC • Formulaires HTML</div>
+      <div class="picker" id="picker">
+        <button data-src="/components/forms/form-reservation-hotel.html">Hôtel</button>
+        <button data-src="/components/forms/form-location-vehicule.html">Location</button>
+        <button data-src="/components/forms/form-conciergerie.html">Conciergerie</button>
+        <button data-src="/components/forms/form-traduction-assistance-guide.html">TDG</button>
+        <button data-src="/components/forms/form-accompagnement-aeroport.html">Aéroport</button>
+        <button data-src="/components/forms/form-visa-carte.html">Visa/Carte</button>
+      </div>
+    </div>
+
+    <div id="mount" class="card">Choisissez un formulaire ci-dessus.</div>
+  </div>
+
+  <script src="/components/forms/forms.js"></script>
+  <script>
+    const picker = document.getElementById('picker');
+    const mount = document.getElementById('mount');
+    picker.addEventListener('click', async (e) => {
+      const btn = e.target.closest('button[data-src]');
+      if (!btn) return;
+      picker.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      mount.innerHTML = 'Chargement…';
+      try {
+        const res = await fetch(btn.dataset.src, { cache: 'no-cache' });
+        const html = await res.text();
+        mount.innerHTML = html;
+        // Re-init any per-form logic after injection
+        document.dispatchEvent(new Event('DOMContentLoaded'));
+      } catch (err) {
+        mount.innerHTML = '<p style="color:#b91c1c">Erreur de chargement du formulaire.</p>';
+      }
+    });
+  </script>
+</body>
+</html>

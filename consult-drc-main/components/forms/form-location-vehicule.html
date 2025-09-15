@@ -1,0 +1,84 @@
+<link rel="stylesheet" href="./forms.css">
+<script src="./forms.js" defer></script>
+
+<form id="location-form" class="location-form-component" novalidate>
+  <fieldset>
+    <legend>Location de véhicules avec chauffeur</legend>
+    <p>Déplacez-vous en toute sécurité, avec confort et ponctualité, partout en RDC.</p>
+    <p>Nous mettons à votre disposition un parc de véhicules adaptés à tous les besoins professionnels et personnels, accompagnés de chauffeurs expérimentés, discrets et multilingues.</p>
+    <p><strong>Remplissez ce formulaire pour réserver un véhicule :</strong></p>
+    <div class="form-group">
+  <label for="loc-ville">Ville de prise en charge <span class="req">*</span></label>
+      <select id="loc-ville" name="ville" required>
+        <option value="">-- Choisir une ville --</option>
+        <option>Kinshasa</option>
+        <option>Lubumbashi</option>
+        <option>Kolwezi</option>
+        <option>Goma</option>
+        <option>Matadi</option>
+        <option>Autre</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Période de démarrage <span class="req">*</span></label>
+      <div class="grid grid-2">
+        <div><input type="date" name="date_debut" required /></div>
+        <div><input type="time" name="heure_debut" required /></div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Durée de la location <span class="req">*</span></label>
+      <select name="duree" required>
+        <option value="">-- Choisir --</option>
+        <option>1 jour</option>
+        <option>2-3 jours</option>
+        <option>1 semaine</option>
+        <option>2 semaines</option>
+        <option>1 mois</option>
+        <option>autre</option>
+      </select>
+      <input type="text" name="duree_autre" placeholder="Si autre, précisez" />
+    </div>
+    <div class="form-group">
+      <label>Type de véhicule souhaité <span class="req">*</span></label>
+      <div class="choice-group">
+        <label><input type="radio" name="vehicule" value="berline" required> Berline (Corolla, Accent…)</label>
+        <label><input type="radio" name="vehicule" value="suv"> SUV (Prado, Fortuner…)</label>
+        <label><input type="radio" name="vehicule" value="pickup"> 4x4 Pick-up (double cabine)</label>
+        <label><input type="radio" name="vehicule" value="minibus"> Minibus / Van (jusqu’à 15 places)</label>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Finalité de l’usage <span class="req">*</span></label>
+      <select name="finalite" required>
+        <option value="">-- Choisir --</option>
+        <option>Déplacement professionnel</option>
+        <option>Missions institutionnelles</option>
+        <option>Transport minier/logistique</option>
+        <option>Visites privées</option>
+        <option>Tourisme</option>
+        <option>Autre</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Services complémentaires</label>
+      <div class="checkbox-group">
+        <label><input type="checkbox" name="services[]" value="chauffeur"> Chauffeur multilingue (Français/Anglais/Swahili)</label>
+        <label><input type="checkbox" name="services[]" value="wifi"> Accès Wi-Fi dans le véhicule</label>
+        <label><input type="checkbox" name="services[]" value="securite"> Assistance sécurité</label>
+        <label><input type="checkbox" name="services[]" value="clim"> Climatisation garantie</label>
+        <label><input type="checkbox" name="services[]" value="carburant"> Carburant inclus</label>
+        <label><input type="checkbox" name="services[]" value="gps"> GPS et géolocalisation temps réel</label>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="loc-depose">Lieu de dépose (si différent du départ)</label>
+      <input type="text" id="loc-depose" name="lieu_depose" placeholder="Précisez le lieu de dépose" />
+    </div>
+    <div class="form-group">
+      <label>Informations complémentaires ou préférences spécifiques</label>
+      <textarea name="infos" rows="3" placeholder="Détails ou préférences..."></textarea>
+    </div>
+    <button type="submit">Réserver mon véhicule</button>
+  </fieldset>
+</form>

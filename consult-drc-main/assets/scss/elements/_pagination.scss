@@ -1,0 +1,139 @@
+// Pagination Style 1 from blog page
+.pagination-style-1 {
+  display: flex;
+  align-items: center;
+  width: 200px;
+  margin: 0 auto;
+
+  .next, .prev {
+    background-color: var(--dark-grey-3);
+    height: 26px;
+    width: 26px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    
+    i {
+      color: var(--white);
+      font-size: 14px;
+    }
+  }
+  .page-num {
+    display: flex;
+    align-items: flex-end;
+    margin: 0 auto;
+
+    .current {
+      font-size: 2.5rem;
+      color: var(--active-icon-color);
+    }
+
+    .total {
+      font-size: 1rem;
+      color: var(--icon-color);
+
+      &::before {
+        content: "";
+        display: inline-block;
+        height: 22px;
+        margin: 0 4px;
+        width: 1px;
+        background: var(--icon-color);
+      }
+
+    }
+  }
+}
+
+// Pagination Style 2 from event page
+.pagination-style-2 {
+  display: flex;
+  justify-content: center;
+  width: 350px;
+  
+  .next, .prev {
+    height: 25px;
+    width: 25px;
+    background-color: var(--icon-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin: 0 .75rem;
+
+    i {
+      font-size: 12px;
+      color: var(--white);
+    }
+  }
+  .page-num {
+    display: flex;
+    align-items: center;
+    a {
+      font-size: 14px;
+      margin: 0 .5rem;
+    }
+    .current {
+      color: var(--active-icon-color);
+      font-weight: 700;
+    }
+    .total {
+      color: var(--icon-color);
+    }
+
+    .page-indicators {
+      display: flex;
+      .indicator {
+        height: 3px;
+        width: 1.5rem;
+        background-color: var(--icon-color);
+      }
+
+      .active {
+        width: 2.5rem;
+        background-color: var(--active-icon-color);
+      }
+    }
+  }
+}
+
+
+/*===============================================================
+                      Carousel Indicatore
+================================================================*/
+.pagination-style-3 {
+  display: flex;
+  align-items: flex-end;
+
+  * {
+    font-family: var(--main-font);
+    line-height: 0.5;
+    margin: 0;
+    color: var(--dark-grey-4);
+  }
+
+  .current {
+    font-size: 5rem;
+    position: relative;
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0px;
+      left: 100px;
+      display: block;
+      height: 3px;
+      width: 270px;
+      background: var(--dark-grey-4);
+      z-index: 1;
+    }
+  }
+  .total {
+    font-size: 1.2rem;
+
+    &:before {
+      content: "/";
+      margin: 0 3px;
+    }
+  }
+}

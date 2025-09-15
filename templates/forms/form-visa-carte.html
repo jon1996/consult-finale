@@ -1,0 +1,142 @@
+{% load static i18n %}
+<link rel="stylesheet" href="{% static 'components/forms/forms.css' %}">
+<script src="{% static 'components/forms/forms.js' %}" defer></script>
+
+<form id="visa-carte-form" class="visa-carte-form-component" novalidate enctype="multipart/form-data">
+  <fieldset>
+  <legend>{% trans "Demande de Visa / Carte de Travail" %}</legend>
+  <p class="muted">{% trans "Merci de sélectionner le but de votre séjour ou la démarche souhaitée, puis de compléter le formulaire adapté." %}</p>
+
+    <div class="form-group">
+  <label>{% trans "Quel est le but de votre séjour en RDC ?" %} <span class="req">*</span></label>
+      <div class="choice-group">
+  <label><input type="radio" name="but_sejour" value="volant" required> {% trans "Court séjour (Visa Volant)" %}</label>
+  <label><input type="radio" name="but_sejour" value="etablissement"> {% trans "Établissement à long terme (Visa d'Établissement)" %}</label>
+  <label><input type="radio" name="but_sejour" value="carte"> {% trans "Demande de Carte de Travail" %}</label>
+      </div>
+    </div>
+
+    <!-- Visa Volant Section -->
+    <div class="visa-section" id="section-volant" style="display:none;">
+  <h4>{% trans "Visa Volant" %}</h4>
+  <div class="form-group"><label>{% trans "Nom complet" %} <input type="text" name="volant_nom" /></label></div>
+  <div class="form-group"><label>{% trans "Nationalité" %} <input type="text" name="volant_nationalite" /></label></div>
+  <div class="form-group"><label>{% trans "Lieu de naissance" %} <input type="text" name="volant_lieu_naissance" /></label></div>
+  <div class="form-group"><label>{% trans "Adresse" %} <input type="text" name="volant_adresse" /></label></div>
+  <div class="form-group"><label>{% trans "Raison de la visite" %} <input type="text" name="volant_raison" /></label></div>
+  <div class="form-group"><label>{% trans "Identité du preneur en charge (si applicable)" %} <input type="text" name="volant_preneur" /></label></div>
+      <div class="form-group">
+  <label>{% trans "Avez-vous besoin d’une assistance pour obtenir une invitation officielle ?" %}</label>
+  <label><input type="radio" name="volant_invitation" value="oui"> {% trans "Oui" %}</label>
+  <label><input type="radio" name="volant_invitation" value="non"> {% trans "Non" %}</label>
+      </div>
+  <div class="form-group"><label>{% trans "Durée prévue du séjour" %} <input type="text" name="volant_duree" /></label></div>
+  <div class="form-group"><label>{% trans "Date estimée d’arrivée" %} <input type="date" name="volant_date_arrivee" /></label></div>
+  <div class="form-group"><strong>{% trans "Documents à joindre :" %}</strong></div>
+  <div class="form-group"><label>{% trans "Lettre de demande au Directeur Général de la Migration" %} <input type="file" name="volant_lettre" accept="image/*,.pdf" /></label></div>
+  <div class="form-group"><label>{% trans "Photocopie du passeport du requérant" %} <input type="file" name="volant_passeport" accept="image/*,.pdf" /></label></div>
+  <div class="form-group"><label>{% trans "Photocopie de l’identité du preneur en charge" %} <input type="file" name="volant_id_preneur" accept="image/*,.pdf" /></label></div>
+  <div class="form-group"><label>{% trans "Preuve d'inscription au RCCM (preneur en charge personne morale)" %} <input type="file" name="volant_rccm" accept="image/*,.pdf" /></label></div>
+  <div class="form-group"><label>{% trans "Numéro d'Impôt (preneur en charge personne morale)" %} <input type="file" name="volant_impot" accept="image/*,.pdf" /></label></div>
+  <div class="form-group"><label>{% trans "Identification Nationale (preneur en charge personne morale)" %} <input type="file" name="volant_id_nat" accept="image/*,.pdf" /></label></div>
+  <button type="submit">{% trans "Envoyer ma demande d'assistance" %}</button>
+    </div>
+
+    <!-- Visa d'Établissement Section -->
+    <div class="visa-section" id="section-etablissement" style="display:none;">
+  <h4>{% trans "Visa d'Établissement" %}</h4>
+      <div class="form-group">
+  <label>{% trans "Quel type de Visa d'Établissement vous intéresse ?" %}</label>
+        <select name="etab_type">
+          <option value="">{% trans "-- Choisir --" %}</option>
+          <option value="ordinaire">{% trans "Ordinaire" %}</option>
+          <option value="travail">{% trans "Travail" %}</option>
+          <option value="permanent">{% trans "Permanent" %}</option>
+        </select>
+      </div>
+
+      <div class="etab-subsection" id="etab-ordinaire" style="display:none;">
+  <h5>{% trans "Visa Ordinaire" %}</h5>
+  <div class="form-group"><label>{% trans "Nom complet" %} <input type="text" name="ord_nom" /></label></div>
+  <div class="form-group"><label>{% trans "Email" %} <input type="email" name="ord_email" /></label></div>
+  <div class="form-group"><label>{% trans "Téléphone" %} <input type="tel" name="ord_tel" /></label></div>
+  <div class="form-group"><label>{% trans "Nationalité" %} <input type="text" name="ord_nationalite" /></label></div>
+  <div class="form-group"><label>{% trans "Votre situation actuelle" %} <input type="text" name="ord_situation" /></label></div>
+  <div class="form-group"><label>{% trans "Informations supplémentaires" %} <textarea name="ord_infos"></textarea></label></div>
+  <div class="form-group"><strong>{% trans "Documents à joindre :" %}</strong></div>
+  <div class="form-group"><label>{% trans "Lettre de demande au Directeur Général de la Migration" %} <input type="file" name="ord_lettre" accept="image/*,.pdf" /></label></div>
+  <div class="form-group"><label>{% trans "Statuts de société" %} <input type="file" name="ord_statuts" accept="image/*,.pdf" /></label></div>
+  <div class="form-group"><label>{% trans "Registre de commerce et de crédit mobilier" %} <input type="file" name="ord_rccm" accept="image/*,.pdf" /></label></div>
+  <div class="form-group"><label>{% trans "Numéro d’identification Nationale" %} <input type="file" name="ord_id_nat" accept="image/*,.pdf" /></label></div>
+  <div class="form-group"><label>{% trans "Quitus Fiscale" %} <input type="file" name="ord_quitus" accept="image/*,.pdf" /></label></div>
+  <div class="form-group"><label>{% trans "Affiliation INPP" %} <input type="file" name="ord_inpp" accept="image/*,.pdf" /></label></div>
+  <div class="form-group"><label>{% trans "Affiliation CNSS" %} <input type="file" name="ord_cnss" accept="image/*,.pdf" /></label></div>
+  <div class="form-group"><label>{% trans "Extrait bancaire" %} <input type="file" name="ord_banque" accept="image/*,.pdf" /></label></div>
+  <button type="button" class="contact-btn">{% trans "Me contacter pour discuter de mon cas" %}</button>
+  <button type="submit">{% trans "Envoyer ma demande d'assistance" %}</button>
+      </div>
+
+      <div class="etab-subsection" id="etab-travail" style="display:none;">
+  <h5>{% trans "Visa de Travail" %}</h5>
+  <div class="form-group"><label>{% trans "Nom complet" %} <input type="text" name="trav_nom" /></label></div>
+  <div class="form-group"><label>{% trans "Email" %} <input type="email" name="trav_email" /></label></div>
+  <div class="form-group"><label>{% trans "Téléphone" %} <input type="tel" name="trav_tel" /></label></div>
+  <div class="form-group"><label>{% trans "Nationalité" %} <input type="text" name="trav_nationalite" /></label></div>
+  <div class="form-group"><label>{% trans "Nom de l’employeur" %} <input type="text" name="trav_employeur" /></label></div>
+  <div class="form-group"><label>{% trans "Informations supplémentaires" %} <textarea name="trav_infos"></textarea></label></div>
+  <div class="form-group"><strong>{% trans "Documents à joindre :" %}</strong></div>
+  <div class="form-group"><label>{% trans "RCCM de l’employeur" %} <input type="file" name="trav_rccm" accept="image/*,.pdf" /></label></div>
+  <div class="form-group"><label>{% trans "ID Nationale de l’employeur" %} <input type="file" name="trav_id_nat" accept="image/*,.pdf" /></label></div>
+  <div class="form-group"><label>{% trans "NIF de l’employeur" %} <input type="file" name="trav_nif" accept="image/*,.pdf" /></label></div>
+  <div class="form-group"><label>{% trans "Photo d’identité récente" %} <input type="file" name="trav_photo" accept="image/*,.pdf" /></label></div>
+  <div class="form-group"><label>{% trans "Preuve paiement INPP/ONEM" %} <input type="file" name="trav_inpp_onem" accept="image/*,.pdf" /></label></div>
+  <div class="form-group"><label>{% trans "Certificat médical" %} <input type="file" name="trav_medical" accept="image/*,.pdf" /></label></div>
+  <div class="form-group"><label>{% trans "Carte de vaccination internationale" %} <input type="file" name="trav_vaccin" accept="image/*,.pdf" /></label></div>
+  <div class="form-group"><label>{% trans "Carte de travail en cours" %} <input type="file" name="trav_carte_travail" accept="image/*,.pdf" /></label></div>
+  <div class="form-group"><label>{% trans "Contrat de travail visé ONEM" %} <input type="file" name="trav_contrat" accept="image/*,.pdf" /></label></div>
+  <div class="form-group"><label>{% trans "Diplôme/certificat qualification" %} <input type="file" name="trav_diplome" accept="image/*,.pdf" /></label></div>
+  <div class="form-group"><label>{% trans "Attestation de service" %} <input type="file" name="trav_attestation_service" accept="image/*,.pdf" /></label></div>
+  <div class="form-group"><label>{% trans "Attestation de résidence" %} <input type="file" name="trav_residence" accept="image/*,.pdf" /></label></div>
+  <div class="form-group"><label>{% trans "Attestation de bonne vie et mœurs" %} <input type="file" name="trav_bonne_vie" accept="image/*,.pdf" /></label></div>
+  <button type="button" class="contact-btn">{% trans "Me contacter pour discuter de mon cas" %}</button>
+  <button type="submit">{% trans "Envoyer ma demande d'assistance" %}</button>
+      </div>
+
+      <div class="etab-subsection" id="etab-permanent" style="display:none;">
+  <h5>{% trans "Visa Permanent" %}</h5>
+  <div class="form-group"><label>{% trans "Nom complet" %} <input type="text" name="perm_nom" /></label></div>
+  <div class="form-group"><label>{% trans "Email" %} <input type="email" name="perm_email" /></label></div>
+  <div class="form-group"><label>{% trans "Téléphone" %} <input type="tel" name="perm_tel" /></label></div>
+  <div class="form-group"><label>{% trans "Nationalité" %} <input type="text" name="perm_nationalite" /></label></div>
+  <div class="form-group"><label>{% trans "Informations supplémentaires" %} <textarea name="perm_infos"></textarea></label></div>
+  <button type="button" class="contact-btn">{% trans "Me contacter pour discuter de mon cas" %}</button>
+  <button type="submit">{% trans "Envoyer ma demande d'assistance" %}</button>
+      </div>
+    </div>
+
+    <!-- Carte de Travail Section -->
+    <div class="visa-section" id="section-carte" style="display:none;">
+  <h4>{% trans "Demande de Carte de Travail" %}</h4>
+  <div class="form-group"><label>{% trans "Nom complet" %} <input type="text" name="carte_nom" /></label></div>
+  <div class="form-group"><label>{% trans "Email" %} <input type="email" name="carte_email" /></label></div>
+  <div class="form-group"><label>{% trans "Téléphone" %} <input type="tel" name="carte_tel" /></label></div>
+  <div class="form-group"><label>{% trans "Nationalité" %} <input type="text" name="carte_nationalite" /></label></div>
+  <div class="form-group"><label>{% trans "Nom de l’employeur" %} <input type="text" name="carte_employeur" /></label></div>
+  <div class="form-group"><label>{% trans "Informations supplémentaires" %} <textarea name="carte_infos"></textarea></label></div>
+  <div class="form-group"><strong>{% trans "Documents à joindre :" %}</strong></div>
+  <div class="form-group"><label>{% trans "Formulaire de demande de carte" %} <input type="file" name="carte_formulaire" accept="image/*,.pdf" /></label></div>
+  <div class="form-group"><label>{% trans "Lettre de transmission" %} <input type="file" name="carte_lettre" accept="image/*,.pdf" /></label></div>
+  <div class="form-group"><label>{% trans "État nominatif du personnel étranger" %} <input type="file" name="carte_etat" accept="image/*,.pdf" /></label></div>
+  <div class="form-group"><label>{% trans "Projet de contrat de travail" %} <input type="file" name="carte_contrat" accept="image/*,.pdf" /></label></div>
+  <div class="form-group"><label>{% trans "CV du requérant" %} <input type="file" name="carte_cv" accept="image/*,.pdf" /></label></div>
+  <div class="form-group"><label>{% trans "Qualification professionnelle" %} <input type="file" name="carte_qualification" accept="image/*,.pdf" /></label></div>
+  <div class="form-group"><label>{% trans "Photo passeport récente" %} <input type="file" name="carte_photo" accept="image/*,.pdf" /></label></div>
+  <div class="form-group"><label>{% trans "Organigramme société" %} <input type="file" name="carte_organigramme" accept="image/*,.pdf" /></label></div>
+  <div class="form-group"><label>{% trans "Description du poste" %} <input type="file" name="carte_poste" accept="image/*,.pdf" /></label></div>
+  <div class="form-group"><label>{% trans "Preuve paiement CNSS/INPP" %} <input type="file" name="carte_cnss_inpp" accept="image/*,.pdf" /></label></div>
+  <div class="form-group"><label>{% trans "Photocopies passeport" %} <input type="file" name="carte_passeport" accept="image/*,.pdf" /></label></div>
+  <button type="button" class="contact-btn">{% trans "Me contacter pour discuter de mon cas" %}</button>
+  <button type="submit">{% trans "Envoyer ma demande d'assistance" %}</button>
+    </div>
+  </fieldset>
+</form>

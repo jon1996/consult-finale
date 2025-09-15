@@ -1,0 +1,1012 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: consult\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-08-15 00:00+0000\n"
+"PO-Revision-Date: 2025-08-15 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: Chinese (Simplified)\n"
+"Language: zh_Hans\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+# Base
+msgid "Consult"
+msgstr "Consult"
+
+# Space (user dashboard)
+msgid "Accueil"
+msgstr "首页"
+
+msgid "Historique"
+msgstr "历史"
+
+msgid "Backoffice"
+msgstr "后台"
+
+msgid "Se déconnecter"
+msgstr "退出"
+
+msgid "Tableau de bord"
+msgstr "仪表盘"
+
+msgid "Détails de la demande"
+msgstr "请求详情"
+
+msgid "Fermer"
+msgstr "关闭"
+
+msgid "Aller à la page \"Nouvelle demande\""
+msgstr "前往“新请求”页面"
+
+msgid "Nouvelle demande"
+msgstr "新请求"
+
+msgid "Service"
+msgstr "服务"
+
+msgid "Informations"
+msgstr "信息"
+
+msgid "Paiement"
+msgstr "支付"
+
+msgid "Confirmation"
+msgstr "确认"
+
+msgid "Choisissez un service, puis cliquez Suivant."
+msgstr "选择一个服务，然后点击下一步。"
+
+msgid "Suivant"
+msgstr "下一步"
+
+msgid "Retour"
+msgstr "返回"
+
+msgid "Choisissez une méthode de paiement."
+msgstr "请选择支付方式。"
+
+msgid "Carte bancaire"
+msgstr "银行卡"
+
+msgid "Mobile Money"
+msgstr "移动支付"
+
+msgid "Virement"
+msgstr "银行转账"
+
+msgid "Résumé"
+msgstr "摘要"
+
+msgid "Soumettre"
+msgstr "提交"
+
+msgid "Besoin d’un autre parcours ? Vous pouvez aussi utiliser l’onglet Formulaires."
+msgstr "需要其他流程？您也可以使用“表单”选项卡。"
+
+msgid "Mes formulaires"
+msgstr "我的表单"
+
+msgid "Choisissez un service, puis remplissez le formulaire."
+msgstr "选择服务，然后填写表单。"
+
+msgid "Formulaires"
+msgstr "表单"
+
+msgid "Mes demandes"
+msgstr "我的请求"
+
+msgid "Rechercher par service, statut ou ID..."
+msgstr "按服务、状态或ID搜索..."
+
+msgid "Toutes"
+msgstr "全部"
+
+msgid "En attente paiement"
+msgstr "待支付"
+
+msgid "Payées"
+msgstr "已支付"
+
+msgid "Annulées"
+msgstr "已取消"
+
+# Backoffice
+msgid "Vue d’ensemble"
+msgstr "总览"
+
+msgid "Demandes"
+msgstr "请求"
+
+msgid "Utilisateurs"
+msgstr "用户"
+
+msgid "Basculer thème"
+msgstr "切换主题"
+
+msgid "Espace utilisateur"
+msgstr "用户空间"
+
+msgid "Total"
+msgstr "总计"
+
+msgid "7 derniers jours"
+msgstr "最近7天"
+
+msgid "En attente"
+msgstr "待处理"
+
+msgid "Profil administrateur"
+msgstr "管理员资料"
+
+msgid "Modifier"
+msgstr "编辑"
+
+msgid "Prénom"
+msgstr "名"
+
+msgid "Nom"
+msgstr "姓"
+
+msgid "Email"
+msgstr "邮箱"
+
+msgid "Annuler"
+msgstr "取消"
+
+msgid "Enregistrer"
+msgstr "保存"
+
+msgid "Rechercher par service, statut, ID, email..."
+msgstr "按服务、状态、ID、邮箱搜索..."
+
+msgid "Nouvel utilisateur"
+msgstr "新用户"
+
+msgid "Rechercher par nom d’utilisateur, email, nom…"
+msgstr "按用户名、邮箱、姓名搜索..."
+
+msgid "Tous"
+msgstr "全部"
+
+msgid "Staff"
+msgstr "员工"
+
+msgid "Créer un utilisateur"
+msgstr "创建用户"
+
+msgid "Nom d’utilisateur"
+msgstr "用户名"
+
+msgid "Mot de passe"
+msgstr "密码"
+
+msgid "Téléphone"
+msgstr "电话"
+
+msgid "Entreprise"
+msgstr "公司"
+
+msgid "Secteur"
+msgstr "行业"
+
+msgid "Donner l’accès staff (backoffice)"
+msgstr "授予后台访问权限（员工）"
+
+msgid "Créer"
+msgstr "创建"
+
+msgid "Détails utilisateur"
+msgstr "用户详情"
+
+msgid "Actif"
+msgstr "启用"
+
+msgid "Superutilisateur"
+msgstr "超级用户"
+
+msgid "Email vérifié"
+msgstr "邮箱已验证"
+
+msgid "Groupes"
+msgstr "用户组"
+
+# Newly added UI strings
+msgid "Fermer le menu"
+msgstr "关闭菜单"
+
+msgid "Ouvrir le menu"
+msgstr "打开菜单"
+
+msgid "Bonjour,"
+msgstr "您好，"
+
+msgid "Créez une nouvelle demande en quelques clics."
+msgstr "几次点击即可创建新请求。"
+
+msgid "Réservation d'hôtel"
+msgstr "酒店预订"
+
+msgid "Hôtels, appartements, résidences"
+msgstr "酒店、公寓、民宿"
+
+msgid "Location de véhicule"
+msgstr "车辆租赁"
+
+msgid "Avec chauffeur"
+msgstr "含司机"
+
+msgid "Conciergerie"
+msgstr "礼宾服务"
+
+msgid "Assistance 24/7"
+msgstr "7×24 小时服务"
+
+msgid "Accompagnement aéroport"
+msgstr "机场陪同"
+
+msgid "Arrivée, départ, transit"
+msgstr "到达、离境、中转"
+
+msgid "Traduction / Guide"
+msgstr "翻译/向导"
+
+msgid "Traduction, assistance, guide"
+msgstr "翻译、协助、向导"
+
+msgid "Visa / Carte de travail"
+msgstr "签证/工作证"
+
+msgid "Accompagnement dossiers"
+msgstr "材料办理协助"
+
+msgid "Autres services"
+msgstr "其他服务"
+
+msgid "Prêt à envoyer ?"
+msgstr "准备发送？"
+
+msgid "Vérifiez les informations avant envoi."
+msgstr "发送前请核对信息。"
+
+msgid "Oui, envoyer"
+msgstr "是，发送"
+
+msgid "Tendance (7 jours)"
+msgstr "趋势（7天）"
+
+msgid "Dernières demandes"
+msgstr "最新请求"
+
+msgid "Top services (30 jours)"
+msgstr "热门服务（30天）"
+
+# Forms: Visa / Work Card
+msgid "Demande de Visa / Carte de Travail"
+msgstr "签证/工作证申请"
+
+msgid "Merci de sélectionner le but de votre séjour ou la démarche souhaitée, puis de compléter le formulaire adapté."
+msgstr "请选择您在刚果（金）的停留目的或所需办理的类型，然后填写相应表单。"
+
+msgid "Quel est le but de votre séjour en RDC ?"
+msgstr "您在刚果（金）的停留目的是什么？"
+
+msgid "Court séjour (Visa Volant)"
+msgstr "短期停留（落地签）"
+
+msgid "Établissement à long terme (Visa d'Établissement)"
+msgstr "长期居留（居留签）"
+
+msgid "Visa Volant"
+msgstr "落地签"
+
+msgid "Visa d'Établissement"
+msgstr "居留签"
+
+msgid "Visa de Travail"
+msgstr "工作签"
+
+msgid "Visa Permanent"
+msgstr "永久签"
+
+msgid "Demande de Carte de Travail"
+msgstr "工作证办理"
+
+msgid "Nom complet"
+msgstr "全名"
+
+msgid "Nationalité"
+msgstr "国籍"
+
+msgid "Lieu de naissance"
+msgstr "出生地"
+
+msgid "Adresse"
+msgstr "地址"
+
+msgid "Raison de la visite"
+msgstr "访问原因"
+
+msgid "Identité du preneur en charge (si applicable)"
+msgstr "担保人信息（如适用）"
+
+msgid "Avez-vous besoin d’une assistance pour obtenir une invitation officielle ?"
+msgstr "是否需要我们协助获取正式邀请函？"
+
+msgid "Oui"
+msgstr "是"
+
+msgid "Non"
+msgstr "否"
+
+msgid "Durée prévue du séjour"
+msgstr "预计停留时间"
+
+msgid "Date estimée d’arrivée"
+msgstr "预计到达日期"
+
+msgid "Documents à joindre :"
+msgstr "需附材料："
+
+msgid "Envoyer ma demande d'assistance"
+msgstr "提交协助请求"
+
+msgid "Quel type de Visa d'Établissement vous intéresse ?"
+msgstr "您感兴趣的居留签类型是？"
+
+msgid "-- Choisir --"
+msgstr "-- 请选择 --"
+
+msgid "Visa Ordinaire"
+msgstr "普通签"
+
+msgid "Votre situation actuelle"
+msgstr "您的当前情况"
+
+msgid "Informations supplémentaires"
+msgstr "补充信息"
+
+msgid "Me contacter pour discuter de mon cas"
+msgstr "联系我沟通详情"
+
+msgid "Nom de l’employeur"
+msgstr "雇主名称"
+
+# Forms: Other services
+msgid "Décrivez librement votre besoin. Notre équipe reviendra vers vous rapidement."
+msgstr "请自由描述您的需求，我们会尽快与您联系。"
+
+msgid "Votre demande"
+msgstr "您的需求"
+
+msgid "Ex: Besoin d’un service spécifique non listé..."
+msgstr "例如：需要未列出的特定服务..."
+
+# Visa form: additional labels
+msgid "Lettre de demande au Directeur Général de la Migration"
+msgstr "致移民总局局长的申请函"
+
+msgid "Photocopie du passeport du requérant"
+msgstr "申请人护照复印件"
+
+msgid "Photocopie de l’identité du preneur en charge"
+msgstr "担保人身份证复印件"
+
+msgid "Preuve d'inscription au RCCM (preneur en charge personne morale)"
+msgstr "RCCM 注册证明（法人担保）"
+
+msgid "Numéro d'Impôt (preneur en charge personne morale)"
+msgstr "税号（法人担保）"
+
+msgid "Identification Nationale (preneur en charge personne morale)"
+msgstr "国家识别号（法人担保）"
+
+msgid "Ordinaire"
+msgstr "普通"
+
+msgid "Travail"
+msgstr "工作"
+
+msgid "Permanent"
+msgstr "永久"
+
+msgid "Statuts de société"
+msgstr "公司章程"
+
+msgid "Registre de commerce et de crédit mobilier"
+msgstr "商事与动产信贷登记"
+
+msgid "Numéro d’identification Nationale"
+msgstr "国家识别号码"
+
+msgid "Quitus Fiscale"
+msgstr "税务清算证明"
+
+msgid "Affiliation INPP"
+msgstr "INPP 参保证明"
+
+msgid "Affiliation CNSS"
+msgstr "CNSS 参保证明"
+
+msgid "Extrait bancaire"
+msgstr "银行对账单"
+
+msgid "RCCM de l’employeur"
+msgstr "雇主 RCCM"
+
+msgid "ID Nationale de l’employeur"
+msgstr "雇主国家身份证"
+
+msgid "NIF de l’employeur"
+msgstr "雇主税号（NIF）"
+
+msgid "Photo d’identité récente"
+msgstr "近期证件照"
+
+msgid "Preuve paiement INPP/ONEM"
+msgstr "INPP/ONEM 缴费凭证"
+
+msgid "Certificat médical"
+msgstr "体检证明"
+
+msgid "Carte de vaccination internationale"
+msgstr "国际预防接种证"
+
+msgid "Carte de travail en cours"
+msgstr "现行工作证"
+
+msgid "Contrat de travail visé ONEM"
+msgstr "ONEM 盖章的劳动合同"
+
+msgid "Diplôme/certificat qualification"
+msgstr "学历/资质证书"
+
+msgid "Attestation de service"
+msgstr "在职证明"
+
+msgid "Attestation de résidence"
+msgstr "居住证明"
+
+msgid "Attestation de bonne vie et mœurs"
+msgstr "无犯罪记录证明"
+
+msgid "Formulaire de demande de carte"
+msgstr "工作证申请表"
+
+msgid "Lettre de transmission"
+msgstr "送审函"
+
+msgid "État nominatif du personnel étranger"
+msgstr "外籍员工名单"
+
+msgid "Projet de contrat de travail"
+msgstr "劳动合同草案"
+
+msgid "CV du requérant"
+msgstr "申请人简历"
+
+msgid "Qualification professionnelle"
+msgstr "职业资格"
+
+msgid "Photo passeport récente"
+msgstr "近期护照照片"
+
+msgid "Organigramme société"
+msgstr "公司组织架构图"
+
+msgid "Description du poste"
+msgstr "岗位说明"
+
+msgid "Preuve paiement CNSS/INPP"
+msgstr "CNSS/INPP 缴费凭证"
+
+msgid "Photocopies passeport"
+msgstr "护照复印件"
+
+# Conciergerie form additions
+msgid "Conciergerie 24h/24"
+msgstr "24/7 礼宾服务"
+
+msgid "Une assistance personnalisée, disponible à tout moment, pour tous vos besoins en RDC."
+msgstr "为您在刚果（金）的所有需求提供随时可用的个性化协助。"
+
+msgid "Parce qu’un séjour réussi dépend aussi de la réactivité et du confort, notre service de conciergerie accessible 24h/24 et 7j/7 prend en charge tous les détails logistiques, pratiques ou d’urgence pendant votre séjour."
+msgstr "成功的旅程也依赖响应速度与舒适度，我们的 7×24 小时礼宾服务为您处理出行中的各类后勤、实务和紧急事项。"
+
+msgid "Faites-nous part de vos besoins :"
+msgstr "请告诉我们您的需求："
+
+msgid "Nature de la demande"
+msgstr "需求类型"
+
+msgid "-- Choisir une option --"
+msgstr "-- 请选择 --"
+
+msgid "Réservation de restaurant / salle de réunion"
+msgstr "餐厅/会议室预订"
+
+msgid "Organisation d’un rendez-vous professionnel"
+msgstr "安排商务会面"
+
+msgid "Achat de billet (avion, Bus, événement)"
+msgstr "购票（机票、巴士、活动）"
+
+msgid "Livraison à domicile ou bureau"
+msgstr "送货到家或办公室"
+
+msgid "Recommandation médicale / urgence santé"
+msgstr "医疗推荐/健康紧急情况"
+
+msgid "Assistance administrative"
+msgstr "行政协助"
+
+msgid "Recherche de prestataire (notaire, avocat, traducteur, etc.)"
+msgstr "寻找服务商（公证员、律师、翻译等）"
+
+msgid "Services personnels (pressing, coiffure, bien-être…)"
+msgstr "个人服务（洗衣、美发、健康等）"
+
+msgid "Degré d’urgence"
+msgstr "紧急程度"
+
+msgid "Immédiat (dans l’heure)"
+msgstr "立即（1小时内）"
+
+msgid "Aujourd’hui"
+msgstr "今天"
+
+msgid "Cette semaine"
+msgstr "本周"
+
+msgid "Moyen de communication préféré"
+msgstr "首选沟通方式"
+
+msgid "WhatsApp"
+msgstr "WhatsApp"
+
+msgid "Rencontre physique"
+msgstr "当面交流"
+
+msgid "Souhaitez-vous un agent dédié pendant tout votre séjour ?"
+msgstr "您是否希望在整个行程中配备专属服务人员？"
+
+msgid "Détail de votre demande ou consigne particulière"
+msgstr "您的具体需求或特别说明"
+
+msgid "Votre demande ou consigne..."
+msgstr "您的需求或说明..."
+
+msgid "Soumettre ma demande"
+msgstr "提交我的请求"
+
+# TDG form additions
+msgid "Traduction Officielle – Assistance Administrative – Guide Local"
+msgstr "官方翻译 – 行政协助 – 本地向导"
+
+msgid "Cochez un ou plusieurs services, puis complétez uniquement les sections affichées."
+msgstr "勾选一个或多个服务，然后仅填写显示的部分。"
+
+msgid "Choisissez le ou les services dont vous avez besoin"
+msgstr "请选择所需服务"
+
+msgid "Français"
+msgstr "法语"
+
+msgid "Anglais"
+msgstr "英语"
+
+msgid "Swahili"
+msgstr "斯瓦西里语"
+
+msgid "Autre"
+msgstr "其他"
+
+msgid "-- Sélectionnez --"
+msgstr "-- 请选择 --"
+
+msgid "Réserver un accompagnement"
+msgstr "预约陪同"
+
+# Airport assistance form additions
+msgid "Un accueil VIP dès votre arrivée, un départ sans stress."
+msgstr "抵达即享 VIP 迎接，离境无压力。"
+
+msgid "Que vous arriviez pour un séjour professionnel ou repartiez après une mission réussie, nous vous offrons un accompagnement complet pour tous vos déplacements à l’aéroport."
+msgstr "无论您是商务抵达还是任务结束离境，我们为您提供全程机场出行陪同服务。"
+
+msgid "Type de service souhaité"
+msgstr "所需服务类型"
+
+msgid "Accueil à l’arrivée"
+msgstr "到达迎接"
+
+msgid "Assistance au départ"
+msgstr "离境协助"
+
+msgid "Transit ou correspondance"
+msgstr "中转/转机"
+
+msgid "Aéroport concerné"
+msgstr "相关机场"
+
+msgid "-- Choisir l’aéroport --"
+msgstr "-- 请选择机场 --"
+
+msgid "Kinshasa – N’djili"
+msgstr "金沙萨 – 恩吉利机场"
+
+msgid "Lubumbashi – Luano"
+msgstr "卢本巴希 – 鲁阿诺机场"
+
+msgid "Kolwezi"
+msgstr "科卢韦齐"
+
+msgid "Goma"
+msgstr "戈马"
+
+msgid "Autres"
+msgstr "其他"
+
+msgid "Date et heure du vol"
+msgstr "航班日期与时间"
+
+msgid "Numéro du vol (si disponible)"
+msgstr "航班号（如有）"
+
+msgid "Numéro du vol"
+msgstr "航班号"
+
+msgid "Langue préférée du personnel d’accueil"
+msgstr "接待人员首选语言"
+
+msgid "Précisez (facultatif)"
+msgstr "请说明（可选）"
+
+msgid "Services souhaités"
+msgstr "所需服务"
+
+msgid "Accueil avec pancarte personnalisée"
+msgstr "举接机牌迎接"
+
+msgid "Accélération des formalités (visa, immigration, douanes)"
+msgstr "加速办理手续（签证、入境、海关）"
+
+msgid "Port des bagages"
+msgstr "行李搬运"
+
+msgid "Transfert aéroport–hôtel ou domicile"
+msgstr "机场—酒店/住所接送"
+
+msgid "Coordination avec votre chauffeur ou hôtel"
+msgstr "与您的司机或酒店协调"
+
+msgid "Assistance pour visa à l’arrivée (le cas échéant)"
+msgstr "落地签协助（如适用）"
+
+msgid "Lounge VIP (optionnel selon l’aéroport)"
+msgstr "VIP 休息室（视机场而定）"
+
+msgid "Informations complémentaires ou instructions spéciales"
+msgstr "补充信息或特别说明"
+
+msgid "Détails ou instructions..."
+msgstr "详细说明..."
+
+msgid "Réserver mon accompagnement"
+msgstr "预订我的陪同服务"
+
+# TDG: detailed section labels and options
+msgid "Traduction officielle de documents"
+msgstr "文件官方翻译"
+
+msgid "Assistance administrative"
+msgstr "行政协助"
+
+msgid "Guide local professionnel"
+msgstr "专业本地向导"
+
+msgid "1. Traduction officielle de documents"
+msgstr "1. 文件官方翻译"
+
+msgid "Documents à traduire :"
+msgstr "待翻译文件："
+
+msgid "Contrat / Accord"
+msgstr "合同/协议"
+
+msgid "Pièce d’identité"
+msgstr "身份证件"
+
+msgid "Documents juridiques / notariés"
+msgstr "法律/公证文件"
+
+msgid "Documents fiscaux / administratifs"
+msgstr "税务/行政文件"
+
+msgid "Correspondance professionnelle"
+msgstr "商务往来"
+
+msgid "Précisez (facultatif)"
+msgstr "请说明（可选）"
+
+msgid "Langue source :"
+msgstr "源语言："
+
+msgid "Langue cible :"
+msgstr "目标语言："
+
+msgid "Besoin de légalisation / certification officielle ?"
+msgstr "是否需要公证/官方认证？"
+
+msgid "2. Assistance administrative"
+msgstr "2. 行政协助"
+
+msgid "Nous vous accompagnons dans toutes vos démarches :"
+msgstr "我们为您的各类办理提供协助："
+
+msgid "Prise de rendez-vous avec l’administration"
+msgstr "预约政府部门"
+
+msgid "Constitution de dossier juridique"
+msgstr "法律材料整理"
+
+msgid "Accompagnement aux guichets"
+msgstr "窗口陪同办理"
+
+msgid "Précisez votre demande :"
+msgstr "请说明您的需求："
+
+msgid "Votre demande..."
+msgstr "您的需求..."
+
+msgid "3. Guide local professionnel"
+msgstr "3. 专业本地向导"
+
+msgid "Accompagnement :"
+msgstr "陪同类型："
+
+msgid "Journée"
+msgstr "全天"
+
+msgid "Demi-journée"
+msgstr "半天"
+
+msgid "Langue souhaitée :"
+msgstr "期望语言："
+
+msgid "Lieux à visiter ou à couvrir :"
+msgstr "计划参观/覆盖地点："
+
+msgid "Ex: Centre-ville, institutions, etc."
+msgstr "例如：市中心、机构等"
+
+msgid "Assistance culturelle / protocolaire"
+msgstr "文化/礼宾协助"
+
+msgid "Présentation aux contacts locaux / partenaires"
+msgstr "引荐本地联系人/合作伙伴"
+
+msgid "Accompagnement lors de missions de terrain"
+msgstr "外勤任务陪同"
+
+# Vehicle rental form additions
+msgid "Location de véhicules avec chauffeur"
+msgstr "配司机车辆租赁"
+
+msgid "Déplacez-vous en toute sécurité, avec confort et ponctualité, partout en RDC."
+msgstr "在刚果（金）各地安全、舒适、准时出行。"
+
+msgid "Nous mettons à votre disposition un parc de véhicules adaptés à tous les besoins professionnels et personnels, accompagnés de chauffeurs expérimentés, discrets et multilingues."
+msgstr "我们提供满足商务与个人需求的车辆队伍，配备经验丰富、低调且多语种的司机。"
+
+msgid "Remplissez ce formulaire pour réserver un véhicule :"
+msgstr "填写此表以预订车辆："
+
+msgid "Ville de prise en charge"
+msgstr "上车城市"
+
+msgid "-- Choisir une ville --"
+msgstr "-- 请选择城市 --"
+
+msgid "Kinshasa"
+msgstr "金沙萨"
+
+msgid "Lubumbashi"
+msgstr "卢本巴希"
+
+msgid "Kolwezi"
+msgstr "科卢韦齐"
+
+msgid "Goma"
+msgstr "戈马"
+
+msgid "Matadi"
+msgstr "马塔迪"
+
+msgid "Autre"
+msgstr "其他"
+
+msgid "Période de démarrage"
+msgstr "开始时间"
+
+msgid "Durée de la location"
+msgstr "租期"
+
+msgid "-- Choisir --"
+msgstr "-- 请选择 --"
+
+msgid "1 jour"
+msgstr "1天"
+
+msgid "2-3 jours"
+msgstr "2-3天"
+
+msgid "1 semaine"
+msgstr "1周"
+
+msgid "2 semaines"
+msgstr "2周"
+
+msgid "1 mois"
+msgstr "1个月"
+
+msgid "autre"
+msgstr "其他"
+
+msgid "Si autre, précisez"
+msgstr "如选择其他，请说明"
+
+msgid "Type de véhicule souhaité"
+msgstr "期望车型"
+
+msgid "Berline (Corolla, Accent…)"
+msgstr "轿车（卡罗拉、雅绅特等）"
+
+msgid "SUV (Prado, Fortuner…)"
+msgstr "SUV（普拉多、Fortuner 等）"
+
+msgid "4x4 Pick-up (double cabine)"
+msgstr "四驱皮卡（双排座）"
+
+msgid "Minibus / Van (jusqu’à 15 places)"
+msgstr "小巴/厢式车（最多15座）"
+
+msgid "Finalité de l’usage"
+msgstr "使用目的"
+
+msgid "Déplacement professionnel"
+msgstr "商务出行"
+
+msgid "Missions institutionnelles"
+msgstr "机构公务"
+
+msgid "Transport minier/logistique"
+msgstr "矿业/物流运输"
+
+msgid "Visites privées"
+msgstr "私人访问"
+
+msgid "Tourisme"
+msgstr "旅游"
+
+msgid "Services complémentaires"
+msgstr "附加服务"
+
+msgid "Chauffeur multilingue (Français/Anglais/Swahili)"
+msgstr "多语司机（法/英/斯瓦西里语）"
+
+msgid "Accès Wi-Fi dans le véhicule"
+msgstr "车载 Wi‑Fi"
+
+msgid "Assistance sécurité"
+msgstr "安保协助"
+
+msgid "Climatisation garantie"
+msgstr "空调保障"
+
+msgid "Carburant inclus"
+msgstr "含燃油"
+
+msgid "GPS et géolocalisation temps réel"
+msgstr "GPS 与实时定位"
+
+msgid "Lieu de dépose (si différent du départ)"
+msgstr "下车地点（如与出发地不同）"
+
+msgid "Précisez le lieu de dépose"
+msgstr "请说明下车地点"
+
+msgid "Informations complémentaires ou préférences spécifiques"
+msgstr "补充信息或特定偏好"
+
+msgid "Détails ou préférences..."
+msgstr "备注或偏好..."
+
+msgid "Réserver mon véhicule"
+msgstr "预订我的车辆"
+
+# Accounts templates (login/register/reset/email)
+msgid "Connexion"
+msgstr "登录"
+
+msgid "Se connecter"
+msgstr "登录"
+
+msgid "Créer un compte"
+msgstr "创建账户"
+
+msgid "Mot de passe oublié ?"
+msgstr "忘记密码？"
+
+msgid "Bienvenue !"
+msgstr "欢迎！"
+
+msgid "Rejoignez la communauté en créant votre compte."
+msgstr "创建账户，加入我们的社区。"
+
+msgid "Déjà inscrit ? Connectez-vous pour accéder à votre espace."
+msgstr "已经注册？登录以访问您的空间。"
+
+msgid "Inscrivez-vous avec votre e-mail"
+msgstr "使用邮箱注册"
+
+msgid "Créer mon compte"
+msgstr "创建我的账户"
+
+msgid "Mot de passe oublié"
+msgstr "忘记密码"
+
+msgid "Envoyer le lien"
+msgstr "发送链接"
+
+msgid "Retour à la connexion"
+msgstr "返回登录"
+
+msgid "Vérifiez votre boîte de réception"
+msgstr "请检查您的收件箱"
+
+msgid "Si vous ne trouvez pas l'e-mail, vérifiez le dossier spam."
+msgstr "如果没有收到邮件，请检查垃圾邮箱。"
+
+msgid "Lien invalide ou expiré"
+msgstr "链接无效或已过期"
+
+msgid "Demandez un nouveau lien pour continuer la réinitialisation."
+msgstr "请申请新的链接以继续重置。"
+
+msgid "Réessayer"
+msgstr "重试"
+
+msgid "Définir un nouveau mot de passe"
+msgstr "设置新密码"
+
+msgid "Choisissez un mot de passe fort, puis confirmez-le."
+msgstr "请选择强密码，并再次确认。"
+
+msgid "Mettre à jour"
+msgstr "更新"
+
+msgid "Mot de passe mis à jour"
+msgstr "密码已更新"
+
+msgid "Votre mot de passe a été réinitialisé avec succès."
+msgstr "您的密码已成功重置。"
+
+msgid "Votre adresse e-mail est confirmée."
+msgstr "您的邮箱地址已确认。"
+
+msgid "Veuillez vérifier votre boîte de réception."
+msgstr "请检查您的收件箱。"
+
+# Email textual lines
+msgid "Pour réinitialiser votre mot de passe, cliquez sur le lien suivant :"
+msgstr "要重置您的密码，请点击以下链接："
+
+msgid "Si vous n'avez pas demandé cette opération, ignorez ce message."
+msgstr "如果这不是您发起的操作，请忽略此邮件。"
+
+# Auto-logout message
+msgid "Votre session a expiré après 10 minutes d'inactivité. Veuillez vous reconnecter."
+msgstr "由于 10 分钟无操作，您的会话已过期。请重新登录。"

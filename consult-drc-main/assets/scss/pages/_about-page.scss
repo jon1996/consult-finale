@@ -1,0 +1,132 @@
+.mantra {
+  .container {
+    background-color: var(--light-grey-3);
+    position: relative;
+
+    .content {
+      padding: 4rem 3rem;
+
+      h2 {
+        margin-bottom: 2rem;
+      }
+    }
+
+    .media {
+      padding: 0px;
+
+      .img-fluid {
+        height: 100%;
+        width: 100%;
+      }
+    }
+
+    .halfway-btn {
+      left: 0%;
+      top: 70%;
+    }
+  }
+}
+
+.mission-section,
+.vision-section {
+  .content {
+    width: 85%;
+    margin: 0 auto;
+  }
+}
+
+.values-section {
+  .content {
+    padding: 2rem;
+  }
+
+  .container {
+    .top-content {
+      .media {
+        padding: 0;
+      }
+
+      .row {
+        background-color: var(--light-grey-3);
+
+        img {
+          width: 100%;
+        }
+      }
+    }
+
+    .bottom-content {
+      .row {
+        background-color: var(--light-grey-5);
+        padding-top: 2rem;
+
+        h2 {
+          margin-bottom: 1.5rem;
+        }
+      }
+    }
+  }
+}
+
+.teachers-section {
+  background-color: var(--light-grey-5);
+  padding: 3rem 0;
+  position: relative;
+
+  .teachers-carousel {
+    .owl-nav {
+      div {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 40px;
+        height: 40px;
+        text-align: center;
+        line-height: 40px;
+        color: var(--white);
+        background-color: rgba(#333e48, 0.8);
+        transition: all 500ms;
+        &:hover {
+          background-color: #333e48;
+        }
+
+        i {
+          color: var(--white);
+        }
+        &.owl-next {
+          left: auto;
+          right: 0;
+          top: auto;
+          bottom: 90px;
+        }
+      }
+    }
+  }
+
+  .dots {
+    .owl-dot {
+      height: 20px;
+      width: 3px;
+      margin: 5px 0;
+      background-color: var(--icon-color);
+      transition: 500ms all;
+    }
+
+    .owl-dot + .active {
+      height: 50px;
+      background-color: var(--active-icon-color);
+    }
+  }
+
+  .dots {
+    position: absolute;
+    left: 4vw;
+    top: 50%;
+  }
+}
+
+.opportunity-section {
+  h2 {
+    margin-bottom: 0.75rem;
+  }
+}

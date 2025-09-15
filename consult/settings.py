@@ -12,6 +12,15 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 import os
 from pathlib import Path
+try:
+    import environ  # django-environ
+    _env = environ.Env()
+    _env_file = os.path.join(Path(__file__).resolve().parent.parent, '.env')
+    if os.path.exists(_env_file):
+        environ.Env.read_env(_env_file)
+except Exception:
+    # Safe fallback if django-environ isn't available or .env missing
+    pass
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -44,6 +53,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts',
     'dashboard',
+    'core',
 ]
 
 # Utilisateur custom
@@ -52,11 +62,13 @@ AUTH_USER_MODEL = 'accounts.User'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'accounts.middleware.InactiveUserLogoutMiddleware',
 ]
 
 ROOT_URLCONF = 'consult.urls'
@@ -69,6 +81,7 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.request',
+                'django.template.context_processors.i18n',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
@@ -84,12 +97,8 @@ WSGI_APPLICATION = 'consult.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'consult',
-        'USER': 'consult',
-        'PASSWORD': 'changeme',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -116,7 +125,8 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+# Default language (can be overridden via i18n set_language view)
+LANGUAGE_CODE = os.environ.get('DJANGO_LANGUAGE_CODE', 'fr')
 
 TIME_ZONE = 'UTC'
 
@@ -134,10 +144,11 @@ USE_TZ = True
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Internationalization
+# Supported languages: French, English, Chinese (Simplified). For Cantonese, use zh-hant (Traditional) if needed.
 LANGUAGES = [
     ('fr', 'Français'),
     ('en', 'English'),
-    ('zh', '中文'),
+    ('zh-hans', '中文(简体)'),
 ]
 LOCALE_PATHS = [os.path.join(BASE_DIR, 'locale')]
 
@@ -169,6 +180,40 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Security
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
+# Internal secret used by server-side callers to change language via the secure endpoint.
+# In production, set INTERNAL_SETLANG_KEY in the environment to a strong random value.
+INTERNAL_SETLANG_KEY = os.environ.get('INTERNAL_SETLANG_KEY', 'dev-internal-setlang-key')
+
 # Auth redirects
-LOGIN_URL = '/app/account/login/'
+LOGIN_URL = '/app/accounts/login/'
 LOGIN_REDIRECT_URL = '/app/space/'
+
+# Session inactivity auto-logout
+# 10 minutes of inactivity
+SESSION_IDLE_TIMEOUT = int(os.environ.get('DJANGO_SESSION_IDLE_TIMEOUT', 600))
+# Ensure the session cookie max age is at least timeout (optional longer to allow sliding behavior)
+SESSION_COOKIE_AGE = int(os.environ.get('DJANGO_SESSION_COOKIE_AGE', 60 * 60 * 8))  # 8 hours
+# Update the session on each request so last_activity_ts persists; prevents premature expiry
+SESSION_SAVE_EVERY_REQUEST = True
+
+# CinetPay configuration (use environment variables in production)
+CINETPAY_API_BASE = os.environ.get('CINETPAY_API_BASE', 'https://api-checkout.cinetpay.com')
+CINETPAY_SITE_ID = os.environ.get('CINETPAY_SITE_ID', '')
+CINETPAY_API_KEY = os.environ.get('CINETPAY_API_KEY', '')
+CINETPAY_VERIFY_ENDPOINT = os.environ.get('CINETPAY_VERIFY_ENDPOINT', f"{CINETPAY_API_BASE}/v2/payment/check")
+CINETPAY_SECRET_KEY = os.environ.get('CINETPAY_SECRET_KEY', '')
+# Preferred transaction currency for your account (e.g., CDF, USD, XOF)
+# Default to USD everywhere unless overridden via environment
+CINETPAY_CURRENCY = os.environ.get('CINETPAY_CURRENCY', 'XOF')
+
+# Business defaults (testing only)
+# Default prices per request kind when no admin offer (price) is set.
+# WARNING: These are for local testing/sandbox only. Remove or override in production.
+DEFAULT_PRICES = {
+    'tdg': 100.00,
+}
+
+# Feature flag: control whether the application sends the user-facing payment emails
+# Set to 'False' in the environment to disable sending payment link emails after
+# submission/validation (useful for testing or when another system handles notifications).
+SEND_PAYMENT_EMAILS = os.environ.get('SEND_PAYMENT_EMAILS', 'False').lower() in ['1', 'true', 'yes']

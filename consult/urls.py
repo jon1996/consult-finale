@@ -16,9 +16,22 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.views.i18n import JavaScriptCatalog
+from core.views import secure_set_language
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('app/account/', include('accounts.urls')),
-    path('app/', include('dashboard.urls')),
+    # Keep two mounts but use explicit namespaces to avoid duplicate app_name warnings
+    path('app/accounts/', include(('accounts.urls', 'accounts'), namespace='accounts_app')),
+    # top-level accounts URLs (so /accounts/ matches)
+    path('accounts/', include(('accounts.urls', 'accounts'), namespace='accounts')),
+    path('app/', include('dashboard.urls'),),
+    # i18n
+    path('i18n/setlang/', secure_set_language, name='set_language'),
+    path('i18n/jsi18n/', JavaScriptCatalog.as_view(), name='javascript-catalog'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

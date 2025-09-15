@@ -1,94 +1,112 @@
 {% extends 'base.html' %}
+{% load static i18n %}
 {% block content %}
-<section class="sign-up-section section">
-  <div class="container">
-    <div class="row">
-      <div class="col-12 col-lg-6 sign-in">
-        <div class="content">
-            <h2>Bienvenue !</h2>
-            <p>Déjà inscrit ? Connectez-vous pour accéder à votre espace.</p>
-            <a href="/app/account/login/" class="main-btn">Se connecter</a>
-        </div>
-      </div>
-      <div class="col-12 col-lg-6 sign-up">
-        <div class="content">
-            <h2>Créer un compte</h2>
-            <div class="sign-with-email">
-              <h6>Inscrivez-vous avec votre e-mail</h6>
-              <form method="post" class="form-style-2" novalidate>
-                  {% csrf_token %}
-                  {% if error_message %}
-                    <div class="alert alert-danger">{{ error_message }}</div>
-                  {% endif %}
-                  {% for field in form %}
-                    <div class="form-group required mb-3">
-                      {{ field.label_tag }}
-                      {{ field }}
-                      {% if field.help_text %}<small class="form-text text-muted">{{ field.help_text }}</small>{% endif %}
-                      {% for error in field.errors %}<div class="text-danger small">{{ error }}</div>{% endfor %}
-                    </div>
-                  {% endfor %}
-                  <button type="submit" class="small-btn btn-block btn btn-primary">Créer mon compte</button>
-                </form>
+<section class="auth-page">
+  <div class="container-fluid min-vh-100 d-flex align-items-center justify-content-center px-3">
+    <div class="auth-card card shadow-sm w-100" style="max-width: 520px;">
+      <div class="card-body p-4 p-md-5 text-center">
+        <img src="{% static 'core/img/logo.png' %}" alt="Logo" height="56" class="mb-3" style="object-fit:contain" />
+        <h1 class="h4 fw-bold mb-2">{% trans "Créer un compte" %}</h1>
+        <p class="text-muted small mb-4">{% trans "Rejoignez-nous en quelques secondes." %}</p>
+
+        <form method="post" class="auth-form text-start" novalidate>
+          {% csrf_token %}
+          {% if error_message %}
+            <div class="alert alert-danger">{{ error_message }}</div>
+          {% endif %}
+          {% for field in form %}
+            <div class="mb-3">
+              <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}{% if field.field.required %} <span class="text-danger">*</span>{% endif %}</label>
+              {{ field }}
+              {% if field.name == 'phone' %}
+                <div class="form-text">{% trans "Format international requis, ex: +243970000000" %}</div>
+              {% endif %}
+              {% if field.help_text %}<div class="form-text">{{ field.help_text }}</div>{% endif %}
+              {% for error in field.errors %}
+                <div class="text-danger small">{{ error }}</div>
+              {% endfor %}
             </div>
+          {% endfor %}
+          <button type="submit" class="btn btn-brand w-100 py-2 btn-login">{% trans "Créer mon compte" %}</button>
+          
+        </form>
+
+        <div class="mt-4 small">
+          {% trans "Déjà inscrit ?" %}
+          <a href="/app/accounts/login/" class="ms-1">{% trans "Se connecter" %}</a>
         </div>
       </div>
     </div>
   </div>
 </section>
+
 <style>
-  .sign-up-section .sign-in, .sign-up-section .sign-up {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 500px;
-  }
-  .sign-up-section .content {
-    background: #fff;
-    padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+  .auth-page { background: var(--bg, #f5f7fb); }
+  .auth-form input[type="text"],
+  .auth-form input[type="email"],
+  .auth-form input[type="password"],
+  .auth-form input[type="tel"],
+  .auth-form input[type="number"],
+  .auth-form select,
+  .auth-form textarea {
+    display: block;
     width: 100%;
-    max-width: 450px;
+    border: 1px solid #e5e7eb;
+    border-radius: .5rem;
+    padding: .6rem .8rem;
+    font-size: 1rem;
   }
-  .main-btn {
-    background: #007bff;
-    color: #fff;
-    padding: 12px 30px;
-    border-radius: 5px;
-    font-weight: 600;
-    text-decoration: none;
-    display: inline-block;
-    margin-top: 20px;
-  }
-  .main-btn:hover {
-    background: #0056b3;
-    color: #fff;
-  }
-  .form-style-2 .form-group label {
-    font-weight: 500;
-    margin-bottom: 6px;
-  }
-  .form-style-2 .form-control {
-    border-radius: 6px;
-    border: 1px solid #e0e0e0;
-    padding: 10px 12px;
-    font-size: 16px;
-  }
-  .btn-block {
-    width: 100%;
-    padding: 15px;
-    font-size: 16px;
-    margin-top: 20px;
-  }
-  @media (max-width: 991px) {
-    .sign-up-section .sign-in, .sign-up-section .sign-up {
-      min-height: 350px;
-    }
-    .sign-up-section .content {
-      padding: 20px;
-      max-width: 100%;
-    }
+  .btn-login { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; font-weight: 600; }
+  .btn-login .btn-icon { display:inline-flex; }
+  .btn-login .btn-icon svg { width: 18px; height: 18px; }
+  .btn-login { box-shadow: 0 2px 10px rgba(13,110,253,.18); transition: transform .05s ease, box-shadow .15s ease; }
+  .btn-login:hover { box-shadow: 0 4px 16px rgba(13,110,253,.28); }
+  .btn-login:active { transform: translateY(1px); }
+  .auth-card { border-radius: 1rem; }
+  @media (max-width: 480px) {
+    .auth-card .card-body { padding: 1.25rem; }
   }
 </style>
+<script>
+  // Derive brand color from the logo image and apply it to the login button
+  document.addEventListener('DOMContentLoaded', function(){
+    const img = document.getElementById('auth-logo');
+    if (!img) return;
+    function applyBrandFromImage() {
+      try {
+        const w = Math.max(1, img.naturalWidth);
+        const h = Math.max(1, img.naturalHeight);
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        const scale = Math.min(120 / w, 120 / h, 1); // sample at most 120px
+        canvas.width = Math.max(1, Math.floor(w * scale));
+        canvas.height = Math.max(1, Math.floor(h * scale));
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        const { data } = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        let r=0,g=0,b=0,count=0;
+        const step = 4 * 5; // sample every ~5 pixels for speed
+        for (let i=0; i<data.length; i+=step) {
+          const alpha = data[i+3];
+          if (alpha < 16) continue; // skip near-transparent
+          r += data[i];
+          g += data[i+1];
+          b += data[i+2];
+          count++;
+        }
+        if (count === 0) return;
+        r = Math.round(r / count); g = Math.round(g / count); b = Math.round(b / count);
+        // Slightly boost saturation / darkness for better button appearance
+        const factor = 0.92; r = Math.round(r*factor); g = Math.round(g*factor); b = Math.round(b*factor);
+        const avg = `rgb(${r}, ${g}, ${b})`;
+        const hover = `rgb(${Math.max(0, Math.round(r*0.9))}, ${Math.max(0, Math.round(g*0.9))}, ${Math.max(0, Math.round(b*0.9))})`;
+        const luminance = 0.299*r + 0.587*g + 0.114*b;
+        const contrast = luminance > 160 ? '#000' : '#fff';
+        document.documentElement.style.setProperty('--brand-color', avg);
+        document.documentElement.style.setProperty('--brand-color-hover', hover);
+        document.documentElement.style.setProperty('--brand-contrast', contrast);
+      } catch (_) { /* no-op */ }
+    }
+    if (img.complete) applyBrandFromImage(); else img.addEventListener('load', applyBrandFromImage);
+  });
+</script>
 {% endblock %}

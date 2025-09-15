@@ -1,0 +1,292 @@
+/* forms.css - Modern, business-oriented styles for all forms */
+:root {
+  --brand: #0d6efd;
+  --brand-600: #0b5ed7;
+  --ring: rgba(13,110,253,0.25);
+  --text: #1f2937;
+  --muted: #6b7280;
+  --card: #ffffff;
+  --border: #e5e7eb;
+  --input: #d1d5db;
+}
+
+/* Base typography inside components */
+.hotel-form-component,
+.location-form-component,
+.conciergerie-form-component,
+.aeroport-form-component,
+.tdg-form-component,
+.visa-carte-form-component {
+  color: var(--text);
+}
+
+/* Helpers */
+.checkbox-group label {
+  display: inline-block;
+  margin-right: 1em;
+  margin-bottom: 0.5em;
+}
+.muted { color: var(--muted); }
+.req { color: #dc2626; }
+.contact-btn {
+  background: var(--brand);
+  color: #fff;
+  border: none;
+  border-radius: 0.3em;
+  padding: 0.7em 1.5em;
+  font-size: 1em;
+  cursor: pointer;
+  margin-right: 0.7em;
+  transition: background 0.2s;
+}
+.contact-btn:hover { background: var(--brand-600); }
+
+/* Card containers */
+.hotel-form-component,
+.location-form-component,
+.conciergerie-form-component,
+.aeroport-form-component {
+  max-width: 480px;
+  margin: 2em auto;
+  background: var(--card);
+  border-radius: 1em;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  border: 1px solid var(--border);
+  padding: 2em 1.5em;
+  font-size: 1rem;
+}
+
+.tdg-form-component,
+.visa-carte-form-component {
+  max-width: 600px;
+  margin: 2em auto;
+  background: var(--card);
+  border-radius: 1em;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  border: 1px solid var(--border);
+  padding: 2em 1.5em;
+  font-size: 1rem;
+}
+
+.hotel-form-component fieldset,
+.location-form-component fieldset,
+.conciergerie-form-component fieldset,
+.aeroport-form-component fieldset,
+.tdg-form-component fieldset,
+.visa-carte-form-component fieldset {
+  border: none;
+  padding: 0;
+}
+
+.hotel-form-component fieldset,
+.location-form-component fieldset,
+.conciergerie-form-component fieldset,
+.aeroport-form-component fieldset,
+.tdg-form-component fieldset,
+.visa-carte-form-component fieldset {
+  border: none;
+  padding: 0;
+}
+
+.hotel-form-component legend,
+.location-form-component legend,
+.conciergerie-form-component legend,
+.aeroport-form-component legend,
+.tdg-form-component legend,
+.visa-carte-form-component legend {
+  font-weight: bold;
+  font-size: 1.2em;
+  margin-bottom: 1em;
+  position: relative;
+}
+
+.hotel-form-component legend,
+.location-form-component legend,
+.conciergerie-form-component legend,
+.aeroport-form-component legend,
+.tdg-form-component legend,
+.visa-carte-form-component legend {
+  font-weight: bold;
+  font-size: 1.2em;
+  margin-bottom: 1em;
+}
+
+.tdg-form-component h4,
+.visa-carte-form-component h4 {
+  margin-top: 1.5em;
+  margin-bottom: 0.7em;
+  font-size: 1.1em;
+  color: var(--brand);
+}
+
+.visa-carte-form-component h5 {
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+  font-size: 1em;
+  color: #333;
+}
+
+/* Form group and labels inside components */
+.hotel-form-component .form-group,
+.location-form-component .form-group,
+.conciergerie-form-component .form-group,
+.aeroport-form-component .form-group,
+.tdg-form-component .form-group,
+.visa-carte-form-component .form-group {
+  margin-bottom: 1.2em;
+}
+
+.hotel-form-component label,
+.location-form-component label,
+.conciergerie-form-component label,
+.aeroport-form-component label,
+.tdg-form-component label,
+.visa-carte-form-component label {
+  display: block;
+  margin-bottom: 0.3em;
+}
+
+/* Inputs inside components (match border color from PHP: #bbb) */
+.hotel-form-component input,
+.hotel-form-component select,
+.hotel-form-component textarea,
+.location-form-component input,
+.location-form-component select,
+.location-form-component textarea,
+.conciergerie-form-component input,
+.conciergerie-form-component select,
+.conciergerie-form-component textarea,
+.aeroport-form-component input,
+.aeroport-form-component select,
+.aeroport-form-component textarea,
+.tdg-form-component input,
+.tdg-form-component select,
+.tdg-form-component textarea,
+.visa-carte-form-component input,
+.visa-carte-form-component select,
+.visa-carte-form-component textarea {
+  width: 100%;
+  padding: 0.5em;
+  border-radius: 0.3em;
+  border: 1px solid var(--input);
+  font-size: 1em;
+  transition: border-color .15s ease, box-shadow .15s ease, background-color .15s ease;
+}
+
+/* Simple grid utility */
+.grid { display: grid; gap: 0.8em; }
+.grid-2 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+@media (max-width: 560px){
+  .grid-2 { grid-template-columns: 1fr; }
+}
+
+/* Focus state */
+.hotel-form-component input:focus,
+.hotel-form-component select:focus,
+.hotel-form-component textarea:focus,
+.location-form-component input:focus,
+.location-form-component select:focus,
+.location-form-component textarea:focus,
+.conciergerie-form-component input:focus,
+.conciergerie-form-component select:focus,
+.conciergerie-form-component textarea:focus,
+.aeroport-form-component input:focus,
+.aeroport-form-component select:focus,
+.aeroport-form-component textarea:focus,
+.tdg-form-component input:focus,
+.tdg-form-component select:focus,
+.tdg-form-component textarea:focus,
+.visa-carte-form-component input:focus,
+.visa-carte-form-component select:focus,
+.visa-carte-form-component textarea:focus {
+  outline: none;
+  border-color: var(--brand);
+  box-shadow: 0 0 0 4px var(--ring);
+  background-color: #fff;
+}
+
+/* Radios and checkboxes keep natural width */
+.hotel-form-component input[type="radio"], .hotel-form-component input[type="checkbox"],
+.location-form-component input[type="radio"], .location-form-component input[type="checkbox"],
+.conciergerie-form-component input[type="radio"], .conciergerie-form-component input[type="checkbox"],
+.aeroport-form-component input[type="radio"], .aeroport-form-component input[type="checkbox"],
+.tdg-form-component input[type="radio"], .tdg-form-component input[type="checkbox"],
+.visa-carte-form-component input[type="radio"], .visa-carte-form-component input[type="checkbox"] {
+  width: auto;
+  margin-right: 0.5em;
+  transform: scale(1.05);
+}
+
+/* Submit buttons inside components */
+.hotel-form-component button[type="submit"],
+.location-form-component button[type="submit"],
+.conciergerie-form-component button[type="submit"],
+.aeroport-form-component button[type="submit"],
+.tdg-form-component button[type="submit"],
+.visa-carte-form-component button[type="submit"] {
+  background: var(--brand);
+  color: #fff;
+  border: none;
+  border-radius: 0.3em;
+  padding: 0.7em 1.5em;
+  font-size: 1em;
+  cursor: pointer;
+  margin-top: 1em;
+  transition: background 0.2s;
+}
+
+.hotel-form-component button[type="submit"]:hover,
+.location-form-component button[type="submit"]:hover,
+.conciergerie-form-component button[type="submit"]:hover,
+.aeroport-form-component button[type="submit"]:hover,
+.tdg-form-component button[type="submit"]:hover,
+.visa-carte-form-component button[type="submit"]:hover {
+  background: var(--brand-600);
+}
+
+/* Legend accent underline for a clean business look */
+.hotel-form-component legend::after,
+.location-form-component legend::after,
+.conciergerie-form-component legend::after,
+.aeroport-form-component legend::after,
+.tdg-form-component legend::after,
+.visa-carte-form-component legend::after {
+  content: "";
+  display: block;
+  width: 56px;
+  height: 3px;
+  background: var(--brand);
+  border-radius: 2px;
+  margin-top: 6px;
+}
+
+/* Error state helpers */
+.is-invalid {
+  border-color: #dc2626 !important;
+  box-shadow: 0 0 0 4px rgba(220,38,38,0.12) !important;
+}
+.error-text { color: #b91c1c; font-size: 0.85em; margin-top: 0.35em; }
+
+/* Checkbox group chips style */
+.checkbox-group label {
+  background: #f9fafb;
+  border: 1px solid var(--border);
+  padding: 0.35em 0.6em;
+  border-radius: 999px;
+}
+
+/* Choice group for radios rendered like chips */
+.choice-group { display: flex; flex-wrap: wrap; gap: 0.5em; }
+.choice-group > label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
+  background: #f9fafb;
+  border: 1px solid var(--border);
+  padding: 0.45em 0.75em;
+  border-radius: 999px;
+  cursor: pointer;
+}
+.choice-group input[type="radio"] {
+  margin-right: 0.2em;
+}

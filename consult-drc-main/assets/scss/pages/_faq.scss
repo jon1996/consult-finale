@@ -1,0 +1,49 @@
+.questions-section {
+  .container-fluid {
+    padding-right: 0;
+
+    .content {
+      padding: 0 2% 0 10%;
+      .accordion {
+        margin-top: 2rem;
+
+        .card-header {
+          padding: 0.5rem;
+          h5 {
+            button {
+              font-size: 14px;
+            }
+          }
+        }
+      }
+    }
+    .side-media {
+      background: url("../img/University/FAQ/bookcase.png") no-repeat center
+        center/cover;
+      height: 85vh;
+      min-height: 800px;
+    }
+  }
+}
+
+.question-form-section {
+  background-color: var(--light-grey-3);
+  padding: 4rem 0;
+
+  img {
+    height: 60px;
+  }
+
+  h2 {
+    margin: 1.5rem;
+  }
+  h5 {
+    color: var(--dark-grey-4);
+  }
+
+  .form-group {
+    .small-text {
+      margin-top: -8px;
+    }
+  }
+}

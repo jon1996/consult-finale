@@ -1,0 +1,85 @@
+// ================================ Event Item Style 1 ============================
+.event-item-style-1 {
+    margin: 5rem 0;
+
+    .date, .media {
+        padding: 0;
+    }
+
+    .date, .details {
+        margin-top: 5%;
+    }
+    h1,
+    h5 {
+        font-family: var(--main-font);
+        font-weight: 700;
+        letter-spacing: 2px;
+        padding: .75rem 0;
+        color: var(--heading-color);
+    }
+
+    h1 {
+        font-size: 4.7rem;
+        padding: 0px;
+        border-bottom: 1px solid var(--icon-color);
+    }
+
+    h5 {
+        font-size: 1rem;
+    }
+    .details {
+        p {
+            margin: 1.8rem 0 .8rem 0;
+        }
+
+        .main-btn {
+            margin: 2rem 0;
+        }
+
+        .event-infos {
+            .info {
+                height: 3rem;
+                display: flex;
+                align-items: center;
+
+                span {
+                    font-size: 11px;
+                    margin: 0;
+                    color: var(--dark-grey-3);
+                }
+
+                i {
+                    color: var(--heading-color);
+                    margin-right: .5rem;
+                }
+            }
+        }
+    }
+}
+
+.event-item-style-1.odd-event {
+    .details {
+        padding-left: 3rem;
+    }
+}
+
+.event-item-style-1.even-event {
+    .details {
+        padding-right: 3rem;
+        order: 1;
+    }
+
+    .media {
+        order: 2;
+    }
+
+    .date {
+        text-align: right;
+        order: 3;
+    }
+}
+
+// ==================================== Events Section =======================
+.events-section {
+    padding: 3rem 0 2rem 0;
+}

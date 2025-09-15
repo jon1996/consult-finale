@@ -4,11 +4,17 @@ __pycache__/
 *.pyo
 *.pyd
 *.so
+# Local config overrides (may contain secrets)
+consult-drc-main/includes/config.local.php
 
 # Django
 /staticfiles/
 /media/
 *.log
+
+# Local DB and PHP config (sensitive)
+db.sqlite3
+consult-drc-main/includes/config.php
 
 # Environments
 .venv/

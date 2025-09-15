@@ -1,0 +1,71 @@
+{% load static i18n %}
+<link rel="stylesheet" href="{% static 'components/forms/forms.css' %}">
+<script src="{% static 'components/forms/forms.js' %}" defer></script>
+<form id="aeroport-form" class="aeroport-form-component" novalidate>
+  <fieldset>
+  <legend>{% trans "Accompagnement aéroport" %}</legend>
+  <p class="muted">{% trans "Un accueil VIP dès votre arrivée, un départ sans stress." %}</p>
+  <p class="muted">{% trans "Que vous arriviez pour un séjour professionnel ou repartiez après une mission réussie, nous vous offrons un accompagnement complet pour tous vos déplacements à l’aéroport." %}</p>
+    <div class="form-group">
+  <label>{% trans "Type de service souhaité" %} <span class="req">*</span></label>
+      <div class="choice-group">
+  <label><input type="radio" name="service" value="arrivee" required> {% trans "Accueil à l’arrivée" %}</label>
+  <label><input type="radio" name="service" value="depart"> {% trans "Assistance au départ" %}</label>
+  <label><input type="radio" name="service" value="transit"> {% trans "Transit ou correspondance" %}</label>
+      </div>
+    </div>
+    <div class="form-group">
+  <label for="aeroport">{% trans "Aéroport concerné" %} <span class="req">*</span></label>
+      <select id="aeroport" name="aeroport" required>
+  <option value="">{% trans "-- Choisir l’aéroport --" %}</option>
+  <option>{% trans "Kinshasa – N’djili" %}</option>
+  <option>{% trans "Lubumbashi – Luano" %}</option>
+  <option>{% trans "Kolwezi" %}</option>
+  <option>{% trans "Goma" %}</option>
+  <option>{% trans "Autres" %}</option>
+      </select>
+    </div>
+      <div class="form-group">
+  <label>{% trans "Date et heure du vol" %} <span class="req">*</span></label>
+        <div class="grid grid-2">
+          <div><input type="date" name="date_vol" required /></div>
+          <div><input type="time" name="heure_vol" required /></div>
+        </div>
+      </div>
+    <div class="form-group">
+  <label for="num_vol">{% trans "Numéro du vol (si disponible)" %}</label>
+  <input type="text" id="num_vol" name="num_vol" placeholder="{% trans "Numéro du vol" %}" />
+    </div>
+    <div class="form-group">
+  <label>{% trans "Langue préférée du personnel d’accueil" %} <span class="req">*</span></label>
+      <div class="choice-group">
+  <label><input type="radio" name="langue" value="fr" required> {% trans "Français" %}</label>
+  <label><input type="radio" name="langue" value="en"> {% trans "Anglais" %}</label>
+  <label><input type="radio" name="langue" value="sw"> {% trans "Swahili" %}</label>
+        <label>
+          <input type="radio" name="langue" value="autre"> {% trans "Autre" %}
+        </label>
+      </div>
+      <div class="grid" style="margin-top:.6em;">
+  <input type="text" name="langue_autre" placeholder="{% trans "Précisez (facultatif)" %}" />
+      </div>
+    </div>
+    <div class="form-group">
+  <label>{% trans "Services souhaités" %}</label>
+      <div class="checkbox-group">
+  <label><input type="checkbox" name="services[]" value="pancarte"> {% trans "Accueil avec pancarte personnalisée" %}</label>
+  <label><input type="checkbox" name="services[]" value="formalites"> {% trans "Accélération des formalités (visa, immigration, douanes)" %}</label>
+  <label><input type="checkbox" name="services[]" value="bagages"> {% trans "Port des bagages" %}</label>
+  <label><input type="checkbox" name="services[]" value="transfert"> {% trans "Transfert aéroport–hôtel ou domicile" %}</label>
+  <label><input type="checkbox" name="services[]" value="coordination"> {% trans "Coordination avec votre chauffeur ou hôtel" %}</label>
+  <label><input type="checkbox" name="services[]" value="visa"> {% trans "Assistance pour visa à l’arrivée (le cas échéant)" %}</label>
+  <label><input type="checkbox" name="services[]" value="lounge"> {% trans "Lounge VIP (optionnel selon l’aéroport)" %}</label>
+      </div>
+    </div>
+    <div class="form-group">
+  <label>{% trans "Informations complémentaires ou instructions spéciales" %}</label>
+  <textarea name="infos" rows="3" placeholder="{% trans "Détails ou instructions..." %}"></textarea>
+    </div>
+  <button type="submit">{% trans "Réserver mon accompagnement" %}</button>
+  </fieldset>
+</form>

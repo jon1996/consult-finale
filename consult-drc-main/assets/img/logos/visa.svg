@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="100" height="60" viewBox="0 0 100 60" xmlns="http://www.w3.org/2000/svg">
+  <rect x="0" y="0" width="100" height="60" rx="8" fill="#FFFFFF" stroke="#E5E5E5" stroke-width="1"/>
+  
+  <!-- Visa text with blue gradient -->
+  <text x="50" y="35" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#1A1F71">
+    VISA
+  </text>
+  
+  <!-- Blue accent bar -->
+  <rect x="20" y="10" width="60" height="4" fill="#1A1F71"/>
+</svg>

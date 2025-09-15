@@ -1,0 +1,208 @@
+/* Hero Slider Responsive Images */
+@media (max-width: 768px) {
+    .slider-item[style*="slide1_hd.jpg"] {
+        background-image: url('../img/slider/home4/slide1_mobile.jpg') !important;
+    }
+    
+    .slider-item[style*="slide2_hd.jpg"] {
+        background-image: url('../img/slider/home4/slide2_mobile.jpg') !important;
+    }
+    
+    .slider-item[style*="slide3_hd.jpg"] {
+        background-image: url('../img/slider/home4/slide3_mobile.jpg') !important;
+    }
+}
+
+/* Ensure images are optimized for background display */
+.slider-item {
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+/* Enhanced overlay for better text readability on African business images */
+.slider-item .overlay {
+    background: linear-gradient(135deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.6) 100%);
+    opacity: 0.8;
+}
+
+/* Ensure text is visible over African business imagery */
+.slider-item .content .heading h1,
+.slider-item .content .heading h6,
+.slider-item .content .heading p {
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+/* Dynamic text highlighting for multilingual support */
+.highlight-orange {
+    color: #ff6b35;
+    font-weight: 600;
+}
+
+.highlight-orange-light {
+    color: #ff6b35;
+}
+
+/* Services Section Styling */
+.services-section {
+    padding: 80px 0;
+}
+
+.services-section .card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.services-section .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1) !important;
+}
+
+.services-section .card-body {
+    transition: all 0.3s ease;
+}
+
+.services-section .card:hover .card-body {
+    background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+    color: white;
+}
+
+.services-section .card:hover h5,
+.services-section .card:hover p {
+    color: white;
+}
+
+.services-section .card:hover i {
+    color: white !important;
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
+}
+
+/* Smooth Scrolling Enhancements */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Navigation Link Hover Effects */
+.smooth-scroll {
+    transition: color 0.3s ease;
+}
+
+.smooth-scroll:hover {
+    color: #ff6b35 !important;
+    text-decoration: none;
+}
+
+/* Ensure sections have proper scroll padding for fixed navbar */
+section, 
+.section,
+#about,
+#services {
+    scroll-margin-top: 80px;
+}
+
+/* Navigation Active State */
+.nav-link-inline.active,
+.nav-items a.active {
+    color: #ff6b35 !important;
+    font-weight: 600;
+}
+
+/* Mobile Navigation Improvements */
+@media (max-width: 768px) {
+    section, 
+    .section,
+    #about,
+    #services {
+        scroll-margin-top: 60px;
+    }
+}
+
+/* Desktop Navigation Improvements - Remove Hamburger Menu */
+.navbar-nav-inline {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-left: 2rem;
+}
+
+.nav-link-inline {
+    color: #333;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14px;
+    padding: 8px 0;
+    transition: color 0.3s ease;
+    white-space: nowrap;
+}
+
+.nav-link-inline:hover {
+    color: #ff6b35 !important;
+    text-decoration: none;
+}
+
+.nav-link-inline.active {
+    color: #ff6b35 !important;
+    font-weight: 600;
+}
+
+/* Ensure proper layout for desktop navigation */
+.navbar-style-4 .main-nav {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.navbar-style-4 .navbar {
+    width: 100%;
+    padding: 0;
+}
+
+.navbar-style-4 .side-nav {
+    margin-left: auto;
+}
+
+/* Navigation improvements for nav-desk-2 */
+.navbar-section .main-nav {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.navbar-section .navbar {
+    width: 100%;
+    padding: 0;
+}
+
+.navbar-section .side-nav {
+    margin-left: auto;
+}
+
+/* Hide hamburger menu on desktop and tablet */
+@media (min-width: 768px) {
+    .menu-toggler {
+        display: none !important;
+    }
+    
+    .nav-menu-items {
+        display: none !important;
+    }
+}
+
+/* Responsive adjustments for tablet */
+@media (max-width: 1024px) and (min-width: 768px) {
+    .navbar-nav-inline {
+        gap: 1.5rem;
+        margin-left: 1rem;
+    }
+    
+    .nav-link-inline {
+        font-size: 13px;
+    }
+}
+
+/* Ensure mobile navigation still shows hamburger */
+@media (max-width: 767px) {
+    .navbar-nav-inline {
+        display: none;
+    }
+}

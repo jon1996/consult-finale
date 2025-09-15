@@ -1,0 +1,116 @@
+// alert clossing button
+.close-alert {
+  position: absolute;
+  height: 30px;
+  width: 30px;
+  background-color: var(--dark-blue-1);
+  right: -15px;
+  top: -15px;
+  border-radius: 50%;
+  font-size: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 100;
+  transition: all 0.3s;
+
+  i {
+    font-size: 1rem;
+    color: var(--white);
+  }
+
+  &:hover {
+    background-color: var(--dark-blue-2);
+  }
+}
+
+// alert default style
+.alert {
+  background-color: var(--light-blue-2);
+  padding: 1rem 1.5rem;
+  width: 500px;
+  position: relative;
+  border-radius: 0;
+  display: none;
+  p {
+    margin: 0;
+    color: --dark-grey-3;
+  }
+
+  i {
+    font-size: 14px;
+  }
+}
+
+// basic alert
+.basic-alert {
+  // basic alert style goes here
+}
+
+// bordered alert
+.bordered-alert {
+  border: 1px solid var(--red);
+}
+
+// alert with icons
+.alert-with-icon {
+  .row {
+    align-items: center;
+
+    .icon {
+      i {
+        margin: 0;
+        color: var(--dark-grey-4);
+      }
+    }
+
+    .content {
+      padding: 0 6px;
+    }
+  }
+}
+
+// Large Alert
+.large-alert {
+  .row {
+    align-items: center;
+
+    .icon {
+      display: flex;
+      justify-content: center;
+      i {
+        font-size: 2rem;
+        color: var(--dark-grey-4);
+      }
+    }
+
+    .content {
+      h6 {
+        font-weight: 700;
+        margin-bottom: 4px;
+      }
+    }
+  }
+}
+
+// Cookies
+.cookies {
+  background-color: var(--light-blue-2);
+  padding: 2rem 1.5rem;
+  width: 500px;
+  display: none;
+  opacity: 0;
+  p {
+    margin: 0;
+  }
+
+  .buttons {
+    display: flex;
+    margin: 2rem 0 1rem;
+
+    .small-btn {
+      margin: 0 3rem 0 0;
+    }
+  }
+}

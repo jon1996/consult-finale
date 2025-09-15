@@ -1,0 +1,807 @@
+{% extends 'base.html' %}
+{% load static i18n %}
+{% block head %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+<link rel="stylesheet" href="{% static 'components/forms/forms.css' %}">
+<style>
+  :root { --ink:#111827; --muted:#6b7280; --bg:#F5F7FB; --surface:#F9FAFB; --sidebar:#F3F4F6; --border:#E5E7EB; --primary:#0d6efd; }
+  html[data-theme="dark"]{ --ink:#E5E7EB; --muted:#9CA3AF; --bg:#0B1220; --surface:#0F172A; --sidebar:#111827; --border:#1F2937; --primary:#60A5FA; }
+  body{background:var(--bg);color:var(--ink);} .sidebar{position:fixed;left:0;top:0;bottom:0;width:240px;background:var(--sidebar);color:var(--ink);z-index:1030;box-shadow:2px 0 18px rgba(0,0,0,.06);border-right:1px solid var(--border)}
+  .sidebar{display:flex;flex-direction:column}
+  .sidebar .brand{font-weight:800;letter-spacing:.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .sidebar a{color:var(--ink);text-decoration:none;display:block;padding:.65rem .9rem;border-radius:.5rem;margin:.25rem .5rem;transition:background-color .15s}
+  .sidebar a:hover{background:#E5E7EB}
+  .sidebar a.active{background:#DBEAFE;color:#1E40AF}
+  html[data-theme="dark"] .sidebar a:hover{background:rgba(255,255,255,.06)}
+  html[data-theme="dark"] .sidebar a.active{background:rgba(96,165,250,.16);color:var(--primary)}
+  .main{margin-left:240px;padding:24px;min-height:100vh}
+  .page-title{font-weight:800;letter-spacing:.2px}
+  .card-quiet{background:var(--surface);border:1px solid var(--border);border-radius:14px;box-shadow:0 6px 18px rgba(17,24,39,.06)}
+  .kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  @media (max-width:992px){.main{margin-left:0}.sidebar{position:static;width:100%;height:auto}.kpi{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:576px){.kpi{grid-template-columns:1fr}}
+  .kpi .card-body{display:flex;align-items:center;gap:12px}
+  .kpi .icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:var(--surface);border:1px solid var(--border)}
+  .kpi .card{cursor:pointer;transition:transform .08s ease, box-shadow .12s ease, border-color .12s ease}
+  .kpi .card:hover{transform:translateY(-1px);box-shadow:0 10px 24px rgba(0,0,0,.10);border-color:#BFDBFE}
+  .kpi .card.active{outline:2px solid #93C5FD}
+  .history-toolbar{display:grid;grid-template-columns:1fr auto;gap:12px;margin:12px 0}
+  .history-search{display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:8px 10px}
+  .history-search input{border:0;outline:0;background:transparent;width:100%;color:var(--ink)}
+  .history-search input::placeholder{color:var(--muted)}
+  .filter-chips{display:flex;flex-wrap:wrap;gap:8px}
+  .filter-chip{border:1px solid var(--border);background:var(--surface);border-radius:999px;padding:6px 10px;cursor:pointer;font-weight:600;color:var(--ink)}
+  .filter-chip.active{background:#DBEAFE;border-color:#BFDBFE;color:#1E3A8A}
+  .history-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:12px}
+  .req-card{display:block;padding:14px;border:1px solid var(--border);border-radius:14px;background:var(--surface);box-shadow:0 6px 14px rgba(0,0,0,.06);transition:transform .08s ease, box-shadow .12s ease, border-color .12s ease}
+  .req-card:hover{transform:translateY(-1px);box-shadow:0 10px 24px rgba(0,0,0,.10);border-color:#BFDBFE}
+  .req-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:var(--surface);border:1px solid var(--border)}
+  .status-pill{font-weight:700;border-radius:999px;padding:4px 10px}
+  .status-pill.paid{background:#DCFCE7;color:#166534}
+  .status-pill.pending{background:#FEF9C3;color:#854D0E}
+  .status-pill.canceled{background:#E5E7EB;color:#374151}
+  html[data-theme="dark"] .status-pill.paid{background:rgba(34,197,94,.18);color:#86efac}
+  html[data-theme="dark"] .status-pill.pending{background:rgba(234,179,8,.18);color:#facc15}
+  html[data-theme="dark"] .status-pill.canceled{background:rgba(255,255,255,.12);color:#e5e7eb}
+  .detail-modal .modal-content{border:1px solid var(--border);border-radius:16px;box-shadow:0 12px 32px rgba(17,24,39,.12)}
+  .detail-modal .modal-header{border-bottom:1px solid var(--border);background:var(--surface)}
+  /* Detail view helpers */
+  .detail-icon{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:var(--surface);border:1px solid var(--border)}
+  .detail-title{font-weight:800}
+  .detail-sub{color:var(--muted)}
+  .kv-grid{display:grid;grid-template-columns:1fr 2fr;gap:8px;border:1px solid var(--border);border-radius:12px;padding:12px;background:var(--surface)}
+  .kv-grid .k{color:var(--muted);font-weight:600}
+  .kv-grid .v{color:var(--ink);word-break:break-word}
+  /* Overview details panel */
+  .overview-details{border:1px solid var(--border);border-radius:14px;background:var(--surface);padding:12px;box-shadow:0 6px 18px rgba(0,0,0,.06)}
+  .sparkline{height:60px; width:100%; position:relative}
+  .sparkline svg{width:100%;height:100%}
+  .mini-list{list-style:none;padding-left:0;margin:0}
+  .mini-list li{display:flex;justify-content:space-between;gap:8px;padding:8px 0;border-bottom:1px solid var(--border)}
+  .mini-list li:last-child{border-bottom:0}
+  .badge-soft{border:1px solid var(--border);border-radius:999px;padding:2px 8px;background:var(--surface)}
+</style>
+{% endblock %}
+{% block content %}
+<aside class="sidebar">
+  <div class="p-3">
+  <div class="d-flex align-items-center gap-2 mb-2">
+    <img src="{% static 'core/img/logo.png' %}" alt="Logo" width="24" height="24" style="object-fit:contain;border-radius:6px;">
+    <div class="brand h6 mb-0">{% trans "Backoffice" %}</div>
+  </div>
+    <nav>
+    <a href="#" data-view="overview" class="active"><i class="bi bi-speedometer me-2"></i>{% trans "Vue d’ensemble" %}</a>
+    <a href="#" data-view="requests"><i class="bi bi-list-ul me-2"></i>{% trans "Demandes" %}</a>
+  <a href="#" data-view="users"><i class="bi bi-people me-2"></i>{% trans "Utilisateurs" %}</a>
+    </nav>
+  </div>
+  <div class="mt-auto p-3 border-top border-secondary-subtle d-flex align-items-center justify-content-between gap-2">
+  <button id="theme-toggle" class="btn btn-outline-secondary btn-sm" title="{% trans "Basculer thème" %}" aria-label="{% trans "Basculer thème" %}"><i class="bi bi-moon"></i></button>
+    <div class="d-flex align-items-center gap-2">
+  <a href="/app/space/" class="d-block"><i class="bi bi-person me-2"></i>{% trans "Espace utilisateur" %}</a>
+  <a href="/admin/" class="d-block"><i class="bi bi-shield-lock me-2"></i>Django Admin</a>
+    </div>
+  </div>
+</aside>
+
+<main class="main">
+  <section id="view-overview">
+  <h2 class="page-title mb-2">{% trans "Backoffice" %}</h2>
+    <div class="kpi mb-3">
+  <div class="card card-quiet" data-kpi="total"><div class="card-body"><div class="icon"><i class="bi bi-inboxes"></i></div><div><div class="fw-bold">{% trans "Total" %}</div><div class="text-muted" id="kpi-total">–</div></div></div></div>
+  <div class="card card-quiet" data-kpi="last7"><div class="card-body"><div class="icon"><i class="bi bi-calendar-week"></i></div><div><div class="fw-bold">{% trans "7 derniers jours" %}</div><div class="text-muted" id="kpi-last7">–</div></div></div></div>
+  <div class="card card-quiet" data-kpi="paid"><div class="card-body"><div class="icon"><i class="bi bi-cash-coin"></i></div><div><div class="fw-bold">{% trans "Payées" %}</div><div class="text-muted" id="kpi-paid">–</div></div></div></div>
+  <div class="card card-quiet" data-kpi="pending"><div class="card-body"><div class="icon"><i class="bi bi-hourglass-split"></i></div><div><div class="fw-bold">{% trans "En attente" %}</div><div class="text-muted" id="kpi-pending">–</div></div></div></div>
+    </div>
+    <div id="overview-details" class="overview-details d-none">
+      <div class="row g-3">
+        <div class="col-12">
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="fw-bold">{% trans "Tendance (7 jours)" %}</div>
+            <span id="od-selected" class="badge-soft">Total</span>
+          </div>
+          <div class="sparkline mt-2" id="od-spark"></div>
+        </div>
+        <div class="col-md-6">
+          <div class="fw-bold mb-1">{% trans "Dernières demandes" %}</div>
+          <ul class="mini-list" id="od-latest"></ul>
+        </div>
+        <div class="col-md-6">
+          <div class="fw-bold mb-1">{% trans "Top services (30 jours)" %}</div>
+          <ul class="mini-list" id="od-top"></ul>
+        </div>
+      </div>
+    </div>
+    <div class="card card-quiet mb-3">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <div class="fw-bold">{% trans "Profil administrateur" %}</div>
+          <button id="adm-edit-btn" class="btn btn-sm btn-outline-primary">{% trans "Modifier" %}</button>
+        </div>
+        <form id="adm-profile-form" class="d-none">
+          <div class="row g-2">
+            <div class="col-md-4">
+              <label class="form-label">{% trans "Prénom" %}</label>
+              <input class="form-control" type="text" name="first_name" />
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">{% trans "Nom" %}</label>
+              <input class="form-control" type="text" name="last_name" />
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Email</label>
+              <input class="form-control" type="email" name="email" required />
+              <div class="text-danger small d-none" data-error="email"></div>
+            </div>
+          </div>
+          <div class="d-flex justify-content-end gap-2 mt-2">
+            <button type="button" id="adm-cancel-btn" class="btn btn-sm btn-outline-secondary">{% trans "Annuler" %}</button>
+            <button type="submit" class="btn btn-sm btn-primary">{% trans "Enregistrer" %}</button>
+          </div>
+        </form>
+        <div id="adm-profile-view" class="text-muted"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="view-requests" class="d-none">
+  <h2 class="page-title mb-2">{% trans "Demandes" %}</h2>
+    <div class="history-toolbar">
+      <div class="history-search">
+        <i class="bi bi-search text-muted"></i>
+  <input id="adm-search" type="text" placeholder="{% trans "Rechercher par service, statut, ID, email..." %}" />
+      </div>
+      <div class="filter-chips" id="adm-filters">
+  <button class="filter-chip active" data-status="">{% trans "Toutes" %}</button>
+  <button class="filter-chip" data-status="pending_payment">{% trans "En attente paiement" %}</button>
+  <button class="filter-chip" data-status="paid">{% trans "Payées" %}</button>
+  <button class="filter-chip" data-status="canceled">{% trans "Annulées" %}</button>
+      </div>
+    </div>
+    <div id="adm-requests-list" class="history-list"></div>
+  </section>
+
+  <section id="view-users" class="d-none">
+    <div class="d-flex justify-content-between align-items-center mb-2">
+  <h2 class="page-title mb-0">{% trans "Utilisateurs" %}</h2>
+  <button id="user-create-btn" class="btn btn-primary btn-sm"><i class="bi bi-plus-lg me-1"></i>{% trans "Nouvel utilisateur" %}</button>
+    </div>
+    <div class="history-toolbar">
+      <div class="history-search">
+        <i class="bi bi-search text-muted"></i>
+  <input id="user-search" type="text" placeholder="{% trans "Rechercher par nom d’utilisateur, email, nom…" %}" />
+      </div>
+      <div class="filter-chips" id="user-filters">
+  <button class="filter-chip active" data-staff="">{% trans "Tous" %}</button>
+  <button class="filter-chip" data-staff="1">{% trans "Staff" %}</button>
+      </div>
+    </div>
+    <div id="users-list" class="history-list"></div>
+  </section>
+</main>
+
+<!-- Detail modal (reuses class names) -->
+<div class="modal fade detail-modal" id="admDetailModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+  <h5 class="modal-title">{% trans "Détails de la demande" %}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="adm-detail-body"></div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">{% trans "Fermer" %}</button>
+      <button id="adm-offer-btn" type="button" class="btn btn-primary">{% trans "Proposer une offre" %}</button>
+    </div>
+    </div>
+  </div>
+</div>
+
+<!-- Offer Modal -->
+<div class="modal fade" id="offerModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{% trans "Proposer une offre" %}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="offer-form">
+          {% csrf_token %}
+          <input type="hidden" name="request_id" />
+          <div class="mb-2">
+            <label class="form-label">{% trans "Message pour l'utilisateur" %}</label>
+            <textarea class="form-control" name="message" rows="4"></textarea>
+          </div>
+          <div>
+            <label class="form-label">{% trans "Prix proposé (ex: 120.00)" %}</label>
+            <input class="form-control" name="price" placeholder="120.00" />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">{% trans "Annuler" %}</button>
+        <button type="button" id="offer-submit" class="btn btn-primary">{% trans "Envoyer l'offre" %}</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Create User Modal -->
+<div class="modal fade" id="createUserModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+    <h5 class="modal-title">{% trans "Créer un utilisateur" %}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="create-user-form">
+          <div class="row g-2">
+            <div class="col-md-6">
+      <label class="form-label">{% trans "Nom d’utilisateur" %}</label>
+              <input class="form-control" name="username" required />
+              <div class="text-danger small d-none" data-error="username"></div>
+            </div>
+            <div class="col-md-6">
+      <label class="form-label">Email</label>
+              <input class="form-control" type="email" name="email" required />
+              <div class="text-danger small d-none" data-error="email"></div>
+            </div>
+            <div class="col-md-6">
+      <label class="form-label">{% trans "Mot de passe" %}</label>
+              <input class="form-control" type="password" name="password" required />
+              <div class="text-danger small d-none" data-error="password"></div>
+            </div>
+            <div class="col-md-6">
+      <label class="form-label">{% trans "Téléphone" %}</label>
+              <input class="form-control" name="phone" />
+            </div>
+            <div class="col-md-6">
+      <label class="form-label">{% trans "Prénom" %}</label>
+              <input class="form-control" name="first_name" />
+            </div>
+            <div class="col-md-6">
+      <label class="form-label">{% trans "Nom" %}</label>
+              <input class="form-control" name="last_name" />
+            </div>
+            <div class="col-12">
+      <label class="form-label">{% trans "Entreprise" %}</label>
+              <input class="form-control" name="company" />
+            </div>
+            <div class="col-12">
+      <label class="form-label">{% trans "Secteur" %}</label>
+              <input class="form-control" name="sector" />
+            </div>
+            <div class="col-12 form-check mt-2">
+              <input class="form-check-input" type="checkbox" id="is_staff" name="is_staff" />
+      <label class="form-check-label" for="is_staff">{% trans "Donner l’accès staff (backoffice)" %}</label>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">{% trans "Annuler" %}</button>
+    <button type="button" id="submit-create-user" class="btn btn-primary">{% trans "Créer" %}</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- User Detail Modal -->
+<div class="modal fade" id="userDetailModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{% trans "Détails utilisateur" %}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="user-detail-form">
+          <input type="hidden" name="id" />
+          <div class="row g-2">
+            <div class="col-md-6">
+              <label class="form-label">{% trans "Nom d’utilisateur" %}</label>
+              <input class="form-control" name="username" disabled />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Email</label>
+              <input class="form-control" type="email" name="email" />
+              <div class="text-danger small d-none" data-error="email"></div>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">{% trans "Prénom" %}</label>
+              <input class="form-control" name="first_name" />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">{% trans "Nom" %}</label>
+              <input class="form-control" name="last_name" />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">{% trans "Téléphone" %}</label>
+              <input class="form-control" name="phone" />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">{% trans "Entreprise" %}</label>
+              <input class="form-control" name="company" />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">{% trans "Secteur" %}</label>
+              <input class="form-control" name="sector" />
+            </div>
+          </div>
+          <div class="row g-2 mt-2">
+            <div class="col-md-3 form-check">
+              <input class="form-check-input" type="checkbox" id="ud-is-active" name="is_active" />
+              <label class="form-check-label" for="ud-is-active">{% trans "Actif" %}</label>
+            </div>
+            <div class="col-md-3 form-check">
+              <input class="form-check-input" type="checkbox" id="ud-is-staff" name="is_staff" />
+              <label class="form-check-label" for="ud-is-staff">{% trans "Staff" %}</label>
+            </div>
+            <div class="col-md-3 form-check">
+              <input class="form-check-input" type="checkbox" id="ud-is-superuser" name="is_superuser" />
+              <label class="form-check-label" for="ud-is-superuser">{% trans "Superutilisateur" %}</label>
+            </div>
+            <div class="col-md-3 form-check">
+              <input class="form-check-input" type="checkbox" id="ud-email-verified" name="email_verified" />
+              <label class="form-check-label" for="ud-email-verified">{% trans "Email vérifié" %}</label>
+            </div>
+          </div>
+          <div class="mt-3">
+            <label class="form-label">{% trans "Groupes" %}</label>
+            <div id="ud-groups" class="d-flex flex-wrap gap-2"></div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">{% trans "Fermer" %}</button>
+        <button type="button" id="user-detail-save" class="btn btn-primary">{% trans "Enregistrer" %}</button>
+      </div>
+    </div>
+  </div>
+  </div>
+{% endblock %}
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+(function(){
+  // Apply persisted theme if present
+  try{ const saved=localStorage.getItem('theme'); if(saved){ document.documentElement.setAttribute('data-theme', saved); } }catch(e){}
+  const MEDIA_URL = '/media/';
+  const views = { overview: document.getElementById('view-overview'), requests: document.getElementById('view-requests'), users: document.getElementById('view-users') };
+  document.querySelectorAll('.sidebar a[data-view]').forEach(a=> a.addEventListener('click', (e)=>{ e.preventDefault(); const v=a.dataset.view; Object.entries(views).forEach(([k,el])=> el.classList.toggle('d-none', k!==v)); document.querySelectorAll('.sidebar a').forEach(x=> x.classList.toggle('active', x===a)); if(v==='overview'){ loadKPIs(); } else if(v==='requests'){ loadRequests(); } else if(v==='users'){ loadUsers(); } }));
+  // Theme toggle
+  const btn = document.getElementById('theme-toggle');
+  if(btn){
+    btn.addEventListener('click', ()=>{
+      const cur = document.documentElement.getAttribute('data-theme') || 'light';
+      const next = cur === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      try{ localStorage.setItem('theme', next); }catch(e){}
+    });
+  }
+
+  async function loadKPIs(){
+    const r = await fetch('/app/admin/stats/'); if(!r.ok) return;
+    const j = await r.json(); if(!j.ok) return;
+    document.getElementById('kpi-total').textContent = j.total;
+    document.getElementById('kpi-last7').textContent = j.last7;
+    document.getElementById('kpi-paid').textContent = j.paid;
+    document.getElementById('kpi-pending').textContent = j.pending;
+  }
+
+  async function loadProfile(){
+    const r = await fetch('/app/admin/profile/'); if(!r.ok) return;
+    const j = await r.json(); if(!j.ok) return;
+    const u = j.user;
+    document.querySelector('#adm-profile-form [name=first_name]').value = u.first_name||'';
+    document.querySelector('#adm-profile-form [name=last_name]').value = u.last_name||'';
+    document.querySelector('#adm-profile-form [name=email]').value = u.email||'';
+    document.getElementById('adm-profile-view').innerHTML = `
+  <div><span class="fw-semibold">{% trans "Nom:" %}</span> ${u.first_name||''} ${u.last_name||''}</div>
+  <div><span class="fw-semibold">{% trans "Email:" %}</span> ${u.email||''}</div>
+  <div><span class="fw-semibold">{% trans "Rôle:" %}</span> ${u.is_superuser ? '{% trans "Superuser" %}' : '{% trans "Staff" %}'}</div>
+    `;
+  }
+
+  async function loadOverviewDetails(selected='total'){
+    const r = await fetch('/app/admin/stats/detail/'); if(!r.ok) return;
+    const j = await r.json(); if(!j.ok) return;
+    // Sparkline
+    const pts = j.recent_by_day.map((d, i)=>({ x:i, y:d.count }));
+    const maxY = Math.max(1, ...pts.map(p=>p.y));
+    const w = 600, h = 60, pad=4;
+    const sx = (w - pad*2) / Math.max(1, pts.length-1);
+    const sy = (h - pad*2) / maxY;
+    const dPath = pts.map((p,i)=> `${i===0?'M':'L'} ${pad + i*sx} ${h - pad - p.y*sy}`).join(' ');
+    const svg = `<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none">
+      <path d="${dPath}" fill="none" stroke="#60A5FA" stroke-width="2" />
+    </svg>`;
+    document.getElementById('od-spark').innerHTML = svg;
+    // Latest
+    const list = (arr)=> arr.map(it=>{
+      const dt = new Date(it.created_at).toLocaleString();
+      return `<li><span class="text-truncate">#${it.id} – ${it.kind} – ${it.email}</span><span class="text-muted">${dt}</span></li>`;
+  }).join('') || '<li class="text-muted">{% trans "No data" %}</li>';
+    document.getElementById('od-latest').innerHTML = list(j.latest);
+    // Top services
+  document.getElementById('od-top').innerHTML = (j.top_services||[]).map(t=> `<li><span class="text-capitalize">${t.kind}</span><span class="badge-soft">${t.count}</span></li>`).join('') || '<li class="text-muted">{% trans "No data" %}</li>';
+    // Show
+    document.getElementById('overview-details').classList.remove('d-none');
+    document.getElementById('od-selected').textContent = selected;
+  }
+
+  const iconMap = { hotel:'bi-building', location:'bi-car-front', conciergerie:'bi-bell', aeroport:'bi-airplane', tdg:'bi-translate', visa:'bi-file-earmark-person', autres:'bi-three-dots' };
+  const labelMap = { hotel: `{% trans "Réservation d'hôtel" %}`, location: `{% trans "Location de véhicule" %}`, conciergerie: `{% trans "Conciergerie" %}`, aeroport: `{% trans "Accompagnement aéroport" %}`, tdg: `{% trans "Traduction / Guide" %}`, visa: `{% trans "Visa / Carte de travail" %}`, autres: `{% trans "Autres services" %}` };
+
+  async function loadRequests(){
+    const q = document.getElementById('adm-search').value.trim();
+    const active = document.querySelector('#adm-filters .filter-chip.active');
+    const status = active ? active.getAttribute('data-status') : '';
+    const url = new URL(location.origin + '/app/admin/requests/');
+    if(q) url.searchParams.set('q', q);
+    if(status) url.searchParams.set('status', status);
+    const r = await fetch(url);
+    if(!r.ok) return;
+    const j = await r.json(); if(!j.ok) return;
+    const list = document.getElementById('adm-requests-list');
+  if(!j.items || j.items.length===0){ list.innerHTML = '<div class="card card-quiet"><div class="card-body text-muted">{% trans "No requests" %}</div></div>'; return; }
+    list.innerHTML = j.items.map(it=>{
+      const icon = iconMap[it.kind] || 'bi-circle';
+      const label = labelMap[it.kind] || it.kind;
+      return `
+        <a href="#" class="req-card text-decoration-none text-reset" data-id="${it.id}">
+          <div class="d-flex align-items-start justify-content-between mb-2">
+            <div class="d-flex align-items-center gap-2">
+              <div class="req-icon text-primary"><i class="bi ${icon}"></i></div>
+              <div>
+                <div class="fw-bold">${label}</div>
+                <div class="text-muted small">#${it.id} • ${new Date(it.created_at).toLocaleString()} • ${it.email}</div>
+              </div>
+            </div>
+            <span class="status-pill ${it.status==='paid'?'paid':(it.status==='pending_payment'?'pending':'canceled')}">${it.status}</span>
+          </div>
+        </a>`;
+    }).join('');
+    list.querySelectorAll('[data-id]').forEach(a=> a.addEventListener('click', async(e)=>{ e.preventDefault(); const id=a.getAttribute('data-id'); const r=await fetch(`/app/admin/requests/${id}/`); if(!r.ok) return; const j=await r.json(); if(!j.ok) return; renderDetail(j); }));
+  }
+
+  function renderDetail(d){
+    const body = document.getElementById('adm-detail-body');
+    const icon = iconMap[d.kind] || 'bi-circle';
+    const pill = d.status==='paid' ? 'paid' : (d.status==='pending_payment' ? 'pending' : 'canceled');
+    const esc = (s)=> String(s).replace(/[&<>"]/g, c=> ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+    const fmt = (v)=> Array.isArray(v) ? v.join(', ') : (v===true?'oui':v===false?'non': String(v));
+    function buildVisaDetails(){
+      const data = d.data||{};
+      const out = [];
+      const add = (label, key)=>{ const val = data[key]; if(val!==undefined && String(val).trim()!=='' ){ out.push(`<div class='k'>${esc(label)}</div><div class='v'>${esc(fmt(val))}</div>`); } }
+      const mapVolant = [
+        ['Nom complet','volant_nom'],['Nationalité','volant_nationalite'],['Lieu de naissance','volant_lieu_naissance'],['Adresse','volant_adresse'],
+        ['Raison de la visite','volant_raison'],['Preneur en charge','volant_preneur'],['Invitation officielle','volant_invitation'],['Durée du séjour','volant_duree'],['Date d’arrivée','volant_date_arrivee']
+      ];
+      const mapOrd = [
+        ['Nom complet','ord_nom'],['Email','ord_email'],['Téléphone','ord_tel'],['Nationalité','ord_nationalite'],['Situation','ord_situation'],['Informations','ord_infos']
+      ];
+      const mapTrav = [
+        ['Nom complet','trav_nom'],['Email','trav_email'],['Téléphone','trav_tel'],['Nationalité','trav_nationalite'],['Employeur','trav_employeur'],['Informations','trav_infos']
+      ];
+      const mapPerm = [
+        ['Nom complet','perm_nom'],['Email','perm_email'],['Téléphone','perm_tel'],['Nationalité','perm_nationalite'],['Informations','perm_infos']
+      ];
+      const mapCarte = [
+        ['Nom complet','carte_nom'],['Email','carte_email'],['Téléphone','carte_tel'],['Nationalité','carte_nationalite'],['Employeur','carte_employeur'],['Informations','carte_infos']
+      ];
+      const butLabel = d.but_sejour==='volant'?'Visa Volant': d.but_sejour==='etablissement'?'Visa d\'Établissement': d.but_sejour==='carte'?'Carte de Travail': (d.but_sejour||'—');
+      if(d.but_sejour){ out.push(`<div class='k'>But du séjour</div><div class='v'>${esc(butLabel)}</div>`); }
+      if(d.but_sejour==='volant'){
+        mapVolant.forEach(([l,k])=> add(l,k));
+      } else if(d.but_sejour==='etablissement'){
+        const etabLabel = d.etab_type==='ordinaire'?'Ordinaire': d.etab_type==='travail'?'Travail': d.etab_type==='permanent'?'Permanent': (d.etab_type||'—');
+        if(d.etab_type){ out.push(`<div class='k'>Type d\'établissement</div><div class='v'>${esc(etabLabel)}</div>`); }
+        const src = d.etab_type==='ordinaire'? mapOrd : d.etab_type==='travail'? mapTrav : d.etab_type==='permanent'? mapPerm : [];
+        src.forEach(([l,k])=> add(l,k));
+      } else if(d.but_sejour==='carte'){
+        mapCarte.forEach(([l,k])=> add(l,k));
+      } else {
+        // Fallback: show any non-empty value
+        Object.keys(data).forEach(k=> add(k,k));
+      }
+  return out.length ? out.join('') : '<div class="text-muted">{% trans "No data" %}</div>';
+    }
+    const kv = (d.kind==='visa')
+      ? buildVisaDetails()
+  : Object.keys(d.data||{}).filter(k=> String((d.data||{})[k]).trim()!=='').map(k=>`<div class='k text-muted'>${esc(k)}</div><div class='v'>${esc(fmt(d.data[k]))}</div>`).join('') || '<div class="text-muted">{% trans "No data" %}</div>';
+    // Optional thumbnails for visa documents
+    let docsHtml = '';
+    if (d.kind === 'visa' && d.documents && typeof d.documents === 'object'){
+      const items = Object.entries(d.documents);
+      if(items.length){
+        const humanDocLabel = (key)=>{
+          const map = {
+            'volant_lettre':'Lettre de demande',
+            'volant_passeport':'Passeport (copie)',
+            'volant_id_preneur':'Identité du preneur',
+            'volant_rccm':'RCCM',
+            'volant_impot':'Numéro d’impôt',
+            'volant_id_nat':'Identification nationale',
+            'ord_lettre':'Lettre de demande',
+            'ord_statuts':'Statuts de société',
+            'ord_rccm':'RCCM',
+            'ord_id_nat':'ID nationale',
+            'ord_quitus':'Quitus fiscal',
+            'ord_inpp':'Affiliation INPP',
+            'ord_cnss':'Affiliation CNSS',
+            'ord_banque':'Extrait bancaire',
+            'trav_rccm':'RCCM employeur',
+            'trav_id_nat':'ID nationale employeur',
+            'trav_nif':'NIF employeur',
+            'trav_photo':'Photo d’identité',
+            'trav_inpp_onem':'INPP / ONEM',
+            'trav_medical':'Certificat médical',
+            'trav_vaccin':'Carte de vaccination',
+            'trav_carte_travail':'Carte de travail en cours',
+            'trav_contrat':'Contrat de travail (ONEM)',
+            'trav_diplome':'Diplôme / Certificat',
+            'trav_attestation_service':'Attestation de service',
+            'trav_residence':'Attestation de résidence',
+            'trav_bonne_vie':'Bonne vie et mœurs',
+            'carte_formulaire':'Formulaire de demande',
+            'carte_lettre':'Lettre de transmission',
+            'carte_etat':'État nominatif étrangers',
+            'carte_contrat':'Projet de contrat',
+            'carte_cv':'CV',
+            'carte_qualification':'Qualification professionnelle',
+            'carte_photo':'Photo passeport',
+            'carte_organigramme':'Organigramme',
+            'carte_poste':'Description du poste',
+            'carte_cnss_inpp':'Preuve CNSS/INPP',
+            'carte_passeport':'Passeport (copies)'
+          };
+          if(map[key]) return map[key];
+          const def = key.replace(/^(volant|ord|trav|perm|carte)_/, '').replace(/_/g,' ');
+          return def.charAt(0).toUpperCase()+def.slice(1);
+        };
+        docsHtml = `
+          <div class="fw-semibold mt-2">Documents</div>
+          <div class="row row-cols-2 row-cols-md-4 g-2 mt-1">
+            ${items.map(([k,info])=>{
+              const rawPath = info && info.path ? MEDIA_URL + esc(info.path).replace(/^\/+/, "") : '';
+              const rawThumb = info && (info.thumb || info.path) ? MEDIA_URL + esc(info.thumb || info.path).replace(/^\/+/, "") : '';
+              const label = esc(humanDocLabel(k));
+              if(!rawPath){ return `<div class='col'><div class='small text-muted'>${label}</div></div>`; }
+              const isImage = rawThumb.toLowerCase().match(/\.(jpg|jpeg|png|webp)$/);
+              return `
+                <div class='col'>
+                  <a href='${rawPath}' target='_blank' rel='noopener' class='d-block text-decoration-none'>
+                    <div class='border rounded-3 overflow-hidden d-flex align-items-center justify-content-center' style='background:var(--surface);min-height:90px'>
+                      ${isImage ? `<img src='${rawThumb}' alt='${label}' class='img-fluid' />` : `<div class='text-muted small p-2'><i class='bi bi-file-earmark-pdf me-1'></i>PDF</div>`}
+                    </div>
+                    <div class='small mt-1 text-truncate' title='${label}'>${label}</div>
+                  </a>
+                </div>`;
+            }).join('')}
+          </div>`;
+      }
+    }
+    body.innerHTML = `
+      <div class="d-flex align-items-start gap-2 mb-2">
+        <div class="detail-icon"><i class="bi ${icon}"></i></div>
+        <div class="flex-grow-1">
+          <div class="d-flex justify-content-between align-items-start">
+            <div class="detail-title">${labelMap[d.kind]||d.kind}</div>
+            <span class="status-pill ${pill}">${d.status}</span>
+          </div>
+          <div class="detail-sub small">#${d.id} • ${new Date(d.created_at).toLocaleString()} • ${d.email}</div>
+        </div>
+      </div>
+      <div class="kv-grid mb-2">
+        <div class='k'>Utilisateur</div><div class='v'>${d.user} (${d.email})</div>
+        <div class='k'>Paiement</div><div class='v'>${d.payment_method||'-'}</div>
+        <div class='k'>Service</div><div class='v text-capitalize'>${labelMap[d.kind]||d.kind}</div>
+      </div>
+      <div class="fw-semibold mb-1">Données</div>
+      <div class="kv-grid">${kv}</div>
+      ${docsHtml}
+    `;
+    const m = new bootstrap.Modal(document.getElementById('admDetailModal'));
+    m.show();
+    // Wire offer button to open offer modal with current request id
+    const offerBtn = document.getElementById('adm-offer-btn');
+    if(offerBtn){
+      offerBtn.onclick = ()=>{
+        const of = document.getElementById('offer-form');
+        of.reset();
+        of.querySelector('[name=request_id]').value = d.id;
+        // Hide the detail modal first to avoid backdrop/focus issues, then show offer modal
+        try{ m.hide(); }catch(e){}
+        const om = new bootstrap.Modal(document.getElementById('offerModal'));
+        om.show();
+        // Focus first input to ensure keyboard/cursor is active
+        setTimeout(()=>{ const ta = document.querySelector('#offer-form [name=message]'); if(ta) ta.focus(); }, 50);
+      };
+    }
+  }
+
+  // Interactions
+  document.getElementById('adm-filters').addEventListener('click', (e)=>{ const b=e.target.closest('.filter-chip'); if(!b) return; document.querySelectorAll('#adm-filters .filter-chip').forEach(x=> x.classList.remove('active')); b.classList.add('active'); loadRequests(); });
+  document.getElementById('adm-search').addEventListener('input', ()=> loadRequests());
+  // Profile edit interactions
+  const editBtn = document.getElementById('adm-edit-btn');
+  const form = document.getElementById('adm-profile-form');
+  const viewBox = document.getElementById('adm-profile-view');
+  const cancelBtn = document.getElementById('adm-cancel-btn');
+  if(editBtn){ editBtn.addEventListener('click', ()=>{ form.classList.toggle('d-none'); viewBox.classList.toggle('d-none'); }); }
+  if(cancelBtn){ cancelBtn.addEventListener('click', ()=>{ form.classList.add('d-none'); viewBox.classList.remove('d-none'); }); }
+  if(form){ form.addEventListener('submit', async (e)=>{
+      e.preventDefault();
+      const fd = new FormData(form);
+      const r = await fetch('/app/admin/profile/update/', { method:'POST', body: fd, headers: { 'X-Requested-With':'XMLHttpRequest' } });
+      const j = await r.json();
+  if(!j.ok){
+  const emailErr = document.querySelector('[data-error=email]');
+  if(emailErr){ emailErr.textContent = (j.errors && j.errors.email) || `{% trans "Erreur" %}`; emailErr.classList.remove('d-none'); }
+        return;
+      }
+      document.querySelector('[data-error=email]')?.classList.add('d-none');
+      await loadProfile();
+      form.classList.add('d-none');
+      viewBox.classList.remove('d-none');
+    }); }
+
+  // Initial load
+  loadKPIs();
+  loadProfile();
+  // KPI toggle interactions
+  document.querySelectorAll('.kpi [data-kpi]').forEach(card=>{
+    card.addEventListener('click', ()=>{
+      document.querySelectorAll('.kpi .card').forEach(c=> c.classList.remove('active'));
+      card.classList.add('active');
+      loadOverviewDetails(card.getAttribute('data-kpi'));
+    });
+  });
+
+  // Users view
+  async function loadUsers(){
+    const q = document.getElementById('user-search').value.trim();
+    const active = document.querySelector('#user-filters .filter-chip.active');
+    const staff = active ? active.getAttribute('data-staff') : '';
+    const url = new URL(location.origin + '/app/admin/users/');
+    if(q) url.searchParams.set('q', q);
+    if(staff) url.searchParams.set('staff', staff);
+    const r = await fetch(url);
+    if(!r.ok) return;
+    const j = await r.json(); if(!j.ok) return;
+    const list = document.getElementById('users-list');
+    if(!j.items || j.items.length===0){ list.innerHTML = '<div class="card card-quiet"><div class="card-body text-muted">Aucun utilisateur</div></div>'; return; }
+    list.innerHTML = j.items.map(u=>{
+      return `
+        <a href="#" class="req-card text-reset text-decoration-none" data-user-id="${u.id}">
+          <div class="d-flex justify-content-between align-items-start">
+            <div>
+              <div class="fw-bold">${u.username}</div>
+              <div class="text-muted small">${u.email || ''}</div>
+              <div class="text-muted small">${(u.first_name||'') + ' ' + (u.last_name||'')}</div>
+            </div>
+            <span class="badge ${u.is_staff ? 'bg-primary' : 'bg-secondary'}">${u.is_staff ? 'Staff' : 'User'}</span>
+          </div>
+          <div class="small mt-1">Inscription: ${u.date_joined ? new Date(u.date_joined).toLocaleString() : '-'}</div>
+        </a>`;
+    }).join('');
+    // attach click -> details
+    list.querySelectorAll('[data-user-id]').forEach(a=> a.addEventListener('click', async (e)=>{
+      e.preventDefault();
+      const id = a.getAttribute('data-user-id');
+      const r = await fetch(`/app/admin/users/${id}/`);
+      if(!r.ok) return;
+      const j = await r.json(); if(!j.ok) return;
+      openUserDetail(j);
+    }));
+  }
+  document.getElementById('user-filters').addEventListener('click', (e)=>{ const b=e.target.closest('.filter-chip'); if(!b) return; document.querySelectorAll('#user-filters .filter-chip').forEach(x=> x.classList.remove('active')); b.classList.add('active'); loadUsers(); });
+  document.getElementById('user-search').addEventListener('input', ()=> loadUsers());
+
+  // Create user modal
+  const createBtn = document.getElementById('user-create-btn');
+  const createForm = document.getElementById('create-user-form');
+  const createModalEl = document.getElementById('createUserModal');
+  const createModal = new bootstrap.Modal(createModalEl);
+  if(createBtn){ createBtn.addEventListener('click', ()=>{ createForm.reset(); createModal.show(); document.querySelectorAll('#createUserModal [data-error]').forEach(e=> e.classList.add('d-none')); }); }
+  const submitCreate = document.getElementById('submit-create-user');
+  if(submitCreate){ submitCreate.addEventListener('click', async ()=>{
+      const fd = new FormData(createForm);
+      // Clear previous errors
+      document.querySelectorAll('#createUserModal [data-error]').forEach(e=>{ e.textContent=''; e.classList.add('d-none'); });
+      const r = await fetch('/app/admin/users/create/', { method:'POST', body: fd, headers: { 'X-Requested-With':'XMLHttpRequest' } });
+      const j = await r.json();
+      if(!j.ok){
+        const errs = j.errors || {};
+        Object.keys(errs).forEach(k=>{ const el = document.querySelector(`#createUserModal [data-error=${k}]`); if(el){ el.textContent = errs[k]; el.classList.remove('d-none'); } });
+        return;
+      }
+      createModal.hide();
+      await loadUsers();
+    }); }
+
+    // CSRF helper
+    function getCookie(name) {
+      const v = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
+      return v ? v.pop() : '';
+    }
+
+    // Offer form submission
+    const offerSubmitBtn = document.getElementById('offer-submit');
+    if(offerSubmitBtn){
+      offerSubmitBtn.addEventListener('click', async ()=>{
+        const form = document.getElementById('offer-form');
+        const fd = new FormData(form);
+        const reqId = fd.get('request_id');
+        if(!reqId){ return alert('Missing request id'); }
+        // Get CSRF token from cookie (Django default)
+        const csrftoken = getCookie('csrftoken');
+        // Post to admin offer endpoint
+        const r = await fetch(`/app/admin/requests/${reqId}/offer/`, { method: 'POST', body: fd, headers: { 'X-Requested-With':'XMLHttpRequest', 'X-CSRFToken': csrftoken } });
+        const j = await r.json().catch(()=> null);
+        if(!r.ok || !j || !j.ok){
+          const err = (j && j.error) ? j.error : `{% trans "Erreur lors de l'envoi de l'offre" %}`;
+          return alert(err);
+        }
+        // Close offer modal and detail modal, reload list
+        bootstrap.Modal.getInstance(document.getElementById('offerModal'))?.hide();
+        bootstrap.Modal.getInstance(document.getElementById('admDetailModal'))?.hide();
+        await loadRequests();
+  alert(`{% trans "Offre envoyée. Le lien de paiement a été envoyé à l'utilisateur." %}`);
+      });
+    }
+
+  // User detail modal logic
+  const userDetailEl = document.getElementById('userDetailModal');
+  const userDetailModal = new bootstrap.Modal(userDetailEl);
+  function openUserDetail(payload){
+    const u = payload.user;
+    const f = document.getElementById('user-detail-form');
+    f.reset();
+    f.querySelector('[name=id]').value = u.id;
+    f.querySelector('[name=username]').value = u.username || '';
+    f.querySelector('[name=email]').value = u.email || '';
+    f.querySelector('[name=first_name]').value = u.first_name || '';
+    f.querySelector('[name=last_name]').value = u.last_name || '';
+    if(f.querySelector('[name=phone]')) f.querySelector('[name=phone]').value = u.phone || '';
+    if(f.querySelector('[name=company]')) f.querySelector('[name=company]').value = u.company || '';
+    if(f.querySelector('[name=sector]')) f.querySelector('[name=sector]').value = u.sector || '';
+    f.querySelector('[name=is_active]').checked = !!u.is_active;
+    f.querySelector('[name=is_staff]').checked = !!u.is_staff;
+    f.querySelector('[name=is_superuser]').checked = !!u.is_superuser;
+    if(f.querySelector('[name=email_verified]')) f.querySelector('[name=email_verified]').checked = !!u.email_verified;
+    // groups
+    const wrap = document.getElementById('ud-groups');
+    wrap.innerHTML = (payload.all_groups||[]).map(g=>{
+      const checked = (u.groups||[]).some(x=> x.id===g.id);
+      return `<label class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" name="groups[]" value="${g.id}" ${checked?'checked':''} />
+        <span class="form-check-label">${g.name}</span>
+      </label>`;
+    }).join('') || '<div class="text-muted">Aucun groupe</div>';
+    userDetailModal.show();
+  }
+  document.getElementById('user-detail-save').addEventListener('click', async ()=>{
+    const f = document.getElementById('user-detail-form');
+    const id = f.querySelector('[name=id]').value;
+    const fd = new FormData(f);
+    // Clear previous errors
+    userDetailEl.querySelectorAll('[data-error]').forEach(e=>{ e.textContent=''; e.classList.add('d-none'); });
+    const r = await fetch(`/app/admin/users/${id}/update/`, { method:'POST', body: fd, headers: { 'X-Requested-With':'XMLHttpRequest' } });
+    const j = await r.json();
+    if(!j.ok){
+      const errs = j.errors || {};
+      Object.keys(errs).forEach(k=>{ const el = userDetailEl.querySelector(`[data-error=${k}]`); if(el){ el.textContent = errs[k]; el.classList.remove('d-none'); } });
+      return;
+    }
+    userDetailModal.hide();
+    await loadUsers();
+  });
+})();
+</script>
+{% endblock %}

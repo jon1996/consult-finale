@@ -1,0 +1,38 @@
+.list {
+
+  .main-li,
+  .sub-li {
+    display: flex;
+    align-items: flex-start;
+    p {
+      line-height: 1;
+    }
+  }
+
+  
+  .check-arrow::before {
+    content: "\f00c";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 700;
+    font-size: 10px;
+    color: var(--dark-blue-1);
+    margin: 0 8px;
+  }
+
+  .point-right-arrow::before {
+    content: "\f30b";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 700;
+    font-size: 10px;
+    color: var(--dark-blue-1);
+    margin: 0 8px;
+  }
+  
+  .with-sub {
+    flex-wrap: wrap;
+
+    ul {
+      margin: 1rem 3rem 0 2rem;
+    }
+  }
+}

@@ -1,0 +1,1780 @@
+.hide-md-and-down {
+  @media (max-width: 991px) {
+    display: none !important;
+  }
+}
+
+.hide-md-and-up {
+  @media (min-width: 992px) {
+    display: none !important;
+  }
+}
+
+@media only screen and (min-width: 1610px) and (max-width: 1920px) {
+  #showcase {
+    .container-fluid {
+      .row {
+        .col-3 {
+          margin-top: 10vh;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1600px) {
+  .blog-style-3 .slider-indicator-2 {
+    right: 0px;
+  }
+}
+
+@media (max-width: 1366px) {
+  .container-fluid {
+    width: 100%;
+    padding: 0px 50px;
+  }
+
+  .header_section {
+    padding-left: 100px;
+
+    .social-icon {
+      left: 50px;
+    }
+
+    .header-carousel .owl-dots {
+      left: -50px;
+    }
+  }
+
+  // ============================ Showcase Style 4 =========================
+
+  .showcase-style-4 {
+    .side-social-links {
+      right: -120px !important;
+    }
+    .side-content {
+      .slider-indicator-2 {
+        right: 30px;
+      }
+    }
+  }
+
+  // ============================== Coming Soon Page =========================
+  .coming-soon .content .title {
+    margin: 15vh 0 6vh 0;
+  }
+}
+
+@media (max-width: 1200px) {
+  .container-fluid {
+    padding: 0px 50px;
+  }
+
+  .navbar-section {
+    .navbar-collapse {
+      display: none !important;
+    }
+  }
+
+  .navbar-style-2 {
+    .navbar-expand-lg .navbar-collapse {
+      display: none !important;
+    }
+  }
+
+  .navbar-style-3 {
+    .navbar-expand-lg .navbar-collapse {
+      display: none !important;
+    }
+  }
+
+  .page-heading {
+    font-size: 4rem;
+  }
+
+  // ================================ Rotated Text ===========================
+  .blog-section .rotated-text {
+    right: -38%;
+  }
+
+  .membership-section .price-cards .rotated-text {
+    right: -42%;
+  }
+
+  .all-courses .course-wrapper .rotated-text {
+    right: -45%;
+  }
+  // ================================= Join Us Page ========================
+  .teacher-form .container-fluid .content {
+    padding: 2rem;
+  }
+
+  // ============================= Homepage 3 ====================================
+  .showcase-style-3 {
+    height: 80vh;
+    .container-fluid {
+      .slider-wrapper .slider-item {
+        height: 80vh;
+      }
+
+      .indicator-style-3 {
+        top: 120px;
+        right: 50px;
+      }
+
+      .side-social-icons {
+        left: 50px;
+      }
+    }
+  }
+  .showcase-style-3 .container-fluid .slider-wrapper .slider-item .content {
+    top: 30%;
+    .main-content {
+      width: 70%;
+    }
+  }
+
+  // ============================= Homepage 4 =================================
+  .showcase-style-4 {
+    .content-wrapper .slick-list .slick-track .content .main-content {
+      padding: 180px 50px 100px 100px;
+      img {
+        width: 80px;
+      }
+
+      .main-btn {
+        margin: 2rem 0 1rem 0;
+      }
+    }
+  }
+
+  // ============================= Online Courses ===============================
+  .blog-style-2 .container .rotated-text {
+    right: -52%;
+  }
+
+  // =============================== testimonials slider 3 =========================
+  .testimonials-style-3
+    .container
+    .testimonial
+    .testimonial-slider-wrapper
+    .testimonial-slider
+    .content {
+    margin: 6rem 8rem 12rem 8rem;
+  }
+}
+
+@media (max-width: 1200px) and (min-height: 1000px) {
+  .showcase-style-5 {
+    height: 70vh;
+    .row {
+      .slider-wrapper {
+        .content-wrapper {
+          .content {
+            height: 100%;
+            .main-content {
+              position: relative;
+              z-index: 999;
+              margin: 250px 20% auto 18%;
+              .heading {
+                width: 200%;
+              }
+            }
+          }
+          .media {
+            height: 100%;
+            .video-bg {
+              left: auto;
+              right: 0px;
+              width: 150%;
+              top: 10%;
+              height: 700px;
+            }
+          }
+        }
+      }
+      .side-social-links {
+        right: -120px;
+      }
+    }
+  }
+
+  .header_section .single-header-item .content-area {
+    height: 60vh;
+  }
+}
+
+@media (max-width: 992px) {
+  // ========================= Events Item Style 1 =========================
+  .event-item-style-1 {
+    margin: 1rem 0;
+    .details {
+      padding: 0;
+      margin: 2rem 0;
+    }
+  }
+  .event-item-style-1.odd-event {
+    .details {
+      padding-left: 0px;
+    }
+  }
+  .event-item-style-1.even-event {
+    .media {
+      order: 1;
+    }
+    .date {
+      order: 2;
+    }
+    .details {
+      order: 3;
+      padding-right: 0px;
+    }
+  }
+
+  .events-section-style-2 .container .event .details {
+    margin: 2rem auto;
+  }
+
+  // =============== Showcase Section ==================
+  .header_section .single-header-item {
+    .content-area {
+      height: 60vh;
+      .title {
+        width: 60vw;
+      }
+    }
+  }
+  // features Section
+  .features-section {
+    .container {
+      .row {
+        margin: 3rem 0;
+        .media {
+          order: 1;
+          margin-bottom: 2rem;
+        }
+
+        .content {
+          order: 2;
+        }
+      }
+    }
+  }
+
+  // footer style 2
+  .footer-style-2 .footer-content .ins-feed ul li {
+    width: 25%;
+  }
+
+  // ================================== About Page =============================
+  .mantra {
+    .container {
+      .media {
+        position: relative;
+
+        .halfway-btn {
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+      }
+    }
+  }
+
+  // =================================== Video Popup ===========================
+  // work in portrait mode
+  .video-portrait-mode {
+    margin: 0 auto !important;
+    .close-popup {
+      top: 0px !important;
+      right: 0px !important;
+    }
+  }
+
+  // ================================ Showcase Style 4 ==============================
+  .showcase-style-5
+    .row
+    .slider-wrapper
+    .content-wrapper
+    .content
+    .main-content
+    form {
+    width: 200%;
+    z-index: 99;
+    margin-top: 2rem;
+  }
+
+  // ============================= Coming Soon Page ========================
+  .coming-soon .content .title {
+    position: static;
+    .left {
+      color: var(--white);
+    }
+  }
+
+  // ============================= Lessson item style 1 ==============================
+  .lesson-item-style-1.even-lesson {
+    .title {
+      order: 1;
+    }
+    .media {
+      order: 2;
+    }
+    .details {
+      order: 3;
+    }
+  }
+
+  .lesson-item-style-1 {
+    margin: 4rem auto;
+
+    .details {
+      align-items: center;
+    }
+  }
+
+  .footer-style-5 .footer-content > div:not(:last-child)::after {
+    display: none;
+  }
+
+  // Blog detrails
+  .blogs-area-section {
+    .container-fluid {
+      margin-top: 4.5rem;
+    }
+  }
+
+  .questions-section .container-fluid .content {
+    padding: 0 2%;
+  }
+}
+
+@media (max-width: 768px) {
+  .container-fluid {
+    width: 100%;
+    padding: 0 30px;
+  }
+
+  .container {
+    width: 90%;
+  }
+
+  .side-form-icons {
+    transform: rotate(90deg);
+    position: fixed;
+    left: 60px;
+    bottom: -120px;
+    top: auto;
+    width: 45px;
+    height: 150px;
+    opacity: 0;
+    transition: all 0.5s;
+
+    * {
+      transform: rotate(-90deg);
+    }
+  }
+
+  .page-heading {
+    font-size: 4rem;
+  }
+
+  .breadcrub-style-2 .page-heading {
+    font-size: 3rem;
+  }
+
+  .breadcrub-style-1 {
+    .container-fluid {
+      .heading {
+        right: 50%;
+        transform: translateX(50%);
+
+        h1 {
+          font-size: 3rem;
+        }
+      }
+    }
+  }
+
+  .breadcrub-style-2 {
+    height: 280px;
+  }
+
+  .breadcrub-style-4 {
+    height: 200px;
+  }
+
+  #showcase {
+    min-height: 400px;
+
+    .container-fluid {
+      .row {
+        .main-content {
+          position: absolute;
+          width: 70vw;
+          z-index: 9;
+
+          h1 {
+            width: 70vw;
+          }
+        }
+
+        .content-media {
+          margin: 0;
+          padding: 0;
+          margin-left: auto;
+
+          .carousel-item {
+            height: 60vh;
+            min-height: 400px;
+          }
+        }
+      }
+    }
+  }
+
+  .events-section {
+    padding: 0;
+  }
+
+  .showcase-style-4
+    .content-wrapper
+    .slick-list
+    .slick-track
+    .content
+    .main-content
+    h1:after {
+    display: none;
+  }
+
+  // Blog detrails
+  .blogs-area-section {
+    .container-fluid {
+      margin-top: 3rem;
+    }
+  }
+  // =================================== Navbar Section ===============================
+  .navbar-section .navbar .navbar-brand {
+    margin-right: 50px;
+    img {
+      height: 40px;
+    }
+  }
+
+  .navbar-section .search-content-wrap .search-content {
+    right: 60px;
+    top: 70px;
+
+    .search-form {
+      input {
+        width: 400px;
+      }
+    }
+  }
+
+  // =========================== showcase section ======================================
+  .header_section .single-header-item {
+    .content-area {
+      .title {
+        width: 75vw;
+      }
+    }
+
+    .bg-image {
+      width: 80%;
+    }
+
+    .content-area {
+      width: 35%;
+    }
+  }
+  .header_section .header-carousel .owl-nav {
+    left: 20%;
+  }
+
+  .header_section
+    .header-carousel
+    .owl-stage
+    .owl-item.active
+    .single-header-item
+    .content-area
+    .boxed-btn {
+    margin-top: 30px;
+  }
+  // ================================= Navbar Style 2 ================================
+  .navbar-style-2 .navbar .navbar-brand {
+    margin-right: 50px;
+    img {
+      height: 40px;
+    }
+  }
+
+  .navbar-style-2 .search-content-wrap .search-content {
+    right: 60px;
+    top: 70px;
+
+    .search-form {
+      input {
+        width: 400px;
+      }
+    }
+  }
+
+  // ================================== Navbar Style 3 ==========================
+  .navbar-style-3 .navbar .navbar-brand {
+    margin-right: 40px;
+    img {
+      height: 40px;
+    }
+  }
+
+  .side-nav-style-2 {
+    width: 240px;
+  }
+
+  .navbar-style-3 .search-content-wrap .search-content {
+    top: 65px;
+    right: 65px;
+
+    .search-form input {
+      width: 400px;
+    }
+  }
+
+  // ============================== 404 page =======================
+  .not-found {
+    .content-wrapper {
+      .content {
+        text-align: center;
+        .main-btn {
+          margin: 1rem auto;
+        }
+      }
+    }
+  }
+
+  // ================================= Navbar Style 4 ===============================
+  .navbar-style-4 .search-content-wrap .search-content .search-form input {
+    width: 400px;
+  }
+
+  // =================================== Footer Section ================================
+  .footer-section {
+    .footer-content {
+      text-align: center;
+
+      .contact-links {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+
+    .copyright {
+      padding-bottom: 4rem;
+    }
+  }
+
+  .footer-section .copyright #scroll-top {
+    right: 20px;
+  }
+
+  .footer-style-2 .copyright #scroll-top {
+    right: 20px;
+  }
+  .footer-style-3 .copyright #scroll-top {
+    right: 20px;
+  }
+
+  .footer-style-2 .copyright {
+    padding-bottom: 3rem;
+  }
+
+  .footer-style-3 {
+    text-align: center;
+    .footer-content {
+      .brand-logo {
+        height: 30px;
+      }
+      .contact-links {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .social-icons {
+        margin: 1rem auto;
+      }
+    }
+
+    .copyright {
+      padding-bottom: 3rem;
+    }
+  }
+
+  // ================================== Achievement Section =========================
+  .achievement-section {
+    #counters {
+      padding: 0;
+
+      & > div {
+        margin: 1rem 0;
+      }
+    }
+  }
+
+  // ==================================== Blogs Section ================================
+  .blog-section .container .blog-carousel-wrap .blog-carousel-controls {
+    .dots {
+      top: auto;
+      bottom: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+
+      .owl-dot {
+        display: inline-block;
+        height: 3px;
+        width: 1rem;
+        margin: 0 3px;
+      }
+
+      .active {
+        height: 3px !important;
+        width: 40px;
+      }
+    }
+  }
+
+  // ==================================== About Page =====================================
+  .breadcrub-style-1 {
+    height: 300px;
+    overflow: hidden;
+    .heading {
+      h1 {
+        font-size: 4rem;
+      }
+    }
+  }
+
+  .mantra .container .content h2 {
+    text-align: center;
+  }
+
+  .values-section .container {
+    .bottom-content {
+      text-align: center;
+    }
+  }
+
+  // ===================================== Blog Page =========================================
+  .blog-sum-item-style-1 {
+    .media {
+      margin: 2rem 0 1rem 0;
+    }
+  }
+
+  // ==================================== Side form popup ==================================
+  .opening-popup,
+  .location-popup,
+  .form-popup {
+    width: 70%;
+
+    .content {
+      padding: 2rem 3rem;
+    }
+  }
+
+  .side-form-popup #location-map {
+    height: 250px;
+  }
+
+  // ====================================== Courses Page =======================================
+
+  .price-cards {
+    margin: 2rem 1rem;
+  }
+
+  .courses-section {
+    .card-columns {
+      column-count: 2;
+    }
+  }
+
+  .price-cards {
+    display: block;
+
+    .price-card,
+    .price-card + .active {
+      width: 100%;
+      box-shadow: none;
+      margin: 1rem 0;
+      img {
+        height: 50px;
+      }
+    }
+  }
+
+  .believes-section {
+    h2 {
+      margin: 2rem 0.5rem;
+      text-align: center;
+    }
+  }
+
+  // ====================================== Event Page =======================================
+  .breadcrub-style-6 {
+    height: 300px;
+  }
+
+  .events-section-style-2 .container {
+    .event {
+      margin: 3rem 0;
+
+      .details {
+        padding: 0;
+      }
+    }
+
+    .even-event {
+      .img {
+        order: 1;
+      }
+      .date {
+        order: 2;
+      }
+      .details {
+        order: 3;
+      }
+    }
+  }
+
+  // ===================================== Showcase Style 3 ===================================
+  .showcase-style-3 .container-fluid .slider-wrapper .slider-item .content {
+    top: 30%;
+    left: 50px;
+    .main-content {
+      width: 80%;
+    }
+  }
+  // Showcase Style 5
+  .showcase-style-5 {
+    height: 680px;
+    .row {
+      .slider-wrapper {
+        .content-wrapper {
+          .content {
+            width: 60vw;
+            .main-content {
+              position: relative;
+              margin: 180px 50px auto 70px;
+
+              .heading {
+                width: 120%;
+              }
+              form {
+                display: block;
+                margin-top: 4rem;
+                z-index: 99;
+
+                input {
+                  width: 60%;
+                }
+                .main-btn {
+                  margin: 1rem 0;
+                  width: 30%;
+                }
+              }
+            }
+          }
+          .media {
+            width: 40vw;
+            left: 60vw;
+            .video-bg {
+              top: 120px;
+              height: 450px;
+              right: 0px;
+              width: 160%;
+            }
+
+            .pagination-style-3 {
+              left: -80%;
+              bottom: 1.5rem;
+            }
+          }
+        }
+      }
+    }
+
+    .carousel-controlar {
+      bottom: 30%;
+      left: 15px;
+    }
+
+    .pagination-style-3 {
+      bottom: 1rem;
+    }
+  }
+
+  // Features Section
+  .features-section .media {
+    margin-bottom: 2rem;
+  }
+
+  // testimonials from online-course
+  .testimonials-style-3 .container {
+    width: 100%;
+    padding: 0;
+
+    .lg-text {
+      font-size: 6rem;
+      bottom: -10px;
+    }
+    .pagination-style-3 {
+      right: 50%;
+      bottom: -70px;
+    }
+
+    .carousel-controlar {
+      top: 50%;
+      left: 40px;
+      z-index: 9;
+
+      .icon {
+        fill: var(--white);
+      }
+    }
+  }
+
+  .testimonials-style-3
+    .container
+    .testimonial
+    .testimonial-slider-wrapper
+    .testimonial-slider
+    .content {
+    margin: 4rem 6rem 8rem 6rem;
+  }
+
+  // Footer Section
+  .footer-section {
+    .footer-content {
+      .contact-links {
+        .social-icons {
+          margin: 1.5rem 0;
+        }
+      }
+      .title {
+        margin: 1rem auto;
+      }
+
+      .newsletter {
+        form {
+          input {
+            width: 60%;
+          }
+
+          .main-btn {
+            width: 36%;
+          }
+        }
+      }
+    }
+  }
+
+  // ====================================== FAQ Page =======================================
+  .questions-section {
+    .container-fluid {
+      padding: 0 3rem;
+
+      .row {
+        margin: 0;
+      }
+      .content {
+        h2 {
+          margin-bottom: 1rem;
+        }
+      }
+    }
+  }
+
+  // ====================================== Contact Us Page =======================================
+  .contact-breadcrumb {
+    height: 200px;
+    .row {
+      .content {
+        height: 100%;
+        top: 0;
+
+        .inner-content {
+          padding: 3rem;
+          text-align: center;
+        }
+      }
+    }
+  }
+
+  // ==================================== Teachers Page ======================================
+
+  .teacher-details .container-fluid {
+    margin-top: 3.5rem;
+    .media {
+      min-height: 250px;
+    }
+
+    .content {
+      h2 {
+        margin: 1rem auto;
+        text-align: center;
+      }
+    }
+  }
+
+  // ================================== All Courses =======================================
+  .popular-courses .container .rotated-text-2 {
+    left: -130px;
+    top: 50%;
+  }
+
+  .all-courses .container h2 {
+    margin-bottom: 2rem;
+  }
+
+  // ================================ Course Enrollment ================================
+  .course-enrolment {
+    padding: 0 1rem;
+  }
+
+  // ============================= Blog Detail Page ==============================
+  .blog-detail .media-grid {
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  // ============================= Homepage 2 ================================
+  .showcase-style-2 {
+    height: 600px;
+
+    .container-fluid .slider-wrapper .slider-item {
+      height: 100%;
+
+      .content {
+        .main-content {
+          width: 100%;
+        }
+      }
+      .heading {
+        top: 200px;
+        left: 30px;
+        width: 80%;
+      }
+    }
+  }
+
+  // ============================= Homepage 3 =================================
+  .showcase-style-3 {
+    height: 60vh;
+    min-height: 480px;
+    .container-fluid {
+      .indicator-style-3 {
+        right: 30px;
+
+        .current {
+          font-size: 3rem;
+        }
+      }
+
+      .slider-wrapper .slider-item {
+        height: 60vh;
+        min-height: 480px;
+      }
+    }
+  }
+
+  // ============================ Homepage 4 =================================
+  .showcase-style-4 {
+    height: 600px;
+    .content-wrapper .slick-list .slick-track .content .main-content {
+      .main-btn {
+        margin-top: 20px;
+      }
+    }
+  }
+
+  .learning-object .objects {
+    .media {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 2rem;
+
+      img {
+        width: 40px;
+      }
+    }
+  }
+  .trending-lessons {
+    h2 {
+      margin-bottom: 6rem;
+    }
+  }
+
+  .achievements-style-2 .container #counters {
+    & > div {
+      margin-top: 20px;
+    }
+  }
+
+  // ============================= Online Courses ==========================
+  .testimonials-style-3
+    .container
+    .testimonial
+    .testimonial-slider-wrapper
+    .slick-list {
+    margin: 0 30px;
+  }
+
+  .testimonial-style-2 .container .slider-indicator-2 {
+    right: -20px;
+  }
+  .believes-section {
+    .container {
+      .col-12 {
+        padding: 0;
+      }
+
+      .content {
+        margin-top: 2rem;
+
+        .card {
+          .card-header {
+            padding: 0.5rem 0;
+
+            h5 {
+              button {
+                font-size: 14px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .blog-style-2 {
+    padding: 2rem 0;
+
+    .carousel {
+      margin: 2rem 1rem;
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  h1 {
+    font-size: 32px;
+  }
+
+  h2 {
+    font-size: 26px;
+  }
+
+  h3 {
+    font-size: 18px;
+  }
+
+  h4 {
+    font-size: 16px;
+  }
+
+  .container {
+    width: 100%;
+  }
+
+  .container-fluid {
+    padding: 0 15px;
+  }
+
+  .page-heading {
+    font-size: 3rem;
+  }
+
+  .breadcrub-style-2 .page-heading {
+    font-size: 2.5rem;
+  }
+  .popover-section {
+    .popover-container {
+      margin: 0 1rem;
+    }
+  }
+
+  // Blog detrails
+  .blogs-area-section {
+    .container-fluid {
+      margin-top: 2rem;
+    }
+  }
+  .breadcrub-style-5 .heading {
+    height: 70px;
+  }
+  .breadcrub-style-5 .heading h1 {
+    font-size: 4rem;
+    bottom: -2rem;
+  }
+
+  .pagination-style-3 {
+    .current {
+      font-size: 2.5rem;
+      &::after {
+        width: 120px;
+        height: 1px;
+        left: 52px;
+      }
+    }
+
+    .total {
+      font-size: 14px;
+    }
+  }
+
+  .header_section {
+    padding-left: 50px;
+    height: 40vh;
+    min-height: 360px;
+
+    .social-icon {
+      left: 20px;
+      top: 30%;
+    }
+
+    .single-header-item {
+      .bg-image {
+        width: 80%;
+        height: 100%;
+      }
+    }
+
+    .header-carousel {
+      height: 100%;
+
+      > div {
+        height: 100%;
+      }
+
+      .owl-dots {
+        position: absolute;
+        left: -30px;
+        bottom: 0;
+      }
+
+      .owl-nav {
+        left: 20%;
+      }
+    }
+
+    .single-header-item {
+      .content-area {
+        padding-top: 5vh;
+
+        .title {
+          width: 80vw;
+        }
+
+        .boxed-btn {
+          margin: 0px;
+          width: 140px;
+        }
+      }
+    }
+  }
+
+  .blog-style-2 .container .blog-carousel-wrap {
+    width: 100%;
+  }
+
+  .model-alert {
+    width: 300px;
+    padding: 2rem;
+  }
+
+  .questions-section .container-fluid .content {
+    padding: 0;
+  }
+
+  // Features Section
+  .features-section {
+    .media,
+    .content {
+      padding: 0;
+    }
+  }
+
+  .countdown-style-2 h6 {
+    letter-spacing: 1px;
+  }
+  .countdown-style-2 .time-con .time {
+    margin: 1rem 4px;
+
+    &:after {
+      content: "";
+    }
+  }
+
+  .range-slider-con {
+    width: 320px;
+    .pmd-range-slider {
+      width: 250px;
+    }
+  }
+  // =================================== Homepage 1 ==================================
+  .testimonial-style-1 .testimonial-thumbnail-slider .single-testimonial-thumb {
+    margin-top: 25px;
+    .img {
+      height: 60px !important;
+      width: 60px !important;
+    }
+  }
+
+  // =============================== Event Section ===================================
+  .event-item-style-1 .details .event-infos .info {
+    &:not(:first-child) {
+      margin-left: 1rem !important;
+    }
+
+    i {
+      margin: 6px;
+    }
+  }
+
+  // ===================================== Vide Popup ================================
+  .video-popup .video-popup-wrapper .v-container {
+    width: 100%;
+    margin: 25vh auto;
+
+    .close-popup {
+      height: 30px;
+      width: 30px;
+      right: 0px;
+      top: 0px;
+      border-radius: 50% 0 50% 50%;
+    }
+
+    .buttons {
+      left: 0px;
+      bottom: 20px;
+      button {
+        height: 30px;
+        width: 30px;
+
+        i {
+          font-size: 14px;
+        }
+      }
+    }
+
+    .share {
+      bottom: 76px;
+      left: 35px;
+      .social-icons {
+        i {
+          margin: 8px;
+          font-size: 14px;
+        }
+      }
+    }
+  }
+
+  // ==================================== Side form popup ==================================
+  .opening-popup,
+  .location-popup,
+  .form-popup {
+    width: 320px;
+
+    .content {
+      padding: 2rem;
+    }
+  }
+
+  .side-form-popup #location-map {
+    height: 200px;
+  }
+
+  // Testimonial Section
+  .testimonial-style-1 {
+    .testimonial-slider-dots {
+      left: -5px;
+    }
+    .testimonial-thumbnail-slider {
+      height: 130px;
+      padding: 0 25px;
+    }
+  }
+
+  // ======================================= UI Elements =============================
+  .alert {
+    width: 300px;
+  }
+
+  .cookies {
+    width: 300px;
+  }
+
+  // ==================================== About Page =====================================
+
+  .breadcrub-style-1 {
+    height: 250px;
+    .heading {
+      right: 50%;
+      top: 50%;
+      transform: translate(50%, -50%);
+      width: 85%;
+      padding: 20px;
+      h1 {
+        font-size: 2.8rem;
+      }
+    }
+  }
+
+  // =============================== Courses Page ==========================================
+
+  .courses-section {
+    .card-columns {
+      column-count: 1;
+    }
+  }
+
+  // ============================== Blog Page ============================================
+  .blogs-area-section .blog {
+    margin-right: 0;
+  }
+
+  .blog-section .container .blog-carousel-wrap {
+    margin: 6rem 12px 4rem 12px;
+  }
+
+  // ====================================== Event Page =======================================
+  .breadcrub-style-6 {
+    height: 220px;
+  }
+
+  .events-section-style-2 .container .event {
+    h1 {
+      font-size: 3rem;
+    }
+    .details .event-infos .info {
+      margin-right: 1.5rem;
+    }
+  }
+
+  .event-detail .container-fluid {
+    padding: 0 15px;
+  }
+
+  .event-detail
+    .container-fluid
+    .content
+    .form-style-3
+    .form-group
+    .range-slider-con
+    .pmd-range-slider {
+    width: 72%;
+  }
+
+  // ===================================== FAQ Page ======================================
+  .breadcrub-style-2 {
+    height: 200px;
+
+    .breadcrub-style {
+      margin-top: 1rem;
+    }
+  }
+
+  .questions-section .container-fluid {
+    padding: 0 1rem;
+  }
+
+  // ===================================== FAQ Page ======================================
+  .membership-plan .container-fluid .content .payment button {
+    margin-right: 1rem;
+  }
+
+  // ================================== Contact Us Page ======================================
+  .contact-details-section .message-from {
+    margin-top: 2rem;
+  }
+  // ================================ Course Enrollment ================================
+  .course-enrolment {
+    padding: 0 1rem;
+  }
+
+  // ============================= Coming Soon Page ================================
+  .coming-soon {
+    .content {
+      padding: 0 2rem;
+      .title {
+        font-size: 3rem;
+        margin: 100px 0 40px 0;
+      }
+
+      form {
+        width: 90%;
+      }
+    }
+  }
+
+  .countdown-style-1 .divider {
+    margin: 0 0.5rem;
+  }
+
+  // ============================= Blog Detail Page ==============================
+  .author-section {
+    img {
+      margin-bottom: 2rem;
+    }
+
+    .about {
+      margin-top: 0.5rem;
+    }
+  }
+
+  .more-carousel-1 {
+    padding: 2rem 0 0 0;
+  }
+
+  // ============================= Course Detail Page ==============================
+  .course-detail .container-fluid .content .summary .data {
+    display: block;
+
+    table {
+      width: 100%;
+    }
+  }
+  // ============================= Homepage 4 =================================
+  .showcase-style-4 {
+    height: 480px;
+    min-height: 480px;
+    .content-wrapper .slick-list .slick-track .content {
+      .main-content {
+        padding: 120px 15px 50px 15px;
+
+        h1 {
+          margin-bottom: 1rem;
+          &::after {
+            display: none;
+          }
+        }
+        img {
+          width: 45%;
+        }
+      }
+
+      .media {
+        top: 65px;
+        min-height: 420px;
+        height: 420px;
+        width: 50vw;
+        margin-left: 50vw;
+        position: absolute;
+      }
+    }
+
+    .slider-indicator-3 {
+      left: 15px;
+    }
+
+    .slider-indicator-2 {
+      right: 15px;
+      .slick-dots {
+        button {
+          font-size: 1rem;
+          font-weight: 300;
+        }
+
+        .slick-active {
+          button {
+            font-weight: 700;
+            color: var(--white);
+          }
+        }
+      }
+    }
+  }
+
+  .trending-lessons .lessons .lesson .title h2::after {
+    width: 50%;
+  }
+
+  .free-trial-lesson {
+    padding: 3rem 0;
+    .container .countdown-style-1 {
+      margin: 3rem auto;
+      flex-direction: column;
+      & > div {
+        margin: 1rem auto;
+        h1 {
+          font-size: 3rem;
+          font-weight: 400;
+        }
+      }
+
+      .divider {
+        display: none;
+      }
+    }
+  }
+
+  .blogs-section-2 .container {
+    .slider-indicator-2 {
+      left: 5px;
+      .slick-dots {
+        button {
+          font-size: 14px;
+        }
+      }
+    }
+
+    .main-btn {
+      margin: 2rem auto 8rem auto;
+    }
+
+    .slider-indicator-3 {
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: -60px;
+    }
+  }
+
+  // =========================== Showcase style 3 ========================
+  .showcase-style-3 .container-fluid .slider-wrapper .slider-item .content {
+    left: 20px;
+    text-align: center;
+
+    .main-content {
+      .main-btn {
+        margin: 1rem auto;
+      }
+    }
+  }
+  .showcase-style-3 .container-fluid .indicator-style-3 {
+    top: 80px;
+    right: 10px;
+
+    .indicators {
+      margin: 1rem 0;
+      .indicator {
+        height: 10px;
+      }
+
+      .active {
+        height: 25px;
+      }
+    }
+
+    .current {
+      font-size: 30px;
+    }
+
+    i {
+      margin: 0;
+      font-size: 11px;
+      font-weight: 600;
+    }
+  }
+
+  // showcase from online courses
+  .showcase-style-5 {
+    height: 400px;
+    margin-top: 1rem;
+    min-height: auto;
+
+    .row {
+      .slider-wrapper {
+        .content-wrapper {
+          .content {
+            .main-content {
+              margin: 50px 10px auto 40px;
+
+              form {
+                margin-top: 2rem;
+                input {
+                  width: 70%;
+                }
+                .main-btn {
+                  width: 40%;
+                }
+              }
+            }
+          }
+          .media {
+            .video-bg {
+              top: 0px;
+              right: -1rem;
+              height: 100%;
+              width: 200%;
+              .halfway-btn {
+                width: 50px;
+                height: 50px;
+                left: 70%;
+                top: 30%;
+
+                i {
+                  font-size: 1rem;
+                }
+              }
+            }
+
+            .pagination-style-3 {
+              left: -100%;
+            }
+          }
+        }
+      }
+    }
+
+    .carousel-controlar {
+      left: 5px;
+    }
+
+    .pagination-style-3 {
+      bottom: 20px;
+    }
+  }
+
+  // ===================== tables ==================
+  .stripped-package-table tbody tr > th {
+    padding-left: 1rem;
+  }
+
+  .basic-package-table tbody tr > th {
+    padding-left: 1rem;
+  }
+
+  // testimonials from online courses
+  .testimonials-style-3 .container {
+    .lg-text {
+      font-size: 3.6rem;
+    }
+  }
+
+  .testimonials-style-3
+    .container
+    .testimonial
+    .testimonial-slider-wrapper
+    .testimonial-slider
+    .content {
+    margin: 3rem 2rem 6rem 2rem;
+  }
+  .testimonials-style-3
+    .container
+    .testimonial
+    .testimonial-slider-wrapper
+    .slick-list {
+    margin: 0;
+  }
+  .testimonials-style-3 .container .carousel-controlar {
+    left: 10px;
+  }
+
+  // opportunity section
+  .opportunity-section {
+    h2 {
+      margin-bottom: 2rem;
+    }
+    .main-btn {
+      margin: 2rem 0;
+    }
+  }
+
+  // footer Style 2
+  .footer-style-2 {
+    .footer-content {
+      .brand-logo {
+        height: 30px;
+      }
+    }
+  }
+
+  .breadcrub-style-1 {
+    .container-fluid {
+      .heading {
+        width: 70%;
+      }
+    }
+  }
+
+  .carousel-icon {
+    top: -9vh;
+
+    .icon {
+      transform: scale(0.7);
+    }
+  }
+
+  #navbar {
+    display: none;
+  }
+
+  .navbar-small-mobile {
+    display: block;
+  }
+
+  #reviews {
+    .container {
+      padding: 1rem;
+
+      .reviews-carousel {
+        width: 70%;
+        margin: 1rem auto;
+
+        .item {
+          transform: scale(0.8);
+        }
+      }
+
+      .carousel-indicator {
+        .indicator {
+          transform: scale(0.7);
+          margin: 0;
+        }
+      }
+    }
+  }
+
+  #blog {
+    .carousel {
+      .carousel-indicator {
+        left: -20px;
+        top: 60%;
+      }
+    }
+  }
+
+  #footer {
+    .footer-content {
+      text-align: center;
+
+      & > div {
+        margin-top: 1rem;
+      }
+
+      .contact-links {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .newsletter {
+        text-align: left;
+
+        form {
+          input {
+            width: 60%;
+          }
+
+          .main-btn {
+            width: 35%;
+          }
+        }
+      }
+    }
+  }
+}

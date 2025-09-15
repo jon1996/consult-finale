@@ -1,0 +1,128 @@
+// ============================== Blog Section ==================================
+.blog-section {
+  background-color: var(--light-grey-3);
+  padding: 4rem 0;
+  .container {
+    .blog-carousel-wrap {
+      position: relative;
+      margin: 6rem auto 4rem auto;
+      .blog-carousel-controls {
+        height: 100%;
+        position: absolute;
+        width: 100%;
+        z-index: 1;
+    
+        .dots {
+          position: absolute;
+          left: -80px;
+          top: 250px;
+          margin-top: 20px;
+    
+          div {
+            display: block;
+            height: 20px;
+            width: 3px;
+            background-color: var(--icon-color);
+            transition: 500ms all;
+    
+            &.active {
+              height: 50px;
+              background-color: var(--dark-blue-2);
+            }
+    
+            +div {
+              margin-top: 5px;
+            }
+          }
+        }
+    
+        .owl-next,
+        .owl-prev {
+          position: absolute;
+          top: 250px;
+          transform: translateY(-50%);
+          font-size: 20px;
+          cursor: pointer;
+    
+          i {
+            color: var(--dark-grey-3);
+          }
+    
+        }
+    
+        .owl-prev {
+          left: -55px;
+        }
+    
+        .owl-next {
+          right: -50px;
+        }
+      }
+    }
+  }
+}
+
+// Blogs form homepage 4
+.blogs-section-2 {
+  .container {
+    position: relative;
+    .rotated-text {
+      color: rgba(#0194BA, .1);
+      z-index: -1;
+    }
+    .main-btn {
+      margin: 4rem auto;
+    }
+
+    .slider-indicator-2 {
+      right:  -12%;
+      top: 50%;
+      transform: translateY(-50%);
+
+      .slick-dots {
+        button {
+          color: var(--dark-indigo);
+        }
+
+        .slick-active {
+          button {
+            color: var(--dark-blue-1);
+          }
+        }
+      } 
+
+    }
+
+    .slider-indicator-3 {
+      left: -30px;
+      bottom: 20px;
+
+      * {
+        color: var(--dark-indigo);
+      }
+    }
+  }
+}
+
+// ==================== Blog item style 3 ==============================
+.blog-item-style-2 {
+  border: 0;
+  margin: 0 1rem;
+  text-align: center;
+  .card-img-top {
+    border-radius: 0;
+  }
+  .card-body {
+    background-color: var(--light-grey-5);
+    .card-text {
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--dark-grey-4);
+    }
+
+    h5 {
+      line-height: 1.5;
+      color: var(--dark-grey-4);
+    }
+  }
+}

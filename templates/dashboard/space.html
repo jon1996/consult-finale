@@ -1,245 +1,1587 @@
 {% extends 'base.html' %}
+{% load static i18n %}
 {% block head %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+<link rel="stylesheet" href="{% static 'components/forms/forms.css' %}">
 <style>
-  body { background: #f7f7fa; }
-  .sidebar { min-width: 220px; background: #222; color: #fff; height: 100vh; position: fixed; display: flex; flex-direction: column; }
-  .sidebar a { color: #fff; display: block; padding: 1em; text-decoration: none; }
-  .sidebar a.active, .sidebar a:hover { background: #007bff; }
-  .main { margin-left: 220px; padding: 2em; }
-  .table thead { background: #eee; }
-  @media (max-width: 800px) {
-    .sidebar { position: static; width: 100%; height: auto; min-width: 0; }
-    .main { margin-left: 0; padding: 1em; }
+  /* Confirmation summary styling (scoped) */
+  .summary-card { border-radius:12px; padding:16px; background:linear-gradient(180deg, #fff, #fbfbfb); border:1px solid var(--border); }
+  .summary-card .row { gap:12px; }
+  .summary-key { color:var(--muted); font-weight:700; font-size:.9rem; }
+  .summary-val { color:var(--ink); font-weight:600; }
+  .summary-meta { display:flex; gap:8px; flex-wrap:wrap; margin-top:8px; }
+  .summary-chip { background:var(--primary-light); color:var(--primary-dark); padding:6px 10px; border-radius:999px; font-weight:700; font-size:.85rem; }
+  .summary-list { margin:0; padding:0; list-style:none; }
+  .summary-list li { padding:.35rem 0; border-bottom:1px dashed var(--border); }
+  .summary-list li:last-child { border-bottom:0; }
+  @media (max-width:576px){ .summary-card { padding:12px; } }
+  :root {
+    --ink:#111827;
+    --muted:#6b7280;
+    --bg:#F5F7FB;
+    --surface:#F9FAFB;
+    --sidebar:#F3F4F6;
+    --border:#E5E7EB;
+  /* Brand-driven palette (defaults set to orange like the logo) */
+  --brand-color:#FF7A00;         /* primary */
+  --brand-color-hover:#E36D00;   /* hover/darker */
+  --brand-color-light:#FFE8D6;   /* light tint */
+  --brand-color-dark:#CC6200;    /* dark */
+  --brand-contrast:#ffffff;
+    /* Map primary tokens to brand */
+    --primary:var(--brand-color);
+    --primary-hover:var(--brand-color-hover);
+    --primary-light:var(--brand-color-light);
+    --primary-dark:var(--brand-color-dark);
+    --success:#198754;
+    --success-light:#DCFCE7;
+    --success-dark:#166534;
+    --warning:#fd7e14;
+    --warning-light:#FEF9C3;
+    --warning-dark:#854D0E;
+    --danger:#dc3545;
+    --danger-light:#F8D7DA;
+    --danger-dark:#721C24;
+    --secondary:#6c757d;
+    --secondary-light:#E5E7EB;
+    --secondary-dark:#495057;
+    --shadow:rgba(17,24,39,.06);
+    --shadow-hover:rgba(17,24,39,.10);
+    --shadow-strong:rgba(17,24,39,.12);
+  }
+  body{background:var(--bg);color:var(--ink);transition:background-color 0.3s ease, color 0.3s ease;}
+  /* Bootstrap primary overrides to enforce brand orange */
+  .btn-primary{--bs-btn-color:var(--brand-contrast);--bs-btn-bg:var(--primary);--bs-btn-border-color:var(--primary);--bs-btn-hover-color:var(--brand-contrast);--bs-btn-hover-bg:var(--primary-hover);--bs-btn-hover-border-color:var(--primary-hover);--bs-btn-active-bg:var(--primary-dark);--bs-btn-active-border-color:var(--primary-dark)}
+  .btn-outline-primary{--bs-btn-color:var(--primary);--bs-btn-border-color:var(--primary);--bs-btn-hover-bg:var(--primary);--bs-btn-hover-border-color:var(--primary);--bs-btn-active-bg:var(--primary-dark);--bs-btn-active-border-color:var(--primary-dark);--bs-btn-hover-color:var(--brand-contrast)}
+  .text-primary{color:var(--primary)!important}
+  .bg-primary{background-color:var(--primary)!important}
+  .border-primary{border-color:var(--primary)!important}
+  .link-primary{color:var(--primary)!important}
+  .link-primary:hover{color:var(--primary-hover)!important}
+  .form-check-input:checked{background-color:var(--primary);border-color:var(--primary)}
+  .page-link{color:var(--primary)}
+  .page-link:hover{color:var(--primary-hover)}
+  .form-range::-webkit-slider-thumb{background:var(--primary)}
+  .form-range::-moz-range-thumb{background:var(--primary)}
+  .sidebar{position:fixed;left:0;top:0;bottom:0;width:240px;background:var(--sidebar);color:var(--ink);z-index:1045;box-shadow:2px 0 18px var(--shadow);border-right:1px solid var(--border);transition:background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;}
+  /* Prevent background scroll when mobile menu is open */
+  body.no-scroll{overflow:hidden}
+  /* Make sidebar a column flex to push logout to bottom */
+  .sidebar{display:flex;flex-direction:column}
+  .sidebar .brand{font-weight:800;letter-spacing:.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .sidebar a{color:var(--ink);text-decoration:none;display:block;padding:.65rem .9rem;border-radius:.5rem;margin:.25rem .5rem;transition:background-color .15s, color .15s}
+  .sidebar a:hover{background:var(--secondary-light)}
+  .sidebar a.active{background:var(--primary-light);color:var(--primary-dark)}
+  .main{margin-left:240px;padding:24px;min-height:100vh}
+  .page-title{font-weight:800;letter-spacing:.2px}
+  .card-quiet{background:var(--surface);border:1px solid var(--border);border-radius:14px;box-shadow:0 6px 18px var(--shadow);transition:background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;}
+  .forms-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  .forms-grid a.card{color:inherit;text-decoration:none}
+  .forms-grid a.card:hover{text-decoration:none}
+  @media (max-width:992px){.main{margin-left:0}}
+  @media (max-width:768px){.forms-grid{grid-template-columns:1fr}}
+  .chip{display:inline-flex;align-items:center;gap:.4rem;padding:.4rem .7rem;border:1px solid var(--border);border-radius:999px;background:var(--surface)}
+  .chip i{color:var(--primary)} .breadcrumb-mini a{color:var(--primary);text-decoration:none} .breadcrumb-mini a:hover{text-decoration:underline}
+  .text-muted{color:var(--muted)!important}
+  .form-player-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+  .hidden{display:none!important}
+  /* Home hero */
+  .hero{display:flex;gap:16px;align-items:center;justify-content:center;flex-direction:column;text-align:center}
+  .hero .hero-icon{width:56px;height:56px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:var(--surface);border:1px solid var(--border)}
+  .hero .hero-title{font-weight:900;margin:0}
+  .hero .hero-sub{color:var(--muted);margin:0}
+  .hero-actions{display:none}
+  .quick-links{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  @media (max-width:992px){.quick-links{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:576px){.quick-links{grid-template-columns:1fr}}
+  /* Wizard */
+  .stepper{display:flex; gap:12px; margin-bottom:16px}
+  .stepper .step{flex:1; display:flex; align-items:center; gap:8px}
+  .step .dot{width:26px;height:26px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;border:2px solid var(--border);color:var(--muted);background:var(--surface);font-weight:700}
+  .step.active .dot{border-color:var(--primary);color:var(--primary)}
+  .step.done .dot{background:var(--primary);color:#fff;border-color:var(--primary)}
+  .step .label{color:var(--muted);font-weight:600}
+  .step.active .label{color:var(--ink)}
+  .wizard-card{border:1px solid var(--border); border-radius:12px; box-shadow:0 8px 22px var(--shadow)}
+  #wizard-services .card.selected{border:2px solid var(--primary)}
+  #wizard-services .card{cursor:pointer}
+  /* Hide inner form submit buttons when used inside the wizard (UI only) */
+  #wizard-form-slot form button[type="submit"]{display:none!important}
+
+  /* History redesign */
+  .history-toolbar{display:grid;grid-template-columns:1fr auto;gap:12px;margin-bottom:12px}
+  .history-search{display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:8px 10px;transition:background-color 0.3s ease, border-color 0.3s ease;}
+  .history-search input{border:0;outline:0;background:transparent;width:100%;color:var(--ink);transition:color 0.3s ease;}
+  .history-search input::placeholder{color:var(--muted);transition:color 0.3s ease;}
+  .filter-chips{display:flex;flex-wrap:wrap;gap:8px}
+  .filter-chip{border:1px solid var(--border);background:var(--surface);border-radius:999px;padding:6px 10px;cursor:pointer;font-weight:600;color:var(--ink);transition:background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;}
+  .filter-chip.active{background:var(--primary-light);border-color:var(--primary);color:var(--primary-dark)}
+  .history-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+  .req-card{position:relative;display:block;padding:16px 16px 12px;border:1px solid var(--border);border-radius:14px;background:var(--surface);box-shadow:0 6px 14px var(--shadow);transition:transform .1s ease, box-shadow .15s ease, border-color .15s ease, background-color .2s ease;overflow:hidden}
+  .req-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--secondary-light)}
+  .req-card.is-paid::before{background:var(--success)}
+  .req-card.is-pending::before{background:var(--warning)}
+  .req-card.is-canceled::before{background:var(--secondary)}
+  .req-card:hover{transform:translateY(-2px);box-shadow:0 12px 28px var(--shadow-hover);border-color:var(--primary-light)}
+  .req-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:var(--primary-light);color:var(--primary-dark);border:1px solid var(--primary)}
+  .req-body{flex:1}
+  .req-title{font-weight:800;word-break:break-word;letter-spacing:.2px}
+  .req-meta{color:var(--muted)}
+  .req-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+  .req-action{display:flex;justify-content:flex-end;margin-top:8px}
+  .req-action .cta{color:var(--primary);font-weight:700;display:inline-flex;align-items:center;gap:2px;text-decoration:none}
+  .req-action .cta:hover{text-decoration:underline}
+  .status-pill{font-weight:700;border-radius:999px;padding:4px 10px}
+  .status-pill.paid{background:var(--success-light);color:var(--success-dark)}
+  .status-pill.pending{background:var(--warning-light);color:var(--warning-dark)}
+  .status-pill.canceled{background:var(--secondary-light);color:var(--secondary-dark)}
+  /* Skeleton */
+  .skeleton{position:relative;overflow:hidden;background:var(--surface);border:1px solid var(--border);border-radius:14px;transition:background-color 0.3s ease, border-color 0.3s ease;}
+  .skeleton::after{content:"";position:absolute;inset:0;translate:-100% 0;background:linear-gradient(90deg,transparent,var(--border),transparent);animation:shimmer 1.2s infinite}
+  @keyframes shimmer{100%{translate:100% 0}}
+
+  /* Detail modal premium styling */
+  .detail-modal .modal-content{border:1px solid var(--border);border-radius:16px;box-shadow:0 12px 32px rgba(17,24,39,.12)}
+  .detail-modal .modal-header{border-bottom:1px solid var(--border);background:var(--surface)}
+  .detail-head{display:flex;align-items:flex-start;gap:12px;margin-bottom:10px}
+  .detail-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:var(--primary-light);color:var(--primary-dark);border:1px solid var(--primary)}
+  .detail-title{font-weight:900;letter-spacing:.2px}
+  .detail-sub{color:var(--muted)}
+  .kv-grid{display:grid;grid-template-columns:1fr 2fr;gap:8px;border:1px solid var(--border);border-radius:12px;padding:12px;background:var(--surface)}
+  .divider{height:1px;background:var(--border);margin:12px 0}
+  .doc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px}
+  .doc-card{border:1px solid var(--border);border-radius:12px;background:var(--surface);box-shadow:0 4px 12px var(--shadow);overflow:hidden;text-decoration:none;color:inherit;display:flex;flex-direction:column}
+  .doc-card .thumb{display:flex;align-items:center;justify-content:center;min-height:96px;background:var(--surface)}
+  .doc-card .label{padding:8px 10px;font-size:.875rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .doc-card:hover{border-color:var(--primary);box-shadow:0 8px 18px var(--shadow-hover)}
+  .kv-grid .k{color:var(--muted);font-weight:600}
+  .kv-grid .v{color:var(--ink);word-break:break-word}
+  .detail-modal .modal-footer{background:var(--surface);border-top:1px solid var(--border)}
+  /* Theme toggle removed */
+
+  /* Modern language selector */
+  .lang-select-wrap{position:relative;display:inline-flex;align-items:center;gap:6px;background:var(--surface);border:1px solid var(--border);border-radius:999px;padding:2px 28px 2px 12px;box-shadow:0 2px 8px var(--shadow);transition:background 0.2s,border-color 0.2s,box-shadow 0.2s;}
+  .lang-select-wrap:hover{box-shadow:0 4px 12px var(--shadow-hover)}
+  .lang-select{appearance:none;-webkit-appearance:none;-moz-appearance:none;background:transparent;border:0;outline:0;color:var(--ink);font-weight:700;letter-spacing:.3px;text-transform:uppercase;padding:2px 0;min-width:56px;text-align:center;}
+  .lang-select:focus{outline:none}
+  .lang-select-wrap::after{content:"\f282"; /* bi-caret-down-fill */ font-family:"bootstrap-icons"; position:absolute; right:10px; color:var(--muted); font-size:12px; pointer-events:none}
+  @media (max-width: 992px){
+    .lang-select{min-width:48px}
+    .lang-select-wrap{padding:2px 26px 2px 10px}
+  }
+
+  /* Mobile enhancements */
+  @media (max-width:992px){
+  .sidebar{position:fixed;top:0;bottom:0;left:0;width:min(86vw, 320px);transform:translateX(-100%);transition:transform .2s ease;box-shadow:0 10px 24px var(--shadow-strong);-webkit-overflow-scrolling:touch;overflow-y:auto}
+    .sidebar.open{transform:translateX(0)}
+    .mobile-topbar{position:fixed;left:0;right:0;top:0;height:56px;background:var(--sidebar);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;padding:0 12px;z-index:1040}
+    .main{padding-top:56px}
+  }
+  #sidebar-backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:1040}
+  #sidebar-backdrop.show{display:block}
+  @media (max-width:576px){
+    .history-toolbar{grid-template-columns:1fr}
+    .filter-chips{overflow-x:auto;white-space:nowrap;padding-bottom:4px}
+    .filter-chips .filter-chip{display:inline-flex}
+    .stepper{gap:8px;overflow-x:auto;padding-bottom:4px}
+    .stepper .step{min-width:max(120px,40%)}
+    .step .label{font-size:12px}
+  }
+  /* Responsive adjustments for key-value grids and detail head */
+  @media (max-width:768px){
+    .kv-grid{grid-template-columns:1fr}
+  }
+  @media (max-width:576px){
+    .detail-head{flex-direction:column;align-items:stretch}
+    .detail-icon{margin-bottom:8px}
   }
 </style>
 {% endblock %}
 {% block content %}
-<div class="sidebar">
-  <h4 class="p-3">Admin</h4>
-  <a href="#" class="active" data-category="hotel">Réservations Hôtels</a>
-  <a href="#" data-category="location">Location Véhicules</a>
-  <a href="#" data-category="conciergerie">Conciergerie</a>
-  <a href="#" data-category="tdg">Traduction/Guide</a>
-  <a href="#" data-category="aeroport">Aéroport</a>
-  <a href="#" data-category="visa">Visa/Carte</a>
-  <div class="mt-auto border-top border-secondary">
-    <a href="/app/account/logout/" class="d-block" title="Se déconnecter">
-      <i class="bi bi-box-arrow-right me-2"></i> Se déconnecter
-    </a>
+<aside class="sidebar" aria-label="Menu">
+  <div class="p-3">
+  <div class="d-flex d-lg-none justify-content-end mb-2">
+    <button class="btn btn-outline-secondary btn-sm" id="btn-close-menu" aria-label="{% trans "Fermer le menu" %}"><i class="bi bi-x-lg"></i></button>
   </div>
-</div>
-<div class="main">
-  <div id="table-hotel" class="admin-table">
-    <h2>Réservations Hôtels</h2>
-    <table class="table table-bordered table-hover">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Ville</th>
-          <th>Date arrivée</th>
-          <th>Date départ</th>
-          <th>Hébergement</th>
-          <th>Chambre</th>
-          <th>Budget</th>
-          <th>Contact</th>
-          <th>Date soumission</th>
-          <th>Détails</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>1</td>
-          <td>Kinshasa</td>
-          <td>2025-09-01</td>
-          <td>2025-09-10</td>
-          <td>Hôtel 4 étoiles</td>
-          <td>Suite</td>
-          <td>100–200 USD</td>
-          <td>Jean Dupont<br>jean@email.com<br>+243 900 000 000</td>
-          <td>2025-08-14 10:23</td>
-          <td><a href="#" class="voir-detail" data-type="hotel" data-ville="Kinshasa" data-date-arrivee="2025-09-01" data-date-depart="2025-09-10" data-hebergement="Hôtel 4 étoiles" data-chambre="Suite" data-budget="100–200 USD" data-nom="Jean Dupont" data-contact="Jean Dupont<br>jean@email.com<br>+243 900 000 000" data-soumission="2025-08-14 10:23">Voir</a></td>
-        </tr>
-      </tbody>
-    </table>
-    <div class="modal fade" id="reservationDetailModal" tabindex="-1" aria-labelledby="reservationDetailModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content border-0 shadow-lg">
-          <div class="modal-header bg-primary text-white border-0">
-            <div class="d-flex align-items-center">
-              <span id="modal-icon" class="me-2" style="font-size:2rem;"></span>
-              <h5 class="modal-title mb-0" id="reservationDetailModalLabel">Détail</h5>
+  <!-- Sidebar header content removed as requested -->
+    <nav>
+  <a href="#" data-view="home" class="active" aria-label="{% trans 'Aller à l\'accueil' %}"><i class="bi bi-house-door me-2"></i>{% trans "Accueil" %}</a>
+  <a href="#" data-view="wizard" aria-label="{% trans 'Créer une nouvelle demande' %}"><i class="bi bi-plus-circle me-2"></i>{% trans "Nouvelle demande" %}</a>
+  <a href="#" data-view="requests" aria-label="{% trans 'Voir mes demandes' %}"><i class="bi bi-clock-history me-2"></i>{% trans "Mes demandes" %}</a>
+  {% if request.user.is_staff %}
+  <a href="/app/backoffice/" aria-label="{% trans 'Accéder au backoffice' %}"><i class="bi bi-speedometer2 me-2"></i>{% trans "Backoffice" %}</a>
+  {% endif %}
+    </nav>
+  </div>
+  <div class="mt-auto p-3 border-top border-secondary-subtle d-flex align-items-center justify-content-start gap-2 flex-wrap">
+     <form id="lang-form" action="{% url 'set_language' %}" method="post" style="margin:0 8px;">
+       {% csrf_token %}
+       <input name="next" type="hidden" value="{{ request.get_full_path }}" />
+  <div class="lang-select-wrap">
+         <select name="language" class="lang-select" onchange="this.form.submit()" aria-label="Language selector">
+           <option value="fr" {% if LANGUAGE_CODE == 'fr' %}selected{% endif %}>FR</option>
+           <option value="en" {% if LANGUAGE_CODE == 'en' %}selected{% endif %}>EN</option>
+           <option value="zh-hans" {% if LANGUAGE_CODE == 'zh-hans' %}selected{% endif %}>ZH</option>
+         </select>
+       </div>
+     </form>
+  <a href="/app/accounts/logout/" class="d-block"><i class="bi bi-box-arrow-right me-2"></i>{% trans "Se déconnecter" %}</a>
+   </div>
+ </aside>
+
+ <div class="mobile-topbar d-lg-none">
+  <button class="btn btn-outline-secondary btn-sm" id="btn-open-menu" aria-label="{% trans "Ouvrir le menu" %}"><i class="bi bi-list"></i></button>
+  <div class="d-flex align-items-center gap-2 text-truncate">
+    <span class="fw-semibold text-truncate">{{ request.user.email|default:"" }}</span>
+  </div>
+  <div class="ms-auto"></div>
+ </div>
+
+ <div id="sidebar-backdrop"></div>
+
+ <!-- Request Detail Modal (global, single instance; placed outside sidebar/main for proper overlay) -->
+ <div class="modal fade detail-modal" id="requestDetailModal" tabindex="-1" aria-labelledby="requestDetailLabel" aria-hidden="true">
+   <div class="modal-dialog modal-lg modal-dialog-centered">
+     <div class="modal-content">
+       <div class="modal-header">
+         <h5 class="modal-title" id="requestDetailLabel">{% trans "Détails de la demande" %}</h5>
+         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+       </div>
+       <div class="modal-body" id="request-detail-body"></div>
+       <div class="modal-footer">
+         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">{% trans "Fermer" %}</button>
+       </div>
+     </div>
+   </div>
+ </div>
+
+<main class="main">
+  <!-- Top navbar (desktop only) -->
+  <div class="d-none d-lg-flex align-items-center justify-content-end mb-3">
+    <div class="text-muted small text-truncate">{{ request.user.email|default:"" }}</div>
+  </div>
+
+  <!-- Bonjour card shown on all pages -->
+  <div class="card card-quiet mb-3"><div class="card-body hero">
+      <div class="hero-icon text-primary d-flex align-items-center justify-content-center">
+        <img src="{% static 'core/img/logo.png' %}" alt="Logo" width="40" height="40" style="object-fit:contain;border-radius:8px;">
+      </div>
+      <div class="flex-grow-1">
+  <h3 class="hero-title">{% trans "Bonjour," %}
+          {% if request.user.get_full_name %}
+            {{ request.user.get_full_name|upper }}
+          {% else %}
+            {{ request.user.email }}
+          {% endif %}
+        </h3>
+  <p class="hero-sub">{% trans "Créez une nouvelle demande en quelques clics." %}</p>
+      </div>
+  <div class="hero-actions"></div>
+    </div></div>
+
+  <section id="view-home" class="d-none">
+    <div class="card card-quiet"><div class="card-body text-center">
+      <a href="#" class="btn btn-outline-primary" data-view="wizard"><i class="bi bi-arrow-right-circle me-1"></i> {% trans "Aller à la page \"Nouvelle demande\"" %}</a>
+    </div></div>
+  </section>
+
+  <section id="view-wizard">
+  <h2 class="page-title mb-2">{% trans "Nouvelle demande" %}</h2>
+    <div class="stepper" id="wizard-steps" role="progressbar" aria-valuenow="1" aria-valuemin="1" aria-valuemax="4" aria-label="{% trans 'Progression de la demande' %}">
+  <div class="step active" data-step="1"><span class="dot">1</span><span class="label">{% trans "Service" %}</span></div>
+  <div class="step" data-step="2"><span class="dot">2</span><span class="label">{% trans "Informations" %}</span></div>
+  <div class="step" data-step="3"><span class="dot">3</span><span class="label">{% trans "Paiement" %}</span></div>
+  <div class="step" data-step="4"><span class="dot">4</span><span class="label">{% trans "Confirmation" %}</span></div>
+    </div>
+
+    <div class="wizard-card p-3 mb-3">
+      <!-- Step 1: Service selection -->
+      <div id="wiz-step-1">
+  <p class="text-muted">{% trans "Choisissez un service, puis cliquez Suivant." %}</p>
+        <div id="wizard-services" class="forms-grid mb-3">
+          <a href="#" class="card card-quiet" data-form="hotel"><div class="card-body d-flex align-items-center gap-2"><i class="bi bi-building fs-4 text-primary"></i><div><div class="fw-semibold">{% trans "Réservation d'hôtel" %}</div><div class="text-muted small">{% trans "Hôtels, appartements, résidences" %}</div></div></div></a>
+          <a href="#" class="card card-quiet" data-form="location"><div class="card-body d-flex align-items-center gap-2"><i class="bi bi-car-front fs-4 text-primary"></i><div><div class="fw-semibold">{% trans "Location de véhicule" %}</div><div class="text-muted small">{% trans "Avec chauffeur" %}</div></div></div></a>
+          <a href="#" class="card card-quiet" data-form="conciergerie"><div class="card-body d-flex align-items-center gap-2"><i class="bi bi-bell fs-4 text-primary"></i><div><div class="fw-semibold">{% trans "Conciergerie" %}</div><div class="text-muted small">{% trans "Assistance 24/7" %}</div></div></div></a>
+          <a href="#" class="card card-quiet" data-form="aeroport"><div class="card-body d-flex align-items-center gap-2"><i class="bi bi-airplane fs-4 text-primary"></i><div><div class="fw-semibold">{% trans "Accompagnement aéroport" %}</div><div class="text-muted small">{% trans "Arrivée, départ, transit" %}</div></div></div></a>
+          <a href="#" class="card card-quiet" data-form="tdg"><div class="card-body d-flex align-items-center gap-2"><i class="bi bi-translate fs-4 text-primary"></i><div><div class="fw-semibold">{% trans "Traduction / Guide" %}</div><div class="text-muted small">{% trans "Traduction, assistance, guide" %}</div></div></div></a>
+          <a href="#" class="card card-quiet" data-form="visa"><div class="card-body d-flex align-items-center gap-2"><i class="bi bi-file-earmark-person fs-4 text-primary"></i><div><div class="fw-semibold">{% trans "Visa / Carte de travail" %}</div><div class="text-muted small">{% trans "Accompagnement dossiers" %}</div></div></div></a>
+          <a href="#" class="card card-quiet" data-form="autres"><div class="card-body d-flex align-items-center gap-2"><i class="bi bi-three-dots fs-4 text-primary"></i><div><div class="fw-semibold">{% trans "Autres services" %}</div><div class="text-muted small">{% trans "Décrivez votre besoin" %}</div></div></div></a>
+        </div>
+        <div class="d-flex justify-content-end gap-2">
+          <button class="btn btn-primary" id="wiz-next-1" disabled>{% trans "Suivant" %}</button>
+        </div>
+      </div>
+
+      <!-- Step 2: Details form -->
+      <div id="wiz-step-2" class="d-none">
+        <div class="form-player-header mb-2">
+          <div class="breadcrumb-mini"><span id="wiz-service-label"></span></div>
+        </div>
+        <div id="wizard-form-slot" class="mb-2"></div>
+        <div class="d-flex justify-content-between">
+          <button class="btn btn-outline-secondary" id="wiz-back-2">{% trans "Retour" %}</button>
+          <button class="btn btn-primary" id="wiz-next-2">
+            <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+            {% trans "Suivant" %}
+          </button>
+        </div>
+      </div>
+
+      <!-- Step 3: Payment method -->
+      <div id="wiz-step-3" class="d-none">
+  <p class="text-muted">{% trans "Choisissez une méthode de paiement." %}</p>
+        <div class="choice-group mb-3" id="wiz-payment-options">
+          <label><input type="radio" name="payment_method" value="card"> {% trans "Carte bancaire" %}</label>
+          <label><input type="radio" name="payment_method" value="mobile"> {% trans "Mobile Money" %}</label>
+          <label><input type="radio" name="payment_method" value="transfer"> {% trans "Virement" %}</label>
+        </div>
+        <div id="wiz-payment-hint" class="text-muted small mb-3"></div>
+        <div class="d-flex justify-content-between">
+          <button class="btn btn-outline-secondary" id="wiz-back-3">{% trans "Retour" %}</button>
+          <button class="btn btn-primary" id="wiz-next-3" disabled>{% trans "Suivant" %}</button>
+        </div>
+      </div>
+
+      <!-- Step 4: Confirmation -->
+      <div id="wiz-step-4" class="d-none">
+        <div class="card card-quiet mb-3"><div class="card-body">
+          <div class="fw-semibold mb-1">{% trans "Résumé" %}</div>
+          <div id="wiz-summary" class="summary-card">
+            <div class="d-flex align-items-start justify-content-between">
+              <div>
+                <div class="summary-key">{% trans "Service" %}</div>
+                <div class="summary-val" id="wiz-summary-service">—</div>
+              </div>
+              <div class="text-end">
+                <div class="summary-key">{% trans "Paiement" %}</div>
+                <div class="summary-val" id="wiz-summary-payment">—</div>
+              </div>
             </div>
-            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="summary-meta mt-3" id="wiz-summary-chips"></div>
+            <ul class="summary-list mt-3" id="wiz-summary-list">
+              <!-- JS will inject key/value items as <li><span class="summary-key">Field:</span> <span class="summary-val">value</span></li> -->
+            </ul>
           </div>
-          <div class="modal-body p-4">
-            <div id="modal-detail-content"></div>
-          </div>
+        </div></div>
+        <div class="d-flex justify-content-between">
+          <button class="btn btn-outline-secondary" id="wiz-back-4">{% trans "Retour" %}</button>
+          <button class="btn btn-success" id="wiz-submit">
+            <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+            {% trans "Soumettre" %}
+          </button>
         </div>
       </div>
     </div>
-  </div>
-  <div id="table-location" class="admin-table" style="display:none;">
-    <h2>Location Véhicules</h2>
-    <table class="table table-bordered table-hover">
-      <thead>
-        <tr>
-          <th>#</th><th>Ville</th><th>Date début</th><th>Heure</th><th>Durée</th><th>Type</th><th>Contact</th><th>Date soumission</th><th>Détails</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td>1</td><td>Goma</td><td>2025-08-20</td><td>09:00</td><td>2-3 jours</td><td>SUV</td><td>Marie K.<br>marie@email.com</td><td>2025-08-14 11:00</td><td><a href="#" class="voir-detail" data-type="location" data-ville="Goma" data-date-debut="2025-08-20" data-heure="09:00" data-duree="2-3 jours" data-type-vehicule="SUV" data-nom="Marie K." data-contact="Marie K.<br>marie@email.com" data-soumission="2025-08-14 11:00">Voir</a></td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div id="table-conciergerie" class="admin-table" style="display:none;">
-    <h2>Conciergerie</h2>
-    <table class="table table-bordered table-hover">
-      <thead>
-        <tr><th>#</th><th>Nature</th><th>Urgence</th><th>Contact</th><th>Date soumission</th><th>Détails</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>1</td><td>Réservation restaurant</td><td>Immédiat</td><td>Paul B.<br>paul@email.com</td><td>2025-08-14 12:00</td><td><a href="#" class="voir-detail" data-type="conciergerie" data-nature="Réservation restaurant" data-urgence="Immédiat" data-nom="Paul B." data-contact="Paul B.<br>paul@email.com" data-soumission="2025-08-14 12:00">Voir</a></td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div id="table-tdg" class="admin-table" style="display:none;">
-    <h2>Traduction/Guide</h2>
-    <table class="table table-bordered table-hover">
-      <thead>
-        <tr><th>#</th><th>Service</th><th>Nom</th><th>Email</th><th>Date soumission</th><th>Détails</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>1</td><td>Traduction</td><td>Ali S.</td><td>ali@email.com</td><td>2025-08-14 13:00</td><td><a href="#" class="voir-detail" data-type="tdg" data-service="Traduction" data-nom="Ali S." data-email="ali@email.com" data-soumission="2025-08-14 13:00">Voir</a></td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div id="table-aeroport" class="admin-table" style="display:none;">
-    <h2>Aéroport</h2>
-    <table class="table table-bordered table-hover">
-      <thead>
-        <tr><th>#</th><th>Aéroport</th><th>Type</th><th>Date</th><th>Contact</th><th>Date soumission</th><th>Détails</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>1</td><td>Kinshasa</td><td>Arrivée</td><td>2025-08-21</td><td>Sarah L.<br>sarah@email.com</td><td>2025-08-14 14:00</td><td><a href="#" class="voir-detail" data-type="aeroport" data-aeroport="Kinshasa" data-type-vol="Arrivée" data-date="2025-08-21" data-nom="Sarah L." data-contact="Sarah L.<br>sarah@email.com" data-soumission="2025-08-14 14:00">Voir</a></td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div id="table-visa" class="admin-table" style="display:none;">
-    <h2>Visa/Carte de Travail</h2>
-    <table class="table table-bordered table-hover">
-      <thead>
-        <tr><th>#</th><th>Type</th><th>Nom</th><th>Email</th><th>Date soumission</th><th>Détails</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>1</td><td>Visa Volant</td><td>Omar D.</td><td>omar@email.com</td><td>2025-08-14 15:00</td><td><a href="#" class="voir-detail" data-type="visa" data-type-visa="Visa Volant" data-nom="Omar D." data-email="omar@email.com" data-soumission="2025-08-14 15:00">Voir</a></td></tr>
-      </tbody>
-    </table>
-  </div>
-</div>
 
+  <!-- removed: suggestion to use Forms tab -->
+  </section>
+
+  <section id="view-forms" class="d-none">
+  <h2 class="page-title mb-2">{% trans "Mes formulaires" %}</h2>
+  <p class="text-muted mb-3">{% trans "Choisissez un service, puis remplissez le formulaire." %}</p>
+    <div id="forms-list" class="forms-grid mb-3">
+  <a href="#" class="card card-quiet" data-form="hotel"><div class="card-body d-flex align-items-center gap-2"><i class="bi bi-building fs-4 text-primary"></i><div><div class="fw-semibold">{% trans "Réservation d'hôtel" %}</div><div class="text-muted small">{% trans "Hôtels, appartements, résidences" %}</div></div></div></a>
+  <a href="#" class="card card-quiet" data-form="location"><div class="card-body d-flex align-items-center gap-2"><i class="bi bi-car-front fs-4 text-primary"></i><div><div class="fw-semibold">{% trans "Location de véhicule" %}</div><div class="text-muted small">{% trans "Avec chauffeur" %}</div></div></div></a>
+  <a href="#" class="card card-quiet" data-form="conciergerie"><div class="card-body d-flex align-items-center gap-2"><i class="bi bi-bell fs-4 text-primary"></i><div><div class="fw-semibold">{% trans "Conciergerie" %}</div><div class="text-muted small">{% trans "Assistance 24/7" %}</div></div></div></a>
+  <a href="#" class="card card-quiet" data-form="aeroport"><div class="card-body d-flex align-items-center gap-2"><i class="bi bi-airplane fs-4 text-primary"></i><div><div class="fw-semibold">{% trans "Accompagnement aéroport" %}</div><div class="text-muted small">{% trans "Arrivée, départ, transit" %}</div></div></div></a>
+  <a href="#" class="card card-quiet" data-form="tdg"><div class="card-body d-flex align-items-center gap-2"><i class="bi bi-translate fs-4 text-primary"></i><div><div class="fw-semibold">{% trans "Traduction / Guide" %}</div><div class="text-muted small">{% trans "Traduction, assistance, guide" %}</div></div></div></a>
+  <a href="#" class="card card-quiet" data-form="visa"><div class="card-body d-flex align-items-center gap-2"><i class="bi bi-file-earmark-person fs-4 text-primary"></i><div><div class="fw-semibold">{% trans "Visa / Carte de travail" %}</div><div class="text-muted small">{% trans "Accompagnement dossiers" %}</div></div></div></a>
+  <a href="#" class="card card-quiet" data-form="autres"><div class="card-body d-flex align-items-center gap-2"><i class="bi bi-three-dots fs-4 text-primary"></i><div><div class="fw-semibold">{% trans "Autres services" %}</div><div class="text-muted small">{% trans "Décrivez votre besoin" %}</div></div></div></a>
+    </div>
+
+    <div id="form-player" class="d-none">
+      <div class="form-player-header">
+  <div class="breadcrumb-mini"><a href="#" id="btn-back-forms">{% trans "Formulaires" %}</a> / <span id="form-title-hint"></span></div>
+        <div></div>
+      </div>
+      <div id="form-slot"></div>
+    </div>
+  </section>
+
+  <section id="view-requests" class="d-none">
+  <h2 class="page-title mb-2">{% trans "Mes demandes" %}</h2>
+    <div class="history-toolbar">
+      <div class="history-search">
+        <i class="bi bi-search text-muted"></i>
+  <input id="req-search" type="text" placeholder="{% trans "Rechercher par service, statut ou ID..." %}" />
+      </div>
+      <div class="filter-chips" id="req-filters">
+  <button class="filter-chip active" data-status="all">{% trans "Toutes" %}</button>
+  <button class="filter-chip" data-status="pending_payment">{% trans "En attente paiement" %}</button>
+  <button class="filter-chip" data-status="paid">{% trans "Payées" %}</button>
+  <button class="filter-chip" data-status="canceled">{% trans "Annulées" %}</button>
+      </div>
+    </div>
+    <div id="requests-list" class="history-list position-relative">
+      <div id="requests-loading" class="d-none position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center bg-white bg-opacity-75" style="z-index:10;">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">{% trans "Chargement..." %}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- CSRF token holder for JS -->
+<form id="csrf-token-form" style="display:none;">{% csrf_token %}</form>
+
+<!-- Confirmation Modal -->
+<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+  <h5 class="modal-title" id="confirmModalLabel">{% trans "Prêt à envoyer ?" %}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+  <div id="confirm-summary">{% trans "Vérifiez les informations avant envoi." %}</div>
+      </div>
+      <div class="modal-footer">
+  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">{% trans "Annuler" %}</button>
+  <button type="button" class="btn btn-success" id="confirm-send">{% trans "Oui, envoyer" %}</button>
+      </div>
+    </div>
+  </div>
+ </div>
 {% endblock %}
+
 {% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="{% static 'components/forms/forms.js' %}" defer></script>
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-  const links = document.querySelectorAll('.sidebar a[data-category]');
-  const tables = document.querySelectorAll('.admin-table');
-  links.forEach(link => {
-    link.addEventListener('click', function(e) {
+document.addEventListener('DOMContentLoaded', function(){
+  // Localized labels for JS
+  const I18N = {
+    theme_to_light: `{% trans "Passer en clair" %}`,
+    theme_to_dark: `{% trans "Passer en sombre" %}`,
+    services: {
+      hotel: `{% trans "Réservation d'hôtel" %}`,
+      location: `{% trans "Location de véhicule" %}`,
+      conciergerie: `{% trans "Conciergerie" %}`,
+      aeroport: `{% trans "Accompagnement aéroport" %}`,
+      tdg: `{% trans "Traduction / Guide" %}`,
+      visa: `{% trans "Visa / Carte de travail" %}`,
+      autres: `{% trans "Autres services" %}`,
+    },
+  // UI messages (make translatable)
+  validation_required: `{% trans "Ce champ est requis." %}`,
+  load_form_error: `{% trans "Impossible de charger le formulaire." %}`,
+  load_details_error: `{% trans "Impossible de charger les détails." %}`,
+  submit_error: `{% trans "Une erreur est survenue lors de la soumission." %}`,
+  // Generic/localized alert strings
+  load_error_generic: `{% trans "Une erreur est survenue." %}`,
+  not_found_edit: `{% trans "Demande introuvable pour modification." %}`,
+  cannot_edit: `{% trans "Cette demande ne peut pas être modifiée." %}`,
+  prep_form_error: `{% trans "Erreur de préparation du formulaire." %}`,
+  submit_success: `{% trans "Votre demande a été soumise avec succès." %}`,
+  payment_unavailable: `{% trans "Paiement indisponible." %}`,
+  payment_link_unavailable: `{% trans "Lien de paiement indisponible." %}`,
+  error_service: `{% trans "Erreur service" %}`,
+  form_missing: `{% trans "Formulaire manquant." %}`,
+  update_failed: `{% trans "Mise à jour impossible" %}`,
+  update_success: `{% trans "Demande mise à jour." %}`,
+  validation_error: `{% trans "Erreur de validation" %}`,
+  payment_error: `{% trans "Erreur paiement" %}`,
+  submission_error: `{% trans "Erreur à la soumission" %}`,
+  open_label: `{% trans "Ouvrir" %}`,
+  delete_label: `{% trans "Supprimer" %}`,
+  documents_label: `{% trans "Documents" %}`,
+  delete_hint: ``,
+  pdf_label: `{% trans "PDF" %}`,
+  // Payment hints are intentionally empty because payment is handled by external service
+  payment_hint_card: ``,
+  payment_hint_mobile: ``,
+  payment_hint_transfer: ``,
+  };
+  // Derive brand colors from the logo and apply to CSS variables
+  (function(){
+    const img = document.getElementById('brand-logo') || document.querySelector("img[src*='core/img/logo.png']");
+    if (!img) return;
+    function setBrandFromImage(){
+      try{
+        const w = Math.max(1, img.naturalWidth);
+        const h = Math.max(1, img.naturalHeight);
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        const scale = Math.min(120 / w, 120 / h, 1);
+        canvas.width = Math.max(1, Math.floor(w * scale));
+        canvas.height = Math.max(1, Math.floor(h * scale));
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        const { data } = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        let r=0,g=0,b=0,count=0; const step = 4 * 5;
+        for (let i=0; i<data.length; i+=step){
+          const a = data[i+3]; if (a < 16) continue; r+=data[i]; g+=data[i+1]; b+=data[i+2]; count++;
+        }
+        if (!count) return;
+        r = Math.round(r/count); g = Math.round(g/count); b = Math.round(b/count);
+        // Adjust for better UI
+        const factor=0.95; r=Math.round(r*factor); g=Math.round(g*factor); b=Math.round(b*factor);
+        const base = `rgb(${r}, ${g}, ${b})`;
+        const hover = `rgb(${Math.max(0, Math.round(r*0.9))}, ${Math.max(0, Math.round(g*0.9))}, ${Math.max(0, Math.round(b*0.9))})`;
+        const light = `rgba(${r}, ${g}, ${b}, .16)`;
+        const dark = base; // fallback same as base
+        const luminance = 0.299*r + 0.587*g + 0.114*b;
+        const contrast = luminance > 160 ? '#000' : '#fff';
+        const root = document.documentElement;
+        root.style.setProperty('--brand-color', base);
+        root.style.setProperty('--brand-color-hover', hover);
+        root.style.setProperty('--brand-color-light', light);
+        root.style.setProperty('--brand-color-dark', dark);
+        root.style.setProperty('--brand-contrast', contrast);
+      }catch(e){ /* noop */ }
+    }
+    if (img.complete) setBrandFromImage(); else img.addEventListener('load', setBrandFromImage);
+  })();
+  const navLinks = document.querySelectorAll('.sidebar a[data-view]');
+  const sidebar = document.querySelector('.sidebar');
+  const backdrop = document.getElementById('sidebar-backdrop');
+  const openMenuBtn = document.getElementById('btn-open-menu');
+  const closeMenuBtn = document.getElementById('btn-close-menu');
+  const views = {
+    home: document.getElementById('view-home'),
+    wizard: document.getElementById('view-wizard'),
+    forms: document.getElementById('view-forms'),
+    requests: document.getElementById('view-requests')
+  };
+
+  // Ensure form player elements exist before any call that may reset them
+  const listEl = document.getElementById('forms-list');
+  const playerEl = document.getElementById('form-player');
+  const slotEl = document.getElementById('form-slot');
+  const hintEl = document.getElementById('form-title-hint');
+  const backBtn = document.getElementById('btn-back-forms');
+  function resetFormPlayer(){
+    if(playerEl){ playerEl.classList.add('d-none'); }
+    if(listEl){ listEl.classList.remove('d-none'); }
+    if(slotEl){ slotEl.innerHTML=''; }
+    if(hintEl){ hintEl.textContent=''; }
+  }
+  if(backBtn){ backBtn.addEventListener('click', (e)=>{ e.preventDefault(); resetFormPlayer(); }); }
+
+  function showView(name){
+    Object.entries(views).forEach(([k,el])=> el.classList.toggle('d-none', k!==name));
+    navLinks.forEach(a=> a.classList.toggle('active', a.dataset.view===name));
+    // Close menu on mobile after navigation
+    if(sidebar && sidebar.classList.contains('open')){
+      sidebar.classList.remove('open');
+      backdrop?.classList.remove('show');
+    }
+  if(name!=='forms'){ resetFormPlayer(); }
+  // If switching to requests view, ensure the list is refreshed so it's visible without extra click
+  try{ if(name === 'requests' && typeof refreshRequests === 'function'){ refreshRequests(); } }catch(e){}
+  // Persist user preference for next page load
+  try{ localStorage.setItem('dashboard:view', name); }catch(e){}
+  // Update URL hash to reflect current view (non-destructive)
+  try{ if(window.history && window.history.replaceState){ const u = new URL(window.location.href); u.hash = name; window.history.replaceState({}, '', u.pathname + u.search + u.hash); } }catch(e){}
+  }
+  // Mobile sidebar open/close
+  function openMenu(){ sidebar?.classList.add('open'); backdrop?.classList.add('show'); document.body.classList.add('no-scroll'); }
+  function closeMenu(){ sidebar?.classList.remove('open'); backdrop?.classList.remove('show'); document.body.classList.remove('no-scroll'); }
+  openMenuBtn?.addEventListener('click', openMenu);
+  closeMenuBtn?.addEventListener('click', closeMenu);
+  backdrop?.addEventListener('click', closeMenu);
+  document.addEventListener('keydown', (e)=>{ if(e.key==='Escape'){ closeMenu(); } });
+  navLinks.forEach(a=> a.addEventListener('click', (e)=>{ e.preventDefault(); showView(a.dataset.view); }));
+  // Restore preferred view on load. Priority: ?view= query param, URL hash (#view), localStorage, fallback to 'wizard'.
+  (function restoreInitialView(){
+    const qv = getQueryParam('view');
+    const hash = (window.location.hash||'').replace(/^#/, '');
+    const stored = (()=>{ try{return localStorage.getItem('dashboard:view');}catch(e){return null;} })();
+    const preferred = qv || hash || stored || 'wizard';
+    // If ?edit= is present, enterEditMode will run later; we still show preferred view
+    showView(preferred);
+  })();
+
+  // Query param helper
+  function getQueryParam(name){
+    const u = new URL(window.location.href);
+    return u.searchParams.get(name);
+  }
+
+  const labelMap = I18N.services;
+
+  // Prefill utilities for edit mode
+  function setFieldValue(container, name, value){
+    const fields = container.querySelectorAll(`[name="${CSS.escape(name)}"]`);
+    if(!fields || !fields.length) return;
+    fields.forEach(el=>{
+      if(el.tagName==='SELECT'){
+        el.value = value ?? '';
+        el.dispatchEvent(new Event('change'));
+      } else if(el.type==='radio'){
+        if(String(el.value)===String(value)){
+          el.checked = true; el.dispatchEvent(new Event('change')); el.dispatchEvent(new Event('input'));
+        }
+      } else if(el.type==='checkbox'){
+        // Expect arrays for checkboxes named with []
+        if(Array.isArray(value)){
+          el.checked = value.includes(el.value);
+        } else if(typeof value==='string' && name.endsWith('[]')){
+          el.checked = value.split(',').includes(el.value);
+        } else {
+          el.checked = !!value;
+        }
+        el.dispatchEvent(new Event('change'));
+      } else if(el.type==='file'){
+        // Cannot prefill files per browser security; noop
+      } else {
+        el.value = value ?? '';
+        el.dispatchEvent(new Event('input'));
+        el.dispatchEvent(new Event('change'));
+      }
+    });
+  }
+
+  async function enterEditMode(requestId){
+    try{
+      // Fetch existing request details
+      const r = await fetch(`/app/requests/${encodeURIComponent(requestId)}/`);
+      const d = await r.json().catch(()=>({ok:false}));
+  if(!r.ok || !d.ok){ showAlert(d.error||I18N.not_found_edit, 'danger'); return; }
+  // Allow edit for draft, pending_payment, and paid (documents only for paid)
+  if(!(d.status==='pending_payment' || d.status==='draft' || d.status==='paid')){
+  showAlert(I18N.cannot_edit, 'warning');
+        return;
+      }
+  // Initialize wizard state
+      wizard.editingId = d.id;
+  wizard.editingStatus = d.status;
+      wizard.service = d.kind;
+      wizard.serviceLabel = labelMap[d.kind] || d.kind;
+      // Highlight selected card in step 1
+      wizServices.querySelectorAll('.card').forEach(c=> c.classList.remove('selected'));
+      const card = wizServices.querySelector(`[data-form="${CSS.escape(d.kind)}"]`);
+      if(card){ card.classList.add('selected'); }
+      document.getElementById('wiz-service-label').textContent = wizard.serviceLabel;
+      // Load the corresponding form into step 2
+      const res = await fetch(`/app/forms/${encodeURIComponent(d.kind)}/`);
+  if(!res.ok){ showAlert(I18N.load_form_error, 'danger'); return; }
+      const html = await res.text();
+      const slot = document.getElementById('wizard-form-slot');
+      slot.innerHTML = html;
+      if(window.FormsInit?.initAll){ window.FormsInit.initAll(slot); }
+  // Prefill known fields
+      const data = d.data || {};
+      // High-level routing fields first to reveal sections
+      if('but_sejour' in d){ setFieldValue(slot, 'but_sejour', d.but_sejour); }
+      if('etab_type' in d){ setFieldValue(slot, 'etab_type', d.etab_type); }
+      Object.entries(data).forEach(([k,v])=>{
+        // Skip arrays stored under keys ending by [] for this form (rare for visa)
+        setFieldValue(slot, k, v);
+      });
+      // If visa, render existing documents with delete checkboxes
+      if(d.kind==='visa' && d.documents && typeof d.documents==='object'){
+        const container = document.createElement('div');
+        container.className = 'card card-quiet mt-2';
+        const items = Object.entries(d.documents);
+        const humanDocLabel = (key)=>{
+          const map = {
+            'volant_lettre':'Lettre de demande','volant_passeport':'Passeport (copie)','volant_id_preneur':'Identité du preneur','volant_rccm':'RCCM','volant_impot':'Numéro d’impôt','volant_id_nat':'Identification nationale',
+            'ord_lettre':'Lettre de demande','ord_statuts':'Statuts de société','ord_rccm':'RCCM','ord_id_nat':'ID nationale','ord_quitus':'Quitus fiscal','ord_inpp':'Affiliation INPP','ord_cnss':'Affiliation CNSS','ord_banque':'Extrait bancaire',
+            'trav_rccm':'RCCM employeur','trav_id_nat':'ID nationale employeur','trav_nif':'NIF employeur','trav_photo':'Photo d’identité','trav_inpp_onem':'INPP / ONEM','trav_medical':'Certificat médical','trav_vaccin':'Carte de vaccination','trav_carte_travail':'Carte de travail en cours','trav_contrat':'Contrat de travail (ONEM)','trav_diplome':'Diplôme / Certificat','trav_attestation_service':'Attestation de service','trav_residence':'Attestation de résidence','trav_bonne_vie':'Bonne vie et mœurs',
+            'carte_formulaire':'Formulaire de demande','carte_lettre':'Lettre de transmission','carte_etat':'État nominatif étrangers','carte_contrat':'Projet de contrat','carte_cv':'CV','carte_qualification':'Qualification professionnelle','carte_photo':'Photo passeport','carte_organigramme':'Organigramme','carte_poste':'Description du poste','carte_cnss_inpp':'Preuve CNSS/INPP','carte_passeport':'Passeport (copies)'
+          };
+          return map[key] || (key.replace(/^(volant|ord|trav|perm|carte)_/, '').replace(/_/g,' '));
+        };
+        const esc = (s)=> String(s).replace(/[&<>"]/g, c=> ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+        const MEDIA_URL = '/media/';
+        container.innerHTML = `
+          <div class='card-body'>
+            <div class='fw-semibold mb-1'>${I18N.documents_label || 'Documents'}</div>
+            <div class='text-muted small mb-2'>${I18N.delete_hint || ''}</div>
+            <div class='row row-cols-1 row-cols-md-2 g-2'>
+              ${items.map(([k,info])=>{
+                const label = esc(humanDocLabel(k));
+                const path = info && info.path ? MEDIA_URL + esc(info.path).replace(/^\/+/, '') : '';
+                const thumb = info && (info.thumb || info.path) ? MEDIA_URL + esc(info.thumb || info.path).replace(/^\/+/, '') : '';
+                const isImage = thumb.toLowerCase().match(/\.(jpg|jpeg|png|webp)$/);
+                return `
+                <div class='col'>
+                  <div class='border rounded p-2 d-flex gap-2 align-items-center'>
+                    <div style='width:80px;height:60px' class='d-flex align-items-center justify-content-center bg-light rounded'>
+                      ${isImage ? `<img src='${thumb}' alt='${label}' style='max-width:100%;max-height:100%;object-fit:cover'/>` : `<i class='bi bi-file-earmark-pdf text-muted'></i>`}
+                    </div>
+                    <div class='flex-grow-1'>
+                      <div class='small fw-semibold text-truncate' title='${label}'>${label}</div>
+                      <a class='small' href='${path}' target='_blank' rel='noopener'>${I18N.open_label || 'Ouvrir'}</a>
+                    </div>
+                    <div class='form-check'>
+                      <input class='form-check-input' type='checkbox' name='delete_documents[]' value='${esc(k)}' id='del_${esc(k)}' />
+                      <label class='form-check-label small' for='del_${esc(k)}'>${I18N.delete_label || 'Supprimer'}</label>
+                    </div>
+                  </div>
+                </div>`;
+              }).join('')}
+            </div>
+          </div>`;
+        slot.appendChild(container);
+      }
+  // Store existing payment method if any
+  if(d.payment_method){ wizard.payment_method = d.payment_method; }
+  // Move to step 2
+      setStep(2);
+      // Clean URL (remove ?edit=) to avoid re-enter on refresh
+      if(window.history && window.history.replaceState){
+        const u = new URL(window.location.href); u.searchParams.delete('edit');
+        window.history.replaceState({}, '', u.pathname + (u.search?('?'+u.searchParams.toString()):''));
+      }
+  }catch(e){ showAlert(I18N.prep_form_error, 'danger'); }
+  }
+
+  async function loadForm(formKey){
+    hintEl.textContent = labelMap[formKey] || '';
+    listEl.classList.add('d-none');
+    playerEl.classList.remove('d-none');
+    // Fetch the form partial rendered by Django templates
+    const res = await fetch(`/app/forms/${formKey}/`);
+    if(res.ok){
+      const html = await res.text();
+      slotEl.innerHTML = html;
+      if(window.FormsInit && window.FormsInit.initAll){ window.FormsInit.initAll(slotEl); }
+
+      // Hook submission to AJAX
+      const form = slotEl.querySelector('form');
+      if(form){
+        const csrf = getCSRFCookie();
+        form.addEventListener('submit', async (e)=>{
+          e.preventDefault();
+          // Inline validation for standalone form
+          form.querySelectorAll('.ui-error').forEach(el=> el.classList.remove('ui-error'));
+          form.querySelectorAll('.field-error').forEach(el=> el.remove());
+          let invalid = false;
+          form.querySelectorAll('[required]').forEach(input=>{
+            if(input.type==='radio'){
+              const checked = form.querySelector(`input[type="radio"][name="${CSS.escape(input.name)}"]:checked`);
+              if(!checked){
+                form.querySelectorAll(`input[type="radio"][name="${CSS.escape(input.name)}"]`).forEach(r=> r.closest('label')?.classList.add('ui-error'));
+                const first = form.querySelector(`input[type="radio"][name="${CSS.escape(input.name)}"]`);
+                const container = first?.closest('.choice-group') || first?.closest('.form-group') || form;
+                if(container && !container.querySelector('.field-error')){ const m = document.createElement('div'); m.className='field-error'; m.textContent=I18N.validation_required; container.appendChild(m); }
+                invalid = true;
+              }
+            } else if(input.type==='checkbox'){
+              if(input.required && !input.checked){
+                input.classList.add('ui-error');
+                const container = input.closest('.checkbox-group') || input.closest('.form-group') || form;
+                if(container && !container.querySelector('.field-error')){ const m = document.createElement('div'); m.className='field-error'; m.textContent=I18N.validation_required; container.appendChild(m); }
+                invalid = true;
+              }
+            } else {
+              if(!input.value){
+                input.classList.add('ui-error');
+                const container = input.closest('.form-group') || form;
+                if(container && !container.querySelector('.field-error')){ const m = document.createElement('div'); m.className='field-error'; m.textContent=I18N.validation_required; container.appendChild(m); }
+                invalid = true;
+              }
+            }
+          });
+          if(invalid){ const firstError = form.querySelector('.ui-error'); if(firstError){ firstError.scrollIntoView({behavior:'smooth', block:'center'}); } return; }
+          const fd = new FormData(form);
+          const submitUrl = `/app/forms/${formKey}/submit/`;
+          const res = await fetch(submitUrl, { method:'POST', headers: { 'X-CSRFToken': csrf }, body: fd });
+          const data = await res.json().catch(()=>({ok:false}));
+          if(res.ok && data.ok){
+            showAlert(I18N.submit_success, 'success');
+            resetFormPlayer();
+            await refreshRequests();
+          } else {
+            if(data && data.errors){
+              Object.entries(data.errors).forEach(([name,msg])=>{
+                const inputs = form.querySelectorAll(`[name="${CSS.escape(name)}"]`);
+                inputs.forEach(inp=> inp.classList.add('ui-error'));
+                const container = inputs[0]?.closest('.form-group') || form;
+                if(container && !container.querySelector('.field-error')){ const m=document.createElement('div'); m.className='field-error'; m.textContent=String(msg); container.appendChild(m); }
+              });
+              const firstError = form.querySelector('.ui-error'); if(firstError){ firstError.scrollIntoView({behavior:'smooth', block:'center'}); }
+            } else {
+              showAlert(data.error || I18N.submit_error, 'danger');
+            }
+          }
+        });
+      }
+    } else {
+  slotEl.innerHTML = `<div class="alert alert-danger">${I18N.load_form_error}</div>`;
+    }
+  }
+
+  document.querySelectorAll('#forms-list [data-form]').forEach(card => {
+    card.addEventListener('click', (e)=>{ e.preventDefault(); loadForm(card.dataset.form); });
+  });
+  // Home navigation links (e.g., "Nouvelle demande")
+  document.querySelectorAll('#view-home [data-view]').forEach(link => {
+    link.addEventListener('click', (e)=>{ e.preventDefault(); showView(link.dataset.view); });
+  });
+  // Home quick links: open Forms view and load selected form
+  document.querySelectorAll('#view-home [data-form]').forEach(card => {
+    card.addEventListener('click', (e)=>{
       e.preventDefault();
-      links.forEach(l => l.classList.remove('active'));
-      this.classList.add('active');
-      tables.forEach(t => t.style.display = 'none');
-      const cat = this.getAttribute('data-category');
-      document.getElementById('table-' + cat).style.display = '';
+      showView('forms');
+      loadForm(card.dataset.form);
     });
   });
 
-  const icons = {
-    hotel: '<i class="bi bi-building"></i>',
-    location: '<i class="bi bi-car-front"></i>',
-    conciergerie: '<i class="bi bi-bell"></i>',
-    tdg: '<i class="bi bi-translate"></i>',
-    aeroport: '<i class="bi bi-airplane"></i>',
-    visa: '<i class="bi bi-file-earmark-person"></i>'
+  // CSRF helper
+  function getCSRFCookie(){
+    // Prefer token from hidden input to avoid HttpOnly cookie issues
+    const inp = document.querySelector('#csrf-token-form input[name="csrfmiddlewaretoken"]');
+    if(inp && inp.value) return inp.value;
+    // Fallback to cookie when available
+    const name = 'csrftoken=';
+    const cookies = document.cookie ? document.cookie.split(';') : [];
+    for(const c of cookies){
+      const v = c.trim();
+      if(v.startsWith(name)) return decodeURIComponent(v.slice(name.length));
+    }
+    return '';
+  }
+
+  // Alerts
+  function showAlert(message, kind){
+    const wrap = document.createElement('div');
+    wrap.innerHTML = `<div class="alert alert-${kind} alert-dismissible fade show" role="alert" style="position:fixed; right:16px; bottom:16px; z-index:2000; box-shadow:0 8px 24px rgba(0,0,0,.12); max-width:400px;">
+      ${message}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>`;
+    document.body.appendChild(wrap.firstChild);
+    // Auto-hide only for success messages
+    if(kind === 'success'){
+      setTimeout(()=> wrap.firstChild && wrap.firstChild.remove(), 3500);
+    }
+  }
+
+  // Requests history
+  let historyItems = [];
+  // Access request-related DOM nodes lazily inside functions to avoid TDZ issues
+
+  const iconMap = {
+    hotel: 'bi-building',
+    location: 'bi-car-front',
+    conciergerie: 'bi-bell',
+    aeroport: 'bi-airplane',
+    tdg: 'bi-translate',
+    visa: 'bi-file-earmark-person',
+    autres: 'bi-three-dots'
   };
 
-  document.addEventListener('click', function(e) {
-    const link = e.target.closest('.voir-detail');
-    if (!link) return;
-    e.preventDefault();
-    const type = link.getAttribute('data-type');
-    let html = '';
-    let title = '';
-    let icon = icons[type] || '';
-    let nom = link.getAttribute('data-nom');
-    if(type === 'hotel') {
-      title = 'Détail Réservation Hôtel';
-      html = `
-        ${nom ? `<div class='row mb-2'><div class='col-5 fw-bold'>Nom:</div><div class='col-7'>${nom}</div></div>` : ''}
-        <div class="row mb-2"><div class="col-5 fw-bold">Ville:</div><div class="col-7">${link.getAttribute('data-ville')}</div></div>
-        <div class="row mb-2"><div class="col-5 fw-bold">Date arrivée:</div><div class="col-7">${link.getAttribute('data-date-arrivee')}</div></div>
-        <div class="row mb-2"><div class="col-5 fw-bold">Date départ:</div><div class="col-7">${link.getAttribute('data-date-depart')}</div></div>
-        <div class="row mb-2"><div class="col-5 fw-bold">Hébergement:</div><div class="col-7">${link.getAttribute('data-hebergement')}</div></div>
-        <div class="row mb-2"><div class="col-5 fw-bold">Chambre:</div><div class="col-7">${link.getAttribute('data-chambre')}</div></div>
-        <div class="row mb-2"><div class="col-5 fw-bold">Budget:</div><div class="col-7">${link.getAttribute('data-budget')}</div></div>
-        <div class="row mb-2"><div class="col-5 fw-bold">Contact:</div><div class="col-7">${link.getAttribute('data-contact')}</div></div>
-        <div class="row mb-2"><div class="col-5 fw-bold">Date soumission:</div><div class="col-7">${link.getAttribute('data-soumission')}</div></div>
-      `;
-    } else if(type === 'location') {
-      title = 'Détail Location Véhicule';
-      html = `
-        ${nom ? `<div class='row mb-2'><div class='col-5 fw-bold'>Nom:</div><div class='col-7'>${nom}</div></div>` : ''}
-        <div class="row mb-2"><div class="col-5 fw-bold">Ville:</div><div class="col-7">${link.getAttribute('data-ville')}</div></div>
-        <div class="row mb-2"><div class="col-5 fw-bold">Date début:</div><div class="col-7">${link.getAttribute('data-date-debut')}</div></div>
-        <div class="row mb-2"><div class="col-5 fw-bold">Heure:</div><div class="col-7">${link.getAttribute('data-heure')}</div></div>
-        <div class="row mb-2"><div class="col-5 fw-bold">Durée:</div><div class="col-7">${link.getAttribute('data-duree')}</div></div>
-        <div class="row mb-2"><div class="col-5 fw-bold">Type:</div><div class="col-7">${link.getAttribute('data-type-vehicule')}</div></div>
-        <div class="row mb-2"><div class="col-5 fw-bold">Contact:</div><div class="col-7">${link.getAttribute('data-contact')}</div></div>
-        <div class="row mb-2"><div class="col-5 fw-bold">Date soumission:</div><div class="col-7">${link.getAttribute('data-soumission')}</div></div>
-      `;
-    } else if(type === 'conciergerie') {
-      title = 'Détail Conciergerie';
-      html = `
-        ${nom ? `<div class='row mb-2'><div class='col-5 fw-bold'>Nom:</div><div class='col-7'>${nom}</div></div>` : ''}
-        <div class="row mb-2"><div class="col-5 fw-bold">Nature:</div><div class="col-7">${link.getAttribute('data-nature')}</div></div>
-        <div class="row mb-2"><div class="col-5 fw-bold">Urgence:</div><div class="col-7">${link.getAttribute('data-urgence')}</div></div>
-        <div class="row mb-2"><div class="col-5 fw-bold">Contact:</div><div class="col-7">${link.getAttribute('data-contact')}</div></div>
-        <div class="row mb-2"><div class="col-5 fw-bold">Date soumission:</div><div class="col-7">${link.getAttribute('data-soumission')}</div></div>
-      `;
-    } else if(type === 'tdg') {
-      title = 'Détail Traduction/Guide';
-      html = `
-        ${nom ? `<div class='row mb-2'><div class='col-5 fw-bold'>Nom:</div><div class='col-7'>${nom}</div></div>` : ''}
-        <div class="row mb-2"><div class="col-5 fw-bold">Service:</div><div class="col-7">${link.getAttribute('data-service')}</div></div>
-        <div class="row mb-2"><div class="col-5 fw-bold">Email:</div><div class="col-7">${link.getAttribute('data-email')}</div></div>
-        <div class="row mb-2"><div class="col-5 fw-bold">Date soumission:</div><div class="col-7">${link.getAttribute('data-soumission')}</div></div>
-      `;
-    } else if(type === 'aeroport') {
-      title = 'Détail Accompagnement Aéroport';
-      html = `
-        ${nom ? `<div class='row mb-2'><div class='col-5 fw-bold'>Nom:</div><div class='col-7'>${nom}</div></div>` : ''}
-        <div class="row mb-2"><div class="col-5 fw-bold">Aéroport:</div><div class="col-7">${link.getAttribute('data-aeroport')}</div></div>
-        <div class="row mb-2"><div class="col-5 fw-bold">Type:</div><div class="col-7">${link.getAttribute('data-type-vol')}</div></div>
-        <div class="row mb-2"><div class="col-5 fw-bold">Date:</div><div class="col-7">${link.getAttribute('data-date')}</div></div>
-        <div class="row mb-2"><div class="col-5 fw-bold">Contact:</div><div class="col-7">${link.getAttribute('data-contact')}</div></div>
-        <div class="row mb-2"><div class="col-5 fw-bold">Date soumission:</div><div class="col-7">${link.getAttribute('data-soumission')}</div></div>
-      `;
-    } else if(type === 'visa') {
-      title = 'Détail Visa/Carte de Travail';
-      html = `
-        ${nom ? `<div class='row mb-2'><div class='col-5 fw-bold'>Nom:</div><div class='col-7'>${nom}</div></div>` : ''}
-        <div class="row mb-2"><div class="col-5 fw-bold">Type:</div><div class="col-7">${link.getAttribute('data-type-visa')}</div></div>
-        <div class="row mb-2"><div class="col-5 fw-bold">Email:</div><div class="col-7">${link.getAttribute('data-email')}</div></div>
-        <div class="row mb-2"><div class="col-5 fw-bold">Date soumission:</div><div class="col-7">${link.getAttribute('data-soumission')}</div></div>
-      `;
+  // Translated strings (injected by Django) for client-side usage
+  const TRANS = {
+  none_requests: `{% trans "No requests" %}`,
+  none_requests_sub: `{% trans "Your requests will appear here." %}`,
+    status_paid: `{% trans "Payée" %}`,
+    status_pending: `{% trans "En attente paiement" %}`,
+    status_draft: `{% trans "Brouillon" %}`,
+    status_canceled: `{% trans "Annulée" %}`,
+  view_detail: `{% trans "View details" %}`,
+    request_label: `{% trans "Demande" %}`,
+    method_payment: `{% trans "Méthode de paiement" %}`,
+    service_label: `{% trans "Service" %}`,
+    submitted_data: `{% trans "Données soumises" %}`,
+  no_data: `{% trans "No data provided" %}`,
+    documents_label: `{% trans "Documents" %}`,
+    documents_current: `{% trans "Documents actuels" %}`,
+    amount_label: `{% trans "Montant:" %}`,
+    pay_button: `{% trans "Payer" %}`,
+    edit_button: `{% trans "Modifier" %}`,
+  };
+
+  // Document label translations for visa keys
+  const DOC_LABEL_MAP = {
+    'volant_lettre': `{% trans "Lettre de demande" %}`,'volant_passeport': `{% trans "Passeport (copie)" %}`,'volant_id_preneur': `{% trans "Identité du preneur" %}`,'volant_rccm': `{% trans "RCCM" %}`,'volant_impot': `{% trans "Numéro d’impôt" %}`,'volant_id_nat': `{% trans "Identification nationale" %}`,
+    'ord_lettre': `{% trans "Lettre de demande" %}`,'ord_statuts': `{% trans "Statuts de société" %}`,'ord_rccm': `{% trans "RCCM" %}`,'ord_id_nat': `{% trans "ID nationale" %}`,'ord_quitus': `{% trans "Quitus fiscal" %}`,'ord_inpp': `{% trans "Affiliation INPP" %}`,'ord_cnss': `{% trans "Affiliation CNSS" %}`,'ord_banque': `{% trans "Extrait bancaire" %}`,
+    'trav_rccm': `{% trans "RCCM employeur" %}`,'trav_id_nat': `{% trans "ID nationale employeur" %}`,'trav_nif': `{% trans "NIF employeur" %}`,'trav_photo': `{% trans "Photo d’identité" %}`,'trav_inpp_onem': `{% trans "INPP / ONEM" %}`,'trav_medical': `{% trans "Certificat médical" %}`,'trav_vaccin': `{% trans "Carte de vaccination" %}`,'trav_carte_travail': `{% trans "Carte de travail en cours" %}`,'trav_contrat': `{% trans "Contrat de travail (ONEM)" %}`,'trav_diplome': `{% trans "Diplôme / Certificat" %}`,'trav_attestation_service': `{% trans "Attestation de service" %}`,'trav_residence': `{% trans "Attestation de résidence" %}`,'trav_bonne_vie': `{% trans "Bonne vie et mœurs" %}`,
+    'carte_formulaire': `{% trans "Formulaire de demande" %}`,'carte_lettre': `{% trans "Lettre de transmission" %}`,'carte_etat': `{% trans "État nominatif étrangers" %}`,'carte_contrat': `{% trans "Projet de contrat" %}`,'carte_cv': `{% trans "CV" %}`,'carte_qualification': `{% trans "Qualification professionnelle" %}`,'carte_photo': `{% trans "Photo passeport" %}`,'carte_organigramme': `{% trans "Organigramme" %}`,'carte_poste': `{% trans "Description du poste" %}`,'carte_cnss_inpp': `{% trans "Preuve CNSS/INPP" %}`,'carte_passeport': `{% trans "Passeport (copies)" %}`
+  };
+
+  // Cache and helper to extract translated labels from the rendered form partial
+  const formLabelCache = {};
+  async function getFormLabels(kind){
+    if(!kind) return {};
+    if(formLabelCache[kind]) return formLabelCache[kind];
+    try{
+      const res = await fetch(`/app/forms/${encodeURIComponent(kind)}/`);
+      if(!res.ok) return {};
+      const html = await res.text();
+      // Parse HTML and extract labels associated with inputs/selects/textareas
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, 'text/html');
+      const mapping = {};
+      const controls = doc.querySelectorAll('input[name], select[name], textarea[name]');
+      controls.forEach(ctrl => {
+        const name = ctrl.getAttribute('name');
+        if(!name) return;
+        // prefer label[for=id]
+        let label = '';
+        const id = ctrl.id;
+        if(id){
+          const forLabel = doc.querySelector(`label[for="${CSS.escape(id)}"]`);
+          if(forLabel) label = forLabel.textContent.trim();
+        }
+        if(!label){
+          const group = ctrl.closest('.form-group, .field, .mb-3, .form-row');
+          if(group){
+            const lab = group.querySelector('label');
+            if(lab) label = lab.textContent.trim();
+          }
+        }
+        if(!label){
+          label = ctrl.getAttribute('placeholder') || ctrl.dataset.label || name;
+        }
+        // cleanup trailing ':' or required markers
+        mapping[name] = label.replace(/[:*]\s*$/, '').trim();
+      });
+      formLabelCache[kind] = mapping;
+      return mapping;
+    }catch(e){
+      console.warn('getFormLabels failed', e);
+      return {};
     }
-    document.getElementById('reservationDetailModalLabel').textContent = title;
-    document.getElementById('modal-icon').innerHTML = icon;
-    document.getElementById('modal-detail-content').innerHTML = html;
-    var modal = new bootstrap.Modal(document.getElementById('reservationDetailModal'));
-    modal.show();
+  }
+
+  // Extract option text for select/radio inputs so we can show user's selected label
+  const formOptionsCache = {};
+  async function getFormOptions(kind){
+    if(!kind) return {};
+    if(formOptionsCache[kind]) return formOptionsCache[kind];
+    try{
+      const res = await fetch(`/app/forms/${encodeURIComponent(kind)}/`);
+      if(!res.ok) return {};
+      const html = await res.text();
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, 'text/html');
+      const optionsMap = {};
+      // selects
+      doc.querySelectorAll('select[name]').forEach(sel=>{
+        const name = sel.getAttribute('name');
+        if(!name) return;
+        optionsMap[name] = optionsMap[name] || {};
+        Array.from(sel.options || []).forEach(opt=>{
+          const val = opt.value;
+          const txt = opt.textContent.trim();
+          optionsMap[name][val] = txt;
+        });
+      });
+      // radio groups
+      doc.querySelectorAll('input[type="radio"][name]').forEach(r=>{
+        const name = r.getAttribute('name');
+        if(!name) return;
+        optionsMap[name] = optionsMap[name] || {};
+        const id = r.id;
+        // label[for=id] may contain the text
+        let txt = '';
+        if(id){ const lab = doc.querySelector(`label[for="${CSS.escape(id)}"]`); if(lab) txt = lab.textContent.trim(); }
+        if(!txt){ // fallback to value
+          txt = r.value;
+        }
+        optionsMap[name][r.value] = txt;
+      });
+      formOptionsCache[kind] = optionsMap;
+      return optionsMap;
+    }catch(e){ console.warn('getFormOptions failed', e); return {}; }
+  }
+
+  function renderRequests(){
+    const requestsList = document.getElementById('requests-list');
+    if(!requestsList) return;
+    const reqSearch = document.getElementById('req-search');
+    const reqFilters = document.getElementById('req-filters');
+    const activeBtn = reqFilters?.querySelector('.filter-chip.active');
+    const status = activeBtn ? activeBtn.getAttribute('data-status') : 'all';
+    const q = (reqSearch?.value || '').toLowerCase().trim();
+    const items = historyItems.filter(it => {
+      const matchStatus = status==='all' ? true : it.status === status;
+      const label = (labelMap[it.kind]||it.kind||'').toLowerCase();
+      const idStr = String(it.id);
+      const matchQ = !q || label.includes(q) || it.status.toLowerCase().includes(q) || idStr.includes(q);
+      return matchStatus && matchQ;
+    });
+    if(items.length===0){
+      requestsList.innerHTML = `<div class="card card-quiet"><div class="card-body"><div class="d-flex align-items-center gap-2"><i class="bi bi-inbox text-muted"></i><div><div class="fw-semibold">${TRANS.none_requests}</div><div class="text-muted small">${TRANS.none_requests_sub}</div></div></div></div></div>`;
+      return;
+    }
+    requestsList.innerHTML = items.map(it => {
+      const icon = iconMap[it.kind] || 'bi-circle';
+      const label = labelMap[it.kind] || it.kind;
+      const when = new Date(it.created_at).toLocaleString();
+      const st = it.status;
+      const pill = st==='paid' ? 'paid' : (st==='pending_payment' ? 'pending' : 'canceled');
+  const statusText = st==='paid' ? TRANS.status_paid : (st==='pending_payment' ? TRANS.status_pending : (st==='draft' ? TRANS.status_draft : TRANS.status_canceled));
+      const leftBorderClass = st==='paid' ? 'is-paid' : (st==='pending_payment' ? 'is-pending' : 'is-canceled');
+      const amount = (typeof it.price !== 'undefined' && it.price !== null) ? `${it.price} ${it.currency || 'USD'}` : '';
+      return `
+        <a href="#" role="button" class="req-card ${leftBorderClass} text-decoration-none text-reset" data-req-id="${it.id}">
+          <div class="d-flex align-items-start justify-content-between mb-1">
+            <div class="d-flex align-items-center gap-2">
+              <div class="req-icon"><i class="bi ${icon}"></i></div>
+              <div>
+                <div class="req-title">${label}</div>
+                <div class="req-meta small">Demande #${it.id} • ${when}</div>
+              </div>
+            </div>
+            <span class="status-pill ${pill}">${statusText}</span>
+          </div>
+          <div class="req-chips">
+            <span class="chip"><i class="bi bi-hash me-1"></i>#${it.id}</span>
+            ${amount ? `<span class="chip"><i class="bi bi-cash-coin me-1"></i>${amount}</span>` : ''}
+          </div>
+          <div class="req-action">
+            <span class="cta small">${TRANS.view_detail} <i class="bi bi-arrow-right-short"></i></span>
+          </div>
+        </a>`;
+    }).join('');
+
+  // Wire up detail clicks
+  requestsList.querySelectorAll('[data-req-id]').forEach(node=>{
+      node.addEventListener('click', async (e)=>{
+        e.preventDefault();
+        const id = node.getAttribute('data-req-id');
+        const r2 = await fetch(`/app/requests/${id}/`);
+  if(!r2.ok){ showAlert(I18N.load_details_error, 'danger'); return; }
+        const d = await r2.json().catch(()=>({ok:false}));
+  if(!d.ok){ showAlert(d.error||I18N.load_error_generic, 'danger'); return; }
+  const body = document.getElementById('request-detail-body');
+        const iconMap = { hotel:'bi-building',location:'bi-car-front',conciergerie:'bi-bell',aeroport:'bi-airplane',tdg:'bi-translate',visa:'bi-file-earmark-person',autres:'bi-three-dots' };
+        const icon = iconMap[d.kind] || 'bi-circle';
+  const st = d.status;
+  const pill = st==='paid' ? 'paid' : (st==='pending_payment' ? 'pending' : 'canceled');
+  const statusTextModal = st==='paid' ? TRANS.status_paid : (st==='pending_payment' ? TRANS.status_pending : (st==='draft' ? TRANS.status_draft : TRANS.status_canceled));
+  const statusPill = `<span class="status-pill ${pill}">${statusTextModal}</span>`;
+  const data = d.data && typeof d.data==='object' ? d.data : {};
+        const esc = (s)=> String(s).replace(/[&<>"]/g, c=> ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+        const fmt = (v)=> Array.isArray(v) ? v.join(', ') : (v===true?'oui':v===false?'non': String(v));
+        async function buildVisaDetails(){
+          const out = [];
+          const printed = new Set();
+          const labels = await getFormLabels('visa');
+          const add = (label, key)=>{
+            const val = (d.data||{})[key];
+            if(val===undefined || String(val).trim()==='') return;
+            // Always show the stored value from DB (even if equals the field label)
+            const vstr = String(fmt(val)).trim();
+            const display = vstr || '—';
+            out.push(`<div class='k'>${esc(label)}</div><div class='v'>${esc(display)}</div>`);
+          }
+          const mapVolant = [
+            ['volant_nom','volant_nom'],['volant_nationalite','volant_nationalite'],['volant_lieu_naissance','volant_lieu_naissance'],['volant_adresse','volant_adresse'],
+            ['volant_raison','volant_raison'],['volant_preneur','volant_preneur'],['volant_invitation','volant_invitation'],['volant_duree','volant_duree'],['volant_date_arrivee','volant_date_arrivee']
+          ];
+          const mapOrd = [
+            ['ord_nom','ord_nom'],['ord_email','ord_email'],['ord_tel','ord_tel'],['ord_nationalite','ord_nationalite'],['ord_situation','ord_situation'],['ord_infos','ord_infos']
+          ];
+          const mapTrav = [
+            ['trav_nom','trav_nom'],['trav_email','trav_email'],['trav_tel','trav_tel'],['trav_nationalite','trav_nationalite'],['trav_employeur','trav_employeur'],['trav_infos','trav_infos']
+          ];
+          const mapPerm = [
+            ['perm_nom','perm_nom'],['perm_email','perm_email'],['perm_tel','perm_tel'],['perm_nationalite','perm_nationalite'],['perm_infos','perm_infos']
+          ];
+          const mapCarte = [
+            ['carte_nom','carte_nom'],['carte_email','carte_email'],['carte_tel','carte_tel'],['carte_nationalite','carte_nationalite'],['carte_employeur','carte_employeur'],['carte_infos','carte_infos']
+          ];
+          // Resolve option labels for selects/radios if possible
+          const opts = await getFormOptions('visa');
+          let butLabel = d.but_sejour || '—';
+          if(d.but_sejour && opts['but_sejour'] && opts['but_sejour'][d.but_sejour]){
+            butLabel = opts['but_sejour'][d.but_sejour];
+          } else if(labels['but_sejour']){
+            // fallback to form label if no option text
+            butLabel = labels['but_sejour'];
+          }
+          if(d.but_sejour){ out.push(`<div class='k'>${esc(labels['but_sejour'] || 'But du séjour')}</div><div class='v'>${esc(butLabel)}</div>`); printed.add('but_sejour'); }
+          if(d.but_sejour==='volant'){
+            mapVolant.forEach(([k,k2])=> add(labels[k] || k, k2));
+          } else if(d.but_sejour==='etablissement'){
+            let etabLabel = d.etab_type || '—';
+            if(d.etab_type && opts['etab_type'] && opts['etab_type'][d.etab_type]){
+              etabLabel = opts['etab_type'][d.etab_type];
+            } else if(labels['etab_type']){
+              etabLabel = labels['etab_type'];
+            }
+            if(d.etab_type){ out.push(`<div class='k'>${esc(labels['etab_type'] || "Type d'\u00e9tablissement")}</div><div class='v'>${esc(etabLabel)}</div>`); printed.add('etab_type'); }
+            const src = d.etab_type==='ordinaire'? mapOrd : d.etab_type==='travail'? mapTrav : d.etab_type==='permanent'? mapPerm : [];
+            src.forEach(([k,k2])=> add(labels[k] || k, k2));
+          } else if(d.but_sejour==='carte'){
+            mapCarte.forEach(([k,k2])=> add(labels[k] || k, k2));
+          } else {
+            Object.keys(d.data||{}).forEach(k=>{ if(!printed.has(k)) add(labels[k] || k, k); });
+          }
+          return out.length ? out.join('') : `<div class='v'>${TRANS.no_data}</div>`;
+        }
+        let kv = '';
+        if(d.kind === 'visa'){
+          kv = await buildVisaDetails();
+        } else {
+          if(Object.keys(data).length){
+            const labelsForKind = await getFormLabels(d.kind);
+            kv = Object.entries(data).filter(([k,v])=> String(v).trim()!=='').map(([k,v])=>{
+              const label = labelsForKind[k] || k;
+              const vstr = String(fmt(v)).trim();
+              const display = vstr || '—';
+              return `<div class='k'>${esc(label)}</div><div class='v'>${esc(display)}</div>`;
+            }).join('');
+          } else {
+            kv = `<div class='v'>${TRANS.no_data}</div>`;
+          }
+        }
+        const amountChip = (d.price ? `<span class="chip"><i class="bi bi-cash-coin me-1"></i>${d.price} ${d.currency||'USD'}</span>` : '');
+        body.innerHTML = `
+          <div class="detail-head">
+            <div class="detail-icon"><i class="bi ${icon}"></i></div>
+            <div class="flex-grow-1">
+              <div class="d-flex justify-content-between align-items-start">
+                <div>
+                  <div class="detail-title">${labelMap[d.kind]||d.kind}</div>
+                  <div class="detail-sub small">Demande #${d.id} • ${new Date(d.created_at).toLocaleString()}</div>
+                </div>
+                ${statusPill}
+              </div>
+              <div class="req-chips mt-2">
+                <span class="chip"><i class="bi bi-hash me-1"></i>#${d.id}</span>
+                ${amountChip}
+                <span class="chip text-capitalize"><i class="bi bi-tag me-1"></i>${labelMap[d.kind]||d.kind}</span>
+              </div>
+            </div>
+          </div>
+          <div class="kv-grid mb-2">
+            <div class='k'>${TRANS.method_payment}</div><div class='v'>${d.payment_method||'-'}</div>
+            <div class='k'>${TRANS.service_label}</div><div class='v text-capitalize'>${labelMap[d.kind]||d.kind}</div>
+          </div>
+          <div class="fw-semibold mb-1">${TRANS.submitted_data}</div>
+          <div class="kv-grid mb-2">${kv}</div>
+        `;
+        // Optional documents for visa
+        if(d.kind==='visa' && d.documents && typeof d.documents==='object'){
+          const MEDIA_URL = '/media/';
+          const items = Object.entries(d.documents);
+          if(items.length){
+            const humanDocLabel = (key)=>{
+              if(DOC_LABEL_MAP[key]) return DOC_LABEL_MAP[key];
+              const def = key.replace(/^(volant|ord|trav|perm|carte)_/, '').replace(/_/g,' ');
+              return def.charAt(0).toUpperCase()+def.slice(1);
+            };
+            const docHtml = `
+              <div class="fw-semibold mt-2">${TRANS.documents_label}</div>
+              <div class="doc-grid mt-1">
+                ${items.map(([k,info])=>{
+                  const label = esc(humanDocLabel(k));
+                  const path = info && info.path ? MEDIA_URL + esc(info.path).replace(/^\/+/, '') : '';
+                  const thumb = info && (info.thumb || info.path) ? MEDIA_URL + esc(info.thumb || info.path).replace(/^\/+/, '') : '';
+                  if(!path) return `<div class='col'><div class='small text-muted'>${label}</div></div>`;
+                  const isImage = thumb.toLowerCase().match(/\.(jpg|jpeg|png|webp)$/);
+                  return `
+                    <a href='${path}' target='_blank' rel='noopener' class='doc-card'>
+                      <div class='thumb'>
+                        ${isImage ? `<img src='${thumb}' alt='${label}' class='img-fluid' />` : `<div class='p-2 text-center text-muted small'><i class='bi bi-file-earmark-pdf me-1'></i>PDF</div>`}
+                      </div>
+                      <div class='label' title='${label}'>${label}</div>
+                    </a>`;
+                }).join('')}
+              </div>`;
+            body.insertAdjacentHTML('beforeend', docHtml);
+          }
+        }
+        // Actions section
+        if(d.status==='draft' || d.status==='pending_payment' || d.status==='paid'){
+          const actions = document.createElement('div');
+          actions.className = 'd-flex justify-content-between align-items-center mt-2 gap-2';
+          // If the request is pending payment and has a price, show only the Pay button and hide edit to keep a professional workflow.
+          const showPay = (d.status==='pending_payment' && d.price);
+          const payHtml = showPay ? `<button class="btn btn-sm btn-primary" id="btn-go-pay">${TRANS.pay_button}</button>` : '';
+          const editHtml = showPay ? '' : `<button class="btn btn-sm btn-outline-primary" id="btn-go-edit">${TRANS.edit_button}</button>`;
+          actions.innerHTML = `
+            <div class="text-muted small">${(d.price ? `${TRANS.amount_label} <strong>${d.price} ${d.currency||'USD'}</strong>` : '')}</div>
+            <div class="d-flex gap-2">
+              ${payHtml}
+              ${editHtml}
+            </div>`;
+          body.appendChild(actions);
+        }
+  // Wire professional edit flow: redirect to wizard step 2 with prefilled data
+  const btnGoEdit = document.getElementById('btn-go-edit');
+  if(btnGoEdit){
+    btnGoEdit.addEventListener('click', ()=>{
+      // Close modal then switch to wizard and enter edit mode in-place
+      try{ requestDetailModal?.hide(); }catch(e){}
+      setTimeout(()=>{
+        showView('wizard');
+        // Ensure UI has time to switch before populating the form
+        setTimeout(()=> enterEditMode(d.id), 150);
+      }, 200);
+    });
+  }
+  const btnGoPay = document.getElementById('btn-go-pay');
+  if(btnGoPay){
+    btnGoPay.addEventListener('click', async ()=>{
+      btnGoPay.disabled = true;
+      try{
+        const r = await fetch(`/app/cinetpay/start/${d.id}/`, { method:'POST', headers:{ 'X-CSRFToken': getCSRFCookie() } });
+        const j = await r.json().catch(()=>({}));
+        if(!r.ok || !j.ok){
+          showAlert(j.error || I18N.payment_unavailable, 'danger');
+          return;
+        }
+        if(j.payment_url){
+          // Option: hide modal before redirect
+          try{ requestDetailModal?.hide(); }catch(e){}
+          window.location.href = j.payment_url;
+          return;
+        }
+  showAlert(I18N.payment_link_unavailable, 'danger');
+      } finally {
+        btnGoPay.disabled = false;
+      }
+    });
+  }
+        if(requestDetailModal){ requestDetailModal.show(); }
+      });
+    });
+  }
+
+  // Prepare Request Detail modal instance and focus safety on hide
+  const requestDetailModalEl = document.getElementById('requestDetailModal');
+  const requestDetailModal = requestDetailModalEl ? new bootstrap.Modal(requestDetailModalEl, { focus: true }) : null;
+  if(requestDetailModalEl){
+    requestDetailModalEl.addEventListener('hide.bs.modal', () => {
+      // Ensure no focused descendant remains to avoid aria-hidden issues
+      if(document.activeElement && requestDetailModalEl.contains(document.activeElement)){
+        try { document.activeElement.blur(); } catch(e){}
+      }
+    });
+  }
+
+  function renderKeyVals(obj){
+  if(!obj||typeof obj!== 'object') return '<div class="text-muted">{% trans "No data" %}</div>';
+    const keys = Object.keys(obj);
+  if(keys.length===0) return '<div class="text-muted">{% trans "No data" %}</div>';
+    return `<div class="small">${keys.map(k=>`<div><span class='text-muted'>${k}</span>: ${obj[k]}</div>`).join('')}</div>`;
+  }
+
+  async function refreshRequests(){
+    const loadingEl = document.getElementById('requests-loading');
+    if(loadingEl) loadingEl.classList.remove('d-none');
+    const requestsList = document.getElementById('requests-list');
+    if(requestsList){
+      requestsList.innerHTML = `
+        <div class='card card-quiet skeleton req-card'></div>
+        <div class='card card-quiet skeleton req-card'></div>
+        <div class='card card-quiet skeleton req-card'></div>`;
+    }
+    try {
+      const r = await fetch('/app/requests/me/');
+      if(!r.ok){ return; }
+      const json = await r.json();
+      if(!json.ok){ return; }
+      historyItems = json.items || [];
+      renderRequests();
+    } finally {
+      if(loadingEl) loadingEl.classList.add('d-none');
+    }
+  }
+
+  // Load requests when opening the tab
+  document.querySelector('.sidebar [data-view="requests"]').addEventListener('click', async()=>{
+    await refreshRequests();
   });
+  // Attach listeners lazily to avoid ReferenceError if elements are not yet in DOM
+  (function attachRequestListeners(){
+    try{
+      const reqSearchEl = document.getElementById('req-search');
+      const reqFiltersEl = document.getElementById('req-filters');
+      if(reqSearchEl){ reqSearchEl.addEventListener('input', ()=> renderRequests()); }
+      if(reqFiltersEl){
+        reqFiltersEl.addEventListener('click', (e)=>{
+          const btn = e.target.closest('.filter-chip');
+          if(!btn) return;
+          reqFiltersEl.querySelectorAll('.filter-chip').forEach(b=> b.classList.remove('active'));
+          btn.classList.add('active');
+          renderRequests();
+        });
+      }
+    }catch(e){ console.warn('attachRequestListeners failed', e); }
+  })();
+
+  // --- Wizard logic ---
+  const wizard = {
+    step: 1,
+    service: null,
+    serviceLabel: '',
+    details: {},
+    payment_method: '',
+  };
+  const stepsEl = document.getElementById('wizard-steps');
+  function setStep(n){
+    wizard.step = n;
+    [1,2,3,4].forEach(i=>{
+      document.getElementById('wiz-step-'+i).classList.toggle('d-none', i!==n);
+    });
+    stepsEl.querySelectorAll('.step').forEach(s=>{
+      const i = parseInt(s.dataset.step);
+      s.classList.toggle('active', i===n);
+      s.classList.toggle('done', i<n);
+    });
+    // Update ARIA progress
+    stepsEl.setAttribute('aria-valuenow', n);
+  }
+  // Step 1
+  const wizServices = document.getElementById('wizard-services');
+  const next1 = document.getElementById('wiz-next-1');
+  // Bind click on each card explicitly for reliability across browsers
+  if(wizServices){
+    Array.from(wizServices.querySelectorAll('[data-form]')).forEach(card => {
+      try{
+        card.addEventListener('click', (e)=>{
+          e.preventDefault();
+          e.stopPropagation();
+          wizard.service = card.dataset.form;
+          wizard.serviceLabel = labelMap[wizard.service] || wizard.service;
+          wizServices.querySelectorAll('.card').forEach(c=> c.classList.remove('selected'));
+          card.classList.add('selected');
+          if(next1) next1.disabled = false;
+        });
+        // Add keyboard support
+        card.addEventListener('keydown', (e)=>{
+          if(e.key === 'Enter' || e.key === ' '){
+            e.preventDefault();
+            card.click();
+          }
+        });
+        card.setAttribute('tabindex', '0');
+        card.setAttribute('role', 'button');
+        card.setAttribute('aria-label', `{% trans "Sélectionner le service" %} ${labelMap[card.dataset.form] || card.dataset.form}`);
+      }catch(err){ console.warn('wizard card bind failed', err); }
+    });
+  } else {
+    console.warn('wizard-services element not found; service selection disabled');
+  }
+  next1.addEventListener('click', async()=>{
+    if(!wizard.service) return;
+    const csrftoken = getCSRFCookie();
+    const r = await fetch('/app/api/wizard/service', { method:'POST', headers:{'X-CSRFToken': csrftoken}, body: new URLSearchParams({service: wizard.service}) });
+    const j = await r.json();
+  if(!r.ok || !j.ok){ showAlert(j.error||I18N.error_service, 'danger'); return; }
+    // Load details form
+    document.getElementById('wiz-service-label').textContent = wizard.serviceLabel;
+    const res = await fetch(`/app/forms/${wizard.service}/`);
+    if(res.ok){
+      const html = await res.text();
+      const slot = document.getElementById('wizard-form-slot');
+      slot.innerHTML = html;
+      if(window.FormsInit?.initAll){ window.FormsInit.initAll(slot); }
+      setStep(2);
+    } else {
+  showAlert(I18N.load_form_error, 'danger');
+    }
+  });
+  // Step 2
+  document.getElementById('wiz-back-2').addEventListener('click', ()=> setStep(1));
+  document.getElementById('wiz-next-2').addEventListener('click', async()=>{
+    const btn = document.getElementById('wiz-next-2');
+    const spinner = btn.querySelector('.spinner-border');
+    btn.disabled = true;
+    spinner.classList.remove('d-none');
+    try {
+      const form = document.querySelector('#wizard-form-slot form');
+  if(!form){ showAlert(I18N.form_missing, 'danger'); return; }
+      // Inline validation: clear previous states
+      form.querySelectorAll('.ui-error').forEach(el=> el.classList.remove('ui-error'));
+      form.querySelectorAll('.field-error').forEach(el=> el.remove());
+      let invalid = false;
+      const requiredFields = form.querySelectorAll('[required]');
+      requiredFields.forEach(input=>{
+        if(input.type === 'radio'){
+          const checked = form.querySelector(`input[type="radio"][name="${CSS.escape(input.name)}"]:checked`);
+          if(!checked){
+            form.querySelectorAll(`input[type="radio"][name="${CSS.escape(input.name)}"]`).forEach(r=> r.closest('label')?.classList.add('ui-error'));
+            const first = form.querySelector(`input[type="radio"][name="${CSS.escape(input.name)}"]`);
+            const container = first?.closest('.choice-group') || first?.closest('.form-group') || form;
+            if(container && !container.querySelector('.field-error')){
+              const m = document.createElement('div'); m.className = 'field-error'; m.textContent = I18N.validation_required; container.appendChild(m);
+            }
+            invalid = true;
+          }
+        } else if(input.type === 'checkbox'){
+          if(input.required && !input.checked){
+            input.classList.add('ui-error');
+            const container = input.closest('.checkbox-group') || input.closest('.form-group') || form;
+            if(container && !container.querySelector('.field-error')){
+              const m = document.createElement('div'); m.className = 'field-error'; m.textContent = I18N.validation_required; container.appendChild(m);
+            }
+            invalid = true;
+          }
+        } else {
+          if(!input.value){
+            input.classList.add('ui-error');
+            const container = input.closest('.form-group') || form;
+            if(container && !container.querySelector('.field-error')){
+              const m = document.createElement('div'); m.className = 'field-error'; m.textContent = I18N.validation_required; container.appendChild(m);
+            }
+            invalid = true;
+          }
+        }
+      });
+      if(invalid){
+        const firstError = form.querySelector('.ui-error');
+        if(firstError){ firstError.scrollIntoView({ behavior:'smooth', block:'center' }); }
+        return;
+      }
+      const fd = new FormData(form);
+      wizard.details = Object.fromEntries(fd.entries());
+      const csrftoken = getCSRFCookie();
+      if(wizard.editingId){
+        // Update existing request instead of wizard details
+        const r = await fetch(`/app/requests/${wizard.editingId}/update/`, { method:'POST', headers:{'X-CSRFToken': csrftoken}, body: fd });
+        const j = await r.json().catch(()=>({ok:false}));
+        if(!r.ok || !j.ok){
+          if(j && j.errors){
+            Object.entries(j.errors).forEach(([name, msg])=>{
+              const inputs = form.querySelectorAll(`[name="${CSS.escape(name)}"]`);
+              inputs.forEach(inp=> inp.classList.add('ui-error'));
+              const container = inputs[0]?.closest('.form-group') || form;
+              if(container && !container.querySelector('.field-error')){
+                const m = document.createElement('div'); m.className = 'field-error'; m.textContent = String(msg); container.appendChild(m);
+              }
+            });
+            const firstError = form.querySelector('.ui-error');
+            if(firstError){ firstError.scrollIntoView({ behavior:'smooth', block:'center' }); }
+          } else {
+            showAlert(j.error||I18N.update_failed, 'danger');
+          }
+          return;
+        }
+        // For PAID requests, stop after documents update (no payment step)
+        if(wizard.editingStatus === 'paid'){
+          showAlert(I18N.update_success, 'success');
+          wizard.editingId = null;
+          setTimeout(()=>{ showView('requests'); refreshRequests(); }, 400);
+          return;
+        }
+        // For DRAFT/PENDING, proceed to payment selection step for editing
+        if(wizard.payment_method){
+          const opt = document.querySelector(`#wiz-step-3 input[name="payment_method"][value="${CSS.escape(wizard.payment_method)}"]`);
+          if(opt){ opt.checked = true; document.getElementById('wiz-next-3').disabled = false; }
+        }
+        setStep(3);
+      } else {
+        const r = await fetch('/app/api/wizard/details', { method:'POST', headers:{'X-CSRFToken': csrftoken}, body: fd });
+        const j = await r.json().catch(()=>({ok:false}));
+        if(!r.ok || !j.ok){
+          if(j && j.errors){
+            Object.entries(j.errors).forEach(([name, msg])=>{
+              const inputs = form.querySelectorAll(`[name="${CSS.escape(name)}"]`);
+              inputs.forEach(inp=> inp.classList.add('ui-error'));
+              const container = inputs[0]?.closest('.form-group') || form;
+              if(container && !container.querySelector('.field-error')){
+                const m = document.createElement('div'); m.className = 'field-error'; m.textContent = String(msg); container.appendChild(m);
+              }
+            });
+            const firstError = form.querySelector('.ui-error');
+            if(firstError){ firstError.scrollIntoView({ behavior:'smooth', block:'center' }); }
+          } else {
+            showAlert(j.error||I18N.validation_error, 'danger');
+          }
+          return;
+        }
+        setStep(3);
+      }
+    } finally {
+      btn.disabled = false;
+      spinner.classList.add('d-none');
+    }
+  });
+  // Step 3
+  const paymentHint = document.getElementById('wiz-payment-hint');
+  function updatePaymentHint(){
+    const m = wizard.payment_method;
+  if(m==='card') paymentHint.textContent = I18N.payment_hint_card || '';
+  else if(m==='mobile') paymentHint.textContent = I18N.payment_hint_mobile || '';
+  else if(m==='transfer') paymentHint.textContent = I18N.payment_hint_transfer || '';
+    else paymentHint.textContent = '';
+  }
+  document.getElementById('wiz-payment-options').addEventListener('change', ()=>{
+    const checked = document.querySelector('#wiz-step-3 input[name="payment_method"]:checked');
+    wizard.payment_method = checked ? checked.value : '';
+    updatePaymentHint();
+    document.getElementById('wiz-next-3').disabled = !wizard.payment_method;
+  });
+  document.getElementById('wiz-back-3').addEventListener('click', ()=> setStep(2));
+  document.getElementById('wiz-next-3').addEventListener('click', async()=>{
+    if(!wizard.payment_method) return;
+    const csrftoken = getCSRFCookie();
+    let r, j;
+    if(wizard.editingId){
+      r = await fetch(`/app/requests/${wizard.editingId}/payment-method/`, { method:'POST', headers:{'X-CSRFToken': csrftoken, 'Content-Type':'application/x-www-form-urlencoded' }, body: new URLSearchParams({payment_method: wizard.payment_method}) });
+      j = await r.json();
+    } else {
+      r = await fetch('/app/api/wizard/payment-method', { method:'POST', headers:{'X-CSRFToken': csrftoken, 'Content-Type':'application/x-www-form-urlencoded' }, body: new URLSearchParams({payment_method: wizard.payment_method}) });
+      j = await r.json();
+    }
+  if(!r.ok || !j.ok){ showAlert(j.error||I18N.payment_error, 'danger'); return; }
+    // Build summary
+    // Populate structured summary fields
+    const svcEl = document.getElementById('wiz-summary-service');
+    const payEl = document.getElementById('wiz-summary-payment');
+    const chipsEl = document.getElementById('wiz-summary-chips');
+    const listEl = document.getElementById('wiz-summary-list');
+    svcEl.textContent = wizard.serviceLabel || '—';
+    payEl.textContent = wizard.payment_method || '—';
+    // Chips: show service and payment as chips
+    chipsEl.innerHTML = `<span class="summary-chip">${wizard.serviceLabel || ''}</span>` + (wizard.payment_method ? ` <span class="summary-chip">${wizard.payment_method}</span>` : '');
+    // List key details
+    listEl.innerHTML = '';
+    const keys = Object.keys(wizard.details||{}).slice(0,8);
+    keys.forEach(k=>{
+      const li = document.createElement('li');
+      li.innerHTML = `<span class="summary-key">${k.replace(/_/g,' ')}</span>: <span class="summary-val">${String(wizard.details[k])}</span>`;
+      listEl.appendChild(li);
+    });
+    setStep(4);
+  });
+  // Step 4
+  document.getElementById('wiz-back-4').addEventListener('click', ()=> setStep(3));
+  const confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
+  document.getElementById('wiz-submit').addEventListener('click', ()=>{
+    document.getElementById('confirm-summary').innerHTML = document.getElementById('wiz-summary').innerHTML;
+    confirmModal.show();
+  });
+  document.getElementById('confirm-send').addEventListener('click', async()=>{
+    const btn = document.getElementById('confirm-send');
+    const spinner = btn.querySelector('.spinner-border');
+    if(!spinner){
+      const newSpinner = document.createElement('span');
+      newSpinner.className = 'spinner-border spinner-border-sm d-none ms-2';
+      newSpinner.setAttribute('role', 'status');
+      newSpinner.setAttribute('aria-hidden', 'true');
+      btn.appendChild(newSpinner);
+    }
+    const spinnerEl = btn.querySelector('.spinner-border');
+    btn.disabled = true;
+    spinnerEl.classList.remove('d-none');
+    try {
+      const csrftoken = getCSRFCookie();
+      let r, j;
+      if(wizard.editingId){
+        r = await fetch(`/app/requests/${wizard.editingId}/resubmit/`, { method:'POST', headers:{'X-CSRFToken': csrftoken} });
+        j = await r.json().catch(()=>({ok:false}));
+      } else {
+        r = await fetch('/app/api/wizard/submit', { method:'POST', headers:{'X-CSRFToken': csrftoken} });
+        j = await r.json().catch(()=>({ok:false}));
+      }
+  if(!r.ok || !j.ok){ showAlert(j.error||I18N.submission_error, 'danger'); return; }
+      confirmModal.hide();
+  // notification intentionally removed: do not show email-sent payment message
+      // Optionally reset wizard
+      // Clear editing context after successful resubmission
+      wizard.editingId = null;
+      setTimeout(()=>{ showView('requests'); refreshRequests(); }, 800);
+    } finally {
+      btn.disabled = false;
+      spinnerEl.classList.add('d-none');
+    }
+  });
+
+  // Auto-enter edit mode if URL has ?edit=ID
+  const editId = getQueryParam('edit');
+  if(editId){ enterEditMode(editId); }
 });
 </script>
 {% endblock %}

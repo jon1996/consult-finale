@@ -1,0 +1,80 @@
+.features-section {
+  .container {
+    > p {
+      width: 80%;
+      margin: 0 auto;
+    }
+    h2 {
+      margin: 4rem 0 3rem 0;
+    }
+
+    .icon {
+      font-size: 10px;
+    }
+
+    .media {
+      img {
+        width: 100%;
+      }
+    }
+    .row {
+      margin: 5rem 0;
+    }
+  }
+}
+
+/*-----------------------------
+    Accordion Item
+-----------------------------*/
+.accordion-wrapper{
+  .card{
+      +.card{
+          margin-top: 20px;
+      }
+      border: none;
+      background-color: transparent;
+      text-align: left;
+      .card-header{
+          background-color: transparent;
+          padding: 0;
+          border: none;
+          a{
+              display: block;
+              font-size: 16px;
+              line-height: 26px;
+              font-weight: 700;
+              background-color: var(--light-blue-2);
+              padding: 10px 30px;
+              cursor: pointer;
+              position: relative;
+              font-family: "Comfortaa", cursive;
+              color: #555;
+              &:after{
+                  position: absolute;
+                  right: 30px;
+                  top: 10px;
+                  content: "\f068";
+                  font-family: "Font Awesome 5 Free";
+                  font-weight: 900;
+                  font-size: 10px;
+              }
+              &[aria-expanded="false"]{
+                  background-color: var(--icon-color);
+                  color: var(--white);
+                  font-weight: 400;
+                  &:after{
+                      content: "\f067";
+                  }
+              }
+          }
+      }
+      .card-body{
+          background-color: transparent;
+          padding: 20px 30px 0px; 
+          font-family: "Comfortaa", cursive;
+          color: var(--light-grey-2);
+          font-size: 14px;
+          font-weight: 400;
+      }
+  }
+}

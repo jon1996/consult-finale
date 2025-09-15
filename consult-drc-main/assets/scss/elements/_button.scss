@@ -1,0 +1,208 @@
+// =================== Primary Button style =====================
+.main-btn,
+.small-btn,
+.large-btn {
+  color: var(--white);
+  background-color: hsla(192, 100%, 36%, 0.8);
+  border: 0;
+  font-weight: 600;
+  font-size: 14px;
+  font-family: var(--main-font);
+  margin: 2rem auto;
+  cursor: pointer;
+  box-shadow: 0px 6px 20px -8px var(--dark-blue-1);
+  transition: all .4s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  a {
+    color: var(--white);
+    font-weight: 600;
+    font-size: 14px;
+  }
+}
+
+
+.main-btn:hover,
+.small-btn:hover,
+.large-btn:hover {
+  background-color: var(--dark-blue-1);
+  color: var(--white);
+  box-shadow: 0px 10px 20px -8px var(--dark-blue-1);
+}
+
+
+// ====================== Main Button ========================
+.main-btn {
+  height: 38px;
+  width: 132px;
+}
+
+// ====================== Small Button ========================
+.small-btn {
+  height: 32px;
+  width: 90px;
+}
+
+.small-text {
+  font-size: 11px;
+}
+
+// ======================== Large Button ============================
+
+.large-btn {
+  height: 42px;
+  width: 178px;
+}
+
+
+// ======================== Secondary Button Style ======================
+.sec-small-btn,
+.sec-main-btn,
+.sec-large-btn {
+  color: var(--dark-indigo);
+  background-color: transparent;
+  border: 1px solid var(--dark-indigo);
+  font-weight: 700;
+  font-size: 14px;
+  font-family: var(--main-font);
+  margin: 2rem auto;
+  cursor: pointer;
+  transition: all .4s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sec-small-btn:hover,
+.sec-main-btn:hover,
+.sec-large-btn:hover {
+  border-color: var(--dark-blue-1);
+  color: var(--dark-blue-1);
+}
+
+// ====================== Secondary Main Button ========================
+.sec-main-btn {
+  height: 38px;
+  width: 132px;
+}
+
+// ====================== Secondary Small Button ========================
+.sec-small-btn {
+  height: 32px;
+  width: 90px;
+}
+
+// ======================== Secondary Large Button ============================
+
+.sec-large-btn {
+  height: 42px;
+  width: 178px;
+}
+
+
+// ======================= Disable Button Styles ===============================
+
+.dis-main-btn,
+.dis-small-btn,
+.dis-large-btn {
+  color: #A0A0A0;
+  background-color: #E5E5E5;
+  border: 0;
+  font-weight: 600;
+  font-size: 14px;
+  font-family: var(--main-font);
+  margin: 2rem auto;
+  cursor: pointer;
+  box-shadow: 0px 6px 20px -8px #E5E5E5;
+  transition: all .4s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  a {
+    color: var(--white);
+    font-weight: 600;
+    font-size: 14px;
+  }
+}
+
+
+.dis-main-btn:hover,
+.dis-small-btn:hover,
+.dis-large-btn:hover {
+  background-color: #c9c9c9;
+  color: var(--white);
+  box-shadow: 0px 10px 20px -8px #969595;
+}
+
+// ====================== Main disabled Button ========================
+.dis-main-btn {
+  height: 38px;
+  width: 132px;
+}
+
+// ====================== Small disabled Button ========================
+.dis-small-btn {
+  height: 32px;
+  width: 90px;
+}
+
+// ======================== Large disabled Button ============================
+
+.dis-large-btn {
+  height: 42px;
+  width: 178px;
+}
+
+
+// ======================= Halfway Button ==============================
+.halfway-btn {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background-color: var(--dark-blue-1);
+  border: 0;
+  border-radius: 50%;
+  transform: translateY(-50%) translateX(-50%);
+  outline: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+    animation: pulse 1s infinite;
+  }
+
+  &:focus {
+    outline: 0;
+  }
+
+  i {
+    color: var(--white);
+    font-size: 24px;
+  }
+}
+
+// ============================ Play btn ===============================
+.play-btn {
+  background-color: transparent;
+  border: 1px solid var(--white);
+  height: 38px;
+  width: 38px;
+  cursor: pointer;
+
+  i {
+    font-size: 13px;
+    color: var(--white);
+    transition: all .2s;
+  }
+
+  &:hover {
+    i {
+      transform: scale(1.2)
+    }
+  }
+}

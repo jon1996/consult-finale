@@ -1,0 +1,246 @@
+
+.blog-detail {
+  h2 {
+    margin-bottom: 1rem;
+  }
+
+  .heading {
+    margin: 3rem 0;
+
+    p {
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 11px;
+      margin-bottom: .5rem;
+    }
+  }
+
+  .media-grid {
+    width: 80%;
+    max-width: 1280px;
+    margin: 0 auto;
+    position: relative;
+
+    .img {
+      padding: .6rem;
+    }
+
+    .img-fluid {
+      width: 100%;
+    }
+
+    .side-social-icons {
+      left: -6%;
+      top: 20%;
+
+      i {
+        font-size: 1rem;
+        color: var(--icon-color);
+
+        &:hover {
+          color: var(--active-icon-color);
+        } 
+      }
+    }
+  }
+
+  .blog-contents {
+    .blog-text {
+      margin: 3rem 0;
+    }
+
+    .reacts {
+      display: flex;
+
+      .react {
+        display: flex;
+        align-items: center;
+        margin-right: 3rem;
+
+        p,
+        i {
+          color: var(--dark-grey-4);
+          font-size: 13px;
+          font-weight: 600;
+        }
+
+        i {
+          margin: 0 .5rem 0 0;
+        }
+
+        p {
+          margin: 0;
+        }
+      }
+    }
+
+    .more {
+      float: right;
+
+      &:hover {
+
+        a,
+        .arrow {
+          color: var(--dark-blue-1);
+        }
+      }
+
+      a {
+        font-size: 10px;
+        color: var(--light-grey-5);
+      }
+
+      .arrow {
+        font-size: 13px;
+      }
+
+    }
+  }
+}
+
+.comment-section, .post-comment, #author {
+  h2 {
+    margin: 6rem 0 4rem 0;
+  }
+}
+
+.post-comment {
+  .main-btn {
+    margin: 1rem 0;
+  }
+}
+
+.author-section {
+  .name {
+    font-weight: 700;
+    margin: 0;
+  }
+
+  .title {
+    font-size: 11px;
+  }
+
+  .about {
+    margin: 2.5rem 0 1.5rem 0;
+  }
+
+  .social-icons {
+    i {
+      margin: 0 .75rem 0 0;
+      color: var(--dark-grey-3);
+
+      &:hover {
+        color: var(--active-icon-color);
+      }
+    }
+  }
+}
+
+.more-carousel-1 {
+  background-color: var(--light-grey-3);
+  padding: 4rem;
+  .container {
+    position: relative;
+    .blog-carousel-2 {
+      .content {
+        .title {
+          font-size: 1rem;
+          font-weight: 500;
+          &:hover {
+            color: var(--dark-indigo);
+          }
+        }
+      }
+    }
+  
+    
+    .blog-carousel-controls {
+      .prev, .next {
+        cursor: pointer;
+        position: absolute;
+        bottom: 15px;
+        * {
+          color: var(--dark-grey-3);;
+        }
+  
+        &:hover {
+          * {
+            color: var(--dark-indigo);
+          }
+        }
+      }
+  
+      .prev {
+        left: -35px;
+      }
+  
+      .next {
+        right: -35px;
+      }
+    }
+  }
+  // .carousel {
+  //   margin: 4rem;
+  //   position: relative;
+  //   display: flex;
+  //   justify-content: center;
+    
+  //   .card {
+  //     z-index: 99;
+  //     border: none;
+
+  //     .card-body {
+  //       padding: 1.25rem 2rem 1.5rem 2rem; 
+  //       p {
+  //         text-transform: uppercase;
+  //         letter-spacing: 2px;
+  //       }
+  //     }
+  //   }
+  //   .carousel-icon {
+  //     display: flex;
+  //     justify-content: space-between;
+  //     width: 110%;
+  //     position: absolute;
+  //     top: 105%;
+  //     li {
+  //       display: flex;
+
+  //       &.next, &.prev{
+  //         cursor: pointer;
+  //         i {
+  //           margin: 0;
+  //           color: var(--dark-grey-3);
+  //         }
+  //         .text {
+  //           margin: 0 .75rem;
+  //           color: var(--dark-grey-3);
+  //         }
+
+  //         &:hover {
+  //           * {
+  //             color: var(--dark-indigo);
+  //           }
+  //         }
+  //       }
+  //     }
+  //   }
+
+  //   .carousel-indicator {
+  //     position: absolute;
+  //     left: -80px;
+  //     top: 50%;
+  //     .indicator {
+  //       height: 14px;
+  //       width: 4px;
+  //       margin: 3px 0;
+  //       background-color: var(--icon-color);
+  //     }
+
+  //     .indicator + .active {
+  //       height: 60px;
+  //       background-color: var(--active-icon-color);
+  //     }
+  //   }
+  // }
+}

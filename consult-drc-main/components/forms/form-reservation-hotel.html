@@ -1,0 +1,76 @@
+<!-- Self-contained includes for direct preview; safe if duplicated by parent page -->
+<link rel="stylesheet" href="./forms.css">
+<script src="./forms.js" defer></script>
+
+<form id="hotel-form" class="hotel-form-component" novalidate>
+  <fieldset>
+    <legend>Réservations hôtelières</legend>
+    <p>Trouvons l’hôtel qui vous correspond, selon vos besoins, votre budget et votre lieu de mission.</p>
+    <p><strong>Remplissez ce formulaire pour une réservation personnalisée :</strong></p>
+    <div class="form-group">
+      <label for="hotel-ville">Ville de séjour <span class="req">*</span></label>
+      <select id="hotel-ville" name="ville" required>
+        <option value="">-- Choisir une ville --</option>
+        <option>Kinshasa</option>
+        <option>Lubumbashi</option>
+        <option>Kolwezi</option>
+        <option>Goma</option>
+        <option>Matadi</option>
+        <option>Autre</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Dates de séjour <span class="req">*</span></label>
+      <div class="grid grid-2">
+        <div><input type="date" name="date_arrivee" required /></div>
+        <div><input type="date" name="date_depart" required /></div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Type d’hébergement souhaité <span class="req">*</span></label>
+      <div class="choice-group">
+        <label><input type="radio" name="hebergement" value="3etoiles" required> Hôtel 3 étoiles</label>
+        <label><input type="radio" name="hebergement" value="4etoiles"> Hôtel 4 étoiles</label>
+        <label><input type="radio" name="hebergement" value="5etoiles"> Hôtel 5 étoiles</label>
+        <label><input type="radio" name="hebergement" value="appartement"> Appartement meublé</label>
+        <label><input type="radio" name="hebergement" value="lodge"> Lodge ou Résidence sécurisée</label>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Type de chambre <span class="req">*</span></label>
+      <div class="choice-group">
+        <label><input type="radio" name="chambre" value="standard" required> Standard</label>
+        <label><input type="radio" name="chambre" value="suite"> Suite</label>
+        <label><input type="radio" name="chambre" value="appartement"> Appartement avec cuisine</label>
+        <label><input type="radio" name="chambre" value="simple"> Lit simple</label>
+        <label><input type="radio" name="chambre" value="double"> Lit double</label>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Besoins spécifiques (optionnel)</label>
+      <div class="checkbox-group">
+        <label><input type="checkbox" name="besoins[]" value="petitdej"> Petit déjeuner inclus</label>
+        <label><input type="checkbox" name="besoins[]" value="reunion"> Salle de réunion</label>
+        <label><input type="checkbox" name="besoins[]" value="internet"> Internet haut débit</label>
+        <label><input type="checkbox" name="besoins[]" value="navette"> Navette aéroport</label>
+        <label><input type="checkbox" name="besoins[]" value="securite"> Sécurité renforcée</label>
+        <label><input type="checkbox" name="besoins[]" value="centre"> Proximité centre-ville / institutions</label>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="hotel-budget">Budget par nuitée (USD) <span class="req">*</span></label>
+      <select id="hotel-budget" name="budget" required>
+        <option value="">-- Choisir une tranche --</option>
+        <option value="<50">< 50 USD</option>
+        <option value="50-100">50–100 USD</option>
+        <option value="100-200">100–200 USD</option>
+        <option value=">200">> 200 USD</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Informations complémentaires</label>
+      <textarea name="infos" rows="3" placeholder="Détails ou préférences..."></textarea>
+    </div>
+    <button type="submit">Envoyer ma demande</button>
+  </fieldset>
+</form>

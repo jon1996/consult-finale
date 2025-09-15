@@ -1,0 +1,658 @@
+// section divider
+.section-divider {
+  width: 90%;
+  max-width: 1440px;
+  height: 1px;
+  background-color: var(--light-grey-4);
+  margin: 3rem auto;
+}
+
+// ======================== Carousel indicator ==========================
+.carousel-indicator {
+  .indicator {
+    height: 20px;
+    width: 3px;
+    margin: 5px 0;
+    background-color: var(--icon-color);
+  }
+
+  .indicator + .active {
+    height: 50px;
+    background-color: var(--active-icon-color);
+  }
+}
+
+// ======================== Carousel indicator style 2 ========================
+.indicator-style-2 {
+  width: 220px;
+  color: var(--white);
+  font-family: var(--main-font);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  * {
+    cursor: pointer;
+  }
+  .icon {
+    height: 24px;
+    fill: var(--white);
+  }
+
+  .nums {
+    display: flex;
+    align-items: flex-end;
+
+    .slick-dots {
+      display: flex;
+      align-items: flex-end;
+
+      li {
+        button {
+          border: none;
+          background-color: transparent;
+          color: var(--white);
+          font-family: var(--main-font);
+        }
+
+        &:not(.slick-active) {
+          display: none;
+        }
+      }
+
+      .slick-active {
+        button {
+          font-size: 3.5rem;
+        }
+      }
+    }
+  }
+
+  .current {
+    font-size: 3rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .divider,
+  .total {
+    font-size: 1rem;
+    padding: 2px;
+  }
+}
+
+// ========================== Contact Links ==========================
+.contact-links {
+  .link {
+    display: flex;
+    align-items: center;
+    margin: 0.25rem 0;
+
+    * {
+      margin: 0;
+    }
+
+    i {
+      color: var(--dark-grey-4);
+      margin-right: 10px;
+      font-size: 13px;
+      cursor: auto;
+      color: var(--light-grey-2);
+    }
+  }
+}
+
+// =========================== Social Icons ==============================
+.social-icons {
+  margin: 1rem 0;
+
+  i {
+    font-size: 1rem;
+    margin-right: 1rem;
+    color: var(--heading-color);
+
+    &:hover {
+      color: var(--active-icon-color);
+      cursor: pointer;
+    }
+  }
+}
+
+// ========================== rotated text ==========================
+.rotated-text {
+  position: absolute;
+  right: -31%;
+  bottom: 26%;
+  font-size: 11rem;
+  font-family: var(--main-font);
+  transform: rotate(-90deg);
+  color: rgba(85, 85, 85, 0.1);
+  text-transform: uppercase;
+}
+
+//================================ Start Rating ==================================
+.star-rating {
+  margin: 1rem 0;
+
+  .star {
+    color: var(--icon-color);
+    font-size: 13px;
+    margin-right: 0.3rem;
+  }
+
+  .checked {
+    color: var(--active-icon-color);
+  }
+}
+
+/*===========================================================
+                        View More
+=============================================================*/
+.view-more {
+  a {
+    font-size: 18px;
+    padding: 0.25rem;
+    color: var(--dark-blue-2);
+    text-align: center;
+    border-bottom: 1px solid var(--dark-blue-2);
+    font-weight: 400;
+    display: inline-block;
+    position: relative;
+    transition: 0.3s;
+  }
+
+  a:after {
+    content: "⭢";
+    position: absolute;
+    opacity: 0;
+    right: 5px;
+    transition: 0.3s;
+  }
+
+  a:hover {
+    padding-right: 28px;
+    padding-left: 8px;
+  }
+
+  a:hover:after {
+    opacity: 1;
+    right: 5px;
+  }
+}
+
+/*===========================================================
+                    Video popup
+============================================================*/
+.video-popup {
+  .video-popup-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: var(--heading-color);
+    opacity: 0;
+    z-index: 999;
+    visibility: hidden;
+    display: none;
+    animation: fadeIn 0.5s;
+    z-index: 9999;
+
+    .v-container {
+      width: 80%;
+      max-width: 800px;
+      height: auto;
+      margin: 0 auto;
+      position: relative;
+      margin: 15vh auto;
+
+      video {
+        width: 100%;
+      }
+
+      .close-popup {
+        position: absolute;
+        height: 40px;
+        width: 40px;
+        background-color: var(--dark-blue-1);
+        right: -20px;
+        top: -20px;
+        border-radius: 50%;
+        font-size: 25px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        z-index: 100;
+        transition: all 0.3s;
+
+        i {
+          font-size: 1rem;
+          color: var(--white);
+        }
+
+        &:hover {
+          background-color: var(--dark-blue-2);
+        }
+      }
+
+      .video-bar {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: var(--white);
+        border: 1px solid var(--dark-grey-5);
+        cursor: pointer;
+
+        .passed {
+          background-color: var(--icon-color);
+          height: 10px;
+          width: 0;
+        }
+      }
+
+      .buttons {
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        left: 15px;
+        bottom: 30px;
+
+        button {
+          cursor: pointer;
+          background: none;
+          border: none;
+          outline: none;
+          height: 40px;
+          width: 40px;
+
+          i {
+            color: var(--white);
+            font-size: 1rem;
+          }
+        }
+      }
+
+      .share {
+        background-color: rgba(0, 0, 0, 0.8);
+        position: absolute;
+        bottom: 115px;
+        left: 50px;
+        opacity: 0;
+        display: none;
+
+        .social-icons {
+          margin: 0;
+
+          i {
+            color: var(--white);
+          }
+        }
+      }
+
+      .show {
+        display: block;
+        opacity: 1;
+      }
+    }
+  }
+}
+
+/*===========================================================
+                        Scoll next
+=============================================================*/
+
+.scroll-next {
+  position: absolute;
+  top: 90vh;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  transform: translate(-50%, 0);
+  .chevrons {
+    position: relative;
+    width: 24px;
+    height: 10px;
+
+    .chevron {
+      position: absolute;
+      width: 24px;
+      height: 2px;
+      opacity: 0;
+      transform: scale3d(0.5, 0.5, 0.5);
+      animation: scroll 3s ease-out infinite;
+    }
+
+    .chevron:first-child {
+      animation: scroll 3s ease-out 1s infinite;
+    }
+
+    .chevron:nth-child(2) {
+      animation: scroll 3s ease-out 2s infinite;
+    }
+
+    .chevron:before,
+    .chevron:after {
+      content: " ";
+      position: absolute;
+      top: 0;
+      height: 100%;
+      width: 51%;
+      background: var(--white);
+    }
+
+    .chevron:before {
+      left: 0;
+      transform: skew(0deg, 30deg);
+    }
+
+    .chevron:after {
+      right: 0;
+      width: 50%;
+      transform: skew(0deg, -30deg);
+    }
+  }
+}
+
+/*==============================================================
+                      Hamburger Menu
+===============================================================*/
+
+.menu-toggler {
+  .hamburger-menu {
+    a {
+      span {
+        background: var(--dark-grey-4);
+        &::after,
+        &::before {
+          background: var(--dark-grey-4);
+        }
+      }
+    }
+
+    .active {
+      span {
+        background: transparent;
+      }
+    }
+  }
+}
+
+/*===============================================================
+                    Movile popup toggler
+================================================================*/
+
+.mobile-popup-toggler {
+  .fixed-bottom {
+    bottom: -2px;
+    height: 50px;
+    width: 100%;
+    box-shadow: 0px 0px 8px 0px var(--icon-color);
+    background-color: var(--white);
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    i {
+      font-size: 1.2rem;
+    }
+
+    .divider {
+      height: 25px;
+      width: 1px;
+      background-color: var(--icon-color);
+    }
+  }
+}
+
+// Openings
+.openings {
+  margin: 2rem 0;
+
+  .opening {
+    display: flex;
+    align-items: center;
+    margin: 0.25rem 0;
+
+    .divider {
+      height: 1px;
+      width: 20px;
+      background-color: var(--light-grey-2);
+      margin: 0 0.25rem;
+    }
+
+    p {
+      margin: 0;
+    }
+  }
+}
+
+// ==================================== Show =================================
+.show {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: scale(1) !important;
+}
+
+// ====================================== Hide ===================================
+.hide {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
+// ============================= Blog Item style 1 ============================
+.single-blog-grid-item-01 {
+  cursor: pointer;
+  &:hover {
+    .thumb {
+      .hover {
+        visibility: visible;
+        opacity: 1;
+      }
+    }
+  }
+
+  .thumb {
+    position: relative;
+    z-index: 0;
+
+    .hover {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(#000, 0.5);
+      content: "";
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      visibility: hidden;
+      opacity: 0;
+      transition: all 500ms;
+
+      .readmore {
+        color: var(--white);
+        transition: all 500ms;
+
+        &:hover {
+          transform: scale(1.2);
+        }
+      }
+    }
+
+    img {
+      width: 100%;
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
+    }
+  }
+
+  .content {
+    background-color: var(--white);
+    padding: 25px 30px 28px;
+    text-align: center;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+
+    .time {
+      font-family: var(--main-font);
+      color: var(--light-grey-2);
+      font-size: 13px;
+      font-weight: 400;
+      line-height: 1.6;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .title {
+      font-size: 20px;
+      line-height: 30px;
+      font-family: var(--main-font);
+      font-weight: 700;
+
+      a {
+        color: var(--dark-grey-4);
+        transition: 500ms all;
+        text-decoration: none;
+        font-size: 16px;
+        font-weight: 500;
+      }
+    }
+  }
+}
+
+// ============================= Single Teacher Item ============================
+.single-teacher-item {
+  .thumb {
+    position: relative;
+    z-index: 0;
+    img {
+      width: 100%;
+    }
+    .hover {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      &.active {
+        .hover-inner {
+          visibility: visible;
+          opacity: 1;
+        }
+      }
+      .plus {
+        position: absolute;
+        right: 5px;
+        top: 5px;
+        z-index: 2;
+        cursor: pointer;
+        i {
+          color: var(--dark-grey-3);
+        }
+      }
+      .hover-inner {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(#333e48, 0.7);
+        padding: 4rem 2.5rem;
+        visibility: hidden;
+        opacity: 0;
+        transition: all 500ms;
+        text-align: left;
+        p {
+          line-height: 1.6;
+          color: var(--white);
+        }
+      }
+    }
+  }
+  .content {
+    background-color: var(--white);
+    text-align: center;
+    padding: 1rem 2rem 2rem 2rem;
+    position: relative;
+    .name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--light-grey-2);
+      letter-spacing: 2px;
+      margin-bottom: 0;
+      text-transform: uppercase;
+    }
+    .designation {
+      font-size: 11px;
+      color: var(--light-grey-2);
+    }
+    .social-icons {
+      margin: 4px;
+      position: absolute;
+      right: 10px;
+      bottom: 0px;
+      i {
+        font-size: 13px;
+        margin: 2px;
+        color: rgba(50, 61, 71, 0.9);
+      }
+    }
+  }
+}
+
+// ============================= comment item style 1 ============================
+.comment-item-style-1 {
+  margin: 2rem 0;
+
+  .name {
+    margin: 0;
+    font-weight: 700;
+  }
+
+  .degree {
+    font-size: 11px;
+    color: var(--icon-color);
+    margin-bottom: 0.3rem;
+  }
+
+  .post {
+    margin-bottom: 0.3rem;
+  }
+  .star-rating {
+    margin: 0;
+    .star {
+      font-size: 12px;
+    }
+  }
+}
+
+// ============================= comment item style 2 ============================
+.comment-item-style-2 {
+  margin: 2rem 0;
+
+  .name {
+    margin: 0;
+    font-weight: 700;
+  }
+
+  .time {
+    font-size: 10px;
+  }
+}
+
+// ======================= Show Up Side Forms Icons =============================
+.show-up-form-icons {
+  bottom: -40px !important;
+  opacity: 1 !important;
+}

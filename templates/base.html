@@ -1,23 +1,77 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{% block title %}Consult{% endblock %}</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  {% block head %}{% endblock %}
-</head>
-<body>
-  {# Navbar supprimée pour les pages d'authentification #}
-  {% if messages %}
-    <div class="container">
-      {% for message in messages %}
-        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
-      {% endfor %}
-    </div>
-  {% endif %}
-  {% block content %}{% endblock %}
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  {% block scripts %}{% endblock %}
-</body>
+{% load i18n static %}
+<!doctype html>
+<html lang="{% get_current_language as LANGUAGE_CODE %}{{ LANGUAGE_CODE|default:'en' }}" data-theme="light">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% trans "Consult" %}{% endblock %}</title>
+  <link rel="icon" type="image/png" href="{% static 'core/favicon.png' %}">
+  <link rel="apple-touch-icon" href="{% static 'core/favicon.png' %}">
+    {% block head %}{% endblock %}
+    <style>
+      .lang-switch{position:fixed;right:12px;bottom:12px;z-index:1100;background:rgba(0,0,0,.04);backdrop-filter:saturate(180%) blur(6px);border:1px solid rgba(0,0,0,.08);border-radius:12px;padding:6px}
+      /* Global brand tokens and Bootstrap primary overrides */
+      :root{
+        /* adjusted brand colors to match provided image (darker orange) */
+        --brand-color:#C64A11;         /* primary */
+        --brand-color-hover:#B03E0F;   /* hover/darker */
+        --brand-color-light:#F6C9B0;   /* light tint */
+        --brand-color-dark:#9B360E;    /* dark */
+        --brand-contrast:#fff;
+      }
+      /* Map common utility tokens (optional) */
+      :root{
+        --primary:var(--brand-color);
+        --primary-hover:var(--brand-color-hover);
+        --primary-light:var(--brand-color-light);
+        --primary-dark:var(--brand-color-dark);
+      }
+  /* Bootstrap primary theming */
+  .btn-primary{--bs-btn-color:var(--brand-contrast);--bs-btn-bg:var(--primary);--bs-btn-border-color:var(--primary);--bs-btn-hover-color:var(--brand-contrast);--bs-btn-hover-bg:var(--primary-hover);--bs-btn-hover-border-color:var(--primary-hover);--bs-btn-active-bg:var(--primary-dark);--bs-btn-active-border-color:var(--primary-dark)}
+      .btn-outline-primary{--bs-btn-color:var(--primary);--bs-btn-border-color:var(--primary);--bs-btn-hover-color:var(--brand-contrast);--bs-btn-hover-bg:var(--primary);--bs-btn-hover-border-color:var(--primary)}
+      .text-primary{color:var(--primary)!important}
+      .bg-primary{background-color:var(--primary)!important}
+      .border-primary{border-color:var(--primary)!important}
+      .link-primary{color:var(--primary)!important}
+      .link-primary:hover{color:var(--primary-hover)!important}
+      .form-check-input:checked{background-color:var(--primary);border-color:var(--primary)}
+      .page-link{color:var(--primary)}
+      .page-item.active .page-link{background-color:var(--primary);border-color:var(--primary)}
+      .form-range::-webkit-slider-thumb{background:var(--primary)}
+      .form-range::-moz-range-thumb{background:var(--primary)}
+
+      /* Stronger brand button rules to override Bootstrap where necessary */
+      .btn-brand {
+        background-color: var(--brand-color) !important;
+        border-color: var(--brand-color) !important;
+        color: var(--brand-contrast) !important;
+      }
+      .btn-brand:hover, .btn-brand:focus {
+        background-color: var(--brand-color-hover) !important;
+        border-color: var(--brand-color-hover) !important;
+      }
+      .btn-login{
+        box-shadow: 0 2px 10px rgba(0,0,0,.08) !important;
+        transition: transform .05s ease, box-shadow .15s ease !important;
+      }
+      .btn-login:hover{box-shadow:0 6px 18px rgba(0,0,0,.12) !important}
+
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  </head>
+  <body>
+    {% if messages %}
+      <div class="container">
+        {% for message in messages %}
+          <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {% block content %}{% endblock %}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    {% block scripts %}{% endblock %}
+
+  </body>
 </html>

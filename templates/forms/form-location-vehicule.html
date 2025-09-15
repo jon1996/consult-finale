@@ -1,0 +1,94 @@
+{% load static i18n %}
+<link rel="stylesheet" href="{% static 'components/forms/forms.css' %}">
+<script src="{% static 'components/forms/forms.js' %}" defer></script>
+
+<form id="location-form" class="location-form-component" novalidate>
+  <fieldset>
+  <legend>{% trans "Location de véhicules avec chauffeur" %}</legend>
+  <p class="muted">{% trans "Déplacez-vous en toute sécurité, avec confort et ponctualité, partout en RDC." %}</p>
+  <p class="muted">{% trans "Nous mettons à votre disposition un parc de véhicules adaptés à tous les besoins professionnels et personnels, accompagnés de chauffeurs expérimentés, discrets et multilingues." %}</p>
+  <p><strong>{% trans "Remplissez ce formulaire pour réserver un véhicule :" %}</strong></p>
+
+    <div class="form-group">
+  <label for="loc-ville">{% trans "Ville de prise en charge" %} <span class="req">*</span></label>
+      <select id="loc-ville" name="ville" required>
+  <option value="">{% trans "-- Choisir une ville --" %}</option>
+  <option>{% trans "Kinshasa" %}</option>
+  <option>{% trans "Lubumbashi" %}</option>
+  <option>{% trans "Kolwezi" %}</option>
+  <option>{% trans "Goma" %}</option>
+  <option>{% trans "Matadi" %}</option>
+  <option>{% trans "Autre" %}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+  <label>{% trans "Période de démarrage" %} <span class="req">*</span></label>
+      <div class="grid grid-2">
+        <div><input type="date" name="date_debut" required /></div>
+        <div><input type="time" name="heure_debut" required /></div>
+      </div>
+    </div>
+
+    <div class="form-group">
+  <label>{% trans "Durée de la location" %} <span class="req">*</span></label>
+      <select name="duree" required>
+  <option value="">{% trans "-- Choisir --" %}</option>
+    <option>{% trans "1 jour" %}</option>
+    <option>{% trans "2-3 jours" %}</option>
+    <option>{% trans "1 semaine" %}</option>
+    <option>{% trans "2 semaines" %}</option>
+    <option>{% trans "1 mois" %}</option>
+    <option>{% trans "autre" %}</option>
+      </select>
+  <input type="text" name="duree_autre" placeholder="{% trans 'Si autre, précisez' %}" />
+    </div>
+
+    <div class="form-group">
+  <label>{% trans "Type de véhicule souhaité" %} <span class="req">*</span></label>
+      <div class="choice-group">
+  <label><input type="radio" name="vehicule" value="berline" required> {% trans "Berline (Corolla, Accent…)" %}</label>
+  <label><input type="radio" name="vehicule" value="suv"> {% trans "SUV (Prado, Fortuner…)" %}</label>
+  <label><input type="radio" name="vehicule" value="pickup"> {% trans "4x4 Pick-up (double cabine)" %}</label>
+  <label><input type="radio" name="vehicule" value="minibus"> {% trans "Minibus / Van (jusqu’à 15 places)" %}</label>
+      </div>
+    </div>
+
+    <div class="form-group">
+  <label>{% trans "Finalité de l’usage" %} <span class="req">*</span></label>
+      <select name="finalite" required>
+  <option value="">{% trans "-- Choisir --" %}</option>
+  <option>{% trans "Déplacement professionnel" %}</option>
+  <option>{% trans "Missions institutionnelles" %}</option>
+  <option>{% trans "Transport minier/logistique" %}</option>
+  <option>{% trans "Visites privées" %}</option>
+  <option>{% trans "Tourisme" %}</option>
+  <option>{% trans "Autre" %}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+  <label>{% trans "Services complémentaires" %}</label>
+      <div class="checkbox-group">
+  <label><input type="checkbox" name="services[]" value="chauffeur"> {% trans "Chauffeur multilingue (Français/Anglais/Swahili)" %}</label>
+  <label><input type="checkbox" name="services[]" value="wifi"> {% trans "Accès Wi-Fi dans le véhicule" %}</label>
+  <label><input type="checkbox" name="services[]" value="securite"> {% trans "Assistance sécurité" %}</label>
+  <label><input type="checkbox" name="services[]" value="clim"> {% trans "Climatisation garantie" %}</label>
+  <label><input type="checkbox" name="services[]" value="carburant"> {% trans "Carburant inclus" %}</label>
+  <label><input type="checkbox" name="services[]" value="gps"> {% trans "GPS et géolocalisation temps réel" %}</label>
+      </div>
+    </div>
+
+    <div class="form-group">
+  <label for="loc-depose">{% trans "Lieu de dépose (si différent du départ)" %}</label>
+  <input type="text" id="loc-depose" name="lieu_depose" placeholder="{% trans 'Précisez le lieu de dépose' %}" />
+    </div>
+
+    <div class="form-group">
+  <label>{% trans "Informations complémentaires ou préférences spécifiques" %}</label>
+  <textarea name="infos" rows="3" placeholder="{% trans 'Détails ou préférences...' %}"></textarea>
+    </div>
+
+  <button type="submit">{% trans "Réserver mon véhicule" %}</button>
+  </fieldset>
+</form>

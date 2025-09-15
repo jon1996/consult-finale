@@ -16,7 +16,9 @@ def password_reset_request(request):
 			if user:
 				token = default_token_generator.make_token(user)
 				uid = urlsafe_base64_encode(force_bytes(user.pk))
-				reset_url = request.build_absolute_uri(reverse("accounts:password_reset_confirm", args=[uid, token]))
+				# build reset link that will work when proxied under /app/
+				path = reverse("accounts:password_reset_confirm", args=[uid, token])
+				reset_url = request.build_absolute_uri('/app' + path)
 				subject = _("Réinitialisation du mot de passe")
 				# Plain text and HTML versions for better compatibility
 				message_txt = render_to_string("accounts/password_reset_email.txt", {"reset_url": reset_url, "user": user})
@@ -36,14 +38,15 @@ def password_reset_confirm(request, uidb64, token):
 		user = get_user_model().objects.get(pk=uid)
 	except (TypeError, ValueError, OverflowError, User.DoesNotExist):
 		user = None
+	from .forms import CustomSetPasswordForm
 	if user and default_token_generator.check_token(user, token):
 		if request.method == "POST":
-			form = SetPasswordForm(user, request.POST)
+			form = CustomSetPasswordForm(user, request.POST)
 			if form.is_valid():
 				form.save()
 				return render(request, "accounts/password_reset_complete.html")
 		else:
-			form = SetPasswordForm(user)
+			form = CustomSetPasswordForm(user)
 		return render(request, "accounts/password_reset_confirm.html", {"form": form})
 	else:
 		return render(request, "accounts/password_reset_invalid.html")
@@ -60,6 +63,9 @@ def login_view(request):
 				form.add_error(None, "Veuillez confirmer votre adresse e-mail avant de vous connecter.")
 			else:
 				auth_login(request, user)
+				# Redirect staff directly to custom backoffice, others to user space
+				if user.is_staff or user.is_superuser:
+					return redirect("/app/backoffice/")
 				return redirect("/app/space/")
 	else:
 		form = LoginForm()
@@ -67,7 +73,7 @@ def login_view(request):
 
 def logout_view(request):
 	auth_logout(request)
-	return redirect("/app/account/login/")
+	return redirect("/app/accounts/login/")
 from django.shortcuts import render
 
 
@@ -100,7 +106,9 @@ def register(request):
 			uid = urlsafe_base64_encode(force_bytes(user.pk))
 			token = default_token_generator.make_token(user)
 			# Envoyer email de confirmation
-			confirm_url = request.build_absolute_uri(reverse("accounts:email_verify", args=[uid, token]))
+			# ensure confirmation link points to the proxied /app/accounts/ path in production
+			confirm_path = reverse("accounts:email_verify", args=[uid, token])
+			confirm_url = request.build_absolute_uri('/app' + confirm_path)
 			send_mail(
 				_("Confirmez votre adresse e-mail"),
 				_(f"Bonjour {user.username},\nCliquez sur ce lien pour confirmer votre adresse e-mail : {confirm_url}"),

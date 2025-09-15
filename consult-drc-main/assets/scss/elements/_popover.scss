@@ -1,0 +1,32 @@
+.popover-container {
+  width: 90px; // this size is compatable with small button. if you use different sized button toggler then you might need to change this size.
+  position: relative;
+}
+
+
+.popover-right {
+  background-color: rgba(51, 62, 72, 0.8);
+  width: 260px;
+  padding: 2rem;
+  position: absolute;
+  top: 10%;
+  left: 100%;
+  visibility: hidden;
+  opacity: 0;
+  transform: scale(.2);
+  transition: all .3s;
+
+  * {
+    color: var(--white);
+  }
+
+  p {
+    font-weight: 300;
+    font-size: 12px;
+  }
+
+  i {
+    font-size: 12px;
+    color: var(--white) !important;
+  }
+}

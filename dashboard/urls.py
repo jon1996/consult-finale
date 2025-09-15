@@ -1,8 +1,71 @@
 from django.urls import path
-from .views import space
+from .views import (
+    space,
+    backoffice,
+    switch_language,
+    form_partial,
+    submit_request,
+    my_requests,
+    request_detail,
+    admin_requests,
+    admin_request_detail,
+    admin_propose_offer,
+    admin_stats,
+    admin_profile,
+    admin_profile_update,
+    admin_stats_detail,
+    admin_users,
+    admin_user_create,
+    admin_user_detail,
+    admin_user_update,
+    wizard_service,
+    wizard_details,
+    wizard_payment_method,
+    wizard_submit,
+    pay,
+    cinetpay_start_payment,
+    cinetpay_notify,
+    cinetpay_return,
+    update_request,
+    update_request_payment_method,
+    resubmit_request,
+)
 
 app_name = 'dashboard'
 
 urlpatterns = [
     path('space/', space, name='space'),
+    # Staff backoffice (custom admin dashboard)
+    path('backoffice/', backoffice, name='backoffice'),
+    path('forms/<str:key>/', form_partial, name='form_partial'),
+    path('forms/<str:key>/submit/', submit_request, name='submit_request'),
+    path('requests/me/', my_requests, name='my_requests'),
+    path('requests/<int:id>/', request_detail, name='request_detail'),
+    path('requests/<int:id>/update/', update_request, name='request_update'),
+    path('requests/<int:id>/payment-method/', update_request_payment_method, name='request_update_payment_method'),
+    path('requests/<int:id>/resubmit/', resubmit_request, name='request_resubmit'),
+    # Staff JSON APIs
+    path('admin/requests/', admin_requests, name='admin_requests'),
+    path('admin/requests/<int:id>/', admin_request_detail, name='admin_request_detail'),
+    path('admin/requests/<int:id>/offer/', admin_propose_offer, name='admin_request_offer'),
+    path('admin/stats/', admin_stats, name='admin_stats'),
+    path('admin/stats/detail/', admin_stats_detail, name='admin_stats_detail'),
+    path('admin/profile/', admin_profile, name='admin_profile'),
+    path('admin/profile/update/', admin_profile_update, name='admin_profile_update'),
+    path('admin/users/', admin_users, name='admin_users'),
+    path('admin/users/create/', admin_user_create, name='admin_user_create'),
+    path('admin/users/<int:id>/', admin_user_detail, name='admin_user_detail'),
+    path('admin/users/<int:id>/update/', admin_user_update, name='admin_user_update'),
+    # Wizard API
+    path('api/wizard/service', wizard_service, name='wizard_service'),
+    path('api/wizard/details', wizard_details, name='wizard_details'),
+    path('api/wizard/payment-method', wizard_payment_method, name='wizard_payment_method'),
+    path('api/wizard/submit', wizard_submit, name='wizard_submit'),
+    # Payment landing
+    path('pay', pay, name='pay'),
+    # CinetPay integration
+    path('cinetpay/start/<int:id>/', cinetpay_start_payment, name='cinetpay_start'),
+    path('cinetpay/notify/', cinetpay_notify, name='cinetpay_notify'),
+    path('cinetpay/return/', cinetpay_return, name='cinetpay_return'),
+    path('i18n/switch/<str:code>/', switch_language, name='switch_language'),
 ]

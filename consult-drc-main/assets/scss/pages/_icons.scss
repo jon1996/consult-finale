@@ -1,0 +1,21 @@
+.icons {
+  font-size: 2rem;
+  padding: 4rem;
+  margin: 2rem 0;
+  i {
+    margin: 2rem;
+  }
+}
+
+.dark-icons {
+  i {
+    color: var(--dark-grey-4);
+  }
+}
+
+.white-icons {
+  background-color: var(--dark-grey-4);
+  i {
+    color: var(--white);
+  }
+}

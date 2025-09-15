@@ -1,0 +1,660 @@
+// default footer
+.footer-section {
+  margin-top: 6vh;
+
+  .divider {
+    width: 100%;
+    height: 1px;
+    background-color: var(--light-grey-4);
+    margin: 0;
+  }
+
+  .footer-content {
+    padding: 4rem 0;
+
+    h5 {
+      display: inline-block;
+      color: var(--dark-grey-3);
+      border-bottom: 1px solid var(--dark-blue-4);
+      padding-bottom: 0.5rem;
+    }
+
+    a {
+      font-size: 13px;
+      color: var(--light-grey-2);
+    }
+
+    a:hover {
+      color: var(--dark-blue-1);
+    }
+
+    li {
+      margin: 0.5rem 0;
+    }
+
+    .contact-links {
+      .social-icons {
+        margin: 1.4rem auto;
+        i {
+          font-size: 15px;
+          color: var(--dark-grey-3);
+        }
+      }
+    }
+    .brand-logo {
+      height: 45px;
+      margin-bottom: 3rem;
+    }
+
+    .newsletter {
+      p {
+        margin: 1.5rem 0;
+      }
+
+      form {
+        * {
+          height: 35px;
+          margin: 0;
+          border: 0;
+        }
+
+        input {
+          width: 70%;
+          background-color: var(--light-blue-2);
+          padding: 0.25rem 1.5rem;
+
+          &::placeholder {
+            color: var(--icon-color);
+            font-size: 12px;
+          }
+
+          &:focus {
+            outline: 1px solid var(--dark-blue-1);
+          }
+        }
+
+        .main-btn {
+          // width: 25%;
+          margin: 0;
+        }
+      }
+    }
+  }
+
+  .copyright {
+    background-color: var(--active-icon-color);
+    padding: 2rem 0;
+
+    .container-fluid {
+      position: relative;
+      p {
+        margin: 0;
+        color: var(--white);
+        font-size: 12px;
+        font-weight: 300;
+      }
+
+      span {
+        color: var(--light-red);
+      }
+    }
+
+    #scroll-top {
+      display: inline-block;
+      background-color: var(--icon-color);
+      position: absolute;
+      right: 60px;
+      bottom: 25px;
+      height: 35px;
+      margin-bottom: -20px;
+      width: 35px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.4s;
+      z-index: 9;
+
+      i {
+        display: block;
+        color: var(--white);
+      }
+
+      &:hover {
+        background-color: var(--dark-blue-1);
+      }
+    }
+
+    .active {
+      margin: 0px !important;
+      position: fixed !important;
+      transition: 0.3s;
+    }
+  }
+}
+
+// footer style two form oline courses
+.footer-style-2 {
+  margin-top: 6vh;
+  background-color: var(--light-grey-4);
+
+  .footer-content {
+    padding: 4rem 0;
+
+    h5 {
+      display: inline-block;
+      border-bottom: 1px solid var(--dark-blue-1);
+      padding-bottom: 0.5rem;
+      color: var(--dark-grey-4);
+    }
+
+    a {
+      font-size: 13px;
+      color: var(--light-grey-2);
+    }
+
+    a:hover {
+      color: var(--dark-blue-1);
+    }
+
+    li {
+      margin: 0.5rem 0;
+    }
+
+    .brand-logo {
+      height: 45px;
+      margin-bottom: 3rem;
+    }
+
+    .contact-links {
+      .social-icons {
+        margin: 1.4rem auto;
+        i {
+          color: var(--dark-grey-4);
+          font-size: 15px;
+        }
+      }
+    }
+
+    .ins-feed {
+      ul {
+        margin-top: 2rem;
+        display: flex;
+        flex-wrap: wrap;
+
+        li {
+          margin: 0;
+          width: 33%;
+          padding: 3px;
+        }
+      }
+    }
+
+    .twi-feed {
+      .post {
+        margin-top: 2rem;
+        display: flex;
+        margin-bottom: 2rem;
+        cursor: pointer;
+
+        i {
+          font-size: 20px;
+          margin: 0;
+          color: var(--active-icon-color);
+        }
+
+        .post-detail {
+          margin-left: 1rem;
+
+          .name {
+            font-size: 11px;
+            font-weight: 400;
+          }
+
+          p {
+            margin-bottom: 0.25rem;
+            font-size: 12px;
+            line-height: 18px;
+            font-weight: 700;
+            color: var(--dark-grey-4);
+          }
+
+          .time {
+            font-size: 9px;
+          }
+        }
+
+        &:hover {
+          i {
+            color: var(--dark-grey-4);
+          }
+        }
+      }
+    }
+
+    .newsletter {
+      p {
+        margin: 1.5rem 0;
+      }
+
+      form {
+        * {
+          height: 35px;
+          margin: 0;
+          border: 0;
+        }
+
+        input {
+          width: 70%;
+          background-color: var(--dark-grey-4);
+          padding: 0.25rem 1.5rem;
+          color: var(--white);
+
+          &::placeholder {
+            color: var(--white);
+            font-size: 12px;
+          }
+
+          &:focus {
+            outline: 1px solid var(--dark-blue-1);
+          }
+        }
+
+        .main-btn {
+          width: 28%;
+          margin: 0;
+        }
+      }
+    }
+  }
+
+  .copyright {
+    background-color: var(--dark-grey-4);
+    position: relative;
+
+    .container-fluid {
+      position: relative;
+
+      p {
+        padding: 2rem 0;
+        margin: 0;
+        color: var(--white);
+        font-size: 12px;
+        font-weight: 300;
+      }
+
+      span {
+        color: var(--light-red);
+      }
+    }
+
+    #scroll-top {
+      display: inline-block;
+      background-color: var(--white);
+      position: absolute;
+      right: 60px;
+      bottom: 25px;
+      height: 35px;
+      margin-bottom: -20px;
+      width: 35px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.4s;
+
+      .icon {
+        display: block;
+        fill: var(--dark-grey-4);
+      }
+
+      &:hover {
+        background-color: var(--dark-blue-1);
+      }
+    }
+
+    .active {
+      margin: 0px !important;
+      position: fixed !important;
+      transition: 0.3s;
+    }
+  }
+}
+
+// footer style three from homepage 4
+.footer-style-3 {
+  margin-top: 6vh;
+  background-color: var(--light-grey-3);
+
+  .footer-content {
+    padding: 6rem 0 4rem 0;
+
+    * {
+      color: var(--dark-indigo);
+    }
+
+    h5 {
+      display: inline-block;
+      border-bottom: 1px solid var(--dark-indigo);
+      padding-bottom: 0.5rem;
+      margin-bottom: 2rem;
+    }
+
+    a {
+      font-size: 13px;
+      font-weight: 400;
+
+      &:hover {
+        font-weight: 700;
+      }
+    }
+
+    li {
+      margin: 0.5rem 0;
+    }
+
+    .brand-logo {
+      height: 45px;
+      margin-bottom: 3rem;
+    }
+
+    .contact-links {
+      .social-icons {
+        margin: 1.4rem auto;
+        i {
+          color: var(--dark-indigo);
+          font-size: 15px;
+        }
+      }
+    }
+
+    .ins-feed {
+      ul {
+        display: flex;
+        flex-wrap: wrap;
+
+        li {
+          margin: 0;
+          width: 33%;
+          padding: 4px;
+        }
+      }
+    }
+  }
+
+  .copyright {
+    background-color: var(--light-grey-3);
+    position: relative;
+
+    .container-fluid {
+      position: relative;
+
+      p {
+        padding: 2rem 0;
+        margin: 0;
+        color: var(--dark-indigo);
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      span {
+        color: var(--light-red);
+      }
+    }
+
+    #scroll-top {
+      display: inline-block;
+      background-color: var(--dark-indigo);
+      position: absolute;
+      right: 60px;
+      bottom: 25px;
+      height: 35px;
+      margin-bottom: -20px;
+      width: 35px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.4s;
+
+      .icon {
+        display: block;
+        fill: var(--light-grey-4);
+      }
+
+      &:hover {
+        .icon {
+          fill: var(--white);
+        }
+      }
+    }
+
+    .active {
+      margin: 0px !important;
+      position: fixed !important;
+      transition: 0.3s;
+    }
+  }
+}
+
+// Footer style four from Footer UI
+.footer-style-4 {
+  background-color: var(--dark-grey-3);
+
+  * {
+    color: var(--white);
+  }
+
+  .red {
+    color: var(--red);
+  }
+
+  .footer-content {
+    position: relative;
+    padding: 8px 0;
+    .row {
+      height: 80px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .footer-links {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0;
+
+        li {
+          margin: 0 1rem;
+
+          a:after {
+            content: "";
+            width: 0;
+            height: 1px;
+            background-color: var(--white);
+            display: block;
+            transition: all 0.5s;
+          }
+
+          &:hover {
+            a {
+              color: var(--white);
+            }
+
+            a:after {
+              width: 100%;
+            }
+          }
+        }
+      }
+
+      .social-icons {
+        i {
+          color: var(--white);
+          margin: 0 6px;
+        }
+      }
+    }
+
+    #scroll-top {
+      display: inline-block;
+      background-color: var(--white);
+      position: absolute;
+      right: -10px;
+      bottom: 25px;
+      height: 35px;
+      margin-bottom: -20px;
+      width: 35px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.4s;
+
+      .icon {
+        display: block;
+        fill: var(--dark-grey-2);
+      }
+
+      &:hover {
+        .icon {
+          fill: var(--dark-indigo);
+        }
+      }
+    }
+
+    .active {
+      margin: 0px !important;
+      position: fixed !important;
+      transition: 0.3s;
+    }
+  }
+}
+
+// Footer style five from Footer UI
+.footer-style-5 {
+  margin-top: 6vh;
+  background-color: var(--dark-grey-4);
+
+  .footer-content {
+    padding: 6rem 0 4rem 0;
+
+    * {
+      color: var(--white);
+    }
+
+    h5 {
+      display: inline-block;
+      border-bottom: 1px solid var(--active-icon-color);
+      padding-bottom: 0.5rem;
+      margin-bottom: 2rem;
+    }
+
+    a {
+      font-size: 13px;
+      font-weight: 400;
+
+      &:hover {
+        color: var(--icon-color);
+      }
+    }
+
+    li {
+      margin: 0.5rem 0;
+    }
+
+    & > div {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    & > div:not(:last-child) {
+      position: relative;
+
+      &::after {
+        content: "";
+        display: inline-block;
+        height: 100%;
+        width: 1px;
+        background-color: var(--white);
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+    }
+
+    .col-divider {
+      height: 200px;
+      width: 1px;
+      background-color: var(--white);
+    }
+
+    .contact-links {
+      .social-icons {
+        margin-top: 3rem;
+        margin-bottom: 1rem;
+
+        i {
+          color: var(--white);
+        }
+      }
+    }
+
+    .brand-logo {
+      height: 45px;
+      margin-bottom: 3rem;
+    }
+
+    .ins-feed {
+      ul {
+        display: flex;
+        flex-wrap: wrap;
+
+        li {
+          margin: 0;
+          width: 33%;
+          padding: 4px;
+        }
+      }
+    }
+  }
+
+  .copyright {
+    background-color: var(--dark-grey-4);
+    position: relative;
+
+    .container-fluid {
+      position: relative;
+
+      p {
+        padding: 2rem 0;
+        margin: 0;
+        color: var(--white);
+        font-size: 12px;
+        font-weight: 400;
+      }
+
+      span {
+        color: var(--light-red);
+      }
+    }
+
+    #scroll-top {
+      display: inline-block;
+      background-color: var(--light-grey-4);
+      position: absolute;
+      right: 60px;
+      bottom: 25px;
+      height: 35px;
+      margin-bottom: -20px;
+      width: 35px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.4s;
+
+      .icon {
+        display: block;
+        fill: var(--dark-indigo);
+      }
+    }
+
+    .active {
+      margin: 0px !important;
+      position: fixed !important;
+      transition: 0.3s;
+    }
+  }
+}

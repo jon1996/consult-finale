@@ -1,0 +1,14 @@
+# Enable rewrites for extensionless PHP pages
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Redirect direct .php requests to extensionless URL (canonical)
+  RewriteCond %{THE_REQUEST} \s/+(.*)\.php[\s?] [NC]
+  RewriteRule ^ /%1 [R=302,L]
+
+  # If a requested file without extension exists as .php, serve it
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME}.php -f
+  RewriteRule ^(.*)$ $1.php [L]
+</IfModule>

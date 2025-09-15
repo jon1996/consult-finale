@@ -1,0 +1,58 @@
+.teacher-form {
+  .container-fluid {
+    padding: 0;
+    background-color: var(--light-grey-3);
+
+    .content {
+      padding: 2rem 3rem 2rem 18vw;
+
+      .text {
+        margin: 0 1.5rem;
+
+        h2 {
+          margin-bottom: 1rem;
+        }
+      }
+
+      .form-style-2 {
+        padding: 3rem 2rem;
+        margin: 3rem 0;
+        background-color: var(--white);
+
+        .form-group {
+          margin: 0;
+
+          label {
+            margin: 0;
+            font-size: 12px;
+          }
+
+          input {
+            padding: .25rem .5rem;
+            margin: .25rem 0 1rem 0;
+          }  
+          .options {
+            display: flex;
+            p {
+              margin: .75rem 2rem .5rem 0;
+              font-weight: 700;
+            }
+          }
+        }
+
+        .main-btn {
+          margin: 2rem 0;
+        }
+      }
+    }
+
+    .media {
+      background: url("../img/University/join_us/teacher-students.png") center center / cover;
+    }
+
+    .halfway-btn {
+      left: 58.333%;
+      top: 50%;
+    }
+  }
+}

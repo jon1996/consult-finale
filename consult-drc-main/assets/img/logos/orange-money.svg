@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="100" height="60" viewBox="0 0 100 60" xmlns="http://www.w3.org/2000/svg">
+  <rect x="0" y="0" width="100" height="60" rx="8" fill="#FFFFFF" stroke="#E5E5E5" stroke-width="1"/>
+  
+  <!-- Orange background -->
+  <rect x="5" y="5" width="90" height="50" rx="5" fill="#FF6600"/>
+  
+  <!-- Orange logo circles -->
+  <circle cx="25" cy="30" r="12" fill="#FFFFFF"/>
+  <circle cx="25" cy="30" r="8" fill="none" stroke="#FF6600" stroke-width="2"/>
+  
+  <!-- Orange text -->
+  <text x="45" y="25" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#FFFFFF">
+    Orange
+  </text>
+  <text x="45" y="38" font-family="Arial, sans-serif" font-size="7" fill="#FFFFFF">
+    Money
+  </text>
+</svg>

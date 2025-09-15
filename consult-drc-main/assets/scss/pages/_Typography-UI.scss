@@ -1,0 +1,49 @@
+
+.font-family-section {
+  .font-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .font-name {
+      width: 120px;
+      h5 {
+        font-weight: 700;
+        letter-spacing: 2px;
+        line-height: 1.6;
+        text-transform: uppercase;
+
+        &::after {
+          content: "";
+          display: block;
+          height: 1px;
+          width: 200px;
+          background-color: var(--icon-color);
+          margin: .5rem 0;
+        }
+      }
+
+      h6 {
+        text-transform: capitalize;
+      }
+    }
+    .font {
+      height: 120px;
+      width: 160px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: var(--light-grey-3);
+    }
+  }
+}
+
+.heading-fonts-section {
+  background-color: var(--light-grey-3);
+
+  .container {
+    &>p {
+      margin: 2rem 0 .5rem;
+    }
+  }
+}

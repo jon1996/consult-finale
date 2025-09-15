@@ -1,0 +1,29 @@
+.popular-courses {
+  background-color: var(--light-grey-3);
+  padding: 4rem 0 3rem 0;
+
+  .container  {
+    position: relative;
+    .rotated-text-2 {
+      position: absolute;
+      left: -150px;
+      top: 100px;
+    }
+  }
+
+}
+
+.all-courses {
+  .course-wrapper {
+    position: relative;
+
+    .rotated-text {
+      font-size: 8rem;
+      bottom: auto;
+      top: 50%;
+      right: -36%;
+      transform: translateY(-50%) rotate(-90deg);
+      z-index: -1;
+    }
+  }
+}

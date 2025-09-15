@@ -1,0 +1,212 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: consult\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-08-15 00:00+0000\n"
+"PO-Revision-Date: 2025-08-15 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: Français\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+# Fr is the source language for most strings; keep identical or refine phrasing.
+msgid "Consult"
+msgstr "Consult"
+
+msgid "Accueil"
+msgstr "Accueil"
+
+msgid "Historique"
+msgstr "Historique"
+
+msgid "Backoffice"
+msgstr "Backoffice"
+
+msgid "Se déconnecter"
+msgstr "Se déconnecter"
+
+msgid "Tableau de bord"
+msgstr "Tableau de bord"
+
+msgid "Détails de la demande"
+msgstr "Détails de la demande"
+
+msgid "Fermer"
+msgstr "Fermer"
+
+msgid "Aller à la page \"Nouvelle demande\""
+msgstr "Aller à la page \"Nouvelle demande\""
+
+msgid "Nouvelle demande"
+msgstr "Nouvelle demande"
+
+msgid "Service"
+msgstr "Service"
+
+msgid "Informations"
+msgstr "Informations"
+
+msgid "Paiement"
+msgstr "Paiement"
+
+msgid "Confirmation"
+msgstr "Confirmation"
+
+msgid "Choisissez un service, puis cliquez Suivant."
+msgstr "Choisissez un service, puis cliquez Suivant."
+
+msgid "Suivant"
+msgstr "Suivant"
+
+msgid "Retour"
+msgstr "Retour"
+
+msgid "Choisissez une méthode de paiement."
+msgstr "Choisissez une méthode de paiement."
+
+msgid "Carte bancaire"
+msgstr "Carte bancaire"
+
+msgid "Mobile Money"
+msgstr "Mobile Money"
+
+msgid "Virement"
+msgstr "Virement"
+
+msgid "Résumé"
+msgstr "Résumé"
+
+msgid "Soumettre"
+msgstr "Soumettre"
+
+msgid "Besoin d’un autre parcours ? Vous pouvez aussi utiliser l’onglet Formulaires."
+msgstr "Besoin d’un autre parcours ? Vous pouvez aussi utiliser l’onglet Formulaires."
+
+msgid "Mes formulaires"
+msgstr "Mes formulaires"
+
+msgid "Choisissez un service, puis remplissez le formulaire."
+msgstr "Choisissez un service, puis remplissez le formulaire."
+
+msgid "Formulaires"
+msgstr "Formulaires"
+
+msgid "Mes demandes"
+msgstr "Mes demandes"
+
+msgid "Rechercher par service, statut ou ID..."
+msgstr "Rechercher par service, statut ou ID..."
+
+msgid "Toutes"
+msgstr "Toutes"
+
+msgid "En attente paiement"
+msgstr "En attente paiement"
+
+msgid "Payées"
+msgstr "Payées"
+
+msgid "Annulées"
+msgstr "Annulées"
+
+msgid "Vue d’ensemble"
+msgstr "Vue d’ensemble"
+
+msgid "Demandes"
+msgstr "Demandes"
+
+msgid "Utilisateurs"
+msgstr "Utilisateurs"
+
+msgid "Basculer thème"
+msgstr "Basculer thème"
+
+msgid "Espace utilisateur"
+msgstr "Espace utilisateur"
+
+msgid "Total"
+msgstr "Total"
+
+msgid "7 derniers jours"
+msgstr "7 derniers jours"
+
+msgid "En attente"
+msgstr "En attente"
+
+msgid "Profil administrateur"
+msgstr "Profil administrateur"
+
+msgid "Modifier"
+msgstr "Modifier"
+
+msgid "Prénom"
+msgstr "Prénom"
+
+msgid "Nom"
+msgstr "Nom"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "Annuler"
+msgstr "Annuler"
+
+msgid "Enregistrer"
+msgstr "Enregistrer"
+
+msgid "Rechercher par service, statut, ID, email..."
+msgstr "Rechercher par service, statut, ID, email..."
+
+msgid "Nouvel utilisateur"
+msgstr "Nouvel utilisateur"
+
+msgid "Rechercher par nom d’utilisateur, email, nom…"
+msgstr "Rechercher par nom d’utilisateur, email, nom…"
+
+msgid "Tous"
+msgstr "Tous"
+
+msgid "Staff"
+msgstr "Staff"
+
+msgid "Créer un utilisateur"
+msgstr "Créer un utilisateur"
+
+msgid "Nom d’utilisateur"
+msgstr "Nom d’utilisateur"
+
+msgid "Mot de passe"
+msgstr "Mot de passe"
+
+msgid "Téléphone"
+msgstr "Téléphone"
+
+msgid "Entreprise"
+msgstr "Entreprise"
+
+msgid "Secteur"
+msgstr "Secteur"
+
+msgid "Donner l’accès staff (backoffice)"
+msgstr "Donner l’accès staff (backoffice)"
+
+msgid "Créer"
+msgstr "Créer"
+
+msgid "Détails utilisateur"
+msgstr "Détails utilisateur"
+
+msgid "Actif"
+msgstr "Actif"
+
+msgid "Superutilisateur"
+msgstr "Superutilisateur"
+
+msgid "Email vérifié"
+msgstr "Email vérifié"
+
+msgid "Groupes"
+msgstr "Groupes"

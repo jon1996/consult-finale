@@ -1,0 +1,18 @@
+{% load static i18n %}
+<link rel="stylesheet" href="{% static 'components/forms/forms.css' %}">
+<script src="{% static 'components/forms/forms.js' %}" defer></script>
+<div class="autres-form-component">
+  <form id="autres-form" novalidate>
+    <fieldset>
+  <legend>{% trans "Autres services" %}</legend>
+  <p class="muted">{% trans "Décrivez librement votre besoin. Notre équipe reviendra vers vous rapidement." %}</p>
+      <div class="form-group">
+  <label for="autres-comment">{% trans "Votre demande" %}</label>
+  <textarea id="autres-comment" name="comment" rows="6" placeholder="{% trans 'Ex: Besoin d’un service spécifique non listé...' %}"></textarea>
+      </div>
+      <div class="form-actions">
+  <button type="submit">{% trans "Soumettre" %}</button>
+      </div>
+    </fieldset>
+  </form>
+</div>

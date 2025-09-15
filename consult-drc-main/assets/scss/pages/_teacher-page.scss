@@ -1,0 +1,161 @@
+.teacher-details {
+  .container-fluid {
+    margin-top: 6rem;
+    padding-left: 0px;
+
+    .media {
+      background: url("../img/University/teachers_profile/teacher.png")
+        no-repeat center center / cover;
+      min-height: 800px;
+
+      .side-social-icons {
+        top: 5%;
+        left: 10%;
+      }
+    }
+
+    .teacher-brif {
+      h2 {
+        margin: 2rem 0;
+      }
+      h3 {
+        font-family: var(--heading-font);
+      }
+
+      h6 {
+        font-weight: 600;
+      }
+
+      .divider {
+        height: 1px;
+        width: 140px;
+        background-color: var(--icon-color);
+        margin: 0;
+      }
+
+      .teacher-rating {
+        display: flex;
+        align-items: center;
+
+        .rate-detail {
+          display: flex;
+          span {
+            font-size: 11px;
+            padding: 2px;
+          }
+
+          .rating {
+            color: var(--dark-grey-3);
+          }
+
+          .raters {
+            color: var(--icon-color);
+          }
+        }
+      }
+    }
+    .content {
+      padding: 0 3rem;
+      position: relative;
+
+      .show {
+        visibility: visible;
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      .small-btn {
+        margin: 1rem 0 5rem 0;
+      }
+
+      .progress-bars {
+        padding: 0;
+      }
+    }
+  }
+}
+
+.message-teacher {
+  .container {
+    background-color: var(--light-grey-3);
+
+    h2 {
+      margin-bottom: 2rem;
+    }
+    .media {
+      padding: 0;
+
+      img {
+        height: 100%;
+      }
+    }
+
+    .content {
+      padding: 3rem 2rem;
+      .form-style-2 {
+        margin: 0;
+        label {
+          margin-bottom: 0;
+          font-size: 11px;
+        }
+
+        .form-group {
+          margin-bottom: 1rem;
+
+          input {
+            &::placeholder {
+              font-family: var(--main-font);
+              color: var(--active-icon-color);
+            }
+          }
+        }
+
+        .main-btn {
+          margin: 2rem 0px 0px 0px;
+        }
+      }
+    }
+  }
+}
+
+.teacher-reviews {
+  h2 {
+    margin: 2rem 0 1.5rem 0;
+  }
+
+  .review-nums {
+    color: var(--dark-grey-4);
+  }
+  .view-more {
+    margin: 3rem auto;
+    text-align: center;
+
+    a {
+      font-size: 15px;
+      font-weight: 700;
+    }
+  }
+}
+
+.post-comment {
+  .container {
+    h2 {
+      margin: 1.5rem 0 2rem 0;
+    }
+
+    .rate-teacher {
+      display: flex;
+      align-items: center;
+
+      p {
+        margin: 0 1rem 0 0;
+        font-size: 13px;
+        color: var(--dark-grey-3);
+      }
+
+      .star {
+        font-size: 12px;
+      }
+    }
+  }
+}

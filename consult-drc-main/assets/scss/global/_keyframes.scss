@@ -1,0 +1,97 @@
+@-webkit-keyframes pulse {
+  0% {
+    -webkit-box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.75);
+  }
+  70% {
+      -webkit-box-shadow: 0 0 0 12px rgba(204,169,44, 0);
+  }
+  100% {
+      -webkit-box-shadow: 0 0 0 0 rgba(204,169,44, 0);
+  }
+}
+@keyframes pulse {
+  0% {
+    -moz-box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.75);
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.75);
+  }
+  70% {
+      -moz-box-shadow: 0 0 0 12px rgba(204,169,44, 0);
+      box-shadow: 0 0 0 12px rgba(204,169,44, 0);
+  }
+  100% {
+      -moz-box-shadow: 0 0 0 0 rgba(204,169,44, 0);
+      box-shadow: 0 0 0 0 rgba(204,169,44, 0);
+  }
+}
+
+
+// pluse for alert model
+@keyframes pulse2 {
+  0% {
+    -moz-box-shadow: 0 0 0 0 rgba(#9eb6bc, .3);
+    box-shadow: 0 0 0 0 rgba(#9EB6BC, .3);
+  }
+  70% {
+      -moz-box-shadow: 0 0 0 12px rgba(204,169,44, 0);
+      box-shadow: 0 0 0 12px rgba(204,169,44, 0);
+  }
+  100% {
+      -moz-box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.75);
+      box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.75);
+  }
+}
+
+@keyframes scroll {
+  25% {
+    opacity: 1;
+
+  }
+  33% {
+    opacity: 1;
+    transform: translateY(30px);
+  }
+  67% {
+    opacity: 1;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(55px) scale3d(0.5, 0.5, 0.5);
+  }
+}
+
+// Checkbox animation 
+
+@-webkit-keyframes checkboxSlideUp {
+  0% {
+    -webkit-transform: translateY(1rem);
+    transform: translateY(1rem);
+  }
+
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
+
+@keyframes checkboxSlideUp {
+  0% {
+    -webkit-transform: translateY(1rem);
+    transform: translateY(1rem);
+  }
+
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
+
+// Fade in 
+@-webkit-keyframes fadeIn {
+  from { opacity: 0; }
+    to { opacity: 1; }
+}  
+@keyframes fadeIn {
+  from { opacity: 0; }
+    to { opacity: 1; }
+}

@@ -1,93 +1,122 @@
 {% extends 'base.html' %}
+{% load static i18n %}
 {% block content %}
-<section class="sign-up-section section">
-  <div class="container">
-    <div class="row">
-      <div class="col-12 col-lg-6 sign-in">
-        <div class="content">
-            <h2>Connexion</h2>
-            <form method="post" class="form-style-2" novalidate>
-                {% csrf_token %}
-                {% for field in form %}
-                  <div class="form-group required mb-3">
-                    {{ field.label_tag }}
-                    {{ field }}
-                    {% for error in field.errors %}<div class="text-danger small">{{ error }}</div>{% endfor %}
-                  </div>
-                {% endfor %}
-                {% if form.non_field_errors %}
-                  <div class="text-danger mb-3">{% for error in form.non_field_errors %}{{ error }}<br>{% endfor %}</div>
-                {% endif %}
-                <button type="submit" class="small-btn btn-block btn btn-primary">Se connecter</button>
-            </form>
-            <div class="login-link text-center mt-4">
-                <a href="/app/account/register/">Créer un compte</a> | <a href="/app/account/password-reset/">Mot de passe oublié ?</a>
+<section class="auth-page">
+  <div class="container-fluid min-vh-100 d-flex align-items-center justify-content-center px-3">
+    <div class="auth-card card shadow-sm w-100" style="max-width: 460px;">
+      <div class="card-body p-4 p-md-5 text-center">
+  <img id="auth-logo" src="{% static '/core/img/logo.png' %}" alt="Logo" height="56" class="mb-3" style="object-fit:contain" />
+        <h1 class="h4 fw-bold mb-2">{% trans "Connexion" %}</h1>
+        <p class="text-muted small mb-4">{% trans "Accédez à votre compte pour continuer." %}</p>
+
+        <form method="post" class="auth-form text-start" novalidate>
+          {% csrf_token %}
+          {% for field in form %}
+            <div class="mb-3">
+              {{ field }}
+              {% for error in field.errors %}
+                <div class="text-danger small">{{ error }}</div>
+              {% endfor %}
             </div>
-        </div>
-      </div>
-      <div class="col-12 col-lg-6 sign-up">
-        <div class="content text-center">
-            <h2>Bienvenue !</h2>
-            <p>Rejoignez la communauté en créant votre compte.</p>
-            <a href="/app/account/register/" class="main-btn">Créer un compte</a>
+          {% endfor %}
+          {% if form.non_field_errors %}
+            <div class="text-danger small mb-3">{% for error in form.non_field_errors %}{{ error }}<br>{% endfor %}</div>
+          {% endif %}
+
+          <button type="submit" class="btn btn-brand w-100 py-2 btn-login" aria-label="{% trans 'Se connecter' %}">
+            <span class="btn-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M10 17l5-5-5-5"/>
+                <path d="M4 12h11"/>
+                <path d="M19 5v14" opacity=".2"/>
+              </svg>
+            </span>
+            <span>{% trans "Se connecter" %}</span>
+          </button>
+        </form>
+
+        <div class="mt-4 small">
+            <a href="/app/accounts/password-reset/" class="me-2">{% trans "Mot de passe oublié ?" %}</a>
+            ·
+            <a href="/app/accounts/register/" class="ms-2">{% trans "Créer un compte" %}</a>
         </div>
       </div>
     </div>
   </div>
 </section>
+
 <style>
-  .sign-up-section .sign-in, .sign-up-section .sign-up {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 500px;
-  }
-  .sign-up-section .content {
-    background: #fff;
-    padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+  /* Subtle background and center alignment */
+  .auth-page { background: var(--bg, #f5f7fb); }
+  /* Ensure built-in widgets look good even without Bootstrap classes on fields */
+  .auth-form input[type="text"],
+  .auth-form input[type="email"],
+  .auth-form input[type="password"],
+  .auth-form input[type="tel"],
+  .auth-form input[type="number"],
+  .auth-form select,
+  .auth-form textarea {
+    display: block;
     width: 100%;
-    max-width: 450px;
+    border: 1px solid #e5e7eb;
+    border-radius: .5rem;
+    padding: .6rem .8rem;
+    font-size: 1rem;
   }
-  .main-btn {
-    background: #007bff;
-    color: #fff;
-    padding: 12px 30px;
-    border-radius: 5px;
-    font-weight: 600;
-    text-decoration: none;
-    display: inline-block;
-    margin-top: 20px;
-  }
-  .main-btn:hover {
-    background: #0056b3;
-    color: #fff;
-  }
-  .form-style-2 .form-group label {
-    font-weight: 500;
-    margin-bottom: 6px;
-  }
-  .form-style-2 .form-control {
-    border-radius: 6px;
-    border: 1px solid #e0e0e0;
-    padding: 10px 12px;
-    font-size: 16px;
-  }
-  .btn-block {
-    width: 100%;
-    padding: 15px;
-    font-size: 16px;
-    margin-top: 20px;
-  }
-  @media (max-width: 991px) {
-    .sign-up-section .sign-in, .sign-up-section .sign-up {
-      min-height: 350px;
-    }
-    .sign-up-section .content {
-      padding: 20px;
-      max-width: 100%;
-    }
+  .auth-card { border-radius: 1rem; }
+  /* Brand-colored button that adapts to logo color */
+  .btn-brand { background-color: var(--brand-color, #0d6efd); border-color: var(--brand-color, #0d6efd); color: var(--brand-contrast, #fff); }
+  .btn-brand:hover { background-color: var(--brand-color-hover, var(--brand-color, #0d6efd)); border-color: var(--brand-color-hover, var(--brand-color, #0d6efd)); }
+  .btn-login { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; font-weight: 600; }
+  .btn-login .btn-icon { display:inline-flex; }
+  .btn-login .btn-icon svg { width: 18px; height: 18px; }
+  .btn-login { box-shadow: 0 2px 10px rgba(13,110,253,.18); transition: transform .05s ease, box-shadow .15s ease; }
+  .btn-login:hover { box-shadow: 0 4px 16px rgba(13,110,253,.28); }
+  .btn-login:active { transform: translateY(1px); }
+  @media (max-width: 480px) {
+    .auth-card .card-body { padding: 1.25rem; }
   }
 </style>
+<script>
+  // Derive brand color from the logo image and apply it to the login button
+  document.addEventListener('DOMContentLoaded', function(){
+    const img = document.getElementById('auth-logo');
+    if (!img) return;
+    function applyBrandFromImage() {
+      try {
+        const w = Math.max(1, img.naturalWidth);
+        const h = Math.max(1, img.naturalHeight);
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        const scale = Math.min(120 / w, 120 / h, 1); // sample at most 120px
+        canvas.width = Math.max(1, Math.floor(w * scale));
+        canvas.height = Math.max(1, Math.floor(h * scale));
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        const { data } = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        let r=0,g=0,b=0,count=0;
+        const step = 4 * 5; // sample every ~5 pixels for speed
+        for (let i=0; i<data.length; i+=step) {
+          const alpha = data[i+3];
+          if (alpha < 16) continue; // skip near-transparent
+          r += data[i];
+          g += data[i+1];
+          b += data[i+2];
+          count++;
+        }
+        if (count === 0) return;
+        r = Math.round(r / count); g = Math.round(g / count); b = Math.round(b / count);
+        // Slightly boost saturation / darkness for better button appearance
+        const factor = 0.92; r = Math.round(r*factor); g = Math.round(g*factor); b = Math.round(b*factor);
+        const avg = `rgb(${r}, ${g}, ${b})`;
+        const hover = `rgb(${Math.max(0, Math.round(r*0.9))}, ${Math.max(0, Math.round(g*0.9))}, ${Math.max(0, Math.round(b*0.9))})`;
+        const luminance = 0.299*r + 0.587*g + 0.114*b;
+        const contrast = luminance > 160 ? '#000' : '#fff';
+        document.documentElement.style.setProperty('--brand-color', avg);
+        document.documentElement.style.setProperty('--brand-color-hover', hover);
+        document.documentElement.style.setProperty('--brand-contrast', contrast);
+      } catch (_) { /* no-op */ }
+    }
+    if (img.complete) applyBrandFromImage(); else img.addEventListener('load', applyBrandFromImage);
+  });
+</script>
 {% endblock %}

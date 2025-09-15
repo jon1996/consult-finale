@@ -1,0 +1,85 @@
+// breadcrub section
+.breadcrub-style-1 {
+  .bg-img-1 {
+    background: url("../img/University/enrolment/brunette-conversation.png")
+      no-repeat center center / cover !important;
+  }
+}
+
+// course enrolment section
+.course-enrolment {
+  .cover-img {
+    background: url("../img/University/enrolment/blurred-background-cap.png")
+      no-repeat center center / cover;
+    height: 102%;
+  }
+
+  .enrolment-details {
+    h2 {
+      margin-bottom: 1rem;
+    }
+    .col-blue {
+      color: var(--dark-blue-1);
+    }
+
+    .form-group {
+      margin: 0;
+      margin: 2rem 0;
+
+      label {
+        margin: 0;
+        font-size: 12px;
+      }
+
+      input {
+        margin: 0;
+      }
+      .toggle-switch {
+        display: inline-block;
+        width: 80px;
+        height: 25px;
+        margin: 0 2rem;
+        position: relative;
+        border-radius: 40px;
+        background-color: rgba(158, 182, 188, 0.4);
+
+        &::after {
+          content: "";
+        }
+
+        input {
+          display: none;
+        }
+      }
+
+      .options {
+        display: flex;
+        p {
+          margin: 0.75rem 2rem 0.5rem 0;
+          font-weight: 700;
+          color: var(--active-icon-color);
+        }
+      }
+    }
+
+    .select-box-con {
+      margin-bottom: 3.5rem;
+    }
+    .terms-conditons {
+      .list-item {
+        margin: 0;
+        padding: 0;
+
+        a {
+          color: var(--active-icon-color);
+        }
+      }
+    }
+
+    .main-btn {
+      margin: 2rem 0;
+    }
+  }
+}
+
+// enrollment

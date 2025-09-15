@@ -1,0 +1,54 @@
+{% load static i18n %}
+<link rel="stylesheet" href="{% static 'components/forms/forms.css' %}">
+<script src="{% static 'components/forms/forms.js' %}" defer></script>
+<form id="conciergerie-form" class="conciergerie-form-component" novalidate>
+  <fieldset>
+  <legend>{% trans "Conciergerie 24h/24" %}</legend>
+  <p class="muted">{% trans "Une assistance personnalisée, disponible à tout moment, pour tous vos besoins en RDC." %}</p>
+  <p class="muted">{% trans "Parce qu’un séjour réussi dépend aussi de la réactivité et du confort, notre service de conciergerie accessible 24h/24 et 7j/7 prend en charge tous les détails logistiques, pratiques ou d’urgence pendant votre séjour." %}</p>
+  <p><strong>{% trans "Faites-nous part de vos besoins :" %}</strong></p>
+    <div class="form-group">
+  <label for="concierge-nature">{% trans "Nature de la demande" %} <span class="req">*</span></label>
+      <select id="concierge-nature" name="nature" required>
+  <option value="">{% trans "-- Choisir une option --" %}</option>
+  <option>{% trans "Réservation de restaurant / salle de réunion" %}</option>
+  <option>{% trans "Organisation d’un rendez-vous professionnel" %}</option>
+  <option>{% trans "Achat de billet (avion, Bus, événement)" %}</option>
+  <option>{% trans "Livraison à domicile ou bureau" %}</option>
+  <option>{% trans "Recommandation médicale / urgence santé" %}</option>
+  <option>{% trans "Assistance administrative" %}</option>
+  <option>{% trans "Recherche de prestataire (notaire, avocat, traducteur, etc.)" %}</option>
+  <option>{% trans "Services personnels (pressing, coiffure, bien-être…)" %}</option>
+      </select>
+    </div>
+    <div class="form-group">
+  <label>{% trans "Degré d’urgence" %} <span class="req">*</span></label>
+      <div class="choice-group">
+  <label><input type="radio" name="urgence" value="immediat" required> {% trans "Immédiat (dans l’heure)" %}</label>
+  <label><input type="radio" name="urgence" value="aujourdhui"> {% trans "Aujourd’hui" %}</label>
+  <label><input type="radio" name="urgence" value="semaine"> {% trans "Cette semaine" %}</label>
+      </div>
+    </div>
+    <div class="form-group">
+  <label>{% trans "Moyen de communication préféré" %} <span class="req">*</span></label>
+      <div class="choice-group">
+  <label><input type="radio" name="contact" value="whatsapp" required> {% trans "WhatsApp" %}</label>
+  <label><input type="radio" name="contact" value="telephone"> {% trans "Téléphone" %}</label>
+  <label><input type="radio" name="contact" value="email"> {% trans "Email" %}</label>
+  <label><input type="radio" name="contact" value="physique"> {% trans "Rencontre physique" %}</label>
+      </div>
+    </div>
+    <div class="form-group">
+  <label>{% trans "Souhaitez-vous un agent dédié pendant tout votre séjour ?" %} <span class="req">*</span></label>
+      <div class="choice-group">
+  <label><input type="radio" name="agent" value="oui" required> {% trans "Oui" %}</label>
+  <label><input type="radio" name="agent" value="non"> {% trans "Non" %}</label>
+      </div>
+    </div>
+    <div class="form-group">
+  <label>{% trans "Détail de votre demande ou consigne particulière" %}</label>
+  <textarea name="details" rows="3" placeholder="{% trans 'Votre demande ou consigne...' %}"></textarea>
+    </div>
+  <button type="submit">{% trans "Soumettre ma demande" %}</button>
+  </fieldset>
+</form>

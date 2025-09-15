@@ -1,0 +1,1012 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: consult\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-08-15 00:00+0000\n"
+"PO-Revision-Date: 2025-08-15 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+# Base
+msgid "Consult"
+msgstr "Consult"
+
+# Space (user dashboard)
+msgid "Accueil"
+msgstr "Home"
+
+msgid "Historique"
+msgstr "History"
+
+msgid "Backoffice"
+msgstr "Backoffice"
+
+msgid "Se déconnecter"
+msgstr "Sign out"
+
+msgid "Tableau de bord"
+msgstr "Dashboard"
+
+msgid "Détails de la demande"
+msgstr "Request details"
+
+msgid "Fermer"
+msgstr "Close"
+
+msgid "Aller à la page \"Nouvelle demande\""
+msgstr "Go to the \"New request\" page"
+
+msgid "Nouvelle demande"
+msgstr "New request"
+
+msgid "Service"
+msgstr "Service"
+
+msgid "Informations"
+msgstr "Information"
+
+msgid "Paiement"
+msgstr "Payment"
+
+msgid "Confirmation"
+msgstr "Confirmation"
+
+msgid "Choisissez un service, puis cliquez Suivant."
+msgstr "Choose a service, then click Next."
+
+msgid "Suivant"
+msgstr "Next"
+
+msgid "Retour"
+msgstr "Back"
+
+msgid "Choisissez une méthode de paiement."
+msgstr "Choose a payment method."
+
+msgid "Carte bancaire"
+msgstr "Bank card"
+
+msgid "Mobile Money"
+msgstr "Mobile Money"
+
+msgid "Virement"
+msgstr "Bank transfer"
+
+msgid "Résumé"
+msgstr "Summary"
+
+msgid "Soumettre"
+msgstr "Submit"
+
+msgid "Besoin d’un autre parcours ? Vous pouvez aussi utiliser l’onglet Formulaires."
+msgstr "Need another path? You can also use the Forms tab."
+
+msgid "Mes formulaires"
+msgstr "My forms"
+
+msgid "Choisissez un service, puis remplissez le formulaire."
+msgstr "Choose a service, then fill in the form."
+
+msgid "Formulaires"
+msgstr "Forms"
+
+msgid "Mes demandes"
+msgstr "My requests"
+
+msgid "Rechercher par service, statut ou ID..."
+msgstr "Search by service, status, or ID..."
+
+msgid "Toutes"
+msgstr "All"
+
+msgid "En attente paiement"
+msgstr "Pending payment"
+
+msgid "Payées"
+msgstr "Paid"
+
+msgid "Annulées"
+msgstr "Canceled"
+
+# Backoffice
+msgid "Vue d’ensemble"
+msgstr "Overview"
+
+msgid "Demandes"
+msgstr "Requests"
+
+msgid "Utilisateurs"
+msgstr "Users"
+
+msgid "Basculer thème"
+msgstr "Toggle theme"
+
+msgid "Espace utilisateur"
+msgstr "User space"
+
+msgid "Total"
+msgstr "Total"
+
+msgid "7 derniers jours"
+msgstr "Last 7 days"
+
+msgid "En attente"
+msgstr "Pending"
+
+msgid "Profil administrateur"
+msgstr "Admin profile"
+
+msgid "Modifier"
+msgstr "Edit"
+
+msgid "Prénom"
+msgstr "First name"
+
+msgid "Nom"
+msgstr "Last name"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "Annuler"
+msgstr "Cancel"
+
+msgid "Enregistrer"
+msgstr "Save"
+
+msgid "Rechercher par service, statut, ID, email..."
+msgstr "Search by service, status, ID, email..."
+
+msgid "Nouvel utilisateur"
+msgstr "New user"
+
+msgid "Rechercher par nom d’utilisateur, email, nom…"
+msgstr "Search by username, email, name..."
+
+msgid "Tous"
+msgstr "All"
+
+msgid "Staff"
+msgstr "Staff"
+
+msgid "Créer un utilisateur"
+msgstr "Create a user"
+
+msgid "Nom d’utilisateur"
+msgstr "Username"
+
+msgid "Mot de passe"
+msgstr "Password"
+
+msgid "Téléphone"
+msgstr "Phone"
+
+msgid "Entreprise"
+msgstr "Company"
+
+msgid "Secteur"
+msgstr "Sector"
+
+msgid "Donner l’accès staff (backoffice)"
+msgstr "Give staff access (backoffice)"
+
+msgid "Créer"
+msgstr "Create"
+
+msgid "Détails utilisateur"
+msgstr "User details"
+
+msgid "Actif"
+msgstr "Active"
+
+msgid "Superutilisateur"
+msgstr "Superuser"
+
+msgid "Email vérifié"
+msgstr "Email verified"
+
+msgid "Groupes"
+msgstr "Groups"
+
+# Newly added UI strings
+msgid "Fermer le menu"
+msgstr "Close menu"
+
+msgid "Ouvrir le menu"
+msgstr "Open menu"
+
+msgid "Bonjour,"
+msgstr "Hello,"
+
+msgid "Créez une nouvelle demande en quelques clics."
+msgstr "Create a new request in a few clicks."
+
+msgid "Réservation d'hôtel"
+msgstr "Hotel booking"
+
+msgid "Hôtels, appartements, résidences"
+msgstr "Hotels, apartments, residences"
+
+msgid "Location de véhicule"
+msgstr "Car rental"
+
+msgid "Avec chauffeur"
+msgstr "With driver"
+
+msgid "Conciergerie"
+msgstr "Concierge"
+
+msgid "Assistance 24/7"
+msgstr "24/7 assistance"
+
+msgid "Accompagnement aéroport"
+msgstr "Airport assistance"
+
+msgid "Arrivée, départ, transit"
+msgstr "Arrival, departure, transit"
+
+msgid "Traduction / Guide"
+msgstr "Translation / Guide"
+
+msgid "Traduction, assistance, guide"
+msgstr "Translation, assistance, guide"
+
+msgid "Visa / Carte de travail"
+msgstr "Visa / Work card"
+
+msgid "Accompagnement dossiers"
+msgstr "Application assistance"
+
+msgid "Autres services"
+msgstr "Other services"
+
+msgid "Prêt à envoyer ?"
+msgstr "Ready to send?"
+
+msgid "Vérifiez les informations avant envoi."
+msgstr "Check the information before sending."
+
+msgid "Oui, envoyer"
+msgstr "Yes, send"
+
+msgid "Tendance (7 jours)"
+msgstr "Trend (7 days)"
+
+msgid "Dernières demandes"
+msgstr "Latest requests"
+
+msgid "Top services (30 jours)"
+msgstr "Top services (30 days)"
+
+# Forms: Visa / Work Card
+msgid "Demande de Visa / Carte de Travail"
+msgstr "Visa / Work Card Request"
+
+msgid "Merci de sélectionner le but de votre séjour ou la démarche souhaitée, puis de compléter le formulaire adapté."
+msgstr "Please select the purpose of your stay or the desired procedure, then complete the appropriate form."
+
+msgid "Quel est le but de votre séjour en RDC ?"
+msgstr "What is the purpose of your stay in DRC?"
+
+msgid "Court séjour (Visa Volant)"
+msgstr "Short stay (Visa Volant)"
+
+msgid "Établissement à long terme (Visa d'Établissement)"
+msgstr "Long-term settlement (Residence Visa)"
+
+msgid "Visa Volant"
+msgstr "Visa Volant"
+
+msgid "Visa d'Établissement"
+msgstr "Residence Visa"
+
+msgid "Visa de Travail"
+msgstr "Work Visa"
+
+msgid "Visa Permanent"
+msgstr "Permanent Visa"
+
+msgid "Demande de Carte de Travail"
+msgstr "Work Card Application"
+
+msgid "Nom complet"
+msgstr "Full name"
+
+msgid "Nationalité"
+msgstr "Nationality"
+
+msgid "Lieu de naissance"
+msgstr "Place of birth"
+
+msgid "Adresse"
+msgstr "Address"
+
+msgid "Raison de la visite"
+msgstr "Reason for visit"
+
+msgid "Identité du preneur en charge (si applicable)"
+msgstr "Sponsor identity (if applicable)"
+
+msgid "Avez-vous besoin d’une assistance pour obtenir une invitation officielle ?"
+msgstr "Do you need help obtaining an official invitation?"
+
+msgid "Oui"
+msgstr "Yes"
+
+msgid "Non"
+msgstr "No"
+
+msgid "Durée prévue du séjour"
+msgstr "Planned length of stay"
+
+msgid "Date estimée d’arrivée"
+msgstr "Estimated arrival date"
+
+msgid "Documents à joindre :"
+msgstr "Documents to attach:"
+
+msgid "Envoyer ma demande d'assistance"
+msgstr "Send my assistance request"
+
+msgid "Quel type de Visa d'Établissement vous intéresse ?"
+msgstr "Which type of Residence Visa are you interested in?"
+
+msgid "-- Choisir --"
+msgstr "-- Choose --"
+
+msgid "Visa Ordinaire"
+msgstr "Ordinary Visa"
+
+msgid "Votre situation actuelle"
+msgstr "Your current situation"
+
+msgid "Informations supplémentaires"
+msgstr "Additional information"
+
+msgid "Me contacter pour discuter de mon cas"
+msgstr "Contact me to discuss my case"
+
+msgid "Nom de l’employeur"
+msgstr "Employer name"
+
+# Forms: Other services
+msgid "Décrivez librement votre besoin. Notre équipe reviendra vers vous rapidement."
+msgstr "Describe your need freely. Our team will get back to you quickly."
+
+msgid "Votre demande"
+msgstr "Your request"
+
+msgid "Ex: Besoin d’un service spécifique non listé..."
+msgstr "E.g.: Need a specific service not listed..."
+
+# Visa form: additional labels
+msgid "Lettre de demande au Directeur Général de la Migration"
+msgstr "Request letter to the Director General of Migration"
+
+msgid "Photocopie du passeport du requérant"
+msgstr "Applicant's passport photocopy"
+
+msgid "Photocopie de l’identité du preneur en charge"
+msgstr "Sponsor's ID photocopy"
+
+msgid "Preuve d'inscription au RCCM (preneur en charge personne morale)"
+msgstr "RCCM registration proof (for corporate sponsor)"
+
+msgid "Numéro d'Impôt (preneur en charge personne morale)"
+msgstr "Tax number (for corporate sponsor)"
+
+msgid "Identification Nationale (preneur en charge personne morale)"
+msgstr "National ID (for corporate sponsor)"
+
+msgid "Ordinaire"
+msgstr "Ordinary"
+
+msgid "Travail"
+msgstr "Work"
+
+msgid "Permanent"
+msgstr "Permanent"
+
+msgid "Statuts de société"
+msgstr "Company articles"
+
+msgid "Registre de commerce et de crédit mobilier"
+msgstr "Trade and movable credit register"
+
+msgid "Numéro d’identification Nationale"
+msgstr "National identification number"
+
+msgid "Quitus Fiscale"
+msgstr "Tax clearance"
+
+msgid "Affiliation INPP"
+msgstr "INPP affiliation"
+
+msgid "Affiliation CNSS"
+msgstr "CNSS affiliation"
+
+msgid "Extrait bancaire"
+msgstr "Bank statement"
+
+msgid "RCCM de l’employeur"
+msgstr "Employer RCCM"
+
+msgid "ID Nationale de l’employeur"
+msgstr "Employer national ID"
+
+msgid "NIF de l’employeur"
+msgstr "Employer tax ID (NIF)"
+
+msgid "Photo d’identité récente"
+msgstr "Recent ID photo"
+
+msgid "Preuve paiement INPP/ONEM"
+msgstr "INPP/ONEM payment proof"
+
+msgid "Certificat médical"
+msgstr "Medical certificate"
+
+msgid "Carte de vaccination internationale"
+msgstr "International vaccination card"
+
+msgid "Carte de travail en cours"
+msgstr "Current work card"
+
+msgid "Contrat de travail visé ONEM"
+msgstr "Work contract endorsed by ONEM"
+
+msgid "Diplôme/certificat qualification"
+msgstr "Diploma/qualification certificate"
+
+msgid "Attestation de service"
+msgstr "Service certificate"
+
+msgid "Attestation de résidence"
+msgstr "Residence certificate"
+
+msgid "Attestation de bonne vie et mœurs"
+msgstr "Certificate of good conduct"
+
+msgid "Formulaire de demande de carte"
+msgstr "Card application form"
+
+msgid "Lettre de transmission"
+msgstr "Transmission letter"
+
+msgid "État nominatif du personnel étranger"
+msgstr "Named list of foreign staff"
+
+msgid "Projet de contrat de travail"
+msgstr "Draft employment contract"
+
+msgid "CV du requérant"
+msgstr "Applicant CV"
+
+msgid "Qualification professionnelle"
+msgstr "Professional qualification"
+
+msgid "Photo passeport récente"
+msgstr "Recent passport photo"
+
+msgid "Organigramme société"
+msgstr "Company organization chart"
+
+msgid "Description du poste"
+msgstr "Job description"
+
+msgid "Preuve paiement CNSS/INPP"
+msgstr "CNSS/INPP payment proof"
+
+msgid "Photocopies passeport"
+msgstr "Passport photocopies"
+
+# Conciergerie form additions
+msgid "Conciergerie 24h/24"
+msgstr "24/7 Concierge"
+
+msgid "Une assistance personnalisée, disponible à tout moment, pour tous vos besoins en RDC."
+msgstr "Personalized assistance, available anytime, for all your needs in DRC."
+
+msgid "Parce qu’un séjour réussi dépend aussi de la réactivité et du confort, notre service de conciergerie accessible 24h/24 et 7j/7 prend en charge tous les détails logistiques, pratiques ou d’urgence pendant votre séjour."
+msgstr "Because a successful stay also relies on responsiveness and comfort, our 24/7 concierge service handles all logistical, practical, or urgent details during your stay."
+
+msgid "Faites-nous part de vos besoins :"
+msgstr "Tell us your needs:"
+
+msgid "Nature de la demande"
+msgstr "Request type"
+
+msgid "-- Choisir une option --"
+msgstr "-- Choose an option --"
+
+msgid "Réservation de restaurant / salle de réunion"
+msgstr "Restaurant / meeting room booking"
+
+msgid "Organisation d’un rendez-vous professionnel"
+msgstr "Scheduling a business appointment"
+
+msgid "Achat de billet (avion, Bus, événement)"
+msgstr "Ticket purchase (flight, bus, event)"
+
+msgid "Livraison à domicile ou bureau"
+msgstr "Home or office delivery"
+
+msgid "Recommandation médicale / urgence santé"
+msgstr "Medical recommendation / health emergency"
+
+msgid "Assistance administrative"
+msgstr "Administrative assistance"
+
+msgid "Recherche de prestataire (notaire, avocat, traducteur, etc.)"
+msgstr "Provider sourcing (notary, lawyer, translator, etc.)"
+
+msgid "Services personnels (pressing, coiffure, bien-être…)"
+msgstr "Personal services (laundry, hairdressing, wellness…)"
+
+msgid "Degré d’urgence"
+msgstr "Urgency level"
+
+msgid "Immédiat (dans l’heure)"
+msgstr "Immediate (within the hour)"
+
+msgid "Aujourd’hui"
+msgstr "Today"
+
+msgid "Cette semaine"
+msgstr "This week"
+
+msgid "Moyen de communication préféré"
+msgstr "Preferred communication channel"
+
+msgid "WhatsApp"
+msgstr "WhatsApp"
+
+msgid "Rencontre physique"
+msgstr "In-person meeting"
+
+msgid "Souhaitez-vous un agent dédié pendant tout votre séjour ?"
+msgstr "Would you like a dedicated agent for your entire stay?"
+
+msgid "Détail de votre demande ou consigne particulière"
+msgstr "Details of your request or special instructions"
+
+msgid "Votre demande ou consigne..."
+msgstr "Your request or instruction..."
+
+msgid "Soumettre ma demande"
+msgstr "Submit my request"
+
+# TDG form additions
+msgid "Traduction Officielle – Assistance Administrative – Guide Local"
+msgstr "Official Translation – Administrative Assistance – Local Guide"
+
+msgid "Cochez un ou plusieurs services, puis complétez uniquement les sections affichées."
+msgstr "Check one or more services, then fill only the sections shown."
+
+msgid "Choisissez le ou les services dont vous avez besoin"
+msgstr "Choose the service(s) you need"
+
+msgid "Français"
+msgstr "French"
+
+msgid "Anglais"
+msgstr "English"
+
+msgid "Swahili"
+msgstr "Swahili"
+
+msgid "Autre"
+msgstr "Other"
+
+msgid "-- Sélectionnez --"
+msgstr "-- Select --"
+
+msgid "Réserver un accompagnement"
+msgstr "Book assistance"
+
+# Airport assistance form additions
+msgid "Un accueil VIP dès votre arrivée, un départ sans stress."
+msgstr "VIP welcome on arrival, stress-free departure."
+
+msgid "Que vous arriviez pour un séjour professionnel ou repartiez après une mission réussie, nous vous offrons un accompagnement complet pour tous vos déplacements à l’aéroport."
+msgstr "Whether arriving for business or leaving after a successful mission, we provide complete assistance for all your airport transfers."
+
+msgid "Type de service souhaité"
+msgstr "Desired service type"
+
+msgid "Accueil à l’arrivée"
+msgstr "Arrival meet-and-greet"
+
+msgid "Assistance au départ"
+msgstr "Departure assistance"
+
+msgid "Transit ou correspondance"
+msgstr "Transit or connection"
+
+msgid "Aéroport concerné"
+msgstr "Airport concerned"
+
+msgid "-- Choisir l’aéroport --"
+msgstr "-- Choose airport --"
+
+msgid "Kinshasa – N’djili"
+msgstr "Kinshasa – N’djili"
+
+msgid "Lubumbashi – Luano"
+msgstr "Lubumbashi – Luano"
+
+msgid "Kolwezi"
+msgstr "Kolwezi"
+
+msgid "Goma"
+msgstr "Goma"
+
+msgid "Autres"
+msgstr "Other"
+
+msgid "Date et heure du vol"
+msgstr "Flight date and time"
+
+msgid "Numéro du vol (si disponible)"
+msgstr "Flight number (if available)"
+
+msgid "Numéro du vol"
+msgstr "Flight number"
+
+msgid "Langue préférée du personnel d’accueil"
+msgstr "Preferred language of the welcome staff"
+
+msgid "Précisez (facultatif)"
+msgstr "Specify (optional)"
+
+msgid "Services souhaités"
+msgstr "Desired services"
+
+msgid "Accueil avec pancarte personnalisée"
+msgstr "Personalized sign meet-and-greet"
+
+msgid "Accélération des formalités (visa, immigration, douanes)"
+msgstr "Fast-tracking formalities (visa, immigration, customs)"
+
+msgid "Port des bagages"
+msgstr "Porter service"
+
+msgid "Transfert aéroport–hôtel ou domicile"
+msgstr "Airport–hotel or home transfer"
+
+msgid "Coordination avec votre chauffeur ou hôtel"
+msgstr "Coordination with your driver or hotel"
+
+msgid "Assistance pour visa à l’arrivée (le cas échéant)"
+msgstr "Assistance for visa on arrival (if applicable)"
+
+msgid "Lounge VIP (optionnel selon l’aéroport)"
+msgstr "VIP lounge (optional depending on airport)"
+
+msgid "Informations complémentaires ou instructions spéciales"
+msgstr "Additional information or special instructions"
+
+msgid "Détails ou instructions..."
+msgstr "Details or instructions..."
+
+msgid "Réserver mon accompagnement"
+msgstr "Book my assistance"
+
+# TDG: detailed section labels and options
+msgid "Traduction officielle de documents"
+msgstr "Official document translation"
+
+msgid "Assistance administrative"
+msgstr "Administrative assistance"
+
+msgid "Guide local professionnel"
+msgstr "Professional local guide"
+
+msgid "1. Traduction officielle de documents"
+msgstr "1. Official document translation"
+
+msgid "Documents à traduire :"
+msgstr "Documents to translate:"
+
+msgid "Contrat / Accord"
+msgstr "Contract / Agreement"
+
+msgid "Pièce d’identité"
+msgstr "Identity document"
+
+msgid "Documents juridiques / notariés"
+msgstr "Legal / notarized documents"
+
+msgid "Documents fiscaux / administratifs"
+msgstr "Tax / administrative documents"
+
+msgid "Correspondance professionnelle"
+msgstr "Business correspondence"
+
+msgid "Précisez (facultatif)"
+msgstr "Specify (optional)"
+
+msgid "Langue source :"
+msgstr "Source language:"
+
+msgid "Langue cible :"
+msgstr "Target language:"
+
+msgid "Besoin de légalisation / certification officielle ?"
+msgstr "Need legalization / official certification?"
+
+msgid "2. Assistance administrative"
+msgstr "2. Administrative assistance"
+
+msgid "Nous vous accompagnons dans toutes vos démarches :"
+msgstr "We support you in all your procedures:"
+
+msgid "Prise de rendez-vous avec l’administration"
+msgstr "Appointment booking with administration"
+
+msgid "Constitution de dossier juridique"
+msgstr "Building a legal file"
+
+msgid "Accompagnement aux guichets"
+msgstr "Support at service counters"
+
+msgid "Précisez votre demande :"
+msgstr "Specify your request:"
+
+msgid "Votre demande..."
+msgstr "Your request..."
+
+msgid "3. Guide local professionnel"
+msgstr "3. Professional local guide"
+
+msgid "Accompagnement :"
+msgstr "Support:"
+
+msgid "Journée"
+msgstr "Full day"
+
+msgid "Demi-journée"
+msgstr "Half day"
+
+msgid "Langue souhaitée :"
+msgstr "Desired language:"
+
+msgid "Lieux à visiter ou à couvrir :"
+msgstr "Places to visit or cover:"
+
+msgid "Ex: Centre-ville, institutions, etc."
+msgstr "E.g.: Downtown, institutions, etc."
+
+msgid "Assistance culturelle / protocolaire"
+msgstr "Cultural / protocol assistance"
+
+msgid "Présentation aux contacts locaux / partenaires"
+msgstr "Introduction to local contacts / partners"
+
+msgid "Accompagnement lors de missions de terrain"
+msgstr "Support during field missions"
+
+# Vehicle rental form additions
+msgid "Location de véhicules avec chauffeur"
+msgstr "Vehicle rental with driver"
+
+msgid "Déplacez-vous en toute sécurité, avec confort et ponctualité, partout en RDC."
+msgstr "Travel safely, comfortably, and on time, anywhere in DRC."
+
+msgid "Nous mettons à votre disposition un parc de véhicules adaptés à tous les besoins professionnels et personnels, accompagnés de chauffeurs expérimentés, discrets et multilingues."
+msgstr "We provide a fleet suited to all business and personal needs, with experienced, discreet, multilingual drivers."
+
+msgid "Remplissez ce formulaire pour réserver un véhicule :"
+msgstr "Fill out this form to book a vehicle:"
+
+msgid "Ville de prise en charge"
+msgstr "Pickup city"
+
+msgid "-- Choisir une ville --"
+msgstr "-- Choose a city --"
+
+msgid "Kinshasa"
+msgstr "Kinshasa"
+
+msgid "Lubumbashi"
+msgstr "Lubumbashi"
+
+msgid "Kolwezi"
+msgstr "Kolwezi"
+
+msgid "Goma"
+msgstr "Goma"
+
+msgid "Matadi"
+msgstr "Matadi"
+
+msgid "Autre"
+msgstr "Other"
+
+msgid "Période de démarrage"
+msgstr "Start period"
+
+msgid "Durée de la location"
+msgstr "Rental duration"
+
+msgid "-- Choisir --"
+msgstr "-- Choose --"
+
+msgid "1 jour"
+msgstr "1 day"
+
+msgid "2-3 jours"
+msgstr "2-3 days"
+
+msgid "1 semaine"
+msgstr "1 week"
+
+msgid "2 semaines"
+msgstr "2 weeks"
+
+msgid "1 mois"
+msgstr "1 month"
+
+msgid "autre"
+msgstr "other"
+
+msgid "Si autre, précisez"
+msgstr "If other, please specify"
+
+msgid "Type de véhicule souhaité"
+msgstr "Desired vehicle type"
+
+msgid "Berline (Corolla, Accent…)"
+msgstr "Sedan (Corolla, Accent…)"
+
+msgid "SUV (Prado, Fortuner…)"
+msgstr "SUV (Prado, Fortuner…)"
+
+msgid "4x4 Pick-up (double cabine)"
+msgstr "4x4 Pickup (double cab)"
+
+msgid "Minibus / Van (jusqu’à 15 places)"
+msgstr "Minibus / Van (up to 15 seats)"
+
+msgid "Finalité de l’usage"
+msgstr "Purpose of use"
+
+msgid "Déplacement professionnel"
+msgstr "Business travel"
+
+msgid "Missions institutionnelles"
+msgstr "Institutional missions"
+
+msgid "Transport minier/logistique"
+msgstr "Mining/logistics transport"
+
+msgid "Visites privées"
+msgstr "Private visits"
+
+msgid "Tourisme"
+msgstr "Tourism"
+
+msgid "Services complémentaires"
+msgstr "Additional services"
+
+msgid "Chauffeur multilingue (Français/Anglais/Swahili)"
+msgstr "Multilingual driver (French/English/Swahili)"
+
+msgid "Accès Wi-Fi dans le véhicule"
+msgstr "Wi‑Fi access in the vehicle"
+
+msgid "Assistance sécurité"
+msgstr "Security assistance"
+
+msgid "Climatisation garantie"
+msgstr "Air conditioning guaranteed"
+
+msgid "Carburant inclus"
+msgstr "Fuel included"
+
+msgid "GPS et géolocalisation temps réel"
+msgstr "GPS and real‑time geolocation"
+
+msgid "Lieu de dépose (si différent du départ)"
+msgstr "Drop-off location (if different from pickup)"
+
+msgid "Précisez le lieu de dépose"
+msgstr "Specify drop-off location"
+
+msgid "Informations complémentaires ou préférences spécifiques"
+msgstr "Additional information or specific preferences"
+
+msgid "Détails ou préférences..."
+msgstr "Details or preferences..."
+
+msgid "Réserver mon véhicule"
+msgstr "Book my vehicle"
+
+# Accounts templates (login/register/reset/email)
+msgid "Connexion"
+msgstr "Sign in"
+
+msgid "Se connecter"
+msgstr "Sign in"
+
+msgid "Créer un compte"
+msgstr "Create an account"
+
+msgid "Mot de passe oublié ?"
+msgstr "Forgot password?"
+
+msgid "Bienvenue !"
+msgstr "Welcome!"
+
+msgid "Rejoignez la communauté en créant votre compte."
+msgstr "Join the community by creating your account."
+
+msgid "Déjà inscrit ? Connectez-vous pour accéder à votre espace."
+msgstr "Already registered? Sign in to access your space."
+
+msgid "Inscrivez-vous avec votre e-mail"
+msgstr "Sign up with your email"
+
+msgid "Créer mon compte"
+msgstr "Create my account"
+
+msgid "Mot de passe oublié"
+msgstr "Forgot password"
+
+msgid "Envoyer le lien"
+msgstr "Send link"
+
+msgid "Retour à la connexion"
+msgstr "Back to sign in"
+
+msgid "Vérifiez votre boîte de réception"
+msgstr "Check your inbox"
+
+msgid "Si vous ne trouvez pas l'e-mail, vérifiez le dossier spam."
+msgstr "If you don't find the email, check your spam folder."
+
+msgid "Lien invalide ou expiré"
+msgstr "Invalid or expired link"
+
+msgid "Demandez un nouveau lien pour continuer la réinitialisation."
+msgstr "Request a new link to continue the reset."
+
+msgid "Réessayer"
+msgstr "Try again"
+
+msgid "Définir un nouveau mot de passe"
+msgstr "Set a new password"
+
+msgid "Choisissez un mot de passe fort, puis confirmez-le."
+msgstr "Choose a strong password, then confirm it."
+
+msgid "Mettre à jour"
+msgstr "Update"
+
+msgid "Mot de passe mis à jour"
+msgstr "Password updated"
+
+msgid "Votre mot de passe a été réinitialisé avec succès."
+msgstr "Your password has been reset successfully."
+
+msgid "Votre adresse e-mail est confirmée."
+msgstr "Your email address is confirmed."
+
+msgid "Veuillez vérifier votre boîte de réception."
+msgstr "Please check your inbox."
+
+# Email textual lines
+msgid "Pour réinitialiser votre mot de passe, cliquez sur le lien suivant :"
+msgstr "To reset your password, click the following link:"
+
+msgid "Si vous n'avez pas demandé cette opération, ignorez ce message."
+msgstr "If you did not request this, please ignore this message."
+
+# Auto-logout message
+msgid "Votre session a expiré après 10 minutes d'inactivité. Veuillez vous reconnecter."
+msgstr "Your session expired after 10 minutes of inactivity. Please sign in again."

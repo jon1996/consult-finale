@@ -1,0 +1,49 @@
+
+        .progress-bars {
+          padding: 2rem;
+
+          .progressbar {
+            width: 100%;
+            margin-top: 5px;
+            margin-bottom: 25px;
+            position: relative;
+            background-color: #f4f4f4;
+          }
+  
+          .proggress {
+            height: 8px;
+            width: 10px;
+          }
+  
+          .percentCount {
+            float: right;
+            margin-top: -30px;
+            clear: both;
+            font-weight: 700;
+            font-size: 13px;
+            font-family: var(--main-font);
+            color: var(--light-grey-2);
+          }
+  
+          .single-progress-item {
+            .title {
+              font-family: var(--main-font);
+              color: var(--light-grey-2);
+              font-size: 13px;
+              font-weight: 500;
+              line-height: 1.6;
+              padding: 0 .5rem;
+            }
+  
+            .pro-bar {
+              .progressbar {
+                background: transparent !important;
+                box-shadow: none !important;
+                .proggress {
+                  background-image: linear-gradient(to right, var(--dark-blue-1) 30%, #A2F8FF) !important;
+                }
+              }
+            }
+          }
+          
+        }

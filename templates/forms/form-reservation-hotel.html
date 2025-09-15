@@ -1,0 +1,76 @@
+{% load static i18n %}
+<link rel="stylesheet" href="{% static 'components/forms/forms.css' %}">
+<script src="{% static 'components/forms/forms.js' %}" defer></script>
+
+<form id="hotel-form" class="hotel-form-component" novalidate>
+  <fieldset>
+  <legend>{% trans "Réservations hôtelières" %}</legend>
+  <p class="muted">{% trans "Trouvons l’hôtel qui vous correspond, selon vos besoins, votre budget et votre lieu de mission." %}</p>
+  <p><strong>{% trans "Remplissez ce formulaire pour une réservation personnalisée :" %}</strong></p>
+    <div class="form-group">
+  <label for="hotel-ville">{% trans "Ville de séjour" %} <span class="req">*</span></label>
+      <select id="hotel-ville" name="ville" required>
+  <option value="">{% trans "-- Choisir une ville --" %}</option>
+        <option>Kinshasa</option>
+        <option>Lubumbashi</option>
+        <option>Kolwezi</option>
+        <option>Goma</option>
+        <option>Matadi</option>
+        <option>Autre</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>{% trans "Dates de séjour" %} <span class="req">*</span></label>
+      <div class="grid grid-2">
+        <div><input type="date" name="date_arrivee" required /></div>
+        <div><input type="date" name="date_depart" required /></div>
+      </div>
+    </div>
+    <div class="form-group">
+  <label>{% trans "Type d’hébergement souhaité" %} <span class="req">*</span></label>
+      <div class="choice-group">
+  <label><input type="radio" name="hebergement" value="3etoiles" required> {% trans "Hôtel 3 étoiles" %}</label>
+  <label><input type="radio" name="hebergement" value="4etoiles"> {% trans "Hôtel 4 étoiles" %}</label>
+  <label><input type="radio" name="hebergement" value="5etoiles"> {% trans "Hôtel 5 étoiles" %}</label>
+  <label><input type="radio" name="hebergement" value="appartement"> {% trans "Appartement meublé" %}</label>
+  <label><input type="radio" name="hebergement" value="lodge"> {% trans "Lodge ou Résidence sécurisée" %}</label>
+      </div>
+    </div>
+    <div class="form-group">
+  <label>{% trans "Type de chambre" %} <span class="req">*</span></label>
+      <div class="choice-group">
+  <label><input type="radio" name="chambre" value="standard" required> {% trans "Standard" %}</label>
+  <label><input type="radio" name="chambre" value="suite"> {% trans "Suite" %}</label>
+  <label><input type="radio" name="chambre" value="appartement"> {% trans "Appartement avec cuisine" %}</label>
+  <label><input type="radio" name="chambre" value="simple"> {% trans "Lit simple" %}</label>
+  <label><input type="radio" name="chambre" value="double"> {% trans "Lit double" %}</label>
+      </div>
+    </div>
+    <div class="form-group">
+  <label>{% trans "Besoins spécifiques (optionnel)" %}</label>
+      <div class="checkbox-group">
+  <label><input type="checkbox" name="besoins[]" value="petitdej"> {% trans "Petit déjeuner inclus" %}</label>
+  <label><input type="checkbox" name="besoins[]" value="reunion"> {% trans "Salle de réunion" %}</label>
+  <label><input type="checkbox" name="besoins[]" value="internet"> {% trans "Internet haut débit" %}</label>
+  <label><input type="checkbox" name="besoins[]" value="navette"> {% trans "Navette aéroport" %}</label>
+  <label><input type="checkbox" name="besoins[]" value="securite"> {% trans "Sécurité renforcée" %}</label>
+  <label><input type="checkbox" name="besoins[]" value="centre"> {% trans "Proximité centre-ville / institutions" %}</label>
+      </div>
+    </div>
+    <div class="form-group">
+  <label for="hotel-budget">{% trans "Budget par nuitée (USD)" %} <span class="req">*</span></label>
+      <select id="hotel-budget" name="budget" required>
+  <option value="">{% trans "-- Choisir une tranche --" %}</option>
+        <option value="<50">< 50 USD</option>
+        <option value="50-100">50–100 USD</option>
+        <option value="100-200">100–200 USD</option>
+        <option value=">200">> 200 USD</option>
+      </select>
+    </div>
+    <div class="form-group">
+  <label>{% trans "Informations complémentaires" %}</label>
+  <textarea name="infos" rows="3" placeholder="{% trans "Détails ou préférences..." %}"></textarea>
+    </div>
+  <button type="submit">{% trans "Envoyer ma demande" %}</button>
+  </fieldset>
+</form>

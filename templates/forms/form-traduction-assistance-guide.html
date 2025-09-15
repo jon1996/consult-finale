@@ -1,0 +1,123 @@
+{% load static i18n %}
+<link rel="stylesheet" href="{% static 'components/forms/forms.css' %}">
+<script src="{% static 'components/forms/forms.js' %}" defer></script>
+
+<form id="tdg-form" class="tdg-form-component" novalidate>
+  <fieldset>
+  <legend>{% trans "Traduction Officielle – Assistance Administrative – Guide Local" %}</legend>
+  <p class="muted">{% trans "Cochez un ou plusieurs services, puis complétez uniquement les sections affichées." %}</p>
+
+    <div class="form-group">
+  <label>{% trans "Choisissez le ou les services dont vous avez besoin" %} <span class="req" aria-hidden="true">*</span></label>
+      <div class="checkbox-group">
+  <label><input type="checkbox" name="services[]" value="traduction" id="service-traduction"> {% trans "Traduction officielle de documents" %}</label>
+  <label><input type="checkbox" name="services[]" value="assistance" id="service-assistance"> {% trans "Assistance administrative" %}</label>
+  <label><input type="checkbox" name="services[]" value="guide" id="service-guide"> {% trans "Guide local professionnel" %}</label>
+      </div>
+    </div>
+
+    <div class="service-section" id="section-traduction" style="display:none;">
+  <h4>{% trans "1. Traduction officielle de documents" %}</h4>
+      <div class="form-group">
+  <label>{% trans "Documents à traduire :" %}</label>
+        <div class="checkbox-group">
+          <label><input type="checkbox" name="traduction_docs[]" value="contrat"> {% trans "Contrat / Accord" %}</label>
+          <label><input type="checkbox" name="traduction_docs[]" value="piece_identite"> {% trans "Pièce d’identité" %}</label>
+          <label><input type="checkbox" name="traduction_docs[]" value="juridique"> {% trans "Documents juridiques / notariés" %}</label>
+          <label><input type="checkbox" name="traduction_docs[]" value="fiscal"> {% trans "Documents fiscaux / administratifs" %}</label>
+          <label><input type="checkbox" name="traduction_docs[]" value="correspondance"> {% trans "Correspondance professionnelle" %}</label>
+          <label><input type="checkbox" name="traduction_docs[]" value="autre"> {% trans "Autre" %}</label>
+        </div>
+  <input type="text" name="traduction_docs_autre" placeholder="{% trans "Précisez (facultatif)" %}" />
+      </div>
+      <div class="form-group">
+  <label>{% trans "Langue source :" %}</label>
+        <select name="langue_source">
+          <option value="">{% trans "-- Sélectionnez --" %}</option>
+          <option value="fr">{% trans "Français" %}</option>
+          <option value="en">{% trans "Anglais" %}</option>
+          <option value="sw">{% trans "Swahili" %}</option>
+          <option value="autre">{% trans "Autre" %}</option>
+        </select>
+      </div>
+      <div class="form-group">
+  <label>{% trans "Langue cible :" %}</label>
+        <select name="langue_cible">
+          <option value="">{% trans "-- Sélectionnez --" %}</option>
+          <option value="fr">{% trans "Français" %}</option>
+          <option value="en">{% trans "Anglais" %}</option>
+          <option value="sw">{% trans "Swahili" %}</option>
+          <option value="autre">{% trans "Autre" %}</option>
+        </select>
+      </div>
+      <div class="form-group">
+  <label>{% trans "Besoin de légalisation / certification officielle ?" %}</label>
+        <div class="choice-group">
+          <label><input type="radio" name="legalisation" value="oui"> {% trans "Oui" %}</label>
+          <label><input type="radio" name="legalisation" value="non"> {% trans "Non" %}</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="service-section" id="section-assistance" style="display:none;">
+  <h4>{% trans "2. Assistance administrative" %}</h4>
+      <div class="form-group">
+  <label>{% trans "Nous vous accompagnons dans toutes vos démarches :" %}</label>
+        <div class="checkbox-group">
+          <label><input type="checkbox" name="assistance_options[]" value="rdv"> {% trans "Prise de rendez-vous avec l’administration" %}</label><br>
+          <label><input type="checkbox" name="assistance_options[]" value="dossier"> {% trans "Constitution de dossier juridique" %}</label><br>
+          <label><input type="checkbox" name="assistance_options[]" value="guichet"> {% trans "Accompagnement aux guichets" %}</label>
+        </div>
+      </div>
+      <div class="form-group">
+  <label>{% trans "Précisez votre demande :" %}</label>
+  <textarea name="assistance_details" rows="2" placeholder="{% trans "Votre demande..." %}"></textarea>
+      </div>
+    </div>
+
+    <div class="service-section" id="section-guide" style="display:none;">
+  <h4>{% trans "3. Guide local professionnel" %}</h4>
+      <div class="form-group">
+  <label>{% trans "Accompagnement :" %}</label>
+        <div class="choice-group">
+          <label><input type="radio" name="guide_accompagnement" value="journee"> {% trans "Journée" %}</label>
+          <label><input type="radio" name="guide_accompagnement" value="demi_journee"> {% trans "Demi-journée" %}</label>
+        </div>
+      </div>
+      <div class="form-group">
+  <label>{% trans "Langue souhaitée :" %}</label>
+        <select name="guide_langue">
+          <option value="">{% trans "-- Sélectionnez --" %}</option>
+          <option value="fr">{% trans "Français" %}</option>
+          <option value="en">{% trans "Anglais" %}</option>
+          <option value="sw">{% trans "Swahili" %}</option>
+        </select>
+      </div>
+      <div class="form-group">
+  <label>{% trans "Lieux à visiter ou à couvrir :" %}</label>
+  <textarea name="guide_lieux" rows="2" placeholder="{% trans "Ex: Centre-ville, institutions, etc." %}"></textarea>
+      </div>
+      <div class="form-group">
+        <div class="checkbox-group">
+          <label><input type="checkbox" name="guide_options[]" value="culturelle"> {% trans "Assistance culturelle / protocolaire" %}</label><br>
+          <label><input type="checkbox" name="guide_options[]" value="contacts"> {% trans "Présentation aux contacts locaux / partenaires" %}</label><br>
+          <label><input type="checkbox" name="guide_options[]" value="terrain"> {% trans "Accompagnement lors de missions de terrain" %}</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="tdg-nom">{% trans "Nom complet" %} <span class="req" aria-hidden="true">*</span></label>
+      <input type="text" id="tdg-nom" name="nom" required autocomplete="name" />
+    </div>
+    <div class="form-group">
+  <label for="tdg-email">{% trans "Email" %} <span class="req" aria-hidden="true">*</span></label>
+      <input type="email" id="tdg-email" name="email" required autocomplete="email" />
+    </div>
+    <div class="form-group">
+  <label for="tdg-phone">{% trans "Téléphone" %} <span class="req" aria-hidden="true">*</span></label>
+      <input type="tel" id="tdg-phone" name="phone" required autocomplete="tel" pattern="[0-9+ ]{7,}" />
+    </div>
+  <button type="submit">{% trans "Réserver un accompagnement" %}</button>
+  </fieldset>
+</form>

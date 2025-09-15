@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Espace Client — Consult DRC</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="/components/forms/forms.css">
+  <script defer src="/components/forms/forms.js"></script>
+  <style>
+    :root { --ink:#1f2937; --muted:#6b7280; --sidebar:#1f1f22; }
+    body{background:#f7f7fb;color:var(--ink);} .sidebar{position:fixed;left:0;top:0;bottom:0;width:240px;background:var(--sidebar);color:#fff;z-index:1030;box-shadow:2px 0 18px rgba(0,0,0,.12)}
+    .sidebar .brand{font-weight:800;letter-spacing:.2px}
+    .sidebar a{color:#eaeaea;text-decoration:none;display:block;padding:.75rem 1rem;border-radius:.5rem;margin:.25rem .5rem}
+    .sidebar a:hover{background:rgba(255,255,255,.06)} .sidebar a.active{background:#0d6efd}
+    .main{margin-left:240px;padding:24px;min-height:100vh} .page-title{font-weight:800;letter-spacing:.2px}
+    .card-quiet{border:1px solid #eef0f3;box-shadow:0 8px 22px rgba(0,0,0,.06)}
+    .forms-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    @media (max-width:992px){.main{margin-left:0}.sidebar{position:static;width:100%;height:auto}}
+    @media (max-width:768px){.forms-grid{grid-template-columns:1fr}}
+    .chip{display:inline-flex;align-items:center;gap:.4rem;padding:.4rem .7rem;border:1px solid #e5e7eb;border-radius:999px;background:#fff}
+    .chip i{color:#0d6efd} .breadcrumb-mini a{color:#0d6efd;text-decoration:none} .breadcrumb-mini a:hover{text-decoration:underline}
+  /* Keep modal above the backdrop to allow interactions */
+  .modal{z-index:2001!important}
+  .modal-backdrop{z-index:2000!important}
+  </style>
+  <link rel="preload" href="/components/forms/form-reservation-hotel.html" as="fetch" crossorigin>
+  <link rel="preload" href="/components/forms/form-location-vehicule.html" as="fetch" crossorigin>
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="p-3">
+      <div class="d-flex align-items-center gap-2 mb-2">
+        <i class="bi bi-grid-1x2-fill fs-4 text-warning"></i>
+        <div class="brand">Espace Client</div>
+      </div>
+      <div class="text-muted small mb-3">Consult DRC</div>
+      <nav>
+        <a href="#" data-view="home" class="active"><i class="bi bi-speedometer2 me-2"></i>Tableau de bord</a>
+        <a href="#" data-view="profile"><i class="bi bi-person-circle me-2"></i>Mes informations</a>
+        <a href="#" data-view="forms"><i class="bi bi-ui-checks-grid me-2"></i>Mes formulaires</a>
+        <a href="#" data-view="requests"><i class="bi bi-clock-history me-2"></i>Mes demandes</a>
+        <hr class="border-secondary-subtle">
+        <a href="#"><i class="bi bi-box-arrow-right me-2"></i>Déconnexion</a>
+      </nav>
+    </div>
+  </aside>
+
+  <main class="main">
+    <section id="view-home">
+      <h2 class="page-title mb-2">Bienvenue</h2>
+      <p class="text-muted mb-4">Accédez à vos formulaires, mettez à jour vos informations, suivez vos demandes.</p>
+      <div class="row g-3">
+        <div class="col-md-6">
+          <div class="card card-quiet"><div class="card-body">
+            <h5 class="card-title">Raccourcis</h5>
+            <div class="d-flex flex-wrap gap-2">
+              <a class="chip" href="#" data-view="forms"><i class="bi bi-journal-check"></i> Ouvrir les formulaires</a>
+              <a class="chip" href="#" data-view="profile"><i class="bi bi-person-gear"></i> Modifier mes infos</a>
+              <a class="chip" href="#" data-view="requests"><i class="bi bi-list-ul"></i> Mes demandes</a>
+            </div>
+          </div></div>
+        </div>
+        <div class="col-md-6">
+          <div class="card card-quiet"><div class="card-body">
+            <h5 class="card-title">Dernières demandes</h5>
+            <div class="table-responsive">
+              <table class="table align-middle mb-0">
+                <thead class="table-light"><tr><th>Type</th><th>Statut</th><th>Créé le</th></tr></thead>
+                <tbody>
+                  <tr><td>Réservation Hôtel</td><td><span class="badge text-bg-warning">En cours</span></td><td>2025-08-14</td></tr>
+                  <tr><td>Conciergerie</td><td><span class="badge text-bg-success">Clôturé</span></td><td>2025-08-10</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="mt-2"><a href="#" data-view="requests">Voir toutes les demandes</a></div>
+          </div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-profile" class="d-none">
+      <h2 class="page-title mb-2">Mes informations</h2>
+      <p class="text-muted mb-3">Mettez à jour votre profil à tout moment.</p>
+      <div class="card card-quiet"><div class="card-body">
+        <div class="row g-3">
+          <div class="col-md-4"><div class="border rounded p-3 h-100"><div class="d-flex align-items-center gap-3"><i class="bi bi-person-circle fs-1 text-secondary"></i><div><div class="fw-bold">Ali S.</div><div class="text-muted small">Membre depuis 2025</div></div></div></div></div>
+          <div class="col-md-8"><div class="border rounded p-3 h-100">
+              <div class="row g-3">
+              <div class="col-md-6"><label class="form-label">Nom complet</label><input id="profile-name-display" class="form-control" value="Ali Samir" disabled></div>
+              <div class="col-md-6"><label class="form-label">Téléphone</label><input id="profile-phone-display" class="form-control" value="+243 900 000 000" disabled></div>
+              <div class="col-md-6"><label class="form-label">Email</label><input id="profile-email-display" class="form-control" value="ali@email.com" disabled></div>
+              <div class="col-md-6"><label class="form-label">Langue préférée</label><input id="profile-lang-display" class="form-control" value="Français" disabled></div>
+            </div>
+            <div class="mt-3"><button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalEditProfile"><i class="bi bi-pencil-square me-1"></i> Modifier</button></div>
+          </div></div>
+        </div>
+      </div></div>
+    </section>
+
+    <section id="view-forms" class="d-none">
+      <h2 class="page-title mb-2">Mes formulaires</h2>
+      <p class="text-muted mb-3">Choisissez un formulaire à remplir. Le contenu s’affiche ci-dessous.</p>
+      <div id="forms-list" class="forms-grid mb-3">
+        <div class="card card-quiet"><div class="card-body"><h5 class="card-title">Réservations hôtelières</h5><p class="text-muted small">Trouver l’hôtel adapté à votre mission et budget.</p><a class="btn btn-outline-primary btn-sm" href="/components/forms/form-reservation-hotel.html">Ouvrir</a></div></div>
+        <div class="card card-quiet"><div class="card-body"><h5 class="card-title">Location de véhicules</h5><p class="text-muted small">Avec chauffeur expérimenté, partout en RDC.</p><a class="btn btn-outline-primary btn-sm" href="/components/forms/form-location-vehicule.html">Ouvrir</a></div></div>
+        <div class="card card-quiet"><div class="card-body"><h5 class="card-title">Conciergerie 24h/24</h5><p class="text-muted small">Assistance personnalisée, à tout moment.</p><a class="btn btn-outline-primary btn-sm" href="/components/forms/form-conciergerie.html">Ouvrir</a></div></div>
+        <div class="card card-quiet"><div class="card-body"><h5 class="card-title">Traduction / Assistance / Guide</h5><p class="text-muted small">Comprendre, se faire comprendre, s’orienter.</p><a class="btn btn-outline-primary btn-sm" href="/components/forms/form-traduction-assistance-guide.html">Ouvrir</a></div></div>
+        <div class="card card-quiet"><div class="card-body"><h5 class="card-title">Accompagnement aéroport</h5><p class="text-muted small">Arrivée VIP, départ sans stress.</p><a class="btn btn-outline-primary btn-sm" href="/components/forms/form-accompagnement-aeroport.html">Ouvrir</a></div></div>
+        <div class="card card-quiet"><div class="card-body"><h5 class="card-title">Visa / Carte de travail</h5><p class="text-muted small">Assistance dossiers et conditions.</p><a class="btn btn-outline-primary btn-sm" href="/components/forms/form-visa-carte.html">Ouvrir</a></div></div>
+      </div>
+      <div id="form-player" class="d-none">
+        <div class="d-flex align-items-center justify-content-between mb-2">
+          <div class="breadcrumb-mini"><a href="#" id="btn-back-forms"><i class="bi bi-arrow-left"></i> Retour à la liste des formulaires</a></div>
+          <div class="text-muted small" id="form-title-hint"></div>
+        </div>
+        <div class="card card-quiet"><div class="card-body"><div id="form-slot"></div></div></div>
+      </div>
+    </section>
+
+    <section id="view-requests" class="d-none">
+      <h2 class="page-title mb-2">Mes demandes</h2>
+      <p class="text-muted mb-3">Historique des formulaires soumis.</p>
+      <div class="card card-quiet"><div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-hover align-middle">
+            <thead class="table-light"><tr><th>#</th><th>Type</th><th>Résumé</th><th>Statut</th><th>Créé le</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>Hôtel</td><td>Kinshasa, 4★, 3 nuits</td><td><span class="badge text-bg-warning">En cours</span></td><td>2025-08-14</td></tr>
+              <tr><td>2</td><td>Conciergerie</td><td>Réservation salle de réunion</td><td><span class="badge text-bg-success">Clôturé</span></td><td>2025-08-10</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="text-muted small">Affichage démo (pas connecté au backend).</div>
+      </div></div>
+    </section>
+  </main>
+
+  <div class="modal fade" id="modalEditProfile" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered"><div class="modal-content" style="border:1px solid #eef0f3;">
+      <div class="modal-header"><h5 class="modal-title"><i class="bi bi-person-gear me-2 text-primary"></i>Modifier mes informations</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button></div>
+      <div class="modal-body">
+        <form id="form-edit-profile" class="row g-3">
+          <div class="col-md-6"><label class="form-label">Nom complet</label><input id="edit-name" class="form-control" value="Ali Samir" required></div>
+          <div class="col-md-6"><label class="form-label">Téléphone</label><input id="edit-phone" class="form-control" value="+243 900 000 000" pattern="[0-9+ ]{7,}"></div>
+          <div class="col-md-6"><label class="form-label">Email</label><input id="edit-email" type="email" class="form-control" value="ali@email.com" required></div>
+          <div class="col-md-6"><label class="form-label">Langue préférée</label><select id="edit-lang" class="form-select"><option>Français</option><option>Anglais</option><option>Swahili</option></select></div>
+          <div class="col-12"><label class="form-label">Mot de passe (laisser vide pour ne pas changer)</label><input id="edit-password" type="password" class="form-control" placeholder="********"></div>
+        </form>
+      </div>
+  <div class="modal-footer"><button type="button" class="btn btn-light" data-bs-dismiss="modal">Annuler</button><button type="button" class="btn btn-primary" id="btn-save-profile"><i class="bi bi-check2-circle me-1"></i>Enregistrer</button></div>
+    </div></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const navLinks = document.querySelectorAll('.sidebar a[data-view]');
+    const views = { home: document.getElementById('view-home'), profile: document.getElementById('view-profile'), forms: document.getElementById('view-forms'), requests: document.getElementById('view-requests') };
+    function showView(name){ Object.entries(views).forEach(([k,el])=> el.classList.toggle('d-none', k!==name)); navLinks.forEach(a=> a.classList.toggle('active', a.dataset.view===name)); if(name!=='forms'){ resetFormPlayer(); } }
+    navLinks.forEach(a=> a.addEventListener('click', (e)=>{ e.preventDefault(); showView(a.dataset.view); })); showView('home');
+
+    const listEl = document.getElementById('forms-list');
+    const playerEl = document.getElementById('form-player');
+    const slotEl = document.getElementById('form-slot');
+    const hintEl = document.getElementById('form-title-hint');
+    const backBtn = document.getElementById('btn-back-forms');
+    function resetFormPlayer(){ playerEl.classList.add('d-none'); listEl.classList.remove('d-none'); slotEl.innerHTML=''; hintEl.textContent=''; }
+    backBtn.addEventListener('click', (e)=>{ e.preventDefault(); resetFormPlayer(); });
+
+  // Since links now redirect to the form pages, we don't intercept clicks here.
+
+    // Prefill modal on open
+    document.getElementById('modalEditProfile').addEventListener('show.bs.modal', ()=>{
+      document.getElementById('edit-name').value  = document.getElementById('profile-name-display').value;
+      document.getElementById('edit-phone').value = document.getElementById('profile-phone-display').value;
+      document.getElementById('edit-email').value = document.getElementById('profile-email-display').value;
+      document.getElementById('edit-lang').value  = document.getElementById('profile-lang-display').value;
+      document.getElementById('edit-password').value = '';
+    });
+
+    // Save and reflect changes in the profile view
+    document.getElementById('btn-save-profile').addEventListener('click', ()=>{
+      const name = document.getElementById('edit-name');
+      const phone = document.getElementById('edit-phone');
+      const email = document.getElementById('edit-email');
+      const lang = document.getElementById('edit-lang');
+
+      let valid = true;
+      [name, email].forEach(i => { i.classList.remove('is-invalid'); if(!i.value.trim()) { i.classList.add('is-invalid'); valid=false; } });
+      const emailOk = /.+@.+\..+/.test(email.value);
+      if(!emailOk){ email.classList.add('is-invalid'); valid=false; }
+      if(!valid) return;
+
+      document.getElementById('profile-name-display').value  = name.value.trim();
+      document.getElementById('profile-phone-display').value = phone.value.trim();
+      document.getElementById('profile-email-display').value = email.value.trim();
+      document.getElementById('profile-lang-display').value  = lang.value;
+
+      const modal = bootstrap.Modal.getInstance(document.getElementById('modalEditProfile')); modal?.hide();
+      const toast = document.createElement('div'); toast.className = 'position-fixed bottom-0 end-0 p-3';
+      toast.innerHTML = '<div class="toast align-items-center text-bg-success border-0 show" role="alert"><div class="d-flex"><div class="toast-body"><i class="bi bi-check2-circle me-1"></i> Modifications enregistrées.</div><button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button></div></div>';
+      document.body.appendChild(toast); setTimeout(()=> toast.remove(), 2500);
+    });
+  </script>
+</body>
+</html>
